@@ -1,0 +1,8 @@
+MODULE 5470: Module._load REQUEST module parent: <eval>
+MODULE 5470: Module._load checking cache for module false
+MODULE 5470: load built-in module module
+MODULE 5470: Module._load REQUEST ./package.json parent: [eval]
+MODULE 5470: RELATIVE: requested: ./package.json from parent.id [eval]
+MODULE 5470: looking for ["/Users/pradeepyadav/Documents/Work/codereveals/Antigravity Projects/Instant-tool"]
+MODULE 5470: Module._load checking cache for /Users/pradeepyadav/Documents/Work/codereveals/Antigravity Projects/Instant-tool/package.json false
+MODULE 5470: load "/Users/pradeepyadav/Documents/Work/codereveals/Antigravity Projects/Instant-tool/package.json" for module "/Users/pradeepyadav/Documents/Work/codereveals/Antigravity Projects/Instant-tool/package.json"

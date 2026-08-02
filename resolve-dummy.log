@@ -1,0 +1,4 @@
+MODULE 5458: Module._load REQUEST module parent: <eval>
+MODULE 5458: Module._load checking cache for module false
+MODULE 5458: load built-in module module
+MODULE 5458: looking for "/tmp/dummy" in ["/Users/pradeepyadav/Documents/Work/codereveals/Antigravity Projects/Instant-tool/node_modules","/Users/pradeepyadav/Documents/Work/codereveals/Antigravity Projects/node_modules","/Users/pradeepyadav/Documents/Work/codereveals/node_modules","/Users/pradeepyadav/Documents/Work/node_modules","/Users/pradeepyadav/Documents/node_modules","/Users/pradeepyadav/node_modules","/Users/node_modules","/node_modules","/Users/pradeepyadav/.node_modules","/Users/pradeepyadav/.node_libraries","/Users/pradeepyadav/.nvm/versions/node/v22.22.3/lib/node"]

@@ -1,0 +1,6 @@
+# Google AdSense
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+
+# Note for Admin:
+# Replace "pub-0000000000000000" with your actual Google AdSense Publisher ID.
+# This file is accessible at yourdomain.com/ads.txt

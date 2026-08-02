@@ -1,0 +1,418 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==========================================
+// User & Authentication (Auth.js)
+// ==========================================
+
+enum Role {
+  USER
+  EMPLOYEE
+  ADMIN
+  SUPER_ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          Role      @default(USER)
+  credits       Int       @default(20) // Default free signup credits
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts           Account[]
+  sessions           Session[]
+  subscriptions      Subscription[]
+  payments           Payment[]
+  creditTransactions CreditTransaction[]
+  jobs               ToolJob[]
+  files              FileAsset[]
+  qrCodes            QRCode[]
+  supportTickets     SupportTicket[]
+  notifications      Notification[]
+  invoices           Invoice[]
+  auditLogs          AuditLog[]
+  aiUsageLogs        AIUsageLog[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ==========================================
+// Pricing & Subscriptions
+// ==========================================
+
+model Plan {
+  id            String   @id @default(cuid())
+  name          String   // e.g., Free, Starter, Pro, Business
+  description   String?
+  priceMonthly  Float    @default(0)
+  priceYearly   Float    @default(0)
+  credits       Int      @default(0)
+  maxFileSizeMB Int      @default(25)
+  features      String[] // JSON/Array of features
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  subscriptions Subscription[]
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  INCOMPLETE
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String
+  planId               String
+  razorpaySubscriptionId String?          @unique
+  status               SubscriptionStatus @default(INCOMPLETE)
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean            @default(false)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan Plan @relation(fields: [planId], references: [id])
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  userId          String
+  razorpayOrderId String?       @unique
+  razorpayPaymentId String?     @unique
+  amount          Float
+  currency        String        @default("INR")
+  status          PaymentStatus @default(PENDING)
+  description     String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  invoice Invoice?
+}
+
+enum TransactionType {
+  PURCHASE
+  JOB_USAGE
+  REFUND
+  BONUS
+  ADMIN_ADJUSTMENT
+}
+
+model CreditTransaction {
+  id          String          @id @default(cuid())
+  userId      String
+  amount      Int             // Positive or negative
+  type        TransactionType
+  description String?
+  jobId       String?         // If related to a specific job
+  createdAt   DateTime        @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  job  ToolJob? @relation(fields: [jobId], references: [id], onDelete: SetNull)
+}
+
+model Coupon {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  discountPercent Float?
+  discountAmount  Float?
+  maxUses         Int?
+  usedCount       Int      @default(0)
+  expiresAt       DateTime?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Invoice {
+  id        String   @id @default(cuid())
+  userId    String
+  paymentId String   @unique
+  amount    Float
+  url       String?
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  payment Payment @relation(fields: [paymentId], references: [id])
+}
+
+// ==========================================
+// Tools & Jobs
+// ==========================================
+
+enum ToolCategory {
+  PDF
+  IMAGE
+  VIDEO
+  QR
+}
+
+model ToolDefinition {
+  id          String       @id @default(cuid())
+  slug        String       @unique // e.g., 'compress-pdf'
+  name        String
+  category    ToolCategory
+  creditCost  Int          @default(1)
+  isActive    Boolean      @default(true)
+  isBatch     Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  jobs ToolJob[]
+}
+
+enum JobStatus {
+  PENDING
+  QUEUED
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+model ToolJob {
+  id           String    @id @default(cuid())
+  userId       String
+  toolId       String
+  status       JobStatus @default(PENDING)
+  creditsUsed  Int       @default(0)
+  inputFiles   String[]  // URIs or IDs of files
+  outputFiles  String[]  // URIs or IDs of files
+  errorMessage String?
+  metadata     Json?     // Any extra job info (e.g. compression level used)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tool               ToolDefinition      @relation(fields: [toolId], references: [id])
+  CreditTransaction  CreditTransaction[]
+}
+
+model FileAsset {
+  id        String   @id @default(cuid())
+  userId    String
+  fileName  String
+  fileUrl   String
+  sizeBytes Int
+  mimeType  String
+  isOutput  Boolean  @default(false)
+  expiresAt DateTime? // Temporary files
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ==========================================
+// QR Codes
+// ==========================================
+
+enum QRType {
+  URL
+  TEXT
+  WIFI
+  VCARD
+  EMAIL
+  PHONE
+  WHATSAPP
+  UPI
+}
+
+model QRCode {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  type      QRType
+  content   String   @db.Text
+  isDynamic Boolean  @default(false)
+  shortUrl  String?  @unique
+  visits    Int      @default(0)
+  style     Json?    // Colors, logo, etc.
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ==========================================
+// Support & Notifications
+// ==========================================
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model SupportTicket {
+  id        String       @id @default(cuid())
+  userId    String
+  subject   String
+  message   String       @db.Text
+  status    TicketStatus @default(OPEN)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ==========================================
+// AI Features
+// ==========================================
+
+model AIUsageLog {
+  id           String   @id @default(cuid())
+  userId       String
+  feature      String   // e.g., 'PDF_SUMMARY', 'SEO_GENERATOR'
+  promptTokens Int      @default(0)
+  completionTokens Int  @default(0)
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ==========================================
+// CMS, SEO, & Settings
+// ==========================================
+
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String @db.Text
+}
+
+model AdSlotSetting {
+  id        String  @id @default(cuid())
+  slotName  String  @unique // e.g., 'HEADER', 'SIDEBAR'
+  isActive  Boolean @default(true)
+  client_id String?
+  slot_id   String?
+  code      String? @db.Text
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  content     String   @db.Text
+  excerpt     String?
+  author      String?
+  isPublished Boolean  @default(false)
+  image       String?
+  metaTitle   String?
+  metaDesc    String?
+  categoryId  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category BlogCategory? @relation(fields: [categoryId], references: [id])
+}
+
+model BlogCategory {
+  id    String @id @default(cuid())
+  name  String @unique
+  slug  String @unique
+  posts BlogPost[]
+}
+
+model FAQ {
+  id       String   @id @default(cuid())
+  question String
+  answer   String   @db.Text
+  order    Int      @default(0)
+  category String?  // e.g., 'GENERAL', 'BILLING', 'PDF_TOOLS'
+  isActive Boolean  @default(true)
+}
+
+model SEOPage {
+  id          String   @id @default(cuid())
+  path        String   @unique // e.g., '/pdf-tools/compress-pdf'
+  h1          String?
+  title       String?
+  description String?
+  content     String?  @db.Text
+  updatedAt   DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  details   Json?
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model LegalPage {
+  id        String   @id @default(cuid())
+  slug      String   @unique // e.g., 'privacy-policy'
+  title     String
+  content   String   @db.Text
+  updatedAt DateTime @updatedAt
+}
