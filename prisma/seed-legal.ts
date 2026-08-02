@@ -9,7 +9,7 @@ const legalPages = [
       
       <h2>1. Introduction</h2>
       <p>Welcome to <strong>InstantTool</strong> ("we", "our", or "us"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice, or our practices with regards to your personal information, please contact us at info.codereveals@gmail.com.</p>
-      <p>When you visit our website https://instant-tool.vercel.app (the "Website"), and more generally, use any of our services (the "Services", which include the Website), we appreciate that you are trusting us with your personal information. We take your privacy very seriously. In this privacy notice, we seek to explain to you in the clearest way possible what information we collect, how we use it and what rights you have in relation to it.</p>
+      <p>When you visit our website https://devigo.cloud (the "Website"), and more generally, use any of our services (the "Services", which include the Website), we appreciate that you are trusting us with your personal information. We take your privacy very seriously. In this privacy notice, we seek to explain to you in the clearest way possible what information we collect, how we use it and what rights you have in relation to it.</p>
       
       <h2>2. What Information Do We Collect?</h2>
       <p><strong>Personal information you disclose to us:</strong> We collect personal information that you voluntarily provide to us when you register on the Website, express an interest in obtaining information about us or our products and Services, when you participate in activities on the Website or otherwise when you contact us.</p>
@@ -59,7 +59,7 @@ const legalPages = [
       <p>Last updated: July 2026</p>
 
       <h2>1. Agreement to Terms</h2>
-      <p>These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and InstantTool ("we", "us", or "our"), concerning your access to and use of the https://instant-tool.vercel.app website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the "Site").</p>
+      <p>These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and InstantTool ("we", "us", or "our"), concerning your access to and use of the https://devigo.cloud website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the "Site").</p>
       <p>You agree that by accessing the Site, you have read, understood, and agree to be bound by all of these Terms of Service. If you do not agree with all of these Terms of Service, then you are expressly prohibited from using the Site and you must discontinue use immediately.</p>
 
       <h2>2. Intellectual Property Rights</h2>
@@ -162,7 +162,7 @@ const legalPages = [
       <p>Last updated: July 2026</p>
 
       <h2>1. General Information</h2>
-      <p>The information provided by InstantTool ("we," "us," or "our") on https://instant-tool.vercel.app (the "Site") is for general informational and utility purposes only. All information and tools on the Site are provided in good faith, however, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information or digital outputs generated on the Site.</p>
+      <p>The information provided by InstantTool ("we," "us," or "our") on https://devigo.cloud (the "Site") is for general informational and utility purposes only. All information and tools on the Site are provided in good faith, however, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information or digital outputs generated on the Site.</p>
       <p>UNDER NO CIRCUMSTANCE SHALL WE HAVE ANY LIABILITY TO YOU FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF THE SITE OR RELIANCE ON ANY INFORMATION OR OUTPUT PROVIDED ON THE SITE. YOUR USE OF THE SITE AND YOUR RELIANCE ON ANY INFORMATION ON THE SITE IS SOLELY AT YOUR OWN RISK.</p>
 
       <h2>2. Professional Disclaimer</h2>

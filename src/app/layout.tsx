@@ -24,7 +24,7 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://instant-tool.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://devigo.cloud"),
   title: "Instant Tool | Free PDF, Image & QR Code Tools",
   description: "Free online tools to compress, merge, split, and rotate PDFs, compress and convert images, and generate QR codes quickly and securely.",
   robots: {
@@ -91,8 +91,8 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "InstantTool",
-            "url": "https://instant-tool.vercel.app",
-            "logo": "https://instant-tool.vercel.app/logo.png",
+            "url": "https://devigo.cloud",
+            "logo": "https://devigo.cloud/logo.png",
             "description": "Your all-in-one platform for powerful, fast, and free online tools.",
             "sameAs": [
               "https://twitter.com/instanttool",
@@ -104,7 +104,7 @@ export default function RootLayout({
         {/* Google AdSense Global Script */}
         <Script 
           async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1199452179361457" 
           crossOrigin="anonymous" 
           strategy="lazyOnload" 
         />

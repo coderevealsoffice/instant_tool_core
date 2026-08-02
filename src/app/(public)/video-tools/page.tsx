@@ -9,7 +9,7 @@ export const metadata = {
   title: "Free Online Video Editor & Tools - Trim, Compress, Convert | InstantTool",
   description: "Professional video editing tools in your browser. Trim, crop, compress, and convert videos easily without watermarks.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/video-tools"
+    canonical: "https://devigo.cloud/video-tools"
   }
 };
 

@@ -5,7 +5,7 @@ export const metadata = {
   title: "Free Custom QR Code Generator - Links, Text & WiFi | InstantTool",
   description: "Create custom QR codes for free. Generate dynamic QR codes for URLs, WiFi, VCards, and more with our easy-to-use tool.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/qr-tools"
+    canonical: "https://devigo.cloud/qr-tools"
   }
 };
 

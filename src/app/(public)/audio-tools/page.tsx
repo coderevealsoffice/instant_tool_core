@@ -7,7 +7,7 @@ export const metadata = {
   title: "Free Online Audio Tools - Edit, Trim & Convert MP3s | InstantTool",
   description: "Edit your audio files online for free. Trim MP3s, change volume, convert formats, and more directly in your browser.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/audio-tools"
+    canonical: "https://devigo.cloud/audio-tools"
   }
 };
 

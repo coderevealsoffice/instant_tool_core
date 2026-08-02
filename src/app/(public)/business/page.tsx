@@ -5,7 +5,7 @@ export const metadata = {
   title: "InstantTool for Business - Enterprise File Management",
   description: "Discover how InstantTool can streamline your company's document, media, and AI workflows with secure, fast processing.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/business"
+    canonical: "https://devigo.cloud/business"
   }
 };
 

@@ -5,7 +5,7 @@ export const metadata = {
   title: "Tutorials & Guides - Learn How to Use InstantTool",
   description: "Step-by-step tutorials on how to compress PDFs, edit videos, generate AI content, and master all InstantTool features.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/tutorials"
+    canonical: "https://devigo.cloud/tutorials"
   }
 };
 

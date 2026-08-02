@@ -5,7 +5,7 @@ export const metadata = {
   title: "Free Online AI Tools - Writers, Generators & Enhancers | InstantTool",
   description: "Supercharge your workflow with our suite of free AI tools. From AI writers to image enhancers, get things done faster.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/ai-tools"
+    canonical: "https://devigo.cloud/ai-tools"
   }
 };
 

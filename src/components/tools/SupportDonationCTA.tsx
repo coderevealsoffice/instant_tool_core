@@ -43,7 +43,7 @@ export function SupportDonationCTA() {
         currency: order.currency,
         name: "InstantTool Support",
         description: "Donation to keep tools free and ad-free",
-        image: "https://instant-tool.vercel.app/logo.png",
+        image: "https://devigo.cloud/logo.png",
         order_id: order.id, 
         handler: function (response: any) {
           toast.success("Thank you for your donation! Your support means the world to us ❤️", {

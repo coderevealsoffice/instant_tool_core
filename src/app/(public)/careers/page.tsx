@@ -4,7 +4,7 @@ export const metadata = {
   title: "Careers at InstantTool - Join Our Mission",
   description: "We are hiring! Join the team at InstantTool and help us build the future of web-based productivity tools.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/careers"
+    canonical: "https://devigo.cloud/careers"
   }
 };
 

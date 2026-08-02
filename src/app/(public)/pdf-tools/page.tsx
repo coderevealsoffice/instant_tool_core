@@ -17,7 +17,7 @@ export const metadata = {
   title: "Free Online PDF Tools - Merge, Split, Compress & Edit | InstantTool",
   description: "The ultimate suite of free online PDF tools. Easily merge, split, compress, convert, and edit your PDF documents securely in seconds.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/pdf-tools"
+    canonical: "https://devigo.cloud/pdf-tools"
   }
 };
 

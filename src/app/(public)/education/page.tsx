@@ -5,7 +5,7 @@ export const metadata = {
   title: "InstantTool for Education - Tools for Students & Teachers",
   description: "Free tools to help students and educators manage PDFs, create presentations, and enhance learning materials.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/education"
+    canonical: "https://devigo.cloud/education"
   }
 };
 

@@ -4,7 +4,7 @@ export const metadata = {
   title: "About InstantTool - Our Mission for Free Powerful File Tools",
   description: "Learn about InstantTool's mission to provide fast, secure, and intuitive file and AI tools for everyone directly in the browser.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/about"
+    canonical: "https://devigo.cloud/about"
   }
 };
 

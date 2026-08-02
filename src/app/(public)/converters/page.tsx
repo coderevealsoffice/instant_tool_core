@@ -5,7 +5,7 @@ export const metadata = {
   title: "Free Online File Converters - Document, Image, Media | InstantTool",
   description: "Convert any file format instantly online. Fast, secure, and free converters for PDFs, images, videos, and audio.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/converters"
+    canonical: "https://devigo.cloud/converters"
   }
 };
 

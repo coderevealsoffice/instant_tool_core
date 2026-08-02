@@ -5,7 +5,7 @@ export const metadata = {
   title: "Free Online Image Tools - Resize, Compress & Convert | InstantTool",
   description: "Powerful online image editing tools. Resize, compress, convert formats, and apply effects to your photos instantly.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/image-tools"
+    canonical: "https://devigo.cloud/image-tools"
   }
 };
 

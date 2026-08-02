@@ -5,7 +5,7 @@ export const metadata = {
   title: "Help Center & Support | InstantTool",
   description: "Need help? Browse our help center for guides, troubleshooting, and support to get the most out of InstantTool.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/help"
+    canonical: "https://devigo.cloud/help"
   }
 };
 

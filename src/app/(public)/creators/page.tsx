@@ -5,7 +5,7 @@ export const metadata = {
   title: "InstantTool for Creators - Streamline Your Media Workflow",
   description: "Tools built for content creators. Edit videos, compress images, and generate assets quickly for your next big project.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/creators"
+    canonical: "https://devigo.cloud/creators"
   }
 };
 

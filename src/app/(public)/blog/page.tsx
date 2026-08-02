@@ -8,7 +8,7 @@ export const metadata = {
   title: "InstantTool Blog - File Management Tips & Tricks",
   description: "Read the latest tips, tricks, and updates on file management, productivity, and how to get the most out of InstantTool.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/blog"
+    canonical: "https://devigo.cloud/blog"
   }
 };
 

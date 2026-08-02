@@ -9,7 +9,7 @@ export const metadata = {
   title: "Pricing & Plans - Affordable Premium File Tools | InstantTool",
   description: "Choose the perfect plan for your needs. Use credits for flexible usage or subscribe for unlimited batch processing with InstantTool.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/pricing"
+    canonical: "https://devigo.cloud/pricing"
   }
 };
 

@@ -13,7 +13,7 @@ export const metadata = {
   title: "All Online File Tools - PDF, Video, Image & AI | InstantTool",
   description: "Explore our complete collection of free online tools for PDFs, Videos, Images, Audio, and AI generation. Fast, secure, and in your browser.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/tools"
+    canonical: "https://devigo.cloud/tools"
   }
 };
 

@@ -41,11 +41,11 @@ export default async function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "InstantTool",
-    "url": "https://instant-tool.vercel.app/",
+    "url": "https://devigo.cloud/",
     "description": "Your all-in-one platform for powerful, fast, and free online tools.",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://instant-tool.vercel.app/tools?q={search_term_string}",
+      "target": "https://devigo.cloud/tools?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };

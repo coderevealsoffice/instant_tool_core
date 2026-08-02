@@ -5,7 +5,7 @@ export const metadata = {
   title: "Free Color Palette Generator - Extract Colors from Images | InstantTool",
   description: "Generate beautiful color palettes instantly. Extract colors from images or create your own custom palettes for free.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/color-tools/color-palette"
+    canonical: "https://devigo.cloud/color-tools/color-palette"
   }
 };
 

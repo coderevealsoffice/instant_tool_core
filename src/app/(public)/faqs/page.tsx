@@ -6,7 +6,7 @@ export const metadata = {
   title: "Frequently Asked Questions (FAQ) | InstantTool",
   description: "Got questions? Find answers about InstantTool's features, pricing, security, and how to use our suite of file tools.",
   alternates: {
-    canonical: "https://instant-tool.vercel.app/faqs"
+    canonical: "https://devigo.cloud/faqs"
   }
 };
 
