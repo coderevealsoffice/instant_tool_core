@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "instant-tool-ai",
       script: ".next/standalone/server.js",
-      cwd: "/var/www/instant-tool-ai",
+      cwd: "./",
       instances: 1,
       exec_mode: "fork",
       autorestart: true,
