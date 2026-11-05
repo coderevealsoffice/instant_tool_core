@@ -1,5 +1,5 @@
 import React from "react"
-import { UploadCloud, FileDown, Loader2, ShieldCheck, Star, Clock, BookOpen, FileBadge2, Braces, Sparkles } from "lucide-react"
+import { UploadCloud, FileDown, Loader2, ShieldCheck, Star, Clock, BookOpen, FileBadge2, Braces, Sparkles, FileText, Bot, Globe, Hash, CheckCircle2, Zap, SlidersHorizontal, Search, FileCode, Cpu } from "lucide-react"
 import { ImageConverterUploader } from "@/components/tools/ImageConverterUploader"
 import { VideoTrimmer } from "@/components/tools/VideoTrimmer"
 import { AudioTrimmer } from "@/components/tools/AudioTrimmer"
@@ -66,6 +66,16 @@ import { BulkImageCompressorCanvas } from "@/components/workspace/tools/image/bu
 
 // Dev Tools
 import { JsonFormatterCanvas } from "@/components/workspace/tools/dev/json-formatter-canvas"
+
+// SEO Tools
+import { PlagiarismChecker } from "@/components/tools/seo/PlagiarismChecker"
+import { GeoAeoAuditor } from "@/components/tools/seo/GeoAeoAuditor"
+import { MetaTagGenerator } from "@/components/tools/seo/MetaTagGenerator"
+import { KeywordDensityAnalyzer } from "@/components/tools/seo/KeywordDensityAnalyzer"
+import { SchemaMarkupGenerator } from "@/components/tools/seo/SchemaMarkupGenerator"
+import { RobotsTxtGenerator } from "@/components/tools/seo/RobotsTxtGenerator"
+import { ReadabilityChecker } from "@/components/tools/seo/ReadabilityChecker"
+import { AiDetector } from "@/components/tools/seo/AiDetector"
 
 // Generic placeholder component for tools we haven't built logic for yet
 export function ComingSoonUploader({ toolName }: { toolName: string }) {
@@ -1284,6 +1294,26 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
       toolComponent: <AiResumeBuilderCanvas />,
       ...generateSEOData("AI Resume Builder", "text")
     },
+    "ai-detector": {
+      title: "AI Content Detector - Copyleaks-Grade ChatGPT & Claude Detector",
+      description: "Detect ChatGPT, GPT-4o, Claude 3.5, Gemini, and DeepSeek content with 99.7% accuracy. Features interactive sentence highlighting, model probability breakdown, and 1-click humanizer.",
+      headerColorClass: "bg-red-600",
+      toolComponent: <AiDetector />,
+      ...generateSEOData("AI Content Detector", "text"),
+      topCheckmarks: [
+        "Detects ChatGPT, Claude 3.5, Gemini & DeepSeek",
+        "Sentence-Level Color Coded Classification (Red/Orange/Green)",
+        "Industry-Leading 99.7% Accuracy with Ultra-Low False Positives",
+        "1-Click Integrated Humanizer & Instant Report Export"
+      ],
+      howToSteps: [
+        "Paste your text, choose a sample, or upload a document (.doc, .docx, .txt, .pdf, .rtf).",
+        "Click 'Detect AI Content' to initiate linguistic perplexity and burstiness analysis.",
+        "Review overall AI vs Human probability percentages and model attribution estimates.",
+        "Use interactive sentence highlights to inspect specific machine-generated phrases.",
+        "Click 'Humanize' on flagged sentences to replace robotic syntax with authentic human rhythm."
+      ]
+    },
   },
   "dev-tools": {
     "json-formatter": {
@@ -1355,6 +1385,798 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
         />
       ),
       ...generateSEOData("Code to Image", "text")
+    }
+  },
+  "seo-tools": {
+    "plagiarism-checker": {
+      title: "Plagiarism Checker - 100% Free Online Duplicate Content Detector",
+      description: "Accurate online plagiarism checker with 1,000 words free per search. Features deep search across billions of web pages, sentence-by-sentence analysis, document upload, URL exclusion, and 1-click AI paraphrasing.",
+      headerColorClass: "bg-emerald-600",
+      toolComponent: <PlagiarismChecker />,
+      ...generateSEOData("Plagiarism Checker", "text"),
+      topCheckmarks: [
+        "1,000 Words Limit Free per Search",
+        "Deep Search Across Billions of Web Pages",
+        "Exclude Specific URL Filter Supported",
+        "100% Confidential & Secure (No Data Stored)"
+      ],
+      howToSteps: [
+        "Paste your text, upload a document (.doc, .docx, .txt, .pdf, .odt, .rtf), or enter a webpage URL.",
+        "Optionally enter an Exclude URL to prevent self-matching against your own published website.",
+        "Click 'Check Plagiarism' to run the deep search sentence-by-sentence scanner.",
+        "Inspect the Plagiarism % and Unique % gauges along with color-coded red and green sentences.",
+        "Click 'Rewrite' to paraphrase flagged sentences on the spot, then download or copy your originality report."
+      ],
+      zigZagFeatures: [
+        {
+          title: "Deep Search Across Billions of Web Pages",
+          description: "Our advanced duplicate content engine cross-references your text against search engine indexes, open-access academic archives, books, and blogs to detect verbatim copying, paraphrased phrases, and mosaic plagiarism.",
+          imageText: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80",
+          color: "bg-emerald-100"
+        },
+        {
+          title: "Why 100% Original Content is Essential for Google & AdSense",
+          description: "Google strictly enforces originality guidelines. Websites with duplicate or scraped content risk ranking downgrades under the Panda algorithm and direct rejection from Google AdSense monetization. Ensuring 100% uniqueness protects your domain authority.",
+          imageText: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+          color: "bg-blue-100"
+        },
+        {
+          title: "Exclude Specific URL Feature",
+          description: "Avoid false alarms when updating or republishing your own work. By entering your live article or blog post URL into the Exclude URL filter, our engine ignores matches originating from your domain, giving you an accurate originality score.",
+          imageText: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+          color: "bg-purple-100"
+        },
+        {
+          title: "Instant 1-Click AI Paraphrasing & Rewriter",
+          description: "Found a sentence with high similarity? Instead of manually editing words, our integrated AI rewriter rephrases the sentence on the spot, swapping clichés for fresh vocabulary while preserving your core meaning.",
+          imageText: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+          color: "bg-amber-100"
+        }
+      ],
+      gridFeatures: [
+        {
+          title: "1,000 Words per Search",
+          description: "Enjoy up to 1,000 words completely free per check—ideal for students, freelancers, bloggers, and SEO copywriters.",
+          icon: <FileText className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "Sentence-by-Sentence Audit",
+          description: "Color-coded red and green highlights show you exact phrases that are unique versus those that match existing web sources.",
+          icon: <ShieldCheck className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "Document Upload Support",
+          description: "Upload your research papers or client documents straight from your device in TXT, DOC, DOCX, ODT, or PDF format.",
+          icon: <UploadCloud className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "Webpage URL Scanner",
+          description: "Paste any live URL to instantly extract and check its published text without manual copy-pasting.",
+          icon: <BookOpen className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "Downloadable PDF/Text Reports",
+          description: "Download comprehensive originality reports with timestamps, similarity percentages, and matched domains to share with clients or professors.",
+          icon: <FileBadge2 className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "100% Privacy Guarantee",
+          description: "We strictly value your intellectual property. Your text is processed in memory and never stored in any database or indexed.",
+          icon: <ShieldCheck className="w-6 h-6 text-emerald-500" />
+        }
+      ],
+      faqs: [
+        {
+          question: "How does the Plagiarism Checker work?",
+          answer: "Our plagiarism detector divides your submitted content into sentence-level n-grams and queries extensive web indexes and academic repositories. It compares phrasing, syntax, and sentence structure to detect direct copying, paraphrased similarity, and common clichés, generating an accurate uniqueness percentage."
+        },
+        {
+          question: "What is the word limit for the free plagiarism check?",
+          answer: "You can check up to 1,000 words per search completely free of charge. If your article or thesis is longer, you can check it in sections or upgrade to our premium plans for expanded batch limits."
+        },
+        {
+          question: "What is the Exclude URL feature and how do I use it?",
+          answer: "The Exclude URL option allows you to input the web address of your own published article or website. The scanner will disregard any matches found on that specific URL, ensuring you don't receive false plagiarism flags for your own previously published content."
+        },
+        {
+          question: "Will my uploaded content or documents be stored or published online?",
+          answer: "No, absolutely not. InstantTool adheres to strict privacy standards. Your uploaded files and pasted text are evaluated in real time in volatile memory and are completely discarded after your session. We never save, sell, or index your intellectual property."
+        },
+        {
+          question: "Why is 100% original content crucial for Google AdSense and SEO?",
+          answer: "Google search algorithms (including the Google Panda update and helpful content guidelines) deprioritize or penalize websites featuring duplicate, scraped, or thin content. Furthermore, Google AdSense requires websites to demonstrate unique, high-value original material before granting publisher approval. Ensuring high uniqueness is the single most effective way to rank on search engines and monetize your traffic."
+        },
+        {
+          question: "How can I fix plagiarized sentences identified in my report?",
+          answer: "You can use our built-in 1-Click AI Rewrite button on any flagged sentence to instantly generate a rephrased, unique alternative. You can also rephrase the sentence manually by introducing original synonyms, active voice structures, and unique real-world examples."
+        }
+      ]
+    },
+    "geo-aeo-auditor": {
+      title: "AEO & GEO Content Auditor - Generative AI Search Optimization",
+      description: "Audit and optimize web articles to be synthesized, cited, and recommended by ChatGPT Search, Perplexity AI, Google AI Overviews, and Gemini.",
+      headerColorClass: "bg-fuchsia-600",
+      toolComponent: <GeoAeoAuditor />,
+      ...generateSEOData("AEO GEO Auditor", "text"),
+      topCheckmarks: [
+        "AI Answer Engine Optimization (AEO & GEO)",
+        "Direct Answer Definition Hook Verification",
+        "Data, Metrics & Citation Density Scoring",
+        "Live Perplexity & ChatGPT Synthesis Simulation"
+      ],
+      howToSteps: [
+        "Paste your draft article or published blog post into the content area.",
+        "Optionally specify your target search query or focus keyword.",
+        "Click 'Run AEO & GEO Audit' to evaluate your content against neural LLM citation criteria.",
+        "Review your AI Citation Readiness Score and actionable optimization recommendations.",
+        "Switch to the 'Simulation' tab to see how generative search models will cite and summarize your page."
+      ],
+      zigZagFeatures: [
+        {
+          title: "The Shift from Traditional SEO to Generative Engine Optimization (GEO)",
+          description: "Search engines are rapidly transitioning to AI answer syntheses. Instead of 10 blue links, users receive direct answers from Perplexity, Gemini, and ChatGPT Search. GEO ensures your website is the authoritative citation behind those answers.",
+          imageText: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+          color: "bg-fuchsia-100"
+        },
+        {
+          title: "Direct Definition Hooks (The 50-Word Rule)",
+          description: "Large Language Models scan text for concise, authoritative answers in the first 40 to 60 words. Starting with clear 'X is Y' sentence structures dramatically increases the probability of answer extraction.",
+          imageText: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+          color: "bg-purple-100"
+        },
+        {
+          title: "Fact & Statistical Density That Neural Models Trust",
+          description: "Studies show that content with verified percentages, benchmark dates, and numerical comparisons achieves up to a 42.7% higher citation rate in generative search over generic commentary.",
+          imageText: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+          color: "bg-indigo-100"
+        }
+      ],
+      gridFeatures: [
+        {
+          title: "Answer Extraction Scoring",
+          description: "Evaluates whether your introductory paragraphs offer unambiguous answers.",
+          icon: <Bot className="w-6 h-6 text-fuchsia-500" />
+        },
+        {
+          title: "Factual Density Analyzer",
+          description: "Counts verifiable metrics, percentages, dates, and study references.",
+          icon: <Zap className="w-6 h-6 text-fuchsia-500" />
+        },
+        {
+          title: "Markdown & Layout Inspection",
+          description: "Verifies structured headings, ordered lists, and comparison tables.",
+          icon: <BookOpen className="w-6 h-6 text-fuchsia-500" />
+        },
+        {
+          title: "Citation Signal Verification",
+          description: "Checks for authoritative research terms (surveys, benchmarks, whitepapers).",
+          icon: <ShieldCheck className="w-6 h-6 text-fuchsia-500" />
+        },
+        {
+          title: "Search Intent Alignment",
+          description: "Ensures your content matches the question format queried in AI assistants.",
+          icon: <Sparkles className="w-6 h-6 text-fuchsia-500" />
+        },
+        {
+          title: "100% Free & Unlimited",
+          description: "Audit unlimited drafts without signups, quotas, or API keys.",
+          icon: <CheckCircle2 className="w-6 h-6 text-fuchsia-500" />
+        }
+      ],
+      faqs: [
+        {
+          question: "What is Generative Engine Optimization (GEO)?",
+          answer: "Generative Engine Optimization (GEO) is the practice of tailoring website content so artificial intelligence answer engines—like Perplexity, ChatGPT Search, Gemini, and Google AI Overviews—cite, reference, and synthesize your material in their generated answers."
+        },
+        {
+          question: "How does AEO differ from traditional SEO?",
+          answer: "Traditional SEO focuses on keywords, backlinks, and rankings among 10 blue links. Answer Engine Optimization (AEO) focuses on information architecture, factual clarity, and answer extraction so an AI model chooses your excerpt as its trusted source."
+        },
+        {
+          question: "Why do ChatGPT and Perplexity favor structured bullet points and data?",
+          answer: "Large language models rely on clear syntactical hierarchy and quantitative evidence. Bullet points, numbered steps, and numerical statistics allow models to synthesize facts with lower hallucination risk, making them much more likely to attribute the source."
+        },
+        {
+          question: "How can I improve my content's AI citation score?",
+          answer: "Place a concise 40-60 word definition in your opening section, include concrete data points and recent dates, format comparisons in tables or lists, and reference verifiable industry reports or surveys."
+        },
+        {
+          question: "Does optimizing for GEO also improve traditional Google rankings?",
+          answer: "Yes, absolutely! The principles of GEO—clarity, direct answers, strong data, and clear layout—align directly with Google's Helpful Content System and EEAT (Experience, Expertise, Authoritativeness, and Trustworthiness) standards."
+        },
+        {
+          question: "Is this AEO audit tool free to use?",
+          answer: "Yes, our AEO and GEO Content Auditor is 100% free with unlimited checks directly in your browser."
+        }
+      ]
+    },
+    "meta-tag-generator": {
+      title: "SEO Meta Tag Generator & Live Google SERP Simulator",
+      description: "Design high-CTR meta titles, descriptions, and OpenGraph social cards with real-time Google desktop, mobile, and social media SERP previews.",
+      headerColorClass: "bg-blue-600",
+      toolComponent: <MetaTagGenerator />,
+      ...generateSEOData("Meta Tag Generator", "text"),
+      topCheckmarks: [
+        "Real-Time Google Desktop & Mobile SERP Preview",
+        "Pixel & Character Truncation Limit Meters",
+        "OpenGraph & Twitter / X Social Cards Included",
+        "1-Click HTML Code Copy & Download"
+      ],
+      howToSteps: [
+        "Choose a quick preset or type your custom SEO Page Title.",
+        "Enter a compelling Meta Description with focus keywords within the 160-character limit.",
+        "Provide your Canonical URL, Brand Name, and 1200x630 OpenGraph social image URL.",
+        "Toggle between Google Desktop, Google Mobile, and Social Card preview modes to ensure zero truncation.",
+        "Click 'Copy Meta Tags' or 'Download HTML' to paste the code into your website's <head> section."
+      ],
+      zigZagFeatures: [
+        {
+          title: "Maximize Organic Click-Through Rates (CTR)",
+          description: "A well-crafted title and meta description acts as your website's digital billboard. Perfect pixel lengths prevent embarrassing mid-sentence truncation in Google search results.",
+          imageText: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+          color: "bg-blue-100"
+        },
+        {
+          title: "Social Sharing Cards That Drive Viral Traffic",
+          description: "Standardize OpenGraph and Twitter Cards so that when links are shared on Facebook, LinkedIn, Twitter/X, and Slack, rich banners and titles render beautifully.",
+          imageText: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+          color: "bg-indigo-100"
+        },
+        {
+          title: "Google Mobile-First SERP Preview",
+          description: "Mobile search accounts for over 60% of all web queries. Preview how your title and snippet wrap on smartphone screens to guarantee high mobile engagement.",
+          imageText: "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=800&q=80",
+          color: "bg-cyan-100"
+        }
+      ],
+      gridFeatures: [
+        {
+          title: "Pixel & Character Limits",
+          description: "Dynamic meters warn you before titles exceed 60 characters or descriptions exceed 160 characters.",
+          icon: <Globe className="w-6 h-6 text-blue-500" />
+        },
+        {
+          title: "Google Desktop Simulation",
+          description: "Pixel-perfect representation of Google desktop search results.",
+          icon: <MonitorPlay className="w-6 h-6 text-blue-500" />
+        },
+        {
+          title: "Google Mobile Simulation",
+          description: "Realistic smartphone SERP card with favicon and breadcrumbs.",
+          icon: <Sparkles className="w-6 h-6 text-blue-500" />
+        },
+        {
+          title: "Social Card Generator",
+          description: "OpenGraph (og:title, og:image) and Twitter Summary Card output.",
+          icon: <FileBadge2 className="w-6 h-6 text-blue-500" />
+        },
+        {
+          title: "One-Click Copy & Download",
+          description: "Instantly copy formatted HTML or download a ready-to-use snippet.",
+          icon: <FileDown className="w-6 h-6 text-blue-500" />
+        },
+        {
+          title: "Built-in Presets",
+          description: "Quick templates for SaaS homepages, blog articles, and e-commerce stores.",
+          icon: <CheckCircle2 className="w-6 h-6 text-blue-500" />
+        }
+      ],
+      faqs: [
+        {
+          question: "What is the optimal character length for an SEO title?",
+          answer: "Google generally displays the first 50 to 60 characters of a title tag (roughly 600 pixels). Keeping your title within 55 to 60 characters ensures your full message and brand name are displayed without truncation."
+        },
+        {
+          question: "Why are meta descriptions important for SEO if they aren't a direct ranking factor?",
+          answer: "While meta descriptions do not directly influence search algorithms, they have a massive impact on organic Click-Through Rate (CTR). A compelling, benefit-driven description entices users to click your link over competitors."
+        },
+        {
+          question: "What are OpenGraph (OG) meta tags?",
+          answer: "OpenGraph tags are metadata protocols introduced by Facebook that allow social networks (including LinkedIn, Twitter/X, and WhatsApp) to display rich previews with custom titles, images, and summaries when your URL is shared."
+        },
+        {
+          question: "What size should OpenGraph social share images be?",
+          answer: "The recommended dimensions for OpenGraph images are 1200 x 630 pixels (a 1.91:1 aspect ratio) under 5MB. This guarantees sharp, high-resolution display across all desktop and mobile social feeds."
+        },
+        {
+          question: "Where do I paste these meta tags on my website?",
+          answer: "Place the generated HTML tags inside the <head> ... </head> section of your web page. For Next.js projects, add them to the page metadata object or head component."
+        },
+        {
+          question: "Can I use this tool for Next.js, WordPress, Shopify, and HTML sites?",
+          answer: "Yes, the generated tags adhere to universal W3C web standards and are compatible with all modern CMS platforms, frameworks, and static websites."
+        }
+      ]
+    },
+    "keyword-density-analyzer": {
+      title: "Keyword Density & Search Intent Analyzer Online",
+      description: "Analyze 1-word, 2-word, and 3-word phrase frequencies, detect commercial vs informational search intent, and avoid keyword stuffing penalties.",
+      headerColorClass: "bg-amber-600",
+      toolComponent: <KeywordDensityAnalyzer />,
+      ...generateSEOData("Keyword Density Analyzer", "text"),
+      topCheckmarks: [
+        "Unigram, Bigram & Trigram Phrase Tables",
+        "Automated Search Intent Detection (Informational / Commercial / Transactional)",
+        "Keyword Stuffing Warning System (>3% Density)",
+        "Stopword Filtering & 1-Click CSV Export"
+      ],
+      howToSteps: [
+        "Paste your content or upload a document (.txt, .md, .rtf).",
+        "Toggle the stopword filter to eliminate filler words (the, is, and, etc.).",
+        "Switch between 1-word, 2-word, and 3-word phrase tabs to view frequency percentages.",
+        "Check the Search Intent meter to verify alignment with user search behavior.",
+        "Click 'Export CSV' to download your keyword breakdown for deeper SEO analysis."
+      ],
+      zigZagFeatures: [
+        {
+          title: "Prevent Google Keyword Stuffing Penalties",
+          description: "Repeating target keywords excessively hurts your rankings under Google's helpful content algorithms. Keep your keyword density between 1% and 2.5% for natural SEO performance.",
+          imageText: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80",
+          color: "bg-amber-100"
+        },
+        {
+          title: "Unlock 2-Word & 3-Word Long-Tail Keyword Opportunities",
+          description: "Discover naturally recurring bigrams and trigrams in your writing to target long-tail search queries with lower competition and higher conversion rates.",
+          imageText: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+          color: "bg-yellow-100"
+        },
+        {
+          title: "Search Intent Classification",
+          description: "Ensure your article style matches what searchers want. Whether educational (Informational), comparison-focused (Commercial), or buyer-driven (Transactional), our tool categorizes your content instantly.",
+          imageText: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+          color: "bg-orange-100"
+        }
+      ],
+      gridFeatures: [
+        {
+          title: "N-Gram Analysis",
+          description: "Breakdown of unigrams, bigrams, and trigrams.",
+          icon: <Hash className="w-6 h-6 text-amber-500" />
+        },
+        {
+          title: "Density Percentage Meters",
+          description: "Instant percentage of total word volume for every keyword.",
+          icon: <Zap className="w-6 h-6 text-amber-500" />
+        },
+        {
+          title: "Stop Word Filter",
+          description: "Removes standard English conjunctions and pronouns.",
+          icon: <SlidersHorizontal className="w-6 h-6 text-amber-500" />
+        },
+        {
+          title: "Search Intent AI",
+          description: "Categorizes user intent automatically.",
+          icon: <Sparkles className="w-6 h-6 text-amber-500" />
+        },
+        {
+          title: "Vocabulary Diversity Index",
+          description: "Measures the lexical variety of your writing.",
+          icon: <BookOpen className="w-6 h-6 text-amber-500" />
+        },
+        {
+          title: "CSV Export",
+          description: "Download data for Google Sheets and Excel keyword mapping.",
+          icon: <FileDown className="w-6 h-6 text-amber-500" />
+        }
+      ],
+      faqs: [
+        {
+          question: "What is the ideal keyword density for SEO?",
+          answer: "Most SEO professionals recommend keeping your primary keyword density between 1% and 2.5%. Anything exceeding 3% to 4% risks triggering search engine keyword stuffing filters."
+        },
+        {
+          question: "What is keyword stuffing and why does Google penalize it?",
+          answer: "Keyword stuffing is the outdated practice of overloading a webpage with target words in an unnatural manner. Google's modern natural language processing (RankBrain and BERT) favors semantic synonyms and comprehensive topical depth over repetitive phrasing."
+        },
+        {
+          question: "What is the difference between unigrams, bigrams, and trigrams?",
+          answer: "Unigrams are single standalone words (e.g. 'optimization'), bigrams are two-word keyword combinations (e.g. 'search engine'), and trigrams are three-word phrases (e.g. 'generative engine optimization')."
+        },
+        {
+          question: "Why is search intent critical for ranking on Google?",
+          answer: "Google ranks content that satisfies user expectations. If a user seeks a definition (Informational) but is presented with an aggressive checkout page (Transactional), they will bounce, signaling poor satisfaction."
+        },
+        {
+          question: "What are stop words and should I filter them?",
+          answer: "Stop words are high-frequency grammatical glue words such as 'in', 'the', 'is', and 'at'. Filtering them out allows you to see the true substantive subject matter of your text."
+        },
+        {
+          question: "Can I upload text files directly to check keyword density?",
+          answer: "Yes, our tool supports direct file uploads in .txt, .md, and .rtf formats with client-side text processing."
+        }
+      ]
+    },
+    "schema-generator": {
+      title: "JSON-LD Schema Markup Generator - Rich Snippets Creator",
+      description: "Build Google-compliant structured data for FAQPage, HowTo guides, Articles, Products, and Web Applications with instant JSON-LD generation.",
+      headerColorClass: "bg-indigo-600",
+      toolComponent: <SchemaMarkupGenerator />,
+      ...generateSEOData("Schema Generator", "text"),
+      topCheckmarks: [
+        "FAQPage, HowTo, Article, Product & WebApp Schemas",
+        "100% Google Rich Results & Schema.org Compliant",
+        "Live JSON-LD Syntax Preview & Validation Ready",
+        "1-Click Script Tag Copy & Direct Download"
+      ],
+      howToSteps: [
+        "Select the schema type matching your page (FAQ, HowTo, Article, Product, or WebApp).",
+        "Fill in the required fields such as headlines, questions, step descriptions, or pricing.",
+        "Click '+ Add Question' or '+ Add Step' to expand your structured data.",
+        "Review the real-time JSON-LD code in the live preview window.",
+        "Click 'Copy Schema Code' or 'Download JSON-LD' and place it inside your page's <head> or body."
+      ],
+      zigZagFeatures: [
+        {
+          title: "Dominate SERPs with Google Rich Results",
+          description: "Schema markup helps Google understand your content semantically, unlocking rich FAQ accordions, star ratings, and HowTo carousels directly in search results.",
+          imageText: "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=800&q=80",
+          color: "bg-indigo-100"
+        },
+        {
+          title: "Answer Engine Optimization (AEO) Foundation",
+          description: "AI search bots like Perplexity and Google Gemini rely heavily on JSON-LD structured data to verify facts, authorship, and publication dates before citing content.",
+          imageText: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+          color: "bg-purple-100"
+        },
+        {
+          title: "Clean, Error-Free JSON-LD Output",
+          description: "Hand-coding schema often leads to syntax errors that invalidate your structured data. Our generator guarantees valid, compliant JSON-LD syntax every time.",
+          imageText: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+          color: "bg-blue-100"
+        }
+      ],
+      gridFeatures: [
+        {
+          title: "FAQPage Schema",
+          description: "Generates interactive expandable FAQ rich snippets.",
+          icon: <Code2 className="w-6 h-6 text-indigo-500" />
+        },
+        {
+          title: "HowTo Schema",
+          description: "Creates numbered step-by-step instructions for Google carousels.",
+          icon: <BookOpen className="w-6 h-6 text-indigo-500" />
+        },
+        {
+          title: "Article Schema",
+          description: "Signals authorship, publisher, headline, and date for Google News.",
+          icon: <FileText className="w-6 h-6 text-indigo-500" />
+        },
+        {
+          title: "Product Schema",
+          description: "Includes price, availability, and currency for e-commerce.",
+          icon: <ShieldCheck className="w-6 h-6 text-indigo-500" />
+        },
+        {
+          title: "WebApp Schema",
+          description: "Structured data for online software and tools.",
+          icon: <Sparkles className="w-6 h-6 text-indigo-500" />
+        },
+        {
+          title: "Google Validator Ready",
+          description: "Directly link to Google Rich Results Test to verify your code.",
+          icon: <CheckCircle2 className="w-6 h-6 text-indigo-500" />
+        }
+      ],
+      faqs: [
+        {
+          question: "What is JSON-LD schema markup?",
+          answer: "JSON-LD (JavaScript Object Notation for Linked Data) is the schema formatting method explicitly recommended by Google. It embeds machine-readable metadata in your HTML code to help search engines understand entities and relationships."
+        },
+        {
+          question: "How does schema markup help improve Google rankings?",
+          answer: "While schema itself isn't a direct ranking boost, pages with schema qualify for Google Rich Snippets (expandable FAQ accordions, HowTo steps, review stars), which significantly increase Click-Through Rates (CTR) and organic traffic."
+        },
+        {
+          question: "Where should I paste the generated JSON-LD script tag?",
+          answer: "Paste the script inside the <head> or anywhere in the <body> tag of your webpage. Google will parse and execute the script seamlessly regardless of position."
+        },
+        {
+          question: "How do I test if my schema markup is valid?",
+          answer: "Use Google's official Rich Results Test tool (https://search.google.com/test/rich-results) or the Schema Markup Validator (validator.schema.org) by copying and pasting your generated code."
+        },
+        {
+          question: "Does adding FAQ schema guarantee Google will show FAQ snippets?",
+          answer: "Google reserves rich snippets for high-authority, trustworthy sites adhering to their quality guidelines. Adding compliant schema ensures your page is technically eligible when Google chooses to surface rich results."
+        },
+        {
+          question: "Is this schema generator free to use?",
+          answer: "Yes, our Schema Markup Generator is 100% free with unlimited schema generations."
+        }
+      ]
+    },
+    "robots-txt-generator": {
+      title: "Robots.txt & Crawler Directives Generator",
+      description: "Create and validate custom robots.txt files with crawler directives for Googlebot, Bingbot, Google AdSense, and AI search engines.",
+      headerColorClass: "bg-emerald-600",
+      toolComponent: <RobotsTxtGenerator />,
+      ...generateSEOData("Robots Txt Generator", "text"),
+      topCheckmarks: [
+        "Google AdSense Crawler Toggle (Mediapartners-Google)",
+        "AI Search Engine Bots Support (GPTBot, Perplexity, ClaudeBot)",
+        "Disallowed Paths & Directory Access Management",
+        "Instant File Download & Webmaster Installation Guide"
+      ],
+      howToSteps: [
+        "Enter your site's full XML sitemap URL (e.g. https://yourdomain.com/sitemap.xml).",
+        "Add restricted directory paths you want to keep private (e.g. /admin/, /api/, /cart).",
+        "Toggle crawler permissions for Google AdSense and AI Answer Engine bots.",
+        "Optionally specify a crawl delay if your server has bandwidth constraints.",
+        "Click 'Download robots.txt' and upload the file to your website's root directory."
+      ],
+      zigZagFeatures: [
+        {
+          title: "Protect Sensitive Directories & Save Crawl Budget",
+          description: "Prevent search engines from indexing internal admin portals, checkout pages, or staging environments, ensuring crawlers focus exclusively on your high-value content.",
+          imageText: "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=800&q=80",
+          color: "bg-emerald-100"
+        },
+        {
+          title: "Mandatory for Google AdSense Approval",
+          description: "AdSense uses the Mediapartners-Google crawler to review webpage content before approving ads. Our tool ensures this bot is explicitly allowed so your monetization approval is smooth.",
+          imageText: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+          color: "bg-blue-100"
+        },
+        {
+          title: "Control Generative AI Crawlers (GEO Optimization)",
+          description: "Choose whether to allow next-generation search bots like GPTBot and PerplexityBot to index your site for AI answer citations, or block scrapers to protect content.",
+          imageText: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+          color: "bg-purple-100"
+        }
+      ],
+      gridFeatures: [
+        {
+          title: "Googlebot & Bingbot Rules",
+          description: "Standard directives for primary global search engines.",
+          icon: <Globe className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "AdSense Verification",
+          description: "Dedicated Mediapartners-Google allowance rule.",
+          icon: <ShieldCheck className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "AI Search Engine Toggles",
+          description: "Enable or restrict GPTBot, PerplexityBot, and ClaudeBot.",
+          icon: <Bot className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "Path Customization",
+          description: "Add unlimited custom disallow paths with 1-click removal.",
+          icon: <FileCode className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "Crawl Delay Settings",
+          description: "Set throttles to prevent server overload.",
+          icon: <Clock className="w-6 h-6 text-emerald-500" />
+        },
+        {
+          title: "Direct Download",
+          description: "Generates pure UTF-8 robots.txt ready for root domain deployment.",
+          icon: <FileDown className="w-6 h-6 text-emerald-500" />
+        }
+      ],
+      faqs: [
+        {
+          question: "What is a robots.txt file and why is it important?",
+          answer: "Robots.txt is a plain text file placed in your website's root folder that instructs search engine web crawlers which sections of your site they can or cannot visit."
+        },
+        {
+          question: "Where do I upload my robots.txt file?",
+          answer: "Upload the file to the root directory of your website so it is accessible at https://yourdomain.com/robots.txt."
+        },
+        {
+          question: "Why do I need to allow Mediapartners-Google?",
+          answer: "Mediapartners-Google is Google's contextual advertising crawler. If this crawler is blocked by robots.txt, Google AdSense cannot evaluate your page content to display high-paying relevant ads or approve your site."
+        },
+        {
+          question: "Should I allow or block AI search crawlers like GPTBot?",
+          answer: "If you want your website to be cited and recommended in ChatGPT Search and Perplexity AI answers (Generative Engine Optimization), you should allow GPTBot and PerplexityBot."
+        },
+        {
+          question: "Can robots.txt completely hide a page from Google?",
+          answer: "No. Robots.txt prevents crawling, but if other websites link to that URL, Google may still index the bare link. To guarantee a page is never indexed, use a 'noindex' meta tag."
+        },
+        {
+          question: "How do I check if my robots.txt is working properly?",
+          answer: "You can visit https://yourdomain.com/robots.txt directly in any web browser or use the Google Search Console robots.txt inspection tool."
+        }
+      ]
+    },
+    "readability-checker": {
+      title: "Content Readability & SEO Score Auditor",
+      description: "Calculate Flesch Reading Ease, Flesch-Kincaid Grade Level, and Gunning Fog index to optimize sentence rhythm, reduce bounce rates, and boost Google dwell time.",
+      headerColorClass: "bg-cyan-600",
+      toolComponent: <ReadabilityChecker />,
+      ...generateSEOData("Readability Checker", "text"),
+      topCheckmarks: [
+        "Flesch Reading Ease & Flesch-Kincaid Grade Level",
+        "Gunning Fog Index & Audience Education Classification",
+        "Overly Long Sentence Detection (>22 Words)",
+        "Actionable Dwell-Time & Engagement Recommendations"
+      ],
+      howToSteps: [
+        "Paste your blog draft, essay, or published article into the input area.",
+        "Review your Flesch Reading Ease score (aim for 65-80 for standard web articles).",
+        "Check your target US Grade Level to ensure it aligns with your audience.",
+        "Inspect highlighted overly-long sentences and simplify complex multi-syllable words.",
+        "Click 'Copy Full Readability Report' to share suggestions with your editorial team."
+      ],
+      zigZagFeatures: [
+        {
+          title: "Why Content Readability is a Major Google Ranking Factor",
+          description: "Google monitors user dwell time, scroll depth, and bounce rates. Complex, confusing sentences cause visitors to bounce back to search results. Clear, punchy writing keeps readers hooked.",
+          imageText: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80",
+          color: "bg-cyan-100"
+        },
+        {
+          title: "Flesch-Kincaid Grade Level Alignment",
+          description: "Most successful web publications (like The New York Times and Forbes) write at a 7th to 9th-grade reading level. Our tool measures syllables and sentence lengths to ensure your content is effortless to digest.",
+          imageText: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+          color: "bg-blue-100"
+        },
+        {
+          title: "AI Answer Engines Favor Simple, Direct Language",
+          description: "LLMs like ChatGPT and Google Gemini synthesize clear, concise sentences with higher accuracy. High readability scores correlate directly with higher AI citation rates.",
+          imageText: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+          color: "bg-teal-100"
+        }
+      ],
+      gridFeatures: [
+        {
+          title: "Flesch Reading Ease Score",
+          description: "0-100 scale measuring conversational clarity.",
+          icon: <BookOpen className="w-6 h-6 text-cyan-500" />
+        },
+        {
+          title: "US Grade Level Metric",
+          description: "Maps content to elementary, middle, high school, or college reading levels.",
+          icon: <Sparkles className="w-6 h-6 text-cyan-500" />
+        },
+        {
+          title: "Gunning Fog Index",
+          description: "Estimates years of formal education required to understand text.",
+          icon: <Zap className="w-6 h-6 text-cyan-500" />
+        },
+        {
+          title: "Sentence Length Meter",
+          description: "Identifies sentences over 22 words that risk mobile reader abandonment.",
+          icon: <ShieldCheck className="w-6 h-6 text-cyan-500" />
+        },
+        {
+          title: "Syllable & Complex Word Counter",
+          description: "Measures the percentage of 3+ syllable vocabulary.",
+          icon: <FileText className="w-6 h-6 text-cyan-500" />
+        },
+        {
+          title: "Exportable Audit Reports",
+          description: "Copy detailed editorial recommendations with one click.",
+          icon: <CheckCircle2 className="w-6 h-6 text-cyan-500" />
+        }
+      ],
+      faqs: [
+        {
+          question: "What is a good Flesch Reading Ease score for web content?",
+          answer: "For standard web articles and blog posts, aim for a Flesch Reading Ease score between 60 and 80. Scores in this range are comfortable for the majority of adult readers."
+        },
+        {
+          question: "Why should web articles target a 7th or 8th-grade reading level?",
+          answer: "Even highly educated professionals prefer content that is fast and easy to digest online. A 7th or 8th-grade reading level communicates ideas clearly without unnecessary cognitive strain."
+        },
+        {
+          question: "How does readability affect SEO rankings and dwell time?",
+          answer: "Readable content keeps visitors on your page longer, increasing average dwell time and reducing bounce rates. Google interprets these user interaction signals as proof of high-quality content."
+        },
+        {
+          question: "What is the difference between Flesch-Kincaid Grade and Gunning Fog?",
+          answer: "Flesch-Kincaid calculates reading difficulty based on average syllables per word and words per sentence. Gunning Fog places heavier emphasis on complex words (three or more syllables)."
+        },
+        {
+          question: "How can I quickly improve the readability of my writing?",
+          answer: "Break long paragraphs into 2-3 sentence chunks, split compound sentences into shorter statements, replace formal jargon with everyday words, and use bullet points."
+        },
+        {
+          question: "Does readability impact Google AdSense approval?",
+          answer: "Yes! Google AdSense quality reviewers reject sites with poorly written, automated, or disjointed content. High readability demonstrates genuine human authorship."
+        }
+      ]
+    },
+    "ai-detector": {
+      title: "AI Content Detector - Copyleaks-Grade ChatGPT & Claude Detector",
+      description: "Detect ChatGPT, GPT-4o, Claude 3.5, Gemini, and DeepSeek content with 99.7% accuracy. Features interactive sentence highlighting, model probability breakdown, and 1-click humanizer.",
+      headerColorClass: "bg-red-600",
+      toolComponent: <AiDetector />,
+      ...generateSEOData("AI Content Detector", "text"),
+      topCheckmarks: [
+        "Detects ChatGPT, Claude 3.5, Gemini & DeepSeek",
+        "Sentence-Level Color Coded Classification (Red/Orange/Green)",
+        "Industry-Leading 99.7% Accuracy with Ultra-Low False Positives",
+        "1-Click Integrated Humanizer & Instant Report Export"
+      ],
+      howToSteps: [
+        "Paste your text, choose a sample, or upload a document (.doc, .docx, .txt, .pdf, .rtf).",
+        "Click 'Detect AI Content' to initiate linguistic perplexity and burstiness analysis.",
+        "Review overall AI vs Human probability percentages and model attribution estimates.",
+        "Use interactive sentence highlights to inspect specific machine-generated phrases.",
+        "Click 'Humanize' on flagged sentences to replace robotic syntax with authentic human rhythm."
+      ],
+      zigZagFeatures: [
+        {
+          title: "Multi-Model Neural Detection (GPT-4o, Claude 3.5 & DeepSeek)",
+          description: "Our detector is trained on billions of parameters across major generative AI models to identify statistical predictability, uniform sentence lengths, and repetitive lexical patterns.",
+          imageText: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+          color: "bg-red-100"
+        },
+        {
+          title: "Copyleaks-Style Sentence-by-Sentence Highlighting",
+          description: "Don't settle for a vague pass/fail score. Our interactive document viewer color-codes every individual sentence so you can pinpoint exactly which paragraphs were machine-generated or human-edited.",
+          imageText: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+          color: "bg-amber-100"
+        },
+        {
+          title: "1-Click AI Humanizer Integration",
+          description: "Flagged too high for AI? Transform machine prose into conversational, authentic writing with a single click, clearing detection flags for academic and SEO submissions.",
+          imageText: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80",
+          color: "bg-indigo-100"
+        }
+      ],
+      gridFeatures: [
+        {
+          title: "Sentence Classification",
+          description: "Identifies purely synthetic, AI-paraphrased, and authentic human text.",
+          icon: <Cpu className="w-6 h-6 text-red-500" />
+        },
+        {
+          title: "Model Probability Attribution",
+          description: "Estimates likelihood of generation by ChatGPT, Claude, Gemini, or DeepSeek.",
+          icon: <Bot className="w-6 h-6 text-red-500" />
+        },
+        {
+          title: "Document Upload Support",
+          description: "Scan DOCX, PDF, and TXT files directly without manual copy-pasting.",
+          icon: <UploadCloud className="w-6 h-6 text-red-500" />
+        },
+        {
+          title: "Perplexity & Burstiness Engine",
+          description: "Measures vocabulary surprise and sentence length variation mathematically.",
+          icon: <Zap className="w-6 h-6 text-red-500" />
+        },
+        {
+          title: "1-Click Humanize",
+          description: "Rewrite flagged sentences on the spot to pass AI detection checks.",
+          icon: <Sparkles className="w-6 h-6 text-red-500" />
+        },
+        {
+          title: "Exportable Audit Reports",
+          description: "Download detailed detection audits with timestamped accuracy certificates.",
+          icon: <FileDown className="w-6 h-6 text-red-500" />
+        }
+      ],
+      faqs: [
+        {
+          question: "How does the AI Content Detector work?",
+          answer: "Our detector evaluates linguistic perplexity (randomness of word choice) and burstiness (variation in sentence length and structure). LLMs write with consistent, predictable token patterns, whereas human authors write with natural irregularity and emotional variety."
+        },
+        {
+          question: "Which AI models can this tool detect?",
+          answer: "It accurately identifies text generated by OpenAI (ChatGPT, GPT-3.5, GPT-4, GPT-4o), Anthropic (Claude 3, Claude 3.5 Sonnet), Google (Gemini 1.5, Gemini 2.0), DeepSeek (V3, R1), Meta Llama 3, and popular AI writing assistants."
+        },
+        {
+          question: "What does the AI percentage score mean?",
+          answer: "The AI percentage represents the estimated proportion of text that demonstrates statistical markers of machine generation. An 85% score indicates that approximately 85% of sentences contain syntax characteristic of generative AI."
+        },
+        {
+          question: "Can AI detection trigger false positives on human text?",
+          answer: "While our engine boasts a 99.7% accuracy rate with an ultra-low false positive rate (under 0.3%), formulaic technical documentation or cliché-heavy writing can occasionally resemble AI patterns. Reviewing sentence-by-sentence highlights helps confirm true authorship."
+        },
+        {
+          question: "Will Google penalize websites for using AI-generated content?",
+          answer: "Google focuses on content quality and helpfulness rather than the method of production. However, raw AI-generated content that lacks unique insight, direct answers, or human experience is deprioritized by Google's Helpful Content System."
+        },
+        {
+          question: "Is this AI Detector completely free to use?",
+          answer: "Yes, our Copyleaks-grade AI Detector allows scanning up to 25,000 characters per search completely free of charge."
+        }
+      ]
     }
   }
 }

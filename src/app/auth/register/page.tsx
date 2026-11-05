@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import Image from "next/image"
 import { Eye, EyeOff, Zap, ShieldCheck, Sparkles } from "lucide-react"
 import { toast } from "sonner"
 
@@ -113,12 +114,15 @@ export default function RegisterPage() {
         <div className="w-full max-w-[400px] relative z-10">
           {/* Logo */}
           <div className="flex justify-center mb-10">
-            <Link href="/" className="font-bold text-3xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-               <div className="flex -space-x-1.5">
-                  <div className="w-6 h-6 rounded-full bg-[#c0ffa5] border-2 border-white dark:border-slate-950"></div>
-                  <div className="w-6 h-6 rounded-full bg-green-950 dark:bg-green-800 border-2 border-white dark:border-slate-950"></div>
-               </div>
-              InstantTool
+            <Link href="/" className="font-bold text-3xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
+              <Image
+                src="/favicon.png"
+                alt="InstantTool Logo"
+                width={36}
+                height={36}
+                className="w-9 h-9 rounded-xl object-contain shadow-sm"
+              />
+              <span>InstantTool</span>
             </Link>
           </div>
 

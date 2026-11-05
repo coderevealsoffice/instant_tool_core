@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { FOOTER_MENU } from "@/config/menu"
 import { Mail, Phone, MapPin } from "lucide-react"
 import { NewsletterForm } from "@/components/layout/NewsletterForm"
@@ -32,13 +33,15 @@ export function Footer() {
           
           {/* Brand & Contact Info */}
           <div className="lg:w-1/3 flex flex-col space-y-6">
-            <Link href="/" className="font-extrabold text-2xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-              <div className="flex -space-x-1">
-                <div className="w-5 h-5 rounded-full bg-blue-500 border-2 border-slate-50 dark:border-[#0B0F19]"></div>
-                <div className="w-5 h-5 rounded-full bg-yellow-400 border-2 border-slate-50 dark:border-[#0B0F19]"></div>
-                <div className="w-5 h-5 rounded-full bg-red-500 border-2 border-slate-50 dark:border-[#0B0F19]"></div>
-              </div>
-              InstantTool
+            <Link href="/" className="font-extrabold text-2xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
+              <Image
+                src="/favicon.png"
+                alt="InstantTool Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8 rounded-lg object-contain shadow-sm"
+              />
+              <span>InstantTool</span>
             </Link>
             
             <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-xs">

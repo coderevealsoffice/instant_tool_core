@@ -5,7 +5,7 @@ import {
   Volume2, FastForward, Activity, Mic, Merge, MoveRight, Music, Sliders, AudioLines,
   FileText, Unlock, Lock, FilePlus2, FileDigit, ImageDown, ArrowRightLeft, FileArchive, BookOpen, Key,
   Palette, Pipette, Hash, ALargeSmall, Link2, Sparkles, Wand2, Bot, PenLine, FileBadge2, Braces,
-  Code2, FileCode2, Droplets, Camera, Briefcase, Smartphone
+  Code2, FileCode2, Droplets, Camera, Briefcase, Smartphone, ShieldCheck, Globe, FileCode, Search
 } from "lucide-react"
 
 export type MenuItem = {
@@ -21,6 +21,7 @@ export type FooterSection = {
 }
 
 export const MAIN_MENU: MenuItem[] = [
+  { label: "SEO Tools", href: "/seo-tools" },
   { label: "Video Tools", href: "/#video-tools" },
   { label: "Audio Tools", href: "/#audio-tools" },
   { label: "PDF Tools", href: "/#pdf-tools" },
@@ -32,6 +33,19 @@ export const MAIN_MENU: MenuItem[] = [
 ]
 
 export const TOOL_CATEGORIES = [
+  {
+    title: "SEO Tools",
+    tools: [
+      { name: "Plagiarism Checker", description: "Detect duplicate content, web clichés, and verify sentence-level uniqueness.", icon: <ShieldCheck className="w-5 h-5" />, href: "/seo-tools/plagiarism-checker" },
+      { name: "AEO & GEO Content Auditor", description: "Optimize content to be cited by ChatGPT Search, Perplexity AI, and Google AI Overviews.", icon: <Bot className="w-5 h-5" />, href: "/seo-tools/geo-aeo-auditor" },
+      { name: "SEO Meta Tag Generator", description: "Design meta tags with real-time Google search snippet and social card previews.", icon: <Globe className="w-5 h-5" />, href: "/seo-tools/meta-tag-generator" },
+      { name: "Keyword Density Analyzer", description: "Analyze 1-word, 2-word, and 3-word phrase density and detect keyword stuffing.", icon: <Hash className="w-5 h-5" />, href: "/seo-tools/keyword-density-analyzer" },
+      { name: "Schema Markup Generator", description: "Build structured JSON-LD data for Google Rich Snippets and FAQ dropdowns.", icon: <Code2 className="w-5 h-5" />, href: "/seo-tools/schema-generator" },
+      { name: "Robots.txt & Sitemap Builder", description: "Generate and validate robots.txt rules for Googlebot, Bingbot, and AI crawlers.", icon: <FileCode className="w-5 h-5" />, href: "/seo-tools/robots-txt-generator" },
+      { name: "Readability & SEO Score", description: "Calculate Flesch-Kincaid readability, Gunning Fog index, and sentence complexity.", icon: <BookOpen className="w-5 h-5" />, href: "/seo-tools/readability-checker" },
+      { name: "AI Content Detector", description: "Copyleaks-grade AI detection for ChatGPT, Claude, Gemini, and DeepSeek.", icon: <Sparkles className="w-5 h-5" />, href: "/seo-tools/ai-detector" },
+    ]
+  },
   {
     title: "Video Tools",
     tools: [
@@ -138,6 +152,7 @@ export const TOOL_CATEGORIES = [
       { name: "AI Viral Video Caption", description: "Generate viral captions and trending hashtags for Reels & TikTok.", icon: <Smartphone className="w-5 h-5" />, href: "/ai-tools/ai-video-caption-generator" },
       { name: "AI Text Humanizer", description: "Leverage powerful AI to text humanizer automatically.", icon: <Sparkles className="w-5 h-5" />, href: "/ai-tools/ai-text-humanizer" },
       { name: "AI Resume Builder", description: "Leverage powerful AI to resume builder automatically.", icon: <FileBadge2 className="w-5 h-5" />, href: "/ai-tools/ai-resume-builder" },
+      { name: "AI Content Detector", description: "Copyleaks-grade AI detection for ChatGPT, Claude, Gemini, and DeepSeek.", icon: <Sparkles className="w-5 h-5" />, href: "/ai-tools/ai-detector" },
     ]
   },
   {
@@ -198,6 +213,18 @@ export const FOOTER_MENU: FooterSection[] = [
       { label: "Audio Joiner", href: "/audio-tools/joiner" },
       { label: "Change Pitch", href: "/audio-tools/pitch" },
       { label: "Audio Converter", href: "/converters/audio" },
+    ]
+  },
+  {
+    title: "SEO Tools",
+    items: [
+      { label: "Plagiarism Checker", href: "/seo-tools/plagiarism-checker" },
+      { label: "AEO & GEO Auditor", href: "/seo-tools/geo-aeo-auditor" },
+      { label: "Meta Tag Generator", href: "/seo-tools/meta-tag-generator" },
+      { label: "Keyword Density", href: "/seo-tools/keyword-density-analyzer" },
+      { label: "Schema Generator", href: "/seo-tools/schema-generator" },
+      { label: "Robots.txt Builder", href: "/seo-tools/robots-txt-generator" },
+      { label: "Readability Score", href: "/seo-tools/readability-checker" },
     ]
   },
   {

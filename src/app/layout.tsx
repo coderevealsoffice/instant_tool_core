@@ -3,7 +3,6 @@ import { Inter, Playfair_Display, Urbanist } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
-import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -50,6 +49,14 @@ export const metadata: Metadata = {
     "free online tools",
     "Instant Tool"
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico" }
+    ],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: "Instant Tool | Free PDF, Image & QR Code Tools",
     description: "Free online tools to compress, merge, split, and rotate PDFs, compress and convert images, and generate QR codes quickly and securely.",
@@ -84,29 +91,40 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${urbanist.variable} h-full antialiased font-sans`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+        {/* Google AdSense Script */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1199452179361457"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {/* Global Organization Schema for AEO/GEO/SEO */}
-        <Script id="organization-schema" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "InstantTool",
-            "url": "https://devigo.cloud",
-            "logo": "https://devigo.cloud/logo.png",
-            "description": "Your all-in-one platform for powerful, fast, and free online tools.",
-            "sameAs": [
-              "https://twitter.com/instanttool",
-              "https://www.linkedin.com/company/instanttool"
-            ]
-          })
-        }} />
-
-        {/* Google AdSense Global Script */}
-        <Script 
-          async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1199452179361457" 
-          crossOrigin="anonymous" 
-          strategy="lazyOnload" 
+        <script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "InstantTool",
+              "url": "https://devigo.cloud",
+              "logo": "https://devigo.cloud/favicon.png",
+              "description": "Your all-in-one platform for powerful, fast, and free online PDF, image, video, audio, and AI tools.",
+              "sameAs": [
+                "https://twitter.com/instanttool",
+                "https://www.linkedin.com/company/instanttool"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "info.codereveals@gmail.com",
+                "contactType": "customer support"
+              }
+            }).replace(/</g, '\\u003c')
+          }}
         />
 
         <Providers>

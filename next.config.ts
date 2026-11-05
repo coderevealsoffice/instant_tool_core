@@ -48,6 +48,9 @@ const nextConfig: NextConfig = {
       "onnxruntime-web/webgpu": "@/lib/empty-module",
     },
   },
+  experimental: {
+    turbopackPluginRuntimeStrategy: "workerThreads",
+  },
   webpack: (config, { webpack }) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,

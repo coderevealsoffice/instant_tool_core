@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
 import { MAIN_MENU, TOOL_CATEGORIES } from "@/config/menu"
 import { ChevronDown, Menu, X } from "lucide-react"
@@ -36,12 +37,16 @@ export function Header() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         
         {/* Logo */}
-        <Link href="/" className="font-black text-2xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-           <div className="flex -space-x-1">
-              <div className="w-5 h-5 rounded-full bg-red-600"></div>
-              <div className="w-5 h-5 rounded-full bg-slate-800 dark:bg-slate-300"></div>
-           </div>
-          InstantTool
+        <Link href="/" className="font-black text-2xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
+          <Image
+            src="/favicon.png"
+            alt="InstantTool Logo"
+            width={32}
+            height={32}
+            className="w-8 h-8 rounded-lg object-contain shadow-sm"
+            priority
+          />
+          <span>InstantTool</span>
         </Link>
         
         {/* Main Nav Links (Like iLovePDF) */}
@@ -53,7 +58,7 @@ export function Header() {
             </button>
             <div className="absolute top-16 left-0 w-[400px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
               <div className="grid grid-cols-2 gap-2">
-                {TOOL_CATEGORIES.find(c => c.title === "PDF Tools")?.tools.slice(0, 10).map((tool, idx) => (
+                {TOOL_CATEGORIES.find(c => c.title === "PDF Tools")?.tools?.slice(0, 10).map((tool, idx) => (
                   <Link key={idx} href={tool.href} className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-red-600 rounded-md transition-colors">
                     <span className="text-slate-400 group-hover:text-red-600 transition-colors scale-75">{tool.icon}</span>
                     <span className="truncate">{tool.name}</span>
@@ -73,7 +78,7 @@ export function Header() {
             </button>
             <div className="absolute top-16 left-0 w-[400px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
               <div className="grid grid-cols-2 gap-2">
-                {TOOL_CATEGORIES.find(c => c.title === "Video Tools")?.tools.slice(0, 10).map((tool, idx) => (
+                {TOOL_CATEGORIES.find(c => c.title === "Video Tools")?.tools?.slice(0, 10).map((tool, idx) => (
                   <Link key={idx} href={tool.href} className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-red-600 rounded-md transition-colors">
                     <span className="text-slate-400 group-hover:text-red-600 transition-colors scale-75">{tool.icon}</span>
                     <span className="truncate">{tool.name}</span>
@@ -107,7 +112,7 @@ export function Header() {
                           {category.title}
                         </h4>
                         <ul className="space-y-2">
-                          {category.tools.slice(0, 4).map((tool, toolIdx) => (
+                          {category.tools?.slice(0, 4).map((tool, toolIdx) => (
                             <li key={toolIdx}>
                               <Link 
                                 href={tool.href}
@@ -122,10 +127,10 @@ export function Header() {
                               </Link>
                             </li>
                           ))}
-                          {category.tools.length > 4 && (
+                          {(category.tools?.length ?? 0) > 4 && (
                             <li>
                               <Link href="/tools" className="text-sm font-bold text-red-600 hover:underline p-2 block">
-                                View all {category.tools.length} tools...
+                                View all {category.tools?.length} tools...
                               </Link>
                             </li>
                           )}
@@ -138,6 +143,28 @@ export function Header() {
             )}
           </div>
 
+          {/* SEO Tools Dropdown */}
+          <div className="relative group h-16 flex items-center">
+            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-500 transition-colors uppercase flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              SEO Tools <ChevronDown className="w-4 h-4" />
+            </button>
+            <div className="absolute top-16 left-0 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
+              <div className="flex flex-col gap-1.5">
+                {TOOL_CATEGORIES.find(c => c.title === "SEO Tools")?.tools.map((tool, idx) => (
+                  <Link key={idx} href={tool.href} className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:text-emerald-600 rounded-lg transition-colors">
+                    <span className="text-emerald-500 transition-colors">{tool.icon}</span>
+                    <span className="truncate">{tool.name}</span>
+                  </Link>
+                ))}
+                
+                <Link href="/seo-tools" className="mt-1 pt-2 border-t border-slate-100 dark:border-slate-800 text-center text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline transition-colors">
+                  View All SEO & AEO Tools &rarr;
+                </Link>
+              </div>
+            </div>
+          </div>
+
           {/* AI Tools Dropdown */}
           <div className="relative group h-16 flex items-center">
             <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-fuchsia-600 dark:group-hover:text-fuchsia-500 transition-colors uppercase flex items-center gap-1 bg-fuchsia-50 dark:bg-fuchsia-900/30 px-3 py-1.5 rounded-full border border-fuchsia-100 dark:border-fuchsia-800">
@@ -145,7 +172,7 @@ export function Header() {
             </button>
             <div className="absolute top-16 left-0 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
               <div className="flex flex-col gap-2">
-                {TOOL_CATEGORIES.find(c => c.title === "AI Tools")?.tools.slice(0, 10).map((tool, idx) => (
+                {TOOL_CATEGORIES.find(c => c.title === "AI Tools")?.tools?.slice(0, 10).map((tool, idx) => (
                   <Link key={idx} href={tool.href} className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20 hover:text-fuchsia-600 rounded-md transition-colors">
                     <span className="text-slate-400 group-hover:text-fuchsia-600 transition-colors">{tool.icon}</span>
                     <span className="truncate">{tool.name}</span>
@@ -196,6 +223,10 @@ export function Header() {
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-16 left-0 right-0 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-xl overflow-y-auto" style={{ maxHeight: "calc(100vh - 4rem)" }}>
           <div className="p-4 flex flex-col gap-4">
+            <Link href="/seo-tools" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors uppercase py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <span>SEO & AEO Tools</span>
+              <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full font-extrabold">NEW</span>
+            </Link>
             <Link href="/pdf-tools" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-red-600 transition-colors uppercase py-2 border-b border-slate-100 dark:border-slate-800">PDF Tools</Link>
             <Link href="/video-tools" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-red-600 transition-colors uppercase py-2 border-b border-slate-100 dark:border-slate-800">Video Tools</Link>
             <Link href="/ai-tools" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-fuchsia-600 hover:text-fuchsia-700 transition-colors uppercase py-2 border-b border-slate-100 dark:border-slate-800">AI Tools</Link>

@@ -37,17 +37,71 @@ export default async function HomePage() {
     where: { isActive: true },
     orderBy: { priceMonthly: 'asc' }
   });
+  const appBaseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://devigo.cloud";
+
   const schema = {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "InstantTool",
-    "url": "https://devigo.cloud/",
-    "description": "Your all-in-one platform for powerful, fast, and free online tools.",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://devigo.cloud/tools?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${appBaseUrl}/#website`,
+        "url": appBaseUrl,
+        "name": "InstantTool",
+        "description": "Free, browser-based online PDF, Image, Video, Audio and AI tools. Zero installations, client-side privacy, and high-performance processing.",
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": `${appBaseUrl}/tools?q={search_term_string}`,
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": `${appBaseUrl}/#organization`,
+        "name": "InstantTool",
+        "url": appBaseUrl,
+        "logo": `${appBaseUrl}/favicon.png`,
+        "description": "Your all-in-one productivity suite for PDF management, multimedia editing, format conversions, and generative AI creation.",
+        "sameAs": [
+          "https://twitter.com/instanttool",
+          "https://www.linkedin.com/company/instanttool"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "info.codereveals@gmail.com",
+          "contactType": "customer service"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Are InstantTool tools completely free to use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! All basic file processing tools, including PDF compression, image conversion, and video trimming, are 100% free with generous daily limits. Additional premium credits are available for heavy batch workloads and advanced AI models."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my data and uploaded documents secure?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, absolutely. Client-side tools execute directly in your browser using WebAssembly without sending your files to a server. Any files processed through server queues are encrypted in transit and permanently deleted immediately after processing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need to install any software or browser extensions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No installation is required. Every tool operates directly inside your web browser across desktop, Mac, Windows, Linux, Android, and iOS devices."
+            }
+          }
+        ]
+      }
+    ]
   };
 
   return (
@@ -178,7 +232,7 @@ export default async function HomePage() {
                   <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1"></div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {category.tools.slice(0, 6).map((tool, idx) => (
+                  {category.tools?.slice(0, 6).map((tool, idx) => (
                     <Link
                       key={`${category.title}-${idx}`}
                       href={tool.href}
@@ -202,7 +256,7 @@ export default async function HomePage() {
                     </Link>
                   ))}
                 </div>
-                {category.tools.length > 6 && (
+                {(category.tools?.length ?? 0) > 6 && (
                   <div className="mt-8 text-center">
                     <Link href="/tools" className="text-blue-600 dark:text-blue-400 font-bold hover:underline">
                       See All {category.title} →
@@ -340,77 +394,100 @@ export default async function HomePage() {
 
       {/* Plans & Pricing */}
       <section className="py-24 bg-white dark:bg-slate-950" id="pricing">
-        <div className="container mx-auto max-w-6xl px-4 text-center">
-          <h2 className="text-4xl font-black text-slate-900 dark:text-white mb-4">Our Pricing Plan</h2>
-          <p className="text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto text-lg">
-            Our pricing plans are affordable and flexible, catering to all budgets. Choose the plan that suits your needs best.
-          </p>
+        <div className="container mx-auto max-w-7xl px-4 text-center">
+          <div className="max-w-3xl mx-auto mb-16">
+            <span className="inline-block py-1 px-3.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 text-xs font-bold tracking-wider uppercase mb-4 border border-blue-200 dark:border-blue-900/50">
+              Transparent Pricing
+            </span>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+              Simple, Predictable Plans for Everyone
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed">
+              Start free with daily credits or unlock massive batch processing, priority queue, and API access with our ultra-affordable plans.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto items-stretch">
             {plans.map((plan, idx) => {
-              const isPopular = plan.name.toLowerCase().includes('pro') || idx === 1; // Default to middle card if no 'pro'
+              const isPopular = plan.name.toLowerCase() === 'pro' || idx === 2;
 
               return (
                 <div
                   key={plan.id}
-                  className={`relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-300 ${isPopular
-                    ? 'bg-[#1C2434] text-white shadow-xl scale-105 z-10'
-                    : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm'
-                    }`}
+                  className={`relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-300 ${
+                    isPopular
+                      ? 'bg-slate-900 text-white shadow-2xl ring-2 ring-blue-500 lg:-translate-y-2 z-10'
+                      : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md'
+                  }`}
                 >
+                  {isPopular && (
+                    <div className="absolute top-0 right-0 left-0 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider py-1.5 text-center shadow-sm">
+                      ★ Most Popular
+                    </div>
+                  )}
+
                   {/* Top section (Header, Price, Button) */}
-                  <div className={`p-8 pb-6 border-b ${isPopular ? 'border-slate-700' : 'border-slate-100 dark:border-slate-800'}`}>
+                  <div className={`p-6 pb-6 border-b text-center ${isPopular ? 'pt-8 border-slate-800' : 'border-slate-100 dark:border-slate-800'}`}>
                     <h3 className={`text-xl font-bold mb-2 ${isPopular ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
                       {plan.name} Plan
                     </h3>
-                    <p className={`text-sm mb-6 ${isPopular ? 'text-slate-300' : 'text-slate-500 dark:text-slate-400'}`}>
+                    <p className={`text-xs mb-5 min-h-[36px] flex items-center justify-center leading-snug ${isPopular ? 'text-slate-300' : 'text-slate-500 dark:text-slate-400'}`}>
                       {plan.description || `Perfect for ${plan.name.toLowerCase()} usage.`}
                     </p>
 
                     <div className="mb-6 flex items-baseline justify-center gap-1">
-                      <span className={`text-4xl font-black ${isPopular ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
+                      <span className={`text-4xl font-black tracking-tight ${isPopular ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
                         ₹{plan.priceMonthly}
                       </span>
-                      <span className={`text-sm ${isPopular ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'}`}>
+                      <span className={`text-xs font-medium ${isPopular ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'}`}>
                         /month
                       </span>
                     </div>
 
                     <Link
-                      href="/dashboard/billing"
-                      className={`block w-full py-3 px-4 rounded-lg font-bold transition-all text-center ${isPopular
-                        ? 'bg-white text-slate-900 hover:bg-slate-100'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700'
-                        }`}
+                      href={plan.priceMonthly === 0 ? "/auth/register" : "/dashboard/billing"}
+                      className={`block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all text-center shadow-sm ${
+                        isPopular
+                          ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-500/25'
+                          : plan.priceMonthly === 0
+                            ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700'
+                            : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100'
+                      }`}
                     >
-                      {plan.priceMonthly === 0 ? "Get Started" : "Upgrade Now"}
+                      {plan.priceMonthly === 0 ? "Get Started Free" : "Upgrade Plan"}
                     </Link>
                   </div>
 
                   {/* Features section */}
-                  <div className={`p-8 pt-6 flex-1 flex flex-col ${isPopular ? 'bg-[#1C2434]' : 'bg-white dark:bg-slate-900'}`}>
-                    <ul className="space-y-4 text-left flex-1">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 className={`w-5 h-5 shrink-0 ${isPopular ? 'text-white' : 'text-slate-800 dark:text-slate-200'}`} />
-                        <span className={`text-sm ${isPopular ? 'text-slate-200' : 'text-slate-700 dark:text-slate-300'}`}>
-                          {plan.credits} Credits included
+                  <div className={`p-6 pt-5 flex-1 flex flex-col justify-between ${isPopular ? 'bg-slate-900' : 'bg-white dark:bg-slate-900'}`}>
+                    <ul className="space-y-3.5 text-left text-xs md:text-sm">
+                      <li className="flex items-start gap-2.5">
+                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${isPopular ? 'text-blue-400' : 'text-emerald-500'}`} />
+                        <span className={`font-semibold ${isPopular ? 'text-slate-200' : 'text-slate-800 dark:text-slate-200'}`}>
+                          {plan.credits.toLocaleString()} Credits included
                         </span>
                       </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 className={`w-5 h-5 shrink-0 ${isPopular ? 'text-white' : 'text-slate-800 dark:text-slate-200'}`} />
-                        <span className={`text-sm ${isPopular ? 'text-slate-200' : 'text-slate-700 dark:text-slate-300'}`}>
-                          Max file size: {plan.maxFileSizeMB}MB
+                      <li className="flex items-start gap-2.5">
+                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${isPopular ? 'text-blue-400' : 'text-emerald-500'}`} />
+                        <span className={isPopular ? 'text-slate-300' : 'text-slate-600 dark:text-slate-400'}>
+                          Max file size: {plan.maxFileSizeMB >= 1024 ? `${(plan.maxFileSizeMB / 1024).toFixed(0)}GB` : `${plan.maxFileSizeMB}MB`}
                         </span>
                       </li>
                       {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <CheckCircle2 className={`w-5 h-5 shrink-0 ${isPopular ? 'text-white' : 'text-slate-800 dark:text-slate-200'}`} />
-                          <span className={`text-sm ${isPopular ? 'text-slate-200' : 'text-slate-700 dark:text-slate-300'}`}>
+                        <li key={i} className="flex items-start gap-2.5">
+                          <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${isPopular ? 'text-blue-400' : 'text-emerald-500'}`} />
+                          <span className={isPopular ? 'text-slate-300' : 'text-slate-600 dark:text-slate-400'}>
                             {feature}
                           </span>
                         </li>
                       ))}
                     </ul>
+
+                    <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
+                      <span className={`text-[11px] font-medium ${isPopular ? 'text-slate-400' : 'text-slate-400 dark:text-slate-500'}`}>
+                        {plan.priceYearly ? `₹${plan.priceYearly}/year billed annually` : 'Free forever'}
+                      </span>
+                    </div>
                   </div>
                 </div>
               )

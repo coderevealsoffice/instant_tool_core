@@ -85,3 +85,34 @@ export async function notifySuperAdminOnNewUser(newUserEmail: string, newUserNam
     console.error("Failed to notify super admins of new user:", err)
   }
 }
+
+export async function sendContactEmail(name: string, email: string, subject: string, message: string) {
+  try {
+    const toEmail = process.env.CONTACT_TO_EMAIL || "info.codereveals@gmail.com"
+    const mailOptions = {
+      from: `"InstantTool Contact" <${process.env.SMTP_USER}>`,
+      to: toEmail,
+      replyTo: email,
+      subject: `[InstantTool Inquiry] ${subject}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; background: #ffffff;">
+          <h2 style="color: #0f172a; margin-top: 0;">New Contact Form Submission</h2>
+          <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 16px 0;">
+            <p style="margin: 0 0 8px 0;"><strong>From:</strong> ${name} &lt;${email}&gt;</p>
+            <p style="margin: 0 0 8px 0;"><strong>Subject:</strong> ${subject}</p>
+            <p style="margin: 0;"><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+          </div>
+          <div style="margin-top: 20px;">
+            <h3 style="color: #334155; font-size: 15px; margin-bottom: 8px;">Message:</h3>
+            <p style="white-space: pre-wrap; color: #1e293b; line-height: 1.6; background: #fafafa; padding: 16px; border-radius: 8px; border-left: 4px solid #3b82f6;">${message}</p>
+          </div>
+        </div>
+      `,
+    }
+    await transporter.sendMail(mailOptions)
+    return { success: true }
+  } catch (error) {
+    console.error("Error sending contact email:", error)
+    return { success: false, error }
+  }
+}

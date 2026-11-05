@@ -17,11 +17,25 @@ export default async function FaqsPage() {
     orderBy: { order: "asc" },
   })
 
-  // Group by category if needed, but for now we'll just show them in order 
-  // as the previous static page did.
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer.replace(/<[^>]*>?/gm, ""), // Strip HTML tags for clean schema text
+      },
+    })),
+  }
 
   return (
     <div className="bg-white dark:bg-slate-950 min-h-screen py-20 px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="container mx-auto max-w-3xl">
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 dark:bg-blue-900/40 rounded-2xl mb-6">
