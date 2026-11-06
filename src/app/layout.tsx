@@ -77,6 +77,9 @@ export const metadata: Metadata = {
     title: "Instant Tool | Free PDF, Image & QR Code Tools",
     description: "Free online tools to compress, merge, split, and rotate PDFs, compress and convert images, and generate QR codes quickly and securely.",
     images: ["https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=1200&q=80"],
+  },
+  verification: {
+    google: "google15fe68b4ac2831d1",
   }
 };
 
