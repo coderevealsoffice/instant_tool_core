@@ -100,8 +100,7 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1199452179361457"
           crossOrigin="anonymous"
         />
-      </head>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+
         {/* Global Organization Schema for AEO/GEO/SEO */}
         <script
           id="organization-schema"
@@ -126,6 +125,8 @@ export default function RootLayout({
             }).replace(/</g, '\\u003c')
           }}
         />
+      </head>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
 
         <Providers>
           {children}

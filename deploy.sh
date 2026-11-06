@@ -16,3 +16,4 @@ echo "🔄 4. Restarting PM2 process..."
 pm2 restart instant-tool-ai || pm2 start ecosystem.config.js
 
 echo "✅ Deployment Successful! Check https://devigo.cloud"
+
