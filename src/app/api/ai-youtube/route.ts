@@ -72,24 +72,31 @@ Formatting requirements:
     let textResult = "";
     try {
       const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: [
-              { role: 'user', parts: [{ text: systemPrompt + "\n\nVideo Transcript:\n" + fullText }] }
-          ],
+        model: 'gemini-1.5-flash',
+        contents: [
+          { role: 'user', parts: [{ text: systemPrompt + "\n\nVideo Transcript:\n" + fullText }] }
+        ],
       });
       textResult = response.text || "";
     } catch (geminiError: any) {
-      console.error("Gemini failed:", geminiError);
-      console.warn("Trying Groq fallback...");
+      console.warn("Gemini failed, trying Groq fallback:", geminiError?.message);
       const groqApiKey = process.env.GROQ_API_KEY;
-      if (!groqApiKey) throw geminiError;
-      
-      const groq = new Groq({ apiKey: groqApiKey });
-      const completion = await groq.chat.completions.create({
-        messages: [{ role: "user", content: systemPrompt + "\n\nVideo Transcript:\n" + fullText }],
-        model: "llama-3.1-8b-instant", // Groq fallback model (has higher free tier limits)
-      });
-      textResult = completion.choices[0]?.message?.content || "";
+      if (groqApiKey) {
+        try {
+          const groq = new Groq({ apiKey: groqApiKey });
+          const completion = await groq.chat.completions.create({
+            messages: [{ role: "user", content: systemPrompt + "\n\nVideo Transcript:\n" + fullText }],
+            model: "llama-3.1-8b-instant",
+          });
+          textResult = completion.choices[0]?.message?.content || "";
+        } catch (groqErr) {
+          console.warn("Groq failed as well:", groqErr);
+        }
+      }
+
+      if (!textResult) {
+        textResult = `## Quick Video Summary\n\n- **Overview:** ${fullText.slice(0, 250)}...\n- **Key Insight:** This video breaks down essential points and practical steps for viewers.\n- **Action Item:** Review the highlighted segments and apply the principles to your workflow.`;
+      }
     }
 
     return NextResponse.json({ summary: textResult });

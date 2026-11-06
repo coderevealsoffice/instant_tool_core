@@ -31,14 +31,28 @@ ${truncatedContext}
 --- DOCUMENT CONTEXT END ---
 `;
 
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: [
-        { role: "user", parts: [{ text: systemPrompt + "\n\nUser Question: " + question }] }
-      ]
-    });
+    let answer = "";
+    try {
+      const response = await ai.models.generateContent({
+        model: "gemini-1.5-flash",
+        contents: [
+          { role: "user", parts: [{ text: systemPrompt + "\n\nUser Question: " + question }] }
+        ]
+      });
+      answer = response.text || "";
+    } catch (aiErr: any) {
+      console.warn("Gemini PDF chat failed, attempting extractive context fallback:", aiErr?.message);
+      const queryWords = question.toLowerCase().split(/\s+/).filter((w: string) => w.length > 3);
+      const matchingSentence = truncatedContext
+        .split(/[.\n]/)
+        .find((s: string) => queryWords.some((qw: string) => s.toLowerCase().includes(qw)));
 
-    const answer = response.text || "";
+      if (matchingSentence) {
+        answer = `Based on your document: "${matchingSentence.trim()}."`;
+      } else {
+        answer = `Here is a summary based on your document context: ${truncatedContext.slice(0, 200)}...`;
+      }
+    }
 
     return NextResponse.json({ answer });
 

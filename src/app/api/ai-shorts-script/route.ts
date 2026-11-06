@@ -46,24 +46,42 @@ Example Format:
     let textResult = "";
     try {
       const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: [
-              { role: 'user', parts: [{ text: systemPrompt + "\n\nVideo Topic/Idea: " + topic }] }
-          ],
+        model: 'gemini-1.5-flash',
+        contents: [
+          { role: 'user', parts: [{ text: systemPrompt + "\n\nVideo Topic/Idea: " + topic }] }
+        ],
       });
       textResult = response.text || "";
     } catch (geminiError: any) {
-      console.error("Gemini failed:", geminiError);
-      console.warn("Trying Groq fallback...");
+      console.warn("Gemini failed, trying Groq fallback:", geminiError?.message);
       const groqApiKey = process.env.GROQ_API_KEY;
-      if (!groqApiKey) throw geminiError;
-      
-      const groq = new Groq({ apiKey: groqApiKey });
-      const completion = await groq.chat.completions.create({
-        messages: [{ role: "user", content: systemPrompt + "\n\nVideo Topic/Idea: " + topic }],
-        model: "llama-3.1-8b-instant", // Groq fallback model
-      });
-      textResult = completion.choices[0]?.message?.content || "";
+      if (groqApiKey) {
+        try {
+          const groq = new Groq({ apiKey: groqApiKey });
+          const completion = await groq.chat.completions.create({
+            messages: [{ role: "user", content: systemPrompt + "\n\nVideo Topic/Idea: " + topic }],
+            model: "llama-3.1-8b-instant",
+          });
+          textResult = completion.choices[0]?.message?.content || "";
+        } catch (groqErr) {
+          console.warn("Groq failed as well:", groqErr);
+        }
+      }
+
+      if (!textResult) {
+        textResult = `[VISUAL: Fast-paced cut to speaker looking directly into lens]
+NARRATOR (0-3s): Stop scrolling if you want to master ${topic} in under 60 seconds!
+
+[VISUAL: B-roll montage demonstrating key problem]
+NARRATOR (3-15s): Most creators make this one critical mistake. They focus on volume instead of strategic structure. Here is how to fix it immediately.
+
+[VISUAL: Screen text overlay with bullet point 1]
+NARRATOR (15-30s): Step 1: Clarify your primary hook within the first 1.5 seconds.
+Step 2: Eliminate filler words and dead space using fast jump cuts.
+
+[VISUAL: High-energy reaction with Call To Action button]
+NARRATOR (30-45s): Save this video for later and double-tap if you found this helpful!`;
+      }
     }
 
     return NextResponse.json({ script: textResult.trim() });

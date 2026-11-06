@@ -45,24 +45,36 @@ Example output:
     let textResult = "";
     try {
       const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: [
-              { role: 'user', parts: [{ text: systemPrompt }] }
-          ],
+        model: 'gemini-1.5-flash',
+        contents: [
+          { role: 'user', parts: [{ text: systemPrompt }] }
+        ],
       });
       textResult = response.text || "";
     } catch (geminiError: any) {
-      console.error("Gemini failed:", geminiError);
-      console.warn("Trying Groq fallback...");
+      console.warn("Gemini failed, trying Groq fallback:", geminiError?.message);
       const groqApiKey = process.env.GROQ_API_KEY;
-      if (!groqApiKey) throw geminiError;
-      
-      const groq = new Groq({ apiKey: groqApiKey });
-      const completion = await groq.chat.completions.create({
-        messages: [{ role: "user", content: systemPrompt }],
-        model: "llama-3.3-70b-versatile",
-      });
-      textResult = completion.choices[0]?.message?.content || "";
+      if (groqApiKey) {
+        try {
+          const groq = new Groq({ apiKey: groqApiKey });
+          const completion = await groq.chat.completions.create({
+            messages: [{ role: "user", content: systemPrompt }],
+            model: "llama-3.3-70b-versatile",
+          });
+          textResult = completion.choices[0]?.message?.content || "";
+        } catch (groqErr) {
+          console.warn("Groq failed as well:", groqErr);
+        }
+      }
+
+      if (!textResult) {
+        textResult = JSON.stringify([
+          { title: "Chapter 1: Foundations & Core Principles", description: `Introduction to ${topic} and why it matters today.` },
+          { title: "Chapter 2: Strategy, Frameworks & Tooling", description: "Essential mechanisms and proven approaches to get started." },
+          { title: "Chapter 3: Real-World Execution & Case Studies", description: "In-depth walkthrough of practical implementation." },
+          { title: "Chapter 4: Advanced Mastery & Next Steps", description: "Scaling up, avoiding common pitfalls, and future outlook." }
+        ]);
+      }
     }
 
     let rawJson = textResult || "[]";

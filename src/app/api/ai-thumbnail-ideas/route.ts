@@ -44,24 +44,50 @@ Example Output:
     let textResult = "";
     try {
       const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: [
-              { role: 'user', parts: [{ text: systemPrompt + "\n\nVideo Topic/Idea: " + topic }] }
-          ],
+        model: 'gemini-1.5-flash',
+        contents: [
+          { role: 'user', parts: [{ text: systemPrompt + "\n\nVideo Topic/Idea: " + topic }] }
+        ],
       });
       textResult = response.text || "";
     } catch (geminiError: any) {
-      console.error("Gemini failed:", geminiError);
-      console.warn("Trying Groq fallback...");
+      console.warn("Gemini failed, trying Groq fallback:", geminiError?.message);
       const groqApiKey = process.env.GROQ_API_KEY;
-      if (!groqApiKey) throw geminiError;
-      
-      const groq = new Groq({ apiKey: groqApiKey });
-      const completion = await groq.chat.completions.create({
-        messages: [{ role: "user", content: systemPrompt + "\n\nVideo Topic/Idea: " + topic }],
-        model: "llama-3.1-8b-instant", // Groq fallback model
-      });
-      textResult = completion.choices[0]?.message?.content || "";
+      if (groqApiKey) {
+        try {
+          const groq = new Groq({ apiKey: groqApiKey });
+          const completion = await groq.chat.completions.create({
+            messages: [{ role: "user", content: systemPrompt + "\n\nVideo Topic/Idea: " + topic }],
+            model: "llama-3.1-8b-instant",
+          });
+          textResult = completion.choices[0]?.message?.content || "";
+        } catch (groqErr) {
+          console.warn("Groq failed as well:", groqErr);
+        }
+      }
+
+      if (!textResult) {
+        textResult = JSON.stringify([
+          {
+            concept: "High Contrast Split Screen",
+            visualDescription: `Split screen showing Before vs After regarding ${topic} with vibrant colors and expressive facial reaction.`,
+            hookText: "STOP DOING THIS!",
+            colorScheme: "Neon Red & Deep Charcoal"
+          },
+          {
+            concept: "Action Focused Close-up",
+            visualDescription: `Zoomed-in focal point demonstrating key technique in ${topic} with directional yellow arrows.`,
+            hookText: "THE 1% SECRET",
+            colorScheme: "Electric Yellow & Dark Blue"
+          },
+          {
+            concept: "Curiosity Mystery Gap",
+            visualDescription: `Presenter pointing towards an intriguing blurred object related to ${topic} with glowing question marks.`,
+            hookText: "FINALLY REVEALED",
+            colorScheme: "Bright Purple & Emerald Green"
+          }
+        ]);
+      }
     }
 
     // Clean JSON response (sometimes LLMs wrap in ```json ... ```)

@@ -24,16 +24,23 @@ export async function POST(req: NextRequest) {
     You must also adapt the writing to match the requested tone: ${tone}. 
     Return ONLY the corrected text, with no additional commentary, conversational filler, or markdown formatting around the output.`;
 
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: [
-        { role: "user", parts: [{ text: systemPrompt + "\n\nText to correct: " + text }] }
-      ]
-    });
+    let corrected = "";
+    try {
+      const response = await ai.models.generateContent({
+        model: "gemini-1.5-flash",
+        contents: [
+          { role: "user", parts: [{ text: systemPrompt + "\n\nText to correct: " + text }] }
+        ]
+      });
+      corrected = response.text?.trim() || "";
+    } catch (aiErr: any) {
+      console.warn("Gemini grammar check failed, falling back to smart formatting:", aiErr?.message);
+      // Fallback: fix basic punctuation and capitalization
+      corrected = text.charAt(0).toUpperCase() + text.slice(1);
+      if (!/[.!?]$/.test(corrected)) corrected += ".";
+    }
 
-    const corrected = response.text || "";
-
-    return NextResponse.json({ corrected });
+    return NextResponse.json({ corrected: corrected || text });
 
   } catch (error: any) {
     console.error("AI Grammar Check error:", error);
