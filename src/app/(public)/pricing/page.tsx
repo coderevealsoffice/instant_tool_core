@@ -13,11 +13,73 @@ export const metadata = {
   }
 };
 
+interface DisplayPlan {
+  id: string;
+  name: string;
+  description: string | null;
+  priceMonthly: number;
+  priceYearly?: number | null;
+  credits: number;
+  maxFileSizeMB: number;
+  features: string[];
+}
+
+const FALLBACK_PLANS: DisplayPlan[] = [
+  {
+    id: "free",
+    name: "Free",
+    description: "Perfect for occasional use and quick daily tasks.",
+    priceMonthly: 0,
+    priceYearly: 0,
+    credits: 50,
+    maxFileSizeMB: 50,
+    features: ["Access to 100+ basic tools", "Standard processing speed", "Daily credit refills", "Community support"]
+  },
+  {
+    id: "starter",
+    name: "Starter",
+    description: "Great for freelancers and everyday content creators.",
+    priceMonthly: 199,
+    priceYearly: 1990,
+    credits: 500,
+    maxFileSizeMB: 200,
+    features: ["Batch file processing", "Faster queue processing", "No watermarks", "Email support"]
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    description: "Best for high-volume creators, teams, and power users.",
+    priceMonthly: 499,
+    priceYearly: 4990,
+    credits: 2000,
+    maxFileSizeMB: 1024,
+    features: ["High-speed priority queue", "Full AI suite unlocked", "Advanced SEO audit tools", "Priority 24/7 support"]
+  },
+  {
+    id: "business",
+    name: "Business",
+    description: "Built for agencies and organizations needing scale.",
+    priceMonthly: 999,
+    priceYearly: 9990,
+    credits: 10000,
+    maxFileSizeMB: 2048,
+    features: ["Unlimited priority queue", "Dedicated API access", "Team collaboration", "Dedicated account manager"]
+  }
+];
+
 export default async function PricingPage() {
-  const plans = await prisma.plan.findMany({
-    where: { isActive: true },
-    orderBy: { priceMonthly: 'asc' }
-  })
+  let plans: DisplayPlan[] = FALLBACK_PLANS;
+  try {
+    const dbPlans = await prisma.plan.findMany({
+      where: { isActive: true },
+      orderBy: { priceMonthly: 'asc' }
+    });
+    if (dbPlans && dbPlans.length > 0) {
+      plans = dbPlans;
+    }
+  } catch (err) {
+    console.warn("Using fallback plans on pricing page:", err);
+  }
 
   const schema = {
     "@context": "https://schema.org",
