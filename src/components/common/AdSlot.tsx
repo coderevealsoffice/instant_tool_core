@@ -74,12 +74,12 @@ export function AdSlot({ slotId, className = "" }: AdSlotProps) {
     <div 
       ref={adRef} 
       className={`w-full overflow-hidden flex items-center justify-center text-slate-400 text-sm ${className}`}
-      style={{ minHeight: "100px" }}
+      style={{ minHeight: "90px" }}
     >
       <ins 
         className="adsbygoogle"
         style={{ display: "block", minWidth: "250px", width: "100%" }}
-        data-ad-client="ca-pub-0000000000000000" // Replace with actual publisher ID
+        data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-1199452179361457"}
         data-ad-slot={slotId}
         data-ad-format="auto"
         data-full-width-responsive="true"

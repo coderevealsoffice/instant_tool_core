@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, ChevronDown, ChevronUp } from "lucide-react"
 import { SupportDonationCTA } from "./SupportDonationCTA"
+import { AdSlot } from "@/components/common/AdSlot"
 
 export interface Feature {
   title: string
@@ -96,6 +97,11 @@ export function ToolPageTemplate({
                 {text}
               </div>
             ))}
+          </div>
+
+          {/* AdSense In-Content Placement */}
+          <div className="mt-10 max-w-4xl mx-auto">
+            <AdSlot slotId="tool-inline-banner" className="bg-slate-50/50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800" />
           </div>
         </div>
       </section>
