@@ -113,10 +113,10 @@ export default function LoginPage() {
               &quot;The most intuitive file platform we&apos;ve ever used. Our team&apos;s productivity tripled in just 3 months.&quot;
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#c0ffa5]/20 flex items-center justify-center text-[#c0ffa5] font-bold text-xs shrink-0">JD</div>
+              <div className="w-8 h-8 rounded-full bg-[#c0ffa5]/20 flex items-center justify-center text-[#c0ffa5] font-bold text-xs shrink-0">P</div>
               <div>
-                <div className="text-white font-bold text-xs uppercase tracking-wider">JAMES DALTON</div>
-                <div className="text-green-100/40 text-[10px] font-bold">Growth Lead @ Codereveals</div>
+                <div className="text-white font-bold text-xs uppercase tracking-wider">Pradeep</div>
+                <div className="text-green-100/40 text-[10px] font-bold">Product Engineering @ Techyfe</div>
               </div>
             </div>
           </div>
