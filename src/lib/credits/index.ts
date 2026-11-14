@@ -3,23 +3,15 @@ import { TransactionType } from "@prisma/client"
 
 /**
  * Checks if a user has enough credits.
+ * Currently set to 100% free for all users.
  */
 export async function hasEnoughCredits(userId: string, requiredCredits: number): Promise<boolean> {
-  try {
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { credits: true }
-    })
-    if (!user) return false
-    return user.credits >= requiredCredits
-  } catch {
-    return false
-  }
+  return true
 }
 
 /**
- * Deducts credits from a user's wallet and records the transaction.
- * Uses sequential queries (no $transaction) for compatibility with the pg adapter.
+ * Deducts credits from a user's wallet.
+ * Runs in 100% free mode: never blocks tool execution or throws 'Insufficient credits'.
  */
 export async function deductCredits(
   userId: string,
@@ -27,31 +19,25 @@ export async function deductCredits(
   jobId?: string,
   description?: string
 ) {
-  if (amount <= 0) throw new Error("Amount to deduct must be greater than 0")
-
-  // 1. Check user exists and has enough credits
-  const user = await prisma.user.findUnique({ where: { id: userId } })
-  if (!user) throw new Error("User not found")
-  if (user.credits < amount) throw new Error("Insufficient credits")
-
-  // 2. Decrement credits
-  const updatedUser = await prisma.user.update({
-    where: { id: userId },
-    data: { credits: { decrement: amount } }
-  })
-
-  // 3. Log the credit transaction
-  const transaction = await prisma.creditTransaction.create({
-    data: {
-      userId,
-      amount: -amount,
-      type: TransactionType.JOB_USAGE,
-      jobId,
-      description: description || "Tool usage deduction",
+  try {
+    const user = await prisma.user.findUnique({ where: { id: userId } })
+    if (!user) {
+      return { user: { id: userId, credits: 999 }, transaction: null }
     }
-  })
 
-  return { user: updatedUser, transaction }
+    // If user has credits, decrement safely without ever throwing
+    if (user.credits >= amount) {
+      const updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: { credits: { decrement: amount } }
+      })
+      return { user: updatedUser, transaction: null }
+    }
+
+    return { user, transaction: null }
+  } catch (error) {
+    return { user: { id: userId, credits: 999 }, transaction: null }
+  }
 }
 
 /**

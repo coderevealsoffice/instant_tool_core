@@ -16,37 +16,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Content is required" }, { status: 400 })
     }
 
-    // Deduct 3 credits for AI usage
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id }
-    })
-    
-    if (!user || user.credits < 3) {
-      return NextResponse.json({ error: "Insufficient credits (Cost: 3)" }, { status: 403 })
-    }
-
-    await prisma.$transaction([
-      prisma.user.update({
-        where: { id: user.id },
-        data: { credits: { decrement: 3 } }
-      }),
-      prisma.creditTransaction.create({
+    // 100% Free AI Tool usage for all users (No credit paywall)
+    try {
+      await prisma.aIUsageLog.create({
         data: {
-          userId: user.id,
-          amount: -3,
-          type: "JOB_USAGE",
-          description: `AI ${aiMode} Tool Used`
-        }
-      }),
-      prisma.aIUsageLog.create({
-        data: {
-          userId: user.id,
+          userId: session.user.id,
           feature: aiMode.toUpperCase(),
-          promptTokens: content.length / 4, // roughly
+          promptTokens: Math.ceil(content.length / 4),
           completionTokens: 0
         }
       })
-    ])
+    } catch {
+      // Non-blocking telemetry
+    }
 
     // Generate AI response
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })

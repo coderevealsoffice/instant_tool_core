@@ -192,19 +192,19 @@ export function Header() {
           <ThemeToggle />
           
           {session ? (
-            <div className="flex items-center gap-4">
-              <Link href="/dashboard/billing" className="hidden sm:flex items-center gap-1.5 bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400 px-3 py-1.5 rounded-full font-bold text-sm border border-red-100 dark:border-red-900/50 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors">
-                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
-                {credits !== null ? `${credits} Credits` : "..."}
+            <div className="flex items-center gap-3">
+              <Link href="/workspace" className="hidden sm:flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 px-3 py-1.5 rounded-full font-bold text-xs border border-emerald-200 dark:border-emerald-800">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                100% Free Plan
               </Link>
-              <Link href="/dashboard" className="text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hidden sm:block">
+              <Link href="/dashboard" className="text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:white hidden sm:block">
                 Dashboard
               </Link>
             </div>
           ) : (
             <>
-              <Link href="/auth/register" className="text-sm font-bold bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-2.5 rounded-full hover:bg-slate-800 dark:hover:bg-slate-100 transition-all shadow-sm hover:shadow-md hidden sm:block">
-                Become a Member
+              <Link href="/workspace" className="text-sm font-bold bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-2.5 rounded-full hover:bg-slate-800 dark:hover:bg-slate-100 transition-all shadow-xs hover:shadow-md hidden sm:block">
+                Free Workspace
               </Link>
             </>
           )}
@@ -237,7 +237,7 @@ export function Header() {
             {session ? (
               <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 dark:text-slate-200 py-2">Dashboard</Link>
             ) : (
-              <Link href="/auth/register" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 dark:text-slate-200 py-2">Become a Member</Link>
+              <Link href="/workspace" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 dark:text-slate-200 py-2">Free Workspace</Link>
             )}
           </div>
         </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Crown, ArrowRight, Loader2 } from "lucide-react"
+import { ArrowRight, Loader2 } from "lucide-react"
 
 interface WorkspaceHeaderProps {
   toolName: string
@@ -29,9 +29,6 @@ export function WorkspaceHeader({ toolName, onFinish, isProcessing }: WorkspaceH
 
       {/* Right side: Finish */}
       <div className="flex items-center gap-3">
-        <Button variant="outline" className="hidden sm:flex h-10 gap-2 font-bold text-amber-600 border-amber-200 bg-amber-50 hover:bg-amber-100 hover:text-amber-700">
-          <Crown className="w-4 h-4" /> Get Pro
-        </Button>
         <Button 
           onClick={onFinish} 
           disabled={isProcessing}
