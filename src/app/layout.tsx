@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Playfair_Display, Urbanist } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -94,20 +95,31 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${urbanist.variable} h-full antialiased font-sans`}
       suppressHydrationWarning
     >
-      <head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
-        {/* Google AdSense Script */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1199452179361457"
-          crossOrigin="anonymous"
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        {/* Google AdSense Dynamic Script - Injected cleanly after hydration to avoid SSR mismatch & data-nscript warnings */}
+        <Script
+          id="google-adsense"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window !== 'undefined' && !document.querySelector('script[src*="adsbygoogle.js"]')) {
+                  var s = document.createElement('script');
+                  s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1199452179361457';
+                  s.async = true;
+                  s.crossOrigin = 'anonymous';
+                  document.head.appendChild(s);
+                }
+              })();
+            `
+          }}
         />
 
         {/* Global Organization Schema for AEO/GEO/SEO */}
         <script
           id="organization-schema"
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -128,8 +140,6 @@ export default function RootLayout({
             }).replace(/</g, '\\u003c')
           }}
         />
-      </head>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
 
         <Providers>
           {children}
