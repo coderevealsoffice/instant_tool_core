@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useWorkspaceStore } from "@/store/workspace-store"
 import { Button } from "@/components/ui/button"
-import { CheckCircle2, ChevronDown, ChevronUp, ArrowRight, ArrowUpRight } from "lucide-react"
+import { CheckCircle2, ChevronDown, ChevronUp, ArrowRight, ArrowUpRight, UploadCloud, FileText } from "lucide-react"
 import { SupportDonationCTA } from "./SupportDonationCTA"
 import { AdSlot } from "@/components/common/AdSlot"
 
@@ -79,6 +79,7 @@ export function ToolPageTemplate({
 }: ToolPageTemplateProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(0)
   const [isDragging, setIsDragging] = useState(false)
+  const dragCounter = useRef(0)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const { addFiles, setContext } = useWorkspaceStore()
@@ -95,22 +96,118 @@ export function ToolPageTemplate({
     fileInputRef.current?.click()
   }
 
-  // Dynamic noun for headline: document / video / audio / search
-  const headlineWord = title.toLowerCase().includes("pdf") || title.toLowerCase().includes("document")
-    ? "document"
-    : title.toLowerCase().includes("video")
-    ? "video"
-    : title.toLowerCase().includes("audio")
-    ? "audio"
-    : "workforce"
+  const handleDragEnter = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    dragCounter.current++
+    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+      setIsDragging(true)
+    }
+  }
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    e.dataTransfer.dropEffect = "copy"
+    setIsDragging(true)
+  }
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    dragCounter.current--
+    if (dragCounter.current <= 0) {
+      dragCounter.current = 0
+      setIsDragging(false)
+    }
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    dragCounter.current = 0
+    setIsDragging(false)
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleFiles(Array.from(e.dataTransfer.files))
+    }
+  }
+
+  // Dynamic category and format helpers tailored to each page
+  const categoryLabel = category.replace(/-/g, ' ').toUpperCase()
+  const isPdf = category === "pdf-tools" || title.toLowerCase().includes("pdf")
+  const isVideo = category === "video-tools" || title.toLowerCase().includes("video")
+  const isAudio = category === "audio-tools" || title.toLowerCase().includes("audio")
+  const isImage = category === "image-tools" || title.toLowerCase().includes("image")
+
+  const displayHeadline = isPdf
+    ? `${title} Files Online Instantly`
+    : `${title} Online Free`
+
+  const displaySubtitle = description || (
+    isPdf 
+      ? `Extract pages, convert formats, or separate your PDF with high precision. 100% free, private in your browser with zero data retention.`
+      : `Fast, secure, and private browser-based tool. 100% free with zero watermarks or data retention.`
+  )
+
+  const previewTiles = isPdf
+    ? ["Pages 1–2", "Pages 3–4", "Pages 5–6", "Pages 7–8", "Pages 9–10", "Pages 11–12"]
+    : isVideo
+    ? ["0:00", "0:15", "0:30", "0:45", "1:00", "1:15"]
+    : isAudio
+    ? ["Track 1", "320kbps", "Hi-Fi", "Stereo", "Lossless", "Master"]
+    : isImage
+    ? ["PNG", "JPG", "WEBP", "SVG", "AVIF", "PDF"]
+    : ["Verified", "Private", "Fast", "Lossless", "100% Free", "Secure"]
+
+  const fileAcceptType = isPdf 
+    ? ".pdf,application/pdf" 
+    : isVideo 
+    ? "video/*" 
+    : isAudio 
+    ? "audio/*" 
+    : isImage 
+    ? "image/*" 
+    : "*"
+
+  const formatBadgeText = isPdf 
+    ? ".PDF files up to 100MB" 
+    : isVideo 
+    ? ".MP4, .MOV, .MKV up to 500MB" 
+    : isAudio 
+    ? ".MP3, .WAV, .M4A lossless" 
+    : "All standard file formats"
 
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
       
-      {/* 1. Sona.ai Exact Hero Section (Clean rounded card with overlapping floating cards) */}
+      {/* 1. Sona-Style Hero Section with Full Drag-and-Drop Dropzone */}
       <section className="pt-8 sm:pt-12 pb-12 px-4 bg-white dark:bg-slate-950 font-sans transition-colors duration-300">
         <div className="container mx-auto max-w-7xl">
-          <div className="rounded-[2.5rem] bg-[#FAFAFA] dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-xs">
+          <div 
+            onDragEnter={handleDragEnter}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            className={`rounded-[2.5rem] bg-[#FAFAFA] dark:bg-slate-900/60 border transition-all p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-xs ${
+              isDragging 
+                ? "border-emerald-500 ring-4 ring-emerald-500/20 bg-emerald-50/40 dark:bg-emerald-950/20" 
+                : "border-slate-200/90 dark:border-slate-800"
+            }`}
+          >
+            {/* Full-Card Drag & Drop Overlay */}
+            {isDragging && (
+              <div className="absolute inset-0 bg-[#D7FB8E]/95 dark:bg-slate-900/95 backdrop-blur-md z-50 flex flex-col items-center justify-center border-4 border-dashed border-emerald-600 dark:border-emerald-400 rounded-[2.5rem] p-8 text-center animate-in fade-in-50 duration-150 pointer-events-none">
+                <div className="w-20 h-20 rounded-full bg-emerald-600 text-white flex items-center justify-center mb-4 animate-bounce shadow-xl">
+                  <UploadCloud className="w-10 h-10" />
+                </div>
+                <h3 className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white mb-2 tracking-tight">
+                  Drop your {title} files right here!
+                </h3>
+                <p className="text-slate-800 dark:text-slate-300 font-semibold text-base sm:text-lg">
+                  Release anywhere in this card to begin processing immediately in your browser
+                </p>
+              </div>
+            )}
             
             {/* Ambient Background Glows */}
             <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-[#D7FB8E]/15 dark:bg-[#D7FB8E]/10 rounded-full blur-[120px] pointer-events-none" />
@@ -118,7 +215,7 @@ export function ToolPageTemplate({
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
               
-              {/* Left Column: Sona.ai Typography & Dual Action Buttons */}
+              {/* Left Column: Tool Specific Headline, Description & Primary Action Button */}
               <div className="lg:col-span-7 flex flex-col items-start text-left">
                 
                 {/* Top Pill Tag */}
@@ -127,139 +224,103 @@ export function ToolPageTemplate({
                   ◆ 100% Free &amp; Private Tools
                 </div>
 
-                {/* Giant Headline (Sona.ai Exact Style) */}
+                {/* Giant Tool Headline (Tailored to PDF / Current Tool) */}
                 <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-slate-900 dark:text-white tracking-tight leading-[1.08] mb-6">
-                  Start making better {headlineWord} decisions
+                  {displayHeadline}
                 </h1>
 
-                {/* Subheadline */}
+                {/* Subheadline (Tailored to PDF / Current Tool) */}
                 <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl font-normal leading-relaxed mb-8">
-                  {description || `See how InstantTool helps large organisations improve efficiency, protect service quality, and perform better at scale.`}
+                  {displaySubtitle}
                 </p>
 
-                {/* Dual Sona.ai Buttons */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mb-10">
+                {/* Single Sona.ai Primary Action Button */}
+                <div className="flex items-center gap-3 w-full sm:w-auto mb-4">
                   <button
                     onClick={handleChooseFilesClick}
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-[15px] sm:text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer text-center"
+                    className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer text-center"
                   >
                     <span>Choose {title} Files</span>
                     <ArrowUpRight className="w-4 h-4 text-slate-950" />
                   </button>
-
-                  <a
-                    href="#how-to-steps"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-900 dark:border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white font-medium text-[15px] sm:text-base tracking-tight transition-all shadow-2xs hover:border-black dark:hover:border-white text-center cursor-pointer"
-                  >
-                    <span>Take a tour</span>
-                    <ArrowRight className="w-4 h-4 text-slate-900 dark:text-white" />
-                  </a>
-                </div>
-
-                {/* Trust Marks */}
-                <div className="flex flex-wrap items-center gap-3.5 text-xs font-semibold text-slate-700 dark:text-slate-300 pt-2">
-                  <div className="flex text-amber-400 text-sm">★★★★★</div>
-                  <span>4.9 / 5 rating from 40,000+ creators</span>
-                  <span className="text-slate-300 dark:text-slate-700">•</span>
-                  <span className="text-emerald-600 dark:text-emerald-400">Zero file retention</span>
                 </div>
 
               </div>
 
-              {/* Right Column: Sona.ai Overlapping Interactive Cards */}
+              {/* Right Column: Sona.ai Overlapping Interactive Cards (Tailored to Current Tool) */}
               <div className="lg:col-span-5 relative flex items-center justify-center min-h-[380px] w-full py-6">
                 
-                {/* 1. Sona.ai Back Lime Card (HR / AI WORKFLOW) */}
+                {/* 1. Sona.ai Back Lime Card (Dynamic per Category) */}
                 <div className="w-[270px] sm:w-[310px] rounded-3xl bg-[#D7FB8E] p-6 text-slate-950 shadow-md border border-black/5 flex flex-col justify-between absolute right-0 sm:right-4 top-0 transform translate-x-1 sm:translate-x-0">
                   <div>
                     <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-slate-700 mb-1.5">
-                      HR
+                      {categoryLabel}
                     </div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/10 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider mb-2.5">
-                      <span>◆</span> AI WORKFLOW
+                      <span>◆</span> INSTANT ENGINE
                     </div>
                     <h4 className="text-sm sm:text-base font-bold text-slate-950 leading-snug">
-                      Onboarding auto-completed
+                      {title} Auto-Processed
                     </h4>
 
-                    {/* 6 Checkmark boxes in 3x2 grid (Exact match to Sona.ai screenshot 2) */}
+                    {/* 6 Feature / Part Preview Tiles */}
                     <div className="grid grid-cols-3 gap-2 my-3.5">
-                      {[...Array(6)].map((_, i) => (
-                        <div key={i} className="aspect-square rounded-xl bg-[#cbf777] border border-black/5 flex items-center justify-center text-slate-950 font-black text-sm shadow-2xs">
-                          ✓
+                      {previewTiles.map((tile, i) => (
+                        <div key={i} className="aspect-square rounded-xl bg-[#cbf777] border border-black/5 flex flex-col items-center justify-center text-slate-950 shadow-2xs p-1">
+                          <span className="text-[9px] font-mono font-bold text-slate-700 truncate max-w-full">{tile}</span>
+                          <span className="text-xs font-black">✓</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   <div className="text-[11px] font-bold text-slate-900 flex items-center justify-between pt-1">
-                    <span>Review onboarding steps</span>
+                    <span>100% Quality Preserved</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
-                {/* 2. Sona.ai Front Sky Blue Card (SCHEDULING / AI SHIFT ALERT) */}
+                {/* 2. Sona.ai Front Sky Blue Card (Active Dropzone) */}
                 <div
                   onClick={handleChooseFilesClick}
-                  onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
-                  onDragLeave={() => setIsDragging(false)}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    setIsDragging(false);
-                    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-                      handleFiles(Array.from(e.dataTransfer.files));
-                    }
-                  }}
-                  className={`w-[270px] sm:w-[310px] rounded-3xl bg-[#BAE6FD] dark:bg-sky-950 p-6 shadow-2xl border transition-all cursor-pointer relative z-20 ${
-                    isDragging 
-                      ? "border-emerald-500 scale-105 ring-4 ring-emerald-500/20" 
-                      : "border-sky-300 dark:border-sky-800 hover:scale-[1.02]"
-                  } transform -translate-x-6 sm:-translate-x-12 translate-y-16 sm:translate-y-20`}
+                  className="w-[270px] sm:w-[310px] rounded-3xl bg-[#BAE6FD] dark:bg-sky-950 p-6 shadow-2xl border border-sky-300 dark:border-sky-800 hover:scale-[1.02] transition-all cursor-pointer relative z-20 transform -translate-x-6 sm:-translate-x-12 translate-y-16 sm:translate-y-20"
                 >
                   <div>
                     <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-sky-900 dark:text-sky-300 mb-1.5">
-                      SCHEDULING
+                      CLIENT SANDBOX
                     </div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-200/80 dark:bg-sky-900/80 text-sky-950 dark:text-sky-200 text-[10px] font-extrabold uppercase tracking-wider mb-2.5">
-                      <span>◆</span> AI SHIFT ALERT
+                      <span>◆</span> ZERO DATA RETENTION
                     </div>
                     <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-snug">
-                      {isDragging ? "Drop your files here!" : "Coverage gap detected"}
+                      Drop {title} files here
                     </h4>
 
-                    {/* Sona.ai Mountain Area Chart Wave Visual */}
-                    <div className="my-3.5 p-2 bg-white/70 dark:bg-slate-900/60 rounded-2xl border border-sky-200/80 dark:border-sky-800 flex items-center justify-center h-20 sm:h-24 overflow-hidden relative shadow-2xs">
-                      <svg className="w-full h-full text-teal-600 dark:text-teal-400" viewBox="0 0 100 40" preserveAspectRatio="none">
-                        <path d="M0,35 Q20,10 40,25 T80,15 T100,28 L100,40 L0,40 Z" fill="currentColor" opacity="0.75" />
-                        <path d="M40,25 Q60,5 80,15" stroke="currentColor" strokeWidth="2" strokeDasharray="2,2" fill="none" />
-                      </svg>
+                    {/* Modern Drag and Drop Graphic */}
+                    <div className="my-3.5 p-3.5 bg-white/80 dark:bg-slate-900/80 rounded-2xl border border-sky-200/80 dark:border-sky-800 flex flex-col items-center justify-center text-center shadow-2xs">
+                      <UploadCloud className="w-8 h-8 text-sky-600 dark:text-sky-400 mb-1 animate-pulse" />
+                      <p className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
+                        Drag &amp; drop files here
+                      </p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+                        {formatBadgeText}
+                      </p>
                     </div>
                   </div>
 
                   {/* Sona.ai Cyan Action Button */}
                   <button
                     type="button"
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-sm"
+                    onClick={handleChooseFilesClick}
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
                   >
-                    <span>Auto-fill shift gaps</span>
+                    <span>Select {title} Files</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </button>
                 </div>
 
               </div>
 
-            </div>
-
-            {/* Bottom Enterprise Trust Logos matching Sona.ai */}
-            <div className="mt-14 pt-8 border-t border-slate-200/80 dark:border-slate-800/80">
-              <div className="flex flex-wrap items-center justify-between gap-6 opacity-60 grayscale hover:grayscale-0 transition-all text-xs font-mono font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase">
-                <span>HAWKSMOOR</span>
-                <span>kisimul</span>
-                <span>THE BEAUMONT</span>
-                <span>Achieve</span>
-                <span>LOUNGERS</span>
-                <span>Community</span>
-              </div>
             </div>
 
           </div>
@@ -275,6 +336,7 @@ export function ToolPageTemplate({
           <input
             type="file"
             multiple
+            accept={fileAcceptType}
             className="hidden"
             ref={fileInputRef}
             onChange={(e) => {
