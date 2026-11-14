@@ -203,7 +203,7 @@ export function Header() {
             </div>
           ) : (
             <>
-              <Link href="/workspace" className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-sm tracking-tight transition-all shadow-xs hover:scale-[1.01] active:scale-[0.99] hidden sm:inline-flex">
+              <Link href="/auth/login" className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-sm tracking-tight transition-all shadow-xs hover:scale-[1.01] active:scale-[0.99] hidden sm:inline-flex">
                 <span>Free Workspace</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-slate-950" />
               </Link>
@@ -238,7 +238,7 @@ export function Header() {
             {session ? (
               <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 dark:text-slate-200 py-2">Dashboard</Link>
             ) : (
-              <Link href="/workspace" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 dark:text-slate-200 py-2">Free Workspace</Link>
+              <Link href="/auth/login" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 dark:text-slate-200 py-2">Free Workspace</Link>
             )}
           </div>
         </div>
