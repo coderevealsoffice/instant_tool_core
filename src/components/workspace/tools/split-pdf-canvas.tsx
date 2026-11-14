@@ -176,9 +176,9 @@ export function SplitPdfCanvas() {
           <button
             onClick={handleProcess}
             disabled={isProcessing}
-            className="w-full bg-rose-500 hover:bg-rose-600 disabled:opacity-50 text-white font-bold py-3.5 rounded-xl flex items-center justify-center space-x-2 transition-all shadow-md hover:shadow-lg"
+            className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] disabled:opacity-50 text-slate-950 font-medium py-3.5 rounded-xl flex items-center justify-center space-x-2 transition-all shadow-sm border border-black/10 cursor-pointer"
           >
-            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5" />}
+            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin text-slate-950" /> : <Play className="w-5 h-5 text-slate-950" />}
             <span>{isProcessing ? "Processing..." : "Extract Pages"}</span>
           </button>
 

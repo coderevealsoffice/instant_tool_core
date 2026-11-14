@@ -202,8 +202,8 @@ export function ImageToPdfCanvas() {
           )}
 
           <button onClick={handleProcess} disabled={isProcessing || allImages.length === 0}
-            className="w-full bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 text-sm transition">
-            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
+            className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] disabled:opacity-50 text-slate-950 font-medium py-3 rounded-xl flex items-center justify-center gap-2 text-sm transition shadow-xs border border-black/10 cursor-pointer">
+            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin text-slate-950" /> : <Play className="w-4 h-4 text-slate-950" />}
             {isProcessing ? "Creating PDF..." : "Convert to PDF"}
           </button>
         </div>

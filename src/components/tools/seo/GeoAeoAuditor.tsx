@@ -225,7 +225,7 @@ Checked with InstantTool GEO Suite (https://devigo.cloud/seo-tools/geo-aeo-audit
           <Button
             onClick={handleAudit}
             disabled={isAuditing || !content.trim()}
-            className="bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold px-8 py-3 rounded-xl shadow-lg shadow-fuchsia-500/20 text-base gap-2"
+            className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium px-8 py-3.5 rounded-xl border border-black/10 shadow-xs text-base gap-2 cursor-pointer"
           >
             {isAuditing ? (
               <>

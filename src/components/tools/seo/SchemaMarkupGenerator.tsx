@@ -161,9 +161,9 @@ export function SchemaMarkupGenerator() {
         <div className="flex gap-2">
           <Button
             onClick={handleCopy}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs gap-1.5 shadow-md"
+            className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-xs gap-1.5 shadow-2xs rounded-xl border border-black/10"
           >
-            {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            {isCopied ? <Check className="w-4 h-4 text-slate-950" /> : <Copy className="w-4 h-4 text-slate-950" />}
             {isCopied ? "Copied!" : "Copy JSON-LD"}
           </Button>
         </div>
@@ -181,9 +181,9 @@ export function SchemaMarkupGenerator() {
           <button
             key={item.id}
             onClick={() => setSchemaType(item.id as SchemaType)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${
               schemaType === item.id
-                ? "bg-indigo-600 text-white shadow-md shadow-indigo-500/20"
+                ? "bg-[#D7FB8E] text-slate-950 font-bold border border-black/10 shadow-xs"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
             }`}
           >

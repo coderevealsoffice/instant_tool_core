@@ -169,12 +169,12 @@ export function ImageBackgroundRemoverCanvas() {
                 size="lg" 
                 onClick={handleRemoveBackground}
                 disabled={isProcessing}
-                className="bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white font-bold rounded-full px-12 h-14 shadow-lg hover:shadow-xl transition-all w-full md:w-auto text-lg"
+                className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium rounded-xl px-12 h-14 shadow-sm hover:shadow-md transition-all w-full md:w-auto text-lg border border-black/10 cursor-pointer"
               >
                 {isProcessing ? (
-                  <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Processing...</>
+                  <><Loader2 className="w-5 h-5 mr-2 animate-spin text-slate-950" /> Processing...</>
                 ) : (
-                  <><Sparkles className="w-5 h-5 mr-2" /> Remove Background</>
+                  <><Sparkles className="w-5 h-5 mr-2 text-slate-950" /> Remove Background</>
                 )}
               </Button>
             ) : (

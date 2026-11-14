@@ -439,7 +439,7 @@ ${sentences.map(s => `[${s.classification.toUpperCase()} - ${s.aiConfidence}%] $
             <Button
               onClick={handleScan}
               disabled={isScanning || !text.trim()}
-              className="w-full sm:w-auto min-w-[260px] bg-red-600 hover:bg-red-500 text-white font-bold px-8 py-3 rounded-xl shadow-lg shadow-red-600/20 text-sm gap-2"
+              className="w-full sm:w-auto min-w-[260px] bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium px-8 py-3.5 rounded-xl border border-black/10 shadow-xs text-sm gap-2 cursor-pointer"
             >
               {isScanning ? (
                 <>
@@ -519,9 +519,9 @@ ${sentences.map(s => `[${s.classification.toUpperCase()} - ${s.aiConfidence}%] $
                   <Button
                     onClick={handleHumanizeAll}
                     size="sm"
-                    className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs gap-1.5 w-full shadow-sm"
+                    className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-xs gap-1.5 w-full shadow-2xs rounded-xl border border-black/10"
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
+                    <Sparkles className="w-3.5 h-3.5 text-slate-950" />
                     Humanize Entire Document
                   </Button>
                 )}
@@ -654,9 +654,9 @@ ${sentences.map(s => `[${s.classification.toUpperCase()} - ${s.aiConfidence}%] $
                             <Button
                               size="sm"
                               onClick={() => handleHumanizeSentence(activeS.id)}
-                              className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs gap-1.5 h-8"
+                              className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-xs gap-1.5 h-8 rounded-xl border border-black/10"
                             >
-                              <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
+                              <Sparkles className="w-3.5 h-3.5 text-slate-950" />
                               Humanize Sentence
                             </Button>
                           </div>
@@ -735,12 +735,12 @@ ${sentences.map(s => `[${s.classification.toUpperCase()} - ${s.aiConfidence}%] $
                         size="sm"
                         disabled={sent.isRewriting}
                         onClick={() => handleHumanizeSentence(sent.id)}
-                        className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs h-8 px-3 gap-1 shadow-sm flex-shrink-0 self-end sm:self-center"
+                        className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-xs h-8 px-3 gap-1 shadow-2xs rounded-xl border border-black/10 flex-shrink-0 self-end sm:self-center"
                       >
                         {sent.isRewriting ? (
-                          <RefreshCw className="w-3 h-3 animate-spin" />
+                          <RefreshCw className="w-3 h-3 animate-spin text-slate-950" />
                         ) : (
-                          <Sparkles className="w-3 h-3 text-yellow-300" />
+                          <Sparkles className="w-3 h-3 text-slate-950" />
                         )}
                         Humanize
                       </Button>

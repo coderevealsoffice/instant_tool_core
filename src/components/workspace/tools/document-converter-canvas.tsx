@@ -261,8 +261,8 @@ export function DocumentConverterCanvas() {
           )}
 
           <button onClick={handleProcess} disabled={isProcessing || targetFormat === inputExt}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition shadow-md">
-            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5" />}
+            className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] disabled:opacity-50 text-slate-950 font-medium py-3.5 rounded-xl flex items-center justify-center gap-2 transition shadow-xs border border-black/10 cursor-pointer">
+            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin text-slate-950" /> : <Play className="w-5 h-5 text-slate-950" />}
             <span>{isProcessing ? "Converting..." : `Convert to ${targetFormat.toUpperCase()} & Download`}</span>
           </button>
         </div>

@@ -118,6 +118,8 @@ export default async function DynamicToolPage({ params }: DynamicToolPageProps) 
         howToSteps={config.howToSteps}
         gridFeatures={config.gridFeatures}
         faqs={config.faqs}
+        category={resolvedParams.category}
+        slug={resolvedParams.slug}
       />
     </>
   )

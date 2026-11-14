@@ -153,12 +153,12 @@ export function InstagramDownloaderCanvas() {
               <button
                 onClick={handleFetch}
                 disabled={isProcessing || !url.trim()}
-                className="h-full px-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold rounded-xl flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+                className="h-full px-6 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium rounded-xl flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xs border border-black/10 cursor-pointer"
               >
                 {isProcessing ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
                 ) : (
-                  <Sparkles className="w-5 h-5" />
+                  <Sparkles className="w-5 h-5 text-slate-950" />
                 )}
                 {isProcessing ? "Fetching..." : "Fetch"}
               </button>

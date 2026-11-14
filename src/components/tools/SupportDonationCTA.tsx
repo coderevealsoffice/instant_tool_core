@@ -52,7 +52,7 @@ export function SupportDonationCTA() {
           setCustomAmount("")
         },
         prefill: { name: "", email: "", contact: "" },
-        theme: { color: "#6366f1" }
+        theme: { color: "#10b981" }
       }
 
       // @ts-ignore
@@ -74,19 +74,19 @@ export function SupportDonationCTA() {
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
       
       <div className="w-full max-w-4xl mx-auto px-4 py-8 font-sans">
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 dark:from-slate-900 dark:via-slate-900/90 dark:to-indigo-950/20 p-6 sm:p-8 shadow-sm">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-900 dark:via-slate-900/90 dark:to-emerald-950/20 p-6 sm:p-8 shadow-sm">
           
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             
             {/* Left: Message & Value Proposition */}
             <div className="space-y-2 text-center lg:text-left flex-1">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/50 text-amber-800 dark:text-amber-300 text-xs font-bold">
-                <Coffee className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold shadow-2xs">
+                <Coffee className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 Buy Us a Coffee
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-                Support InstantTool & Keep Tools Free
+                Support InstantTool &amp; Keep Tools Free
               </h3>
 
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
@@ -113,7 +113,7 @@ export function SupportDonationCTA() {
               
               <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300">
                 <span>Select Contribution:</span>
-                <span className="text-indigo-600 dark:text-indigo-400 font-mono font-bold">
+                <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold">
                   ₹{currentAmount || 0}
                 </span>
               </div>
@@ -130,10 +130,10 @@ export function SupportDonationCTA() {
                         setSelectedAmount(amt)
                         setCustomAmount("")
                       }}
-                      className={`py-2 px-1 text-xs font-bold rounded-lg border transition-all text-center ${
+                      className={`py-2 px-1 text-xs font-bold rounded-xl border transition-all text-center ${
                         isSelected
-                          ? "bg-indigo-600 text-white border-indigo-600 shadow-sm scale-105"
-                          : "bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-indigo-400"
+                          ? "bg-[#D7FB8E] text-slate-950 border-[#b5eb4e] shadow-2xs scale-105 font-bold"
+                          : "bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-emerald-400"
                       }`}
                     >
                       ₹{amt}
@@ -156,7 +156,7 @@ export function SupportDonationCTA() {
                     setCustomAmount(e.target.value)
                     setSelectedAmount(0)
                   }}
-                  className="w-full pl-7 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 font-medium"
+                  className="w-full pl-7 pr-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-medium"
                 />
               </div>
 
@@ -164,14 +164,14 @@ export function SupportDonationCTA() {
               <Button
                 onClick={handleDonate}
                 disabled={isProcessing || !currentAmount || currentAmount < 1}
-                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs h-9 rounded-lg gap-1.5 shadow-sm"
+                className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-xs h-10 rounded-xl gap-2 shadow-xs border border-black/10 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
                 {isProcessing ? (
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <Loader2 className="w-3.5 h-3.5 animate-spin text-slate-950" />
                 ) : (
                   <>
-                    <Coffee className="w-3.5 h-3.5" />
-                    Tip ₹{currentAmount || 100}
+                    <Coffee className="w-3.5 h-3.5 text-slate-950" />
+                    <span className="font-semibold text-slate-950">Tip ₹{currentAmount || 100}</span>
                   </>
                 )}
               </Button>

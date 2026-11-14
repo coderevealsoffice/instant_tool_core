@@ -201,77 +201,77 @@ export default async function HomePage() {
               <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm">
                 Get high-volume, SEO-optimized tags for your videos instantly. Ready to copy-paste into YouTube.
               </p>
-              <Link href="/ai-tools/ai-youtube-keyword-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold transition-colors w-full">
+              <Link href="/ai-tools/ai-youtube-keyword-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium border border-black/10 transition-all w-full shadow-2xs">
                 Try it now <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
 
             {/* AI Thumbnail Generator */}
-            <div className="relative group rounded-2xl p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg hover:border-blue-400 dark:hover:border-blue-500 transition-all overflow-hidden">
-              <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform">
+            <div className="relative group rounded-2xl p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg hover:border-emerald-400 dark:hover:border-emerald-500 transition-all overflow-hidden">
+              <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
                 <ImageIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">AI Thumbnail Generator</h3>
               <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm">
                 Generate high-CTR YouTube thumbnail concepts with visual descriptions and hook text.
               </p>
-              <Link href="/ai-tools/ai-thumbnail-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-semibold transition-colors w-full">
+              <Link href="/ai-tools/ai-thumbnail-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium border border-black/10 transition-all w-full shadow-2xs">
                 Try it now <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
 
             {/* AI LinkedIn Post Generator */}
-            <div className="relative group rounded-2xl p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg hover:border-[#0077b5] transition-all overflow-hidden">
-              <div className="w-14 h-14 bg-[#0077b5]/10 rounded-xl flex items-center justify-center mb-6 text-[#0077b5] group-hover:scale-110 transition-transform">
+            <div className="relative group rounded-2xl p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg hover:border-emerald-400 dark:hover:border-emerald-500 transition-all overflow-hidden">
+              <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
                 <Briefcase className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">AI LinkedIn Post Generator</h3>
               <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm">
                 Generate a highly engaging LinkedIn text post and 5-slide carousel plan to go viral.
               </p>
-              <Link href="/ai-tools/ai-linkedin-post-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-semibold transition-colors w-full">
+              <Link href="/ai-tools/ai-linkedin-post-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium border border-black/10 transition-all w-full shadow-2xs">
                 Try it now <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
 
             {/* AI Podcast Notes Generator */}
-            <div className="relative group rounded-2xl p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg hover:border-indigo-400 dark:hover:border-indigo-500 transition-all overflow-hidden">
-              <div className="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mb-6 text-indigo-500 dark:text-indigo-400 group-hover:scale-110 transition-transform">
+            <div className="relative group rounded-2xl p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg hover:border-emerald-400 dark:hover:border-emerald-500 transition-all overflow-hidden">
+              <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
                 <Mic className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">AI Podcast Notes Generator</h3>
               <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm">
                 Generate professional podcast show notes with summaries, key takeaways, and timestamps.
               </p>
-              <Link href="/ai-tools/ai-podcast-notes-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-semibold transition-colors w-full">
+              <Link href="/ai-tools/ai-podcast-notes-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium border border-black/10 transition-all w-full shadow-2xs">
                 Try it now <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
 
             {/* AI Viral Video Caption Generator */}
-            <div className="relative group rounded-2xl p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg hover:border-pink-400 dark:hover:border-pink-500 transition-all overflow-hidden">
-              <div className="w-14 h-14 bg-pink-50 dark:bg-pink-900/30 rounded-xl flex items-center justify-center mb-6 text-pink-500 dark:text-pink-400 group-hover:scale-110 transition-transform">
+            <div className="relative group rounded-2xl p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg hover:border-emerald-400 dark:hover:border-emerald-500 transition-all overflow-hidden">
+              <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
                 <Smartphone className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">AI Viral Video Caption</h3>
               <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm">
                 Generate viral captions and trending hashtags for Instagram Reels, TikTok, and YouTube Shorts.
               </p>
-              <Link href="/ai-tools/ai-video-caption-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-semibold transition-colors w-full">
+              <Link href="/ai-tools/ai-video-caption-generator" className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium border border-black/10 transition-all w-full shadow-2xs">
                 Try it now <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
 
             {/* Remove Background */}
             <div className="relative group rounded-2xl p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg hover:border-emerald-400 dark:hover:border-emerald-500 transition-all overflow-hidden">
-              <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6 text-emerald-500 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
                 <ImageIcon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Remove Background</h3>
               <p className="text-slate-600 dark:text-slate-400 mb-6 text-sm">
                 Instantly remove backgrounds from images using advanced AI algorithms in seconds.
               </p>
-              <Link href="/ai-tools/remove-background" className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-semibold transition-colors w-full">
+              <Link href="/ai-tools/remove-background" className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium border border-black/10 transition-all w-full shadow-2xs">
                 Try it now <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>

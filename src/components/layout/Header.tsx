@@ -18,14 +18,37 @@ export function Header() {
   const { data: session } = useSession()
   const [credits, setCredits] = useState<number | null>(null)
 
-  // Automatically close all dropdowns & mobile menus on navigation
+  // Automatically close all dropdowns & mobile menus on navigation and window events
   useEffect(() => {
     setActiveDropdown(null)
     setIsMobileMenuOpen(false)
     setIsLockedClosed(true)
-    const timer = setTimeout(() => setIsLockedClosed(false), 500)
+    const timer = setTimeout(() => setIsLockedClosed(false), 800)
     return () => clearTimeout(timer)
   }, [pathname])
+
+  // Close menus on outside click or escape
+  useEffect(() => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!target.closest("header") && !target.closest("nav")) {
+        setActiveDropdown(null)
+        setIsMobileMenuOpen(false)
+      }
+    }
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveDropdown(null)
+        setIsMobileMenuOpen(false)
+      }
+    }
+    document.addEventListener("click", handleDocumentClick)
+    document.addEventListener("keydown", handleKeyDown)
+    return () => {
+      document.removeEventListener("click", handleDocumentClick)
+      document.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [])
 
   const closeAllDropdowns = () => {
     setActiveDropdown(null)
@@ -33,7 +56,7 @@ export function Header() {
     setIsLockedClosed(true)
     setTimeout(() => {
       setIsLockedClosed(false)
-    }, 500)
+    }, 800)
   }
 
   const handleMouseEnter = (menuName: string) => {

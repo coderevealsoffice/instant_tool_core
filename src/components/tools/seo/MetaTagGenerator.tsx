@@ -139,7 +139,7 @@ export function MetaTagGenerator() {
             </Button>
             <Button
               onClick={handleCopy}
-              className="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs gap-1.5 shadow-md"
+              className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-xs gap-1.5 shadow-2xs rounded-xl border border-black/10"
             >
               {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               {isCopied ? "Copied!" : "Copy Meta Tags"}
