@@ -164,3 +164,36 @@
 .animation-delay-300 { animation-delay: 300ms; }
 .animation-delay-500 { animation-delay: 500ms; }
 .animation-delay-700 { animation-delay: 700ms; }
+
+/* Continuous Vertical Marquee for Hero Tools Showcase (Sona.ai 3-Column Style) */
+@keyframes marqueeUp {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes marqueeDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0%); }
+}
+
+.animate-marquee-up {
+  animation: marqueeUp 36s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-down {
+  animation: marqueeDown 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-up-alt {
+  animation: marqueeUp 44s linear infinite;
+  animation-delay: -14s;
+  will-change: transform;
+}
+
+.marquee-container:hover .animate-marquee-up,
+.marquee-container:hover .animate-marquee-down,
+.marquee-container:hover .animate-marquee-up-alt {
+  animation-play-state: paused;
+}
