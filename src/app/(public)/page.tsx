@@ -131,7 +131,7 @@ export default async function HomePage() {
         ],
         "contactPoint": {
           "@type": "ContactPoint",
-          "email": "info.codereveals@gmail.com",
+          "email": "info@codereveals.com",
           "contactType": "customer service"
         }
       },

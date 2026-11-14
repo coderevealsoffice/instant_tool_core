@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { 
-  ArrowUpRight, 
-  ArrowRight, 
-  CheckCircle2, 
-  ShieldCheck, 
-  Check, 
+import {
+  ArrowUpRight,
+  ArrowRight,
+  CheckCircle2,
+  ShieldCheck,
+  Check,
   Sparkles,
   Zap,
   Sliders,
@@ -14,27 +14,27 @@ import {
 } from "lucide-react"
 
 // Types for the Sona.ai 3-Column Marquee Showcase
-type ShowcaseCard = 
+type ShowcaseCard =
   | {
-      type: "tool"
-      category: string
-      badge: string
-      title: string
-      description: string
-      containerBg: string
-      containerText: string
-      buttonBg: string
-      buttonText?: string
-      href: string
-      actionText: string
-      visual: React.ReactNode
-    }
+    type: "tool"
+    category: string
+    badge: string
+    title: string
+    description: string
+    containerBg: string
+    containerText: string
+    buttonBg: string
+    buttonText?: string
+    href: string
+    actionText: string
+    visual: React.ReactNode
+  }
   | {
-      type: "photo"
-      imageUrl: string
-      label: string
-      href: string
-    }
+    type: "photo"
+    imageUrl: string
+    label: string
+    href: string
+  }
 
 // ─── COLUMN 1: Scrolls UP ───
 const COLUMN_ONE_CARDS: ShowcaseCard[] = [
@@ -392,7 +392,7 @@ export function HeroSection() {
           </p>
 
           {/* Sona Action Button */}
-          <div className={`w-full py-2 px-3 rounded-lg text-xs font-bold text-center transition-all ${card.buttonBg} flex items-center justify-center gap-1.5 shadow-2xs`}>
+          <div className={`w-full py-2.5 px-3 rounded-xl text-xs font-medium text-center transition-all ${card.buttonBg} flex items-center justify-center gap-1.5 shadow-2xs`}>
             <span>{card.actionText}</span>
           </div>
         </div>
@@ -402,17 +402,17 @@ export function HeroSection() {
 
   return (
     <section className="relative pt-12 pb-20 lg:pt-16 lg:pb-24 px-4 w-full bg-[#FAFAFA] dark:bg-slate-950 overflow-hidden font-sans border-b border-slate-200/70 dark:border-slate-800/60">
-      
+
       {/* Background Soft Glows */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-sky-500/5 blur-[140px] rounded-full pointer-events-none"></div>
 
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-          
+
           {/* ─── LEFT COLUMN: Text, CTA & Value Proposition (Sona style) ─── */}
           <div className="lg:col-span-5 flex flex-col items-start text-left z-10">
-            
+
             {/* Top Tag Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-black tracking-wider uppercase mb-6 shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -420,8 +420,8 @@ export function HeroSection() {
             </div>
 
             {/* Giant Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.65rem] font-black text-slate-900 dark:text-white tracking-tight leading-[1.08] mb-6">
-              Every tool you need,<br />
+            <h1 className="text-4xl sm:text-5xl lg:text-[3.65rem] font-bold text-slate-900 dark:text-white tracking-tight leading-[1.08] mb-6">
+              Every tool you need,
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500">
                 built for speed.
               </span>
@@ -432,22 +432,22 @@ export function HeroSection() {
               InstantTool helps creators and professionals eliminate bloated software. Merge PDFs, trim 4K videos, transcode media, and run Copyleaks-grade AI detection—100% free and private in your browser.
             </p>
 
-            {/* Action Buttons (Sona.ai Dual CTAs: Lime Primary + Outline Secondary) */}
+            {/* Action Buttons (Exact Sona.ai Dual CTAs: Pastel Lime Primary + Clean Dark Outline Secondary) */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mb-10">
               <Link
                 href="/tools"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-[#C3F53C] hover:bg-[#b5ea30] text-slate-950 font-extrabold text-base transition-all shadow-md shadow-[#C3F53C]/20 hover:scale-[1.02] active:scale-[0.98] group text-center"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-[15px] sm:text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] group text-center"
               >
-                Explore 100+ Free Tools
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <span>Explore 100+ Free Tools</span>
+                <ArrowUpRight className="w-4 h-4 text-slate-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
 
               <Link
                 href="/workspace"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-bold text-base transition-all shadow-2xs hover:border-slate-400 dark:hover:border-slate-600 text-center"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-900 dark:border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white font-medium text-[15px] sm:text-base tracking-tight transition-all shadow-2xs hover:border-black dark:hover:border-white group text-center"
               >
-                Open Workspace
-                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
+                <span>Take a tour</span>
+                <ArrowRight className="w-4 h-4 text-slate-900 dark:text-white group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
 
@@ -481,33 +481,33 @@ export function HeroSection() {
 
           {/* ─── RIGHT COLUMN: Infinite Scrolling 3-Column Showcase (Sona Style) ─── */}
           <div className="lg:col-span-7 relative h-[640px] lg:h-[700px] overflow-hidden rounded-3xl marquee-container">
-            
+
             {/* Top Gradient Fade Mask */}
             <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#FAFAFA] dark:from-slate-950 via-[#FAFAFA]/80 dark:via-slate-950/80 to-transparent z-20"></div>
-            
+
             {/* Bottom Gradient Fade Mask */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#FAFAFA] dark:from-slate-950 via-[#FAFAFA]/80 dark:via-slate-950/80 to-transparent z-20"></div>
 
             {/* 3-Column Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 h-full items-start px-1 sm:px-2">
-              
+
               {/* Column 1: Scrolls UP */}
               <div className="flex flex-col gap-3.5 animate-marquee-up">
-                {[...COLUMN_ONE_CARDS, ...COLUMN_ONE_CARDS].map((card, idx) => 
+                {[...COLUMN_ONE_CARDS, ...COLUMN_ONE_CARDS].map((card, idx) =>
                   renderCard(card, `col1-${idx}`)
                 )}
               </div>
 
               {/* Column 2 (Middle): Scrolls DOWN */}
               <div className="hidden sm:flex flex-col gap-3.5 animate-marquee-down">
-                {[...COLUMN_TWO_CARDS, ...COLUMN_TWO_CARDS].map((card, idx) => 
+                {[...COLUMN_TWO_CARDS, ...COLUMN_TWO_CARDS].map((card, idx) =>
                   renderCard(card, `col2-${idx}`)
                 )}
               </div>
 
               {/* Column 3: Scrolls UP (Offset timing for natural organic flow) */}
               <div className="hidden lg:flex flex-col gap-3.5 animate-marquee-up-alt">
-                {[...COLUMN_THREE_CARDS, ...COLUMN_THREE_CARDS].map((card, idx) => 
+                {[...COLUMN_THREE_CARDS, ...COLUMN_THREE_CARDS].map((card, idx) =>
                   renderCard(card, `col3-${idx}`)
                 )}
               </div>

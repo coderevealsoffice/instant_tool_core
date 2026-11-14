@@ -134,7 +134,7 @@ export default function RootLayout({
               ],
               "contactPoint": {
                 "@type": "ContactPoint",
-                "email": "info.codereveals@gmail.com",
+                "email": "info@codereveals.com",
                 "contactType": "customer support"
               }
             }).replace(/</g, '\\u003c')

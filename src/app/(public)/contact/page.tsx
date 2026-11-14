@@ -57,7 +57,7 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Get in Touch</h2>
               <div className="space-y-5">
                 {[
-                  { icon: <Mail className="w-5 h-5" />, label: "Email", value: "info.codereveals@gmail.com", href: "mailto:info.codereveals@gmail.com" },
+                  { icon: <Mail className="w-5 h-5" />, label: "Email", value: "info@codereveals.com", href: "mailto:info@codereveals.com" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4">
                     <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-lg flex items-center justify-center shrink-0">

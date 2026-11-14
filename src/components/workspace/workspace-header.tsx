@@ -32,12 +32,12 @@ export function WorkspaceHeader({ toolName, onFinish, isProcessing }: WorkspaceH
         <Button 
           onClick={onFinish} 
           disabled={isProcessing}
-          className="h-10 px-6 gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all"
+          className="h-10 px-6 gap-2 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-sm rounded-xl shadow-xs transition-all border-none cursor-pointer"
         >
           {isProcessing ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
           ) : (
-            <>Finish <ArrowRight className="w-4 h-4" /></>
+            <>Finish <ArrowRight className="w-4 h-4 text-slate-950" /></>
           )}
         </Button>
       </div>

@@ -247,15 +247,6 @@ export const FOOTER_MENU: FooterSection[] = [
     ]
   },
   {
-    title: "Resources",
-    items: [
-      { label: "Blog", href: "/blog" },
-      { label: "Tutorials", href: "/tutorials" },
-      { label: "FAQs", href: "/faqs" },
-      { label: "Help Center", href: "/help" },
-    ]
-  },
-  {
     title: "Company",
     items: [
       { label: "About Us", href: "/about" },

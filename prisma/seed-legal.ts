@@ -8,7 +8,7 @@ const legalPages = [
       <p>Last updated: July 2026</p>
       
       <h2>1. Introduction</h2>
-      <p>Welcome to <strong>InstantTool</strong> ("we", "our", or "us"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice, or our practices with regards to your personal information, please contact us at info.codereveals@gmail.com.</p>
+      <p>Welcome to <strong>InstantTool</strong> ("we", "our", or "us"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice, or our practices with regards to your personal information, please contact us at info@codereveals.com.</p>
       <p>When you visit our website https://devigo.cloud (the "Website"), and more generally, use any of our services (the "Services", which include the Website), we appreciate that you are trusting us with your personal information. We take your privacy very seriously. In this privacy notice, we seek to explain to you in the clearest way possible what information we collect, how we use it and what rights you have in relation to it.</p>
       
       <h2>2. What Information Do We Collect?</h2>
@@ -151,7 +151,7 @@ const legalPages = [
       <p>We kindly request that you contact us to resolve any issues before initiating a chargeback with your bank or credit card provider. Fraudulent chargebacks will result in the immediate and permanent suspension of your account and your IP address will be blacklisted.</p>
 
       <h2>5. How to Request a Refund</h2>
-      <p>If you meet the eligibility criteria, please send an email to <strong>info.codereveals@gmail.com</strong> with the subject line "Refund Request - [Your Order ID]". Include a detailed explanation of the issue, screenshots of the error, and the email address associated with your account.</p>
+      <p>If you meet the eligibility criteria, please send an email to <strong>info@codereveals.com</strong> with the subject line "Refund Request - [Your Order ID]". Include a detailed explanation of the issue, screenshots of the error, and the email address associated with your account.</p>
       <p>Approved refunds are processed within 3-5 business days and will be returned to the original payment method. Depending on your bank, it may take an additional 5-10 business days for the funds to appear on your statement.</p>
     `
   },

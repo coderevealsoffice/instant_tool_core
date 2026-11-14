@@ -19,7 +19,7 @@ const DEFAULT_LEGAL_PAGES: Record<string, LegalContent> = {
     content: `
       <h2>1. Introduction & Overview</h2>
       <p>At <strong>InstantTool</strong> (accessible at <a href="https://devigo.cloud">https://devigo.cloud</a>), one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information that is collected and recorded by InstantTool and how we use and protect it.</p>
-      <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us at <a href="mailto:info.codereveals@gmail.com">info.codereveals@gmail.com</a>.</p>
+      <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us at <a href="mailto:info@codereveals.com">info@codereveals.com</a>.</p>
 
       <h2>2. File Processing & Zero-Storage Guarantee</h2>
       <p>InstantTool provides client-side and secure serverless file processing utilities (including PDF editors, image converters, video compressors, and SEO tools):</p>
@@ -108,7 +108,7 @@ const DEFAULT_LEGAL_PAGES: Record<string, LegalContent> = {
       <p>Contributions made through our "Support / Buy us a coffee" feature via Razorpay are strictly voluntary donations intended to help cover cloud hosting, bandwidth, and ongoing development. Because these are direct voluntary gifts, donations are generally non-refundable once processed.</p>
 
       <h2>3. Premium Plans & Credit Packs</h2>
-      <p>If you purchase a paid subscription or credit pack and encounter a technical failure where credits were deducted without producing the promised output, please email <a href="mailto:info.codereveals@gmail.com">info.codereveals@gmail.com</a> within 7 days with your transaction ID. We will promptly investigate and credit your account or issue a full refund.</p>
+      <p>If you purchase a paid subscription or credit pack and encounter a technical failure where credits were deducted without producing the promised output, please email <a href="mailto:info@codereveals.com">info@codereveals.com</a> within 7 days with your transaction ID. We will promptly investigate and credit your account or issue a full refund.</p>
     `
   },
   "disclaimer": {

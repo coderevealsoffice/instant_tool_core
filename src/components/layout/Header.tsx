@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { MAIN_MENU, TOOL_CATEGORIES } from "@/config/menu"
-import { ChevronDown, Menu, X } from "lucide-react"
+import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react"
 
 import { useSession } from "next-auth/react"
 import { useEffect } from "react"
@@ -193,18 +193,19 @@ export function Header() {
           
           {session ? (
             <div className="flex items-center gap-3">
-              <Link href="/workspace" className="hidden sm:flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 px-3 py-1.5 rounded-full font-bold text-xs border border-emerald-200 dark:border-emerald-800">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <Link href="/workspace" className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#D7FB8E] text-slate-950 font-medium text-xs shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-950 animate-pulse"></span>
                 100% Free Plan
               </Link>
-              <Link href="/dashboard" className="text-sm font-bold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:white hidden sm:block">
+              <Link href="/dashboard" className="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hidden sm:block">
                 Dashboard
               </Link>
             </div>
           ) : (
             <>
-              <Link href="/workspace" className="text-sm font-bold bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-2.5 rounded-full hover:bg-slate-800 dark:hover:bg-slate-100 transition-all shadow-xs hover:shadow-md hidden sm:block">
-                Free Workspace
+              <Link href="/workspace" className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-sm tracking-tight transition-all shadow-xs hover:scale-[1.01] active:scale-[0.99] hidden sm:inline-flex">
+                <span>Free Workspace</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-slate-950" />
               </Link>
             </>
           )}
