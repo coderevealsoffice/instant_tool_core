@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import Image from "next/image"
-import { Eye, EyeOff, Zap, ShieldCheck, Sparkles, Mail, Lock, Loader2 } from "lucide-react"
+import { Eye, EyeOff, Zap, ShieldCheck, Sparkles, Mail, Lock, Loader2, ArrowRight } from "lucide-react"
 
 type LoginMode = "credentials" | "magic"
 
@@ -78,45 +78,49 @@ export default function LoginPage() {
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
 
         <div className="relative z-10 w-full max-w-2xl px-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/20 border border-green-500/30 text-[#c0ffa5] text-[10px] font-bold uppercase tracking-widest mb-6">
-            <Sparkles className="w-3.5 h-3.5" /> Trusted by 1000+ teams
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-[#D7FB8E] text-[10px] font-bold uppercase tracking-widest mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D7FB8E] animate-pulse"></span>
+            ◆ 100% Free &amp; Private Browser Suite
           </div>
 
-          <h1 className="text-5xl font-bold text-white leading-[1.1] mb-8 tracking-tighter">
-            Scale your business with <span className="text-[#c0ffa5]">InstantTool AI.</span>
+          <h1 className="text-4xl sm:text-5xl font-black text-white leading-[1.1] mb-8 tracking-tight">
+            Every tool you need,<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-[#D7FB8E]">
+              built for speed.
+            </span>
           </h1>
 
           <div className="space-y-4">
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 shadow-2xl hover:bg-white/10 transition-colors group cursor-default flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#c0ffa5] flex items-center justify-center text-green-950 shadow-lg group-hover:scale-110 transition-transform shrink-0">
-                <Zap className="w-6 h-6" />
+            <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-5 border border-white/10 shadow-2xl hover:bg-white/10 transition-colors group cursor-default flex items-center gap-4">
+              <div className="w-11 h-11 rounded-xl bg-[#D7FB8E] flex items-center justify-center text-slate-950 shadow-md group-hover:scale-110 transition-transform shrink-0">
+                <Zap className="w-5 h-5 text-slate-950" />
               </div>
               <div>
-                <h3 className="text-white font-bold text-lg leading-tight mb-1">10x Faster Processing</h3>
-                <p className="text-green-100/60 text-sm">Automated file conversions and enhancements in seconds.</p>
+                <h3 className="text-white font-bold text-base leading-tight mb-1">Lightning-Fast WebAssembly</h3>
+                <p className="text-emerald-100/70 text-xs leading-relaxed">Compress PDFs, trim 4K videos, and convert formats directly in your browser without lag.</p>
               </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 shadow-2xl hover:bg-white/10 transition-colors group cursor-default flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-[#c0ffa5] border border-white/10 shadow-lg group-hover:scale-110 transition-transform shrink-0">
-                <ShieldCheck className="w-6 h-6" />
+            <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-5 border border-white/10 shadow-2xl hover:bg-white/10 transition-colors group cursor-default flex items-center gap-4">
+              <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-[#D7FB8E] border border-white/10 shadow-md group-hover:scale-110 transition-transform shrink-0">
+                <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-white font-bold text-lg leading-tight mb-1">Verified Security</h3>
-                <p className="text-green-100/60 text-sm">Bank-grade encryption for all your sensitive documents.</p>
+                <h3 className="text-white font-bold text-base leading-tight mb-1">Zero Server File Retention</h3>
+                <p className="text-emerald-100/70 text-xs leading-relaxed">Your files never leave your device. Complete client-side privacy with bank-grade security.</p>
               </div>
             </div>
           </div>
 
-          <div className="mt-8 p-6 bg-gradient-to-br from-green-500/20 to-transparent rounded-3xl border border-white/5">
-            <p className="text-green-100/80 italic text-sm leading-relaxed mb-4">
-              &quot;The most intuitive file platform we&apos;ve ever used. Our team&apos;s productivity tripled in just 3 months.&quot;
+          <div className="mt-8 p-6 bg-gradient-to-br from-emerald-500/15 to-transparent rounded-2xl border border-white/10">
+            <p className="text-emerald-100/90 italic text-sm leading-relaxed mb-4">
+              &quot;The fastest and most intuitive browser tool suite we&apos;ve used. No bloat, no paywalls—everything just works instantly.&quot;
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#c0ffa5]/20 flex items-center justify-center text-[#c0ffa5] font-bold text-xs shrink-0">P</div>
+              <div className="w-8 h-8 rounded-full bg-[#D7FB8E]/20 flex items-center justify-center text-[#D7FB8E] font-bold text-xs shrink-0">P</div>
               <div>
                 <div className="text-white font-bold text-xs uppercase tracking-wider">Pradeep</div>
-                <div className="text-green-100/40 text-[10px] font-bold">Product Engineering @ Techyfe</div>
+                <div className="text-emerald-200/60 text-[10px] font-bold">Product Engineering @ Techyfe</div>
               </div>
             </div>
           </div>
@@ -251,10 +255,10 @@ export default function LoginPage() {
               </div>
               <Button
                 type="submit"
-                className="w-full h-12 text-sm font-bold rounded-2xl bg-red-600 hover:bg-red-700 text-white flex items-center justify-center gap-2 shadow-lg"
+                className="w-full h-12 text-sm font-medium rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer border-none"
                 disabled={isLoading}
               >
-                {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
+                {isLoading ? <Loader2 className="w-4 h-4 animate-spin text-slate-950" /> : <Mail className="w-4 h-4 text-slate-950" />}
                 {isLoading ? "Sending..." : "Send Magic Link"}
               </Button>
               <p className="text-xs text-center text-slate-400">
@@ -275,7 +279,7 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-11 h-12 rounded-2xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 placeholder:text-slate-400 text-slate-900 dark:text-white focus-visible:ring-green-500 shadow-sm"
+                  className="pl-11 h-12 rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 placeholder:text-slate-400 text-slate-900 dark:text-white focus-visible:ring-emerald-500 shadow-2xs"
                 />
               </div>
               <div className="relative">
@@ -289,7 +293,7 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-11 pr-11 h-12 rounded-2xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 placeholder:text-slate-400 text-slate-900 dark:text-white focus-visible:ring-green-500 shadow-sm"
+                  className="pl-11 pr-11 h-12 rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 placeholder:text-slate-400 text-slate-900 dark:text-white focus-visible:ring-emerald-500 shadow-2xs"
                 />
                 <button
                   type="button"
@@ -301,20 +305,20 @@ export default function LoginPage() {
               </div>
 
               <div className="flex justify-end pt-1 pb-2">
-                <Link href="/auth/forgot-password" className="text-xs font-bold text-green-600 dark:text-green-500 hover:underline">
+                <Link href="/auth/forgot-password" className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
                   Forgot password?
                 </Link>
               </div>
 
               <Button
                 type="submit"
-                className="w-full h-12 text-sm font-bold rounded-2xl bg-green-950 hover:bg-green-900 dark:bg-green-900 dark:hover:bg-green-800 text-white flex items-center justify-center gap-2 shadow-lg"
+                className="w-full h-12 text-sm font-semibold rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer border-none"
                 disabled={isLoading}
               >
-                {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+                {isLoading ? <Loader2 className="w-4 h-4 animate-spin text-slate-950" /> : null}
                 {isLoading ? "Signing In..." : "Log In"}
                 {!isLoading && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  <ArrowRight className="w-4 h-4 text-slate-950" />
                 )}
               </Button>
             </form>
@@ -322,7 +326,7 @@ export default function LoginPage() {
 
           <div className="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
             New to InstantTool?{" "}
-            <Link href="/auth/register" className="font-bold text-green-600 dark:text-green-500 hover:underline">
+            <Link href="/auth/register" className="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
               Sign up for free
             </Link>
           </div>

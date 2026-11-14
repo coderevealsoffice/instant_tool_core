@@ -2,19 +2,26 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useState } from "react"
+import { usePathname } from "next/navigation"
+import { useState, useEffect } from "react"
 import { MAIN_MENU, TOOL_CATEGORIES } from "@/config/menu"
 import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react"
 
 import { useSession } from "next-auth/react"
-import { useEffect } from "react"
 import { ThemeToggle } from "./ThemeToggle"
 
 export function Header() {
+  const pathname = usePathname()
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { data: session } = useSession()
   const [credits, setCredits] = useState<number | null>(null)
+
+  // Automatically close all menus on navigation
+  useEffect(() => {
+    setIsMegaMenuOpen(false)
+    setIsMobileMenuOpen(false)
+  }, [pathname])
 
   useEffect(() => {
     if (session?.user) {
@@ -97,49 +104,68 @@ export function Header() {
             onMouseEnter={() => setIsMegaMenuOpen(true)}
             onMouseLeave={() => setIsMegaMenuOpen(false)}
           >
-            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase flex items-center gap-1">
-              All Tools <ChevronDown className="w-4 h-4" />
+            <button 
+              onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
+              className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase flex items-center gap-1 cursor-pointer"
+            >
+              All Tools <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMegaMenuOpen ? "rotate-180" : ""}`} />
             </button>
             
             {/* Mega Menu Dropdown — fixed to viewport for proper centering */}
             {isMegaMenuOpen && (
-              <div className="fixed top-16 left-0 right-0 flex justify-center z-50">
-                <div className="w-full max-w-7xl mx-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl rounded-b-2xl p-8">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {TOOL_CATEGORIES.filter(c => !["PDF Tools", "Video Tools", "AI Tools"].includes(c.title)).map((category, idx) => (
-                      <div key={idx}>
-                        <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4 border-b dark:border-slate-800 pb-2">
-                          {category.title}
-                        </h4>
-                        <ul className="space-y-2">
-                          {category.tools?.slice(0, 4).map((tool, toolIdx) => (
-                            <li key={toolIdx}>
-                              <Link 
-                                href={tool.href}
-                                className="flex items-center gap-3 group hover:bg-slate-50 dark:hover:bg-slate-800/50 p-2 -ml-2 rounded-lg transition-colors"
-                              >
-                                <div className="text-slate-400 group-hover:text-emerald-600 transition-colors flex-shrink-0">
-                                  {tool.icon}
-                                </div>
-                                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white truncate">
-                                  {tool.name}
-                                </span>
-                              </Link>
-                            </li>
-                          ))}
-                          {(category.tools?.length ?? 0) > 4 && (
-                            <li>
-                              <Link href="/tools" className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline p-2 block">
-                                View all {category.tools?.length} tools...
-                              </Link>
-                            </li>
-                          )}
-                        </ul>
-                      </div>
-                    ))}
+              <>
+                {/* Backdrop overlay to close when clicking outside */}
+                <div 
+                  className="fixed inset-0 top-16 bg-black/20 backdrop-blur-2xs z-40"
+                  onClick={() => setIsMegaMenuOpen(false)}
+                />
+                <div 
+                  className="fixed top-16 left-0 right-0 flex justify-center z-50 pointer-events-auto animate-in fade-in-0 zoom-in-95 duration-150"
+                  onMouseEnter={() => setIsMegaMenuOpen(true)}
+                  onMouseLeave={() => setIsMegaMenuOpen(false)}
+                >
+                  <div className="w-full max-w-7xl mx-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl rounded-b-2xl p-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {TOOL_CATEGORIES.filter(c => !["PDF Tools", "Video Tools", "AI Tools"].includes(c.title)).map((category, idx) => (
+                        <div key={idx}>
+                          <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4 border-b dark:border-slate-800 pb-2">
+                            {category.title}
+                          </h4>
+                          <ul className="space-y-2">
+                            {category.tools?.slice(0, 4).map((tool, toolIdx) => (
+                              <li key={toolIdx}>
+                                <Link 
+                                  href={tool.href}
+                                  onClick={() => setIsMegaMenuOpen(false)}
+                                  className="flex items-center gap-3 group/item hover:bg-emerald-50/50 dark:hover:bg-slate-800/50 p-2 -ml-2 rounded-lg transition-colors"
+                                >
+                                  <div className="text-slate-400 group-hover/item:text-emerald-600 transition-colors flex-shrink-0">
+                                    {tool.icon}
+                                  </div>
+                                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 group-hover/item:text-emerald-600 dark:group-hover/item:text-white truncate">
+                                    {tool.name}
+                                  </span>
+                                </Link>
+                              </li>
+                            ))}
+                            {(category.tools?.length ?? 0) > 4 && (
+                              <li>
+                                <Link 
+                                  href="/tools" 
+                                  onClick={() => setIsMegaMenuOpen(false)}
+                                  className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline p-2 block"
+                                >
+                                  View all {category.tools?.length} tools...
+                                </Link>
+                              </li>
+                            )}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </>
             )}
           </div>
 
