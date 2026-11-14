@@ -53,51 +53,51 @@ export function Header() {
         <nav className="hidden lg:flex gap-6 items-center flex-1 ml-10">
           {/* PDF Tools Dropdown */}
           <div className="relative group h-16 flex items-center">
-            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors uppercase flex items-center gap-1">
+            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase flex items-center gap-1">
               PDF Tools <ChevronDown className="w-4 h-4" />
             </button>
             <div className="absolute top-16 left-0 w-[400px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
               <div className="grid grid-cols-2 gap-2">
                 {TOOL_CATEGORIES.find(c => c.title === "PDF Tools")?.tools?.slice(0, 10).map((tool, idx) => (
-                  <Link key={idx} href={tool.href} className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-red-600 rounded-md transition-colors">
-                    <span className="text-slate-400 group-hover:text-red-600 transition-colors scale-75">{tool.icon}</span>
+                  <Link key={idx} href={tool.href} className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 rounded-md transition-colors">
+                    <span className="text-slate-400 group-hover:text-emerald-600 transition-colors scale-75">{tool.icon}</span>
                     <span className="truncate">{tool.name}</span>
                   </Link>
                 ))}
               </div>
               <div className="mt-3 pt-3 border-t dark:border-slate-800 text-center">
-                <Link href="/tools" className="text-sm font-bold text-red-600 hover:underline">View All PDF Tools →</Link>
+                <Link href="/pdf-tools" className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline">View All PDF Tools →</Link>
               </div>
             </div>
           </div>
 
           {/* Video Tools Dropdown */}
           <div className="relative group h-16 flex items-center">
-            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors uppercase flex items-center gap-1">
+            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase flex items-center gap-1">
               Video Tools <ChevronDown className="w-4 h-4" />
             </button>
             <div className="absolute top-16 left-0 w-[400px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
               <div className="grid grid-cols-2 gap-2">
                 {TOOL_CATEGORIES.find(c => c.title === "Video Tools")?.tools?.slice(0, 10).map((tool, idx) => (
-                  <Link key={idx} href={tool.href} className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-red-600 rounded-md transition-colors">
-                    <span className="text-slate-400 group-hover:text-red-600 transition-colors scale-75">{tool.icon}</span>
+                  <Link key={idx} href={tool.href} className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 rounded-md transition-colors">
+                    <span className="text-slate-400 group-hover:text-emerald-600 transition-colors scale-75">{tool.icon}</span>
                     <span className="truncate">{tool.name}</span>
                   </Link>
                 ))}
               </div>
               <div className="mt-3 pt-3 border-t dark:border-slate-800 text-center">
-                <Link href="/tools" className="text-sm font-bold text-red-600 hover:underline">View All Video Tools →</Link>
+                <Link href="/video-tools" className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline">View All Video Tools →</Link>
               </div>
             </div>
           </div>
 
           {/* Mega Menu Trigger */}
           <div 
-            className="relative h-16 flex items-center"
+            className="relative h-16 flex items-center group"
             onMouseEnter={() => setIsMegaMenuOpen(true)}
             onMouseLeave={() => setIsMegaMenuOpen(false)}
           >
-            <button className="text-sm font-bold text-red-600 transition-colors uppercase flex items-center gap-1">
+            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase flex items-center gap-1">
               All Tools <ChevronDown className="w-4 h-4" />
             </button>
             
@@ -118,7 +118,7 @@ export function Header() {
                                 href={tool.href}
                                 className="flex items-center gap-3 group hover:bg-slate-50 dark:hover:bg-slate-800/50 p-2 -ml-2 rounded-lg transition-colors"
                               >
-                                <div className="text-slate-400 group-hover:text-red-600 transition-colors flex-shrink-0">
+                                <div className="text-slate-400 group-hover:text-emerald-600 transition-colors flex-shrink-0">
                                   {tool.icon}
                                 </div>
                                 <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white truncate">
@@ -129,7 +129,7 @@ export function Header() {
                           ))}
                           {(category.tools?.length ?? 0) > 4 && (
                             <li>
-                              <Link href="/tools" className="text-sm font-bold text-red-600 hover:underline p-2 block">
+                              <Link href="/tools" className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline p-2 block">
                                 View all {category.tools?.length} tools...
                               </Link>
                             </li>
