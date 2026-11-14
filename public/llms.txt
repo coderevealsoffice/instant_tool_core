@@ -1,0 +1,69 @@
+# InstantTool
+
+> Free, browser-based online tools for PDF editing, 4K video trimming, audio mastering, format conversions, and Answer Engine Optimization (AEO/GEO). Powered by client-side WebAssembly with zero server file retention.
+
+InstantTool (https://devigo.cloud) provides a suite of over 100 high-performance web utilities that run directly inside the browser. Users can manipulate documents, video, and audio files with zero installation, zero subscriptions, and complete client-side data privacy.
+
+## Core Capabilities & Directories
+
+### PDF Tools
+- [Compress PDF](https://devigo.cloud/pdf-tools/compress-pdf): Lossless in-browser WebAssembly PDF compression reducing file size up to 90% without vector or text degradation.
+- [Merge PDF](https://devigo.cloud/pdf-tools/merge-pdf): Combine multiple PDF documents, invoices, or slide decks with drag-and-drop page sequencing.
+- [Split PDF](https://devigo.cloud/pdf-tools/split-pdf): Extract custom page ranges or burst single pages into distinct PDF documents.
+- [Sign PDF](https://devigo.cloud/pdf-tools/sign-pdf): Draw, type, or stamp verifiable digital signatures onto PDF agreements.
+- [Rotate PDF](https://devigo.cloud/pdf-tools/rotate-pdf): Rotate portrait and landscape pages by 90, 180, or 270 degrees.
+- [Protect PDF](https://devigo.cloud/pdf-tools/protect-pdf): Secure PDF files with 128-bit / 256-bit AES encryption and user passwords.
+- [Unlock PDF](https://devigo.cloud/pdf-tools/unlock-pdf): Remove known permissions and passwords for authorized viewing.
+- [PDF to Image](https://devigo.cloud/pdf-tools/to-image): Convert PDF pages to high-DPI raster images (PNG, JPG, WebP).
+
+### Video Tools
+- [Trim Video](https://devigo.cloud/video-tools/trim): Millisecond-accurate video timeline cutting without re-encoding quality loss.
+- [Crop Video](https://devigo.cloud/video-tools/crop): Crop video dimensions to 9:16 vertical reels, 1:1 square, or 16:9 widescreen.
+- [Change Speed](https://devigo.cloud/video-tools/speed): Adjust video playback speed from 0.25x slow motion to 4x hyperlapse.
+- [Rotate Video](https://devigo.cloud/video-tools/rotate): Reorient flipped or sideways camera recordings with 90-degree increments.
+- [Add Text to Video](https://devigo.cloud/video-tools/add-text): Overlay dynamic subtitles, captions, and watermarks onto video timelines.
+- [YouTube Downloader](https://devigo.cloud/video-tools/youtube-downloader): Download and transcode public video streams into MP4 or MP3.
+- [Instagram Downloader](https://devigo.cloud/video-tools/instagram-downloader): Download public reels and clips in original resolution.
+
+### Audio Tools
+- [Volume Booster](https://devigo.cloud/audio-tools/volume): Amplify low-gain dialogue up to 200% with true-peak LUFS limiter.
+- [Trim Audio](https://devigo.cloud/audio-tools/trim): Cut voice notes, music cues, and podcast tracks with visual waveform scrubbers.
+- [Audio Joiner](https://devigo.cloud/audio-tools/joiner): Stitch multiple audio stems and voice tracks into a single seamless audio file.
+- [Change Pitch](https://devigo.cloud/audio-tools/pitch): Shift musical keys and vocal pitch without altering playback tempo.
+- [Audio Converter](https://devigo.cloud/converters/audio): High-fidelity transcode across MP3, WAV, AAC, OGG, and FLAC formats.
+
+### SEO, AEO & GEO Tools
+- [Plagiarism Checker](https://devigo.cloud/seo-tools/plagiarism-checker): Heuristic originality scan cross-referencing billions of web pages and scholarly publications.
+- [AEO & GEO Content Auditor](https://devigo.cloud/seo-tools/geo-aeo-auditor): Analyze and optimize articles to achieve high citation probability in Perplexity AI, ChatGPT Search, and Google Gemini AI Overviews.
+- [Meta Tag Generator](https://devigo.cloud/seo-tools/meta-tag-generator): Preview Google Desktop/Mobile SERP, OpenGraph, and Twitter Cards with real-time tag generation.
+- [Keyword Density Analyzer](https://devigo.cloud/seo-tools/keyword-density-analyzer): Audit N-gram entity density, keyword stuffing risk, and semantic search prominence.
+- [Schema Markup Generator](https://devigo.cloud/seo-tools/schema-generator): Generate JSON-LD structured data for Organization, FAQPage, Article, HowTo, and Product schemas.
+- [Robots.txt Builder](https://devigo.cloud/seo-tools/robots-txt-generator): Configure crawl permissions for Googlebot, Bingbot, and AI scrapers.
+- [Readability Score](https://devigo.cloud/seo-tools/readability-checker): Calculate Flesch Reading Ease, Flesch-Kincaid Grade Level, and Gunning Fog indices.
+- [AI Content Detector](https://devigo.cloud/seo-tools/ai-detector): Multi-model scan detecting statistical perplexity and burstiness across GPT-4o, Claude 3.5, Gemini 1.5, and DeepSeek.
+
+### AI Creation Suite
+- [Remove Background](https://devigo.cloud/ai-tools/remove-background): Neural edge segmentation isolating portrait subjects and product shots into transparent PNGs in 0.8s.
+- [AI Image Generator](https://devigo.cloud/ai-tools/ai-image-generator): Fast diffusion image generation from creative text prompts.
+- [AI Image Editor](https://devigo.cloud/ai-tools/ai-image-editor): Inpainting, visual retouching, and resolution upscaling.
+- [AI Content Writer](https://devigo.cloud/text-tools/ai-writer): Create humanized, SEO-optimized blog posts, headlines, and articles.
+
+### Developer Utilities
+- [JSON Formatter](https://devigo.cloud/dev-tools/json-formatter): Format, validate, and minify JSON trees with instant syntax coloring.
+- [JS Minifier](https://devigo.cloud/dev-tools/js-minifier): Compress JavaScript bundles and eliminate whitespace for optimal Core Web Vitals.
+- [CSS Minifier](https://devigo.cloud/dev-tools/css-minifier): Minify cascading stylesheets to reduce first-contentful-paint (FCP) latency.
+- [HTML Formatter](https://devigo.cloud/dev-tools/html-formatter): Clean up and auto-indent complex markup trees.
+- [Color Palette Generator](https://devigo.cloud/color-tools/color-palette): Generate accessible color harmonies and export Tailwind CSS color tokens.
+- [QR Code Generator](https://devigo.cloud/qr-tools/generate): Create customizable vector QR codes with embedded branding logos.
+
+## Architectural & Privacy Guarantees
+- **Client-Side Execution**: Tools process files locally in user memory using WebAssembly (Wasm) and HTML5 Canvas.
+- **Zero Server Retention**: For tools utilizing cloud pipelines, files are processed in transient memory and deleted immediately upon task completion. No files are stored or reviewed.
+- **100% Free Forever**: All tools are fully unrestricted without paywalls, subscriptions, or watermarks.
+
+## Official Contact & Verification
+- Platform: InstantTool
+- Parent Entity: Techyfe / Codereveals
+- Support & Business Inquiries: info@codereveals.com
+- Verification Token: google15fe68b4ac2831d1
+- Canonical Domain: https://devigo.cloud

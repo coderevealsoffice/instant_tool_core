@@ -132,12 +132,27 @@ export async function generateStaticParams() {
   return LEGAL_SLUGS.map(slug => ({ slug }))
 }
 
+const LEGAL_ALIASES: Record<string, string> = {
+  "privacy": "privacy-policy",
+  "terms": "terms-of-service",
+  "tos": "terms-of-service",
+  "refund": "refund-policy",
+  "cookies": "cookie-policy",
+  "cookie": "cookie-policy",
+  "privacy-policy": "privacy-policy",
+  "terms-of-service": "terms-of-service",
+  "refund-policy": "refund-policy",
+  "cookie-policy": "cookie-policy",
+  "disclaimer": "disclaimer",
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  let title = DEFAULT_LEGAL_PAGES[slug]?.title || "Legal Document"
+  const canonicalSlug = LEGAL_ALIASES[slug] || slug
+  let title = DEFAULT_LEGAL_PAGES[canonicalSlug]?.title || "Legal Document"
 
   try {
-    const page = await prisma.legalPage.findUnique({ where: { slug } })
+    const page = await prisma.legalPage.findUnique({ where: { slug: canonicalSlug } })
     if (page?.title) {
       title = page.title
     }
@@ -148,7 +163,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${title} | InstantTool`,
     description: `Read our ${title} - InstantTool's commitment to your privacy, security, transparency, and data protection.`,
-    alternates: { canonical: `https://devigo.cloud/legal/${slug}` },
+    alternates: { canonical: `https://devigo.cloud/legal/${canonicalSlug}` },
   }
 }
 
@@ -162,21 +177,22 @@ const LEGAL_NAV = [
 
 export default async function LegalPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const fallback = DEFAULT_LEGAL_PAGES[slug]
+  const canonicalSlug = LEGAL_ALIASES[slug] || slug
+  const fallback = DEFAULT_LEGAL_PAGES[canonicalSlug]
 
   let pageTitle = fallback?.title
   let pageContent = fallback?.content
   let pageUpdatedAt = fallback?.updatedAt ? new Date(fallback.updatedAt) : new Date()
 
   try {
-    const dbPage = await prisma.legalPage.findUnique({ where: { slug } })
+    const dbPage = await prisma.legalPage.findUnique({ where: { slug: canonicalSlug } })
     if (dbPage) {
       pageTitle = dbPage.title
       pageContent = dbPage.content
       pageUpdatedAt = dbPage.updatedAt
     }
   } catch (err) {
-    console.warn(`Using fallback legal content for ${slug}:`, err)
+    console.warn(`Using fallback legal content for ${canonicalSlug}:`, err)
   }
 
   if (!pageTitle || !pageContent) {

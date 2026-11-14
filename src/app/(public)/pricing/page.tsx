@@ -127,22 +127,22 @@ export default async function PricingPage() {
             const isPro = plan.name.toLowerCase() === 'pro'
             
             return (
-              <Card key={plan.id} className={`flex flex-col relative ${isPro ? 'border-blue-200 shadow-xl scale-105 z-10' : 'border-slate-200'}`}>
+              <Card key={plan.id} className={`flex flex-col relative ${isPro ? 'border-emerald-300 dark:border-emerald-700 shadow-xl scale-105 z-10' : 'border-slate-200 dark:border-slate-800'}`}>
                 {isPro && (
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#D7FB8E] text-slate-950 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wide border border-black/10 shadow-xs">
                     Most Popular
                   </div>
                 )}
                 <CardHeader>
-                  <CardTitle className={isPro ? "text-blue-600" : ""}>{plan.name}</CardTitle>
+                  <CardTitle className={isPro ? "text-emerald-600 dark:text-emerald-400 font-bold" : ""}>{plan.name}</CardTitle>
                   {plan.description && <CardDescription>{plan.description}</CardDescription>}
                   <div className="mt-4 text-4xl font-bold">${plan.priceMonthly}<span className="text-lg text-slate-500 font-normal">/mo</span></div>
                 </CardHeader>
                 <CardContent className="flex-1">
-                  <ul className="space-y-3 text-sm text-slate-600">
+                  <ul className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-green-500 shrink-0" /> {feature}
+                        <Check className="w-4 h-4 text-emerald-500 shrink-0" /> {feature}
                       </li>
                     ))}
                   </ul>
@@ -150,7 +150,7 @@ export default async function PricingPage() {
                 <CardFooter>
                   <Link href={plan.priceMonthly === 0 ? "/auth/register" : "/dashboard/billing"} className="w-full">
                     <Button 
-                      className={`w-full ${isPro ? 'bg-blue-600 hover:bg-blue-700 text-white' : plan.priceMonthly === 0 ? '' : 'bg-slate-900 hover:bg-slate-800 text-white'}`} 
+                      className={`w-full rounded-xl font-medium ${isPro ? 'bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 border border-black/10' : plan.priceMonthly === 0 ? 'bg-white dark:bg-slate-900 border border-slate-900 dark:border-slate-700 text-slate-900 dark:text-white hover:bg-slate-50' : 'bg-slate-900 hover:bg-slate-800 text-white'}`} 
                       variant={plan.priceMonthly === 0 ? "outline" : "default"}
                     >
                       {plan.priceMonthly === 0 ? "Sign Up Free" : `Choose ${plan.name}`}

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { TOOL_CATEGORIES } from "@/config/menu"
-import { CheckCircle2, ChevronRight, Lock, Sparkles, Star, Download, Play, Smartphone, FileCheck, RefreshCw, ImageIcon, Briefcase, Mic } from "lucide-react"
+import { CheckCircle2, ChevronRight, Lock, Sparkles, Star, Download, Play, Smartphone, FileCheck, RefreshCw, ImageIcon, Briefcase, Mic, ArrowUpRight } from "lucide-react"
 import { HeroSection } from "@/components/home/hero"
 
 import type { Metadata } from 'next';
@@ -350,7 +350,7 @@ export default async function HomePage() {
                 <p className="text-lg text-slate-600 dark:text-slate-400 mb-6">
                   Do more than just view files. Highlight and add text, images, shapes, and freehand annotations to your documents. You can connect to 20 other tools to enhance your files further.
                 </p>
-                <Link href="/tools" className="text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center gap-1 justify-center md:justify-start">
+                <Link href="/tools" className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 justify-center md:justify-start">
                   Explore Tools <ChevronRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -363,7 +363,7 @@ export default async function HomePage() {
                       <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded w-full"></div>
                       <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded w-5/6"></div>
                     </div>
-                    <div className="h-20 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-900/50 rounded flex items-center justify-center text-blue-500 dark:text-blue-400 mt-4">
+                    <div className="h-20 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-900/50 rounded flex items-center justify-center text-emerald-600 dark:text-emerald-400 mt-4">
                       Text Box
                     </div>
                   </div>
@@ -378,7 +378,7 @@ export default async function HomePage() {
                 <p className="text-lg text-slate-600 dark:text-slate-400 mb-6">
                   Fill in forms, e-sign contracts, and close deals in a few simple steps. You can also request e-signatures and track your document's progress.
                 </p>
-                <Link href="/pdf-tools/sign-pdf" className="text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center gap-1 justify-center md:justify-start">
+                <Link href="/pdf-tools/sign-pdf" className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 justify-center md:justify-start">
                   Explore eSign <ChevronRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -389,7 +389,7 @@ export default async function HomePage() {
                       <div className="w-full h-12 border-b-2 border-slate-900 dark:border-slate-100 font-cursive text-2xl flex items-end justify-center pb-2 dark:text-white">
                         Sign Here
                       </div>
-                      <button className="mt-4 bg-blue-600 text-white text-sm font-bold py-2 px-4 rounded w-full">Apply</button>
+                      <button className="mt-4 bg-[#D7FB8E] text-slate-950 text-sm font-medium py-2 px-4 rounded-xl w-full">Apply</button>
                     </div>
                   </div>
                 </div>
@@ -459,7 +459,7 @@ export default async function HomePage() {
       <section className="py-24 bg-white dark:bg-slate-950" id="pricing">
         <div className="container mx-auto max-w-7xl px-4 text-center">
           <div className="max-w-3xl mx-auto mb-16">
-            <span className="inline-block py-1 px-3.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 text-xs font-bold tracking-wider uppercase mb-4 border border-blue-200 dark:border-blue-900/50">
+            <span className="inline-block py-1 px-3.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold tracking-wider uppercase mb-4 border border-emerald-200/80 dark:border-emerald-800 shadow-2xs">
               Transparent Pricing
             </span>
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
@@ -479,12 +479,12 @@ export default async function HomePage() {
                   key={plan.id}
                   className={`relative flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-300 ${
                     isPopular
-                      ? 'bg-slate-900 text-white shadow-2xl ring-2 ring-blue-500 lg:-translate-y-2 z-10'
+                      ? 'bg-slate-900 text-white shadow-2xl ring-2 ring-[#D7FB8E] lg:-translate-y-2 z-10'
                       : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md'
                   }`}
                 >
                   {isPopular && (
-                    <div className="absolute top-0 right-0 left-0 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider py-1.5 text-center shadow-sm">
+                    <div className="absolute top-0 right-0 left-0 bg-[#D7FB8E] text-slate-950 text-xs font-bold uppercase tracking-wider py-1.5 text-center shadow-xs">
                       ★ Most Popular
                     </div>
                   )}
@@ -509,9 +509,9 @@ export default async function HomePage() {
 
                     <Link
                       href={plan.priceMonthly === 0 ? "/auth/register" : "/dashboard/billing"}
-                      className={`block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all text-center shadow-sm ${
+                      className={`block w-full py-2.5 px-4 rounded-xl font-semibold text-sm transition-all text-center shadow-xs ${
                         isPopular
-                          ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-500/25'
+                          ? 'bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 border border-black/10'
                           : plan.priceMonthly === 0
                             ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700'
                             : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100'
@@ -598,15 +598,28 @@ export default async function HomePage() {
           <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
             All the tools you'll need to be more productive and work smarter with your files.
           </p>
-          <Link href="/tools" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full transition-colors inline-block">
-            Start Free Trial
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link 
+              href="/auth/login" 
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10"
+            >
+              <span>Start Free Trial</span>
+              <ArrowUpRight className="w-4 h-4 text-slate-950" />
+            </Link>
+            <Link 
+              href="/tools" 
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white dark:bg-slate-950 border border-slate-900 dark:border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white font-medium text-base tracking-tight transition-all shadow-2xs hover:border-black dark:hover:border-white"
+            >
+              <span>Explore 100+ Tools</span>
+              <ArrowRight className="w-4 h-4 text-slate-900 dark:text-white" />
+            </Link>
+          </div>
 
           <div className="absolute right-0 top-0 -z-10 opacity-20">
-            <div className="w-64 h-64 bg-yellow-300 dark:bg-yellow-500 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+            <div className="w-64 h-64 bg-emerald-300 dark:bg-emerald-500 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
           </div>
           <div className="absolute left-0 bottom-0 -z-10 opacity-20">
-            <div className="w-64 h-64 bg-blue-300 dark:bg-blue-500 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+            <div className="w-64 h-64 bg-[#D7FB8E] dark:bg-emerald-600 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
           </div>
         </div>
       </section>

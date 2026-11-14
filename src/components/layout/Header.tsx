@@ -12,16 +12,38 @@ import { ThemeToggle } from "./ThemeToggle"
 
 export function Header() {
   const pathname = usePathname()
-  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [isLockedClosed, setIsLockedClosed] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { data: session } = useSession()
   const [credits, setCredits] = useState<number | null>(null)
 
-  // Automatically close all menus on navigation
+  // Automatically close all dropdowns & mobile menus on navigation
   useEffect(() => {
-    setIsMegaMenuOpen(false)
+    setActiveDropdown(null)
     setIsMobileMenuOpen(false)
+    setIsLockedClosed(true)
+    const timer = setTimeout(() => setIsLockedClosed(false), 500)
+    return () => clearTimeout(timer)
   }, [pathname])
+
+  const closeAllDropdowns = () => {
+    setActiveDropdown(null)
+    setIsMobileMenuOpen(false)
+    setIsLockedClosed(true)
+    setTimeout(() => {
+      setIsLockedClosed(false)
+    }, 500)
+  }
+
+  const handleMouseEnter = (menuName: string) => {
+    if (isLockedClosed) return
+    setActiveDropdown(menuName)
+  }
+
+  const handleMouseLeave = () => {
+    setActiveDropdown(null)
+  }
 
   useEffect(() => {
     if (session?.user) {
@@ -57,159 +79,240 @@ export function Header() {
         </Link>
         
         {/* Main Nav Links (Like iLovePDF) */}
-        <nav className="hidden lg:flex gap-6 items-center flex-1 ml-10">
+        <nav 
+          className="hidden lg:flex gap-6 items-center flex-1 ml-10"
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Global backdrop when any dropdown is open */}
+          {activeDropdown && (
+            <div 
+              className="fixed inset-0 top-16 bg-black/10 dark:bg-black/30 backdrop-blur-2xs z-30 transition-opacity"
+              onClick={closeAllDropdowns}
+            />
+          )}
+          
           {/* PDF Tools Dropdown */}
-          <div className="relative group h-16 flex items-center">
-            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase flex items-center gap-1">
-              PDF Tools <ChevronDown className="w-4 h-4" />
+          <div 
+            className="relative h-16 flex items-center"
+            onMouseEnter={() => handleMouseEnter("pdf")}
+          >
+            <button 
+              onClick={() => setActiveDropdown(activeDropdown === "pdf" ? null : "pdf")}
+              className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors uppercase flex items-center gap-1 cursor-pointer"
+            >
+              PDF Tools <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "pdf" ? "rotate-180" : ""}`} />
             </button>
-            <div className="absolute top-16 left-0 w-[400px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
-              <div className="grid grid-cols-2 gap-2">
-                {TOOL_CATEGORIES.find(c => c.title === "PDF Tools")?.tools?.slice(0, 10).map((tool, idx) => (
-                  <Link key={idx} href={tool.href} className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 rounded-md transition-colors">
-                    <span className="text-slate-400 group-hover:text-emerald-600 transition-colors scale-75">{tool.icon}</span>
-                    <span className="truncate">{tool.name}</span>
+            {activeDropdown === "pdf" && (
+              <div 
+                className="absolute top-16 left-0 w-[400px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 z-50 animate-in fade-in-0 zoom-in-95 duration-150"
+              >
+                <div className="grid grid-cols-2 gap-2">
+                  {TOOL_CATEGORIES.find(c => c.title === "PDF Tools")?.tools?.slice(0, 10).map((tool, idx) => (
+                    <Link 
+                      key={idx} 
+                      href={tool.href} 
+                      onClick={closeAllDropdowns}
+                      className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-emerald-50/50 dark:hover:bg-slate-800 hover:text-emerald-600 rounded-md transition-colors"
+                    >
+                      <span className="text-slate-400 group-hover:text-emerald-600 transition-colors scale-75">{tool.icon}</span>
+                      <span className="truncate">{tool.name}</span>
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
+                  <Link 
+                    href="/pdf-tools" 
+                    onClick={closeAllDropdowns}
+                    className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
+                  >
+                    View All PDF Tools →
                   </Link>
-                ))}
+                </div>
               </div>
-              <div className="mt-3 pt-3 border-t dark:border-slate-800 text-center">
-                <Link href="/pdf-tools" className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline">View All PDF Tools →</Link>
-              </div>
-            </div>
+            )}
           </div>
 
           {/* Video Tools Dropdown */}
-          <div className="relative group h-16 flex items-center">
-            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase flex items-center gap-1">
-              Video Tools <ChevronDown className="w-4 h-4" />
+          <div 
+            className="relative h-16 flex items-center"
+            onMouseEnter={() => handleMouseEnter("video")}
+          >
+            <button 
+              onClick={() => setActiveDropdown(activeDropdown === "video" ? null : "video")}
+              className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors uppercase flex items-center gap-1 cursor-pointer"
+            >
+              Video Tools <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "video" ? "rotate-180" : ""}`} />
             </button>
-            <div className="absolute top-16 left-0 w-[400px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
-              <div className="grid grid-cols-2 gap-2">
-                {TOOL_CATEGORIES.find(c => c.title === "Video Tools")?.tools?.slice(0, 10).map((tool, idx) => (
-                  <Link key={idx} href={tool.href} className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 rounded-md transition-colors">
-                    <span className="text-slate-400 group-hover:text-emerald-600 transition-colors scale-75">{tool.icon}</span>
-                    <span className="truncate">{tool.name}</span>
+            {activeDropdown === "video" && (
+              <div 
+                className="absolute top-16 left-0 w-[400px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 z-50 animate-in fade-in-0 zoom-in-95 duration-150"
+              >
+                <div className="grid grid-cols-2 gap-2">
+                  {TOOL_CATEGORIES.find(c => c.title === "Video Tools")?.tools?.slice(0, 10).map((tool, idx) => (
+                    <Link 
+                      key={idx} 
+                      href={tool.href} 
+                      onClick={closeAllDropdowns}
+                      className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-emerald-50/50 dark:hover:bg-slate-800 hover:text-emerald-600 rounded-md transition-colors"
+                    >
+                      <span className="text-slate-400 group-hover:text-emerald-600 transition-colors scale-75">{tool.icon}</span>
+                      <span className="truncate">{tool.name}</span>
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
+                  <Link 
+                    href="/video-tools" 
+                    onClick={closeAllDropdowns}
+                    className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
+                  >
+                    View All Video Tools →
                   </Link>
-                ))}
+                </div>
               </div>
-              <div className="mt-3 pt-3 border-t dark:border-slate-800 text-center">
-                <Link href="/video-tools" className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline">View All Video Tools →</Link>
-              </div>
-            </div>
+            )}
           </div>
 
           {/* Mega Menu Trigger */}
           <div 
-            className="relative h-16 flex items-center group"
-            onMouseEnter={() => setIsMegaMenuOpen(true)}
-            onMouseLeave={() => setIsMegaMenuOpen(false)}
+            className="relative h-16 flex items-center"
+            onMouseEnter={() => handleMouseEnter("all")}
           >
             <button 
-              onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
-              className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase flex items-center gap-1 cursor-pointer"
+              onClick={() => setActiveDropdown(activeDropdown === "all" ? null : "all")}
+              className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors uppercase flex items-center gap-1 cursor-pointer"
             >
-              All Tools <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMegaMenuOpen ? "rotate-180" : ""}`} />
+              All Tools <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "all" ? "rotate-180" : ""}`} />
             </button>
             
             {/* Mega Menu Dropdown — fixed to viewport for proper centering */}
-            {isMegaMenuOpen && (
-              <>
-                {/* Backdrop overlay to close when clicking outside */}
-                <div 
-                  className="fixed inset-0 top-16 bg-black/20 backdrop-blur-2xs z-40"
-                  onClick={() => setIsMegaMenuOpen(false)}
-                />
-                <div 
-                  className="fixed top-16 left-0 right-0 flex justify-center z-50 pointer-events-auto animate-in fade-in-0 zoom-in-95 duration-150"
-                  onMouseEnter={() => setIsMegaMenuOpen(true)}
-                  onMouseLeave={() => setIsMegaMenuOpen(false)}
-                >
-                  <div className="w-full max-w-7xl mx-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl rounded-b-2xl p-8">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {TOOL_CATEGORIES.filter(c => !["PDF Tools", "Video Tools", "AI Tools"].includes(c.title)).map((category, idx) => (
-                        <div key={idx}>
-                          <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4 border-b dark:border-slate-800 pb-2">
-                            {category.title}
-                          </h4>
-                          <ul className="space-y-2">
-                            {category.tools?.slice(0, 4).map((tool, toolIdx) => (
-                              <li key={toolIdx}>
-                                <Link 
-                                  href={tool.href}
-                                  onClick={() => setIsMegaMenuOpen(false)}
-                                  className="flex items-center gap-3 group/item hover:bg-emerald-50/50 dark:hover:bg-slate-800/50 p-2 -ml-2 rounded-lg transition-colors"
-                                >
-                                  <div className="text-slate-400 group-hover/item:text-emerald-600 transition-colors flex-shrink-0">
-                                    {tool.icon}
-                                  </div>
-                                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 group-hover/item:text-emerald-600 dark:group-hover/item:text-white truncate">
-                                    {tool.name}
-                                  </span>
-                                </Link>
-                              </li>
-                            ))}
-                            {(category.tools?.length ?? 0) > 4 && (
-                              <li>
-                                <Link 
-                                  href="/tools" 
-                                  onClick={() => setIsMegaMenuOpen(false)}
-                                  className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline p-2 block"
-                                >
-                                  View all {category.tools?.length} tools...
-                                </Link>
-                              </li>
-                            )}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
+            {activeDropdown === "all" && (
+              <div 
+                className="fixed top-16 left-0 right-0 flex justify-center z-50 pointer-events-auto animate-in fade-in-0 zoom-in-95 duration-150"
+              >
+                <div className="w-full max-w-7xl mx-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl rounded-b-2xl p-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {TOOL_CATEGORIES.filter(c => !["PDF Tools", "Video Tools", "AI Tools"].includes(c.title)).map((category, idx) => (
+                      <div key={idx}>
+                        <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4 border-b dark:border-slate-800 pb-2">
+                          {category.title}
+                        </h4>
+                        <ul className="space-y-2">
+                          {category.tools?.slice(0, 4).map((tool, toolIdx) => (
+                            <li key={toolIdx}>
+                              <Link 
+                                href={tool.href}
+                                onClick={closeAllDropdowns}
+                                className="flex items-center gap-3 group/item hover:bg-emerald-50/50 dark:hover:bg-slate-800/50 p-2 -ml-2 rounded-lg transition-colors"
+                              >
+                                <div className="text-slate-400 group-hover/item:text-emerald-600 transition-colors flex-shrink-0">
+                                  {tool.icon}
+                                </div>
+                                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 group-hover/item:text-emerald-600 dark:group-hover/item:text-white truncate">
+                                  {tool.name}
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                          {(category.tools?.length ?? 0) > 4 && (
+                            <li>
+                              <Link 
+                                href="/tools" 
+                                onClick={closeAllDropdowns}
+                                className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline p-2 block"
+                              >
+                                View all {category.tools?.length} tools...
+                              </Link>
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </div>
 
           {/* SEO Tools Dropdown */}
-          <div className="relative group h-16 flex items-center">
-            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-500 transition-colors uppercase flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+          <div 
+            className="relative h-16 flex items-center"
+            onMouseEnter={() => handleMouseEnter("seo")}
+          >
+            <button 
+              onClick={() => setActiveDropdown(activeDropdown === "seo" ? null : "seo")}
+              className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-500 transition-colors uppercase flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1.5 rounded-full border border-emerald-200 dark:border-emerald-800 cursor-pointer"
+            >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              SEO Tools <ChevronDown className="w-4 h-4" />
+              SEO Tools <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "seo" ? "rotate-180" : ""}`} />
             </button>
-            <div className="absolute top-16 left-0 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
-              <div className="flex flex-col gap-1.5">
-                {TOOL_CATEGORIES.find(c => c.title === "SEO Tools")?.tools.map((tool, idx) => (
-                  <Link key={idx} href={tool.href} className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:text-emerald-600 rounded-lg transition-colors">
-                    <span className="text-emerald-500 transition-colors">{tool.icon}</span>
-                    <span className="truncate">{tool.name}</span>
+            {activeDropdown === "seo" && (
+              <div 
+                className="absolute top-16 left-0 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 z-50 animate-in fade-in-0 zoom-in-95 duration-150"
+              >
+                <div className="flex flex-col gap-1.5">
+                  {TOOL_CATEGORIES.find(c => c.title === "SEO Tools")?.tools.map((tool, idx) => (
+                    <Link 
+                      key={idx} 
+                      href={tool.href} 
+                      onClick={closeAllDropdowns}
+                      className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:text-emerald-600 rounded-lg transition-colors"
+                    >
+                      <span className="text-emerald-500 transition-colors">{tool.icon}</span>
+                      <span className="truncate">{tool.name}</span>
+                    </Link>
+                  ))}
+                  
+                  <Link 
+                    href="/seo-tools" 
+                    onClick={closeAllDropdowns}
+                    className="mt-1 pt-2 border-t border-slate-100 dark:border-slate-800 text-center text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline transition-colors"
+                  >
+                    View All SEO & AEO Tools &rarr;
                   </Link>
-                ))}
-                
-                <Link href="/seo-tools" className="mt-1 pt-2 border-t border-slate-100 dark:border-slate-800 text-center text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline transition-colors">
-                  View All SEO & AEO Tools &rarr;
-                </Link>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* AI Tools Dropdown */}
-          <div className="relative group h-16 flex items-center">
-            <button className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-fuchsia-600 dark:group-hover:text-fuchsia-500 transition-colors uppercase flex items-center gap-1 bg-fuchsia-50 dark:bg-fuchsia-900/30 px-3 py-1.5 rounded-full border border-fuchsia-100 dark:border-fuchsia-800">
-              AI Tools <ChevronDown className="w-4 h-4" />
+          <div 
+            className="relative h-16 flex items-center"
+            onMouseEnter={() => handleMouseEnter("ai")}
+          >
+            <button 
+              onClick={() => setActiveDropdown(activeDropdown === "ai" ? null : "ai")}
+              className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-fuchsia-600 dark:hover:text-fuchsia-500 transition-colors uppercase flex items-center gap-1 bg-fuchsia-50 dark:bg-fuchsia-900/30 px-3 py-1.5 rounded-full border border-fuchsia-100 dark:border-fuchsia-800 cursor-pointer"
+            >
+              AI Tools <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "ai" ? "rotate-180" : ""}`} />
             </button>
-            <div className="absolute top-16 left-0 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 hidden group-hover:block">
-              <div className="flex flex-col gap-2">
-                {TOOL_CATEGORIES.find(c => c.title === "AI Tools")?.tools?.slice(0, 10).map((tool, idx) => (
-                  <Link key={idx} href={tool.href} className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20 hover:text-fuchsia-600 rounded-md transition-colors">
-                    <span className="text-slate-400 group-hover:text-fuchsia-600 transition-colors">{tool.icon}</span>
-                    <span className="truncate">{tool.name}</span>
+            {activeDropdown === "ai" && (
+              <div 
+                className="absolute top-16 left-0 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-b-xl py-4 px-4 z-50 animate-in fade-in-0 zoom-in-95 duration-150"
+              >
+                <div className="flex flex-col gap-2">
+                  {TOOL_CATEGORIES.find(c => c.title === "AI Tools")?.tools?.slice(0, 10).map((tool, idx) => (
+                    <Link 
+                      key={idx} 
+                      href={tool.href} 
+                      onClick={closeAllDropdowns}
+                      className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20 hover:text-fuchsia-600 rounded-md transition-colors"
+                    >
+                      <span className="text-slate-400 group-hover:text-fuchsia-600 transition-colors">{tool.icon}</span>
+                      <span className="truncate">{tool.name}</span>
+                    </Link>
+                  ))}
+                  
+                  <Link 
+                    href="/ai-tools" 
+                    onClick={closeAllDropdowns}
+                    className="mt-1 pt-2 border-t border-slate-100 dark:border-slate-800 text-center text-xs font-bold text-fuchsia-600 dark:text-fuchsia-400 hover:text-fuchsia-700 dark:hover:text-fuchsia-300 transition-colors"
+                  >
+                    View all AI tools &rarr;
                   </Link>
-                ))}
-                
-                <Link href="/ai-tools" className="mt-1 pt-2 border-t border-slate-100 dark:border-slate-800 text-center text-xs font-bold text-fuchsia-600 dark:text-fuchsia-400 hover:text-fuchsia-700 dark:hover:text-fuchsia-300 transition-colors">
-                  View all AI tools &rarr;
-                </Link>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </nav>
 
@@ -264,7 +367,14 @@ export function Header() {
             {session ? (
               <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 dark:text-slate-200 py-2">Dashboard</Link>
             ) : (
-              <Link href="/auth/login" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 dark:text-slate-200 py-2">Free Workspace</Link>
+              <Link 
+                href="/auth/login" 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#D7FB8E] text-slate-950 font-medium text-sm tracking-tight shadow-xs"
+              >
+                <span>Free Workspace</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-slate-950" />
+              </Link>
             )}
           </div>
         </div>

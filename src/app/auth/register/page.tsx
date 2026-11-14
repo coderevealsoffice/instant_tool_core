@@ -216,7 +216,7 @@ export default function RegisterPage() {
               </button>
             </div>
 
-            <Button type="submit" className="w-full h-12 text-sm font-bold rounded-2xl bg-green-950 hover:bg-green-900 dark:bg-green-900 dark:hover:bg-green-800 text-white flex items-center justify-center gap-2 shadow-lg" disabled={isLoading}>
+            <Button type="submit" className="w-full h-12 text-sm font-semibold rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer border-none" disabled={isLoading}>
               {isLoading ? "Creating account..." : "Sign Up"}
               {!isLoading && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>}
             </Button>

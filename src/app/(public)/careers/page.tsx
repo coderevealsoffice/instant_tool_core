@@ -66,8 +66,8 @@ export default function CareersPage() {
                   </div>
                 </div>
                 <a href={`mailto:info@codereveals.com?subject=Application: ${job.title}`}
-                  className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors text-sm flex items-center gap-2">
-                  <Briefcase className="w-4 h-4" /> Apply Now
+                  className="shrink-0 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium py-2.5 px-6 rounded-xl transition-all text-sm flex items-center gap-2 border border-black/10 shadow-xs">
+                  <Briefcase className="w-4 h-4 text-slate-950" /> Apply Now
                 </a>
               </div>
             ))}

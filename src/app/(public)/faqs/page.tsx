@@ -119,8 +119,8 @@ export default async function FaqsPage() {
         <div className="mt-16 text-center bg-slate-50 dark:bg-slate-900 rounded-xl p-8 border border-slate-200 dark:border-slate-800">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Still have questions?</h2>
           <p className="text-slate-600 dark:text-slate-400 mb-6">Our support team is always here to help.</p>
-          <Link href="/contact" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-lg transition-colors">
-            Contact Support
+          <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium px-8 py-3.5 rounded-xl transition-all shadow-sm border border-black/10">
+            <span>Contact Support</span>
           </Link>
         </div>
       </div>

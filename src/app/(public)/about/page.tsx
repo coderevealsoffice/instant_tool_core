@@ -110,19 +110,34 @@ export default function AboutPage() {
       {/* Team & Origin */}
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold uppercase tracking-widest mb-6">
-            <Award className="w-4 h-4" /> The Origin Story
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-widest mb-6">
+            <Award className="w-4 h-4 text-emerald-600" /> The Origin Story
           </div>
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">Built in India, for the World</h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-            InstantTool is proudly built by the team at <strong>CodeReveals</strong>, based in Noida, India. 
-            We started this journey when we realized how much time our own team was wasting switching between different 
-            apps for PDF editing, image conversions, and AI text generation. 
+            InstantTool is proudly engineered by <strong>CodeReveals</strong>, headquartered in Noida, India, spearheaded by <strong>Pradeep</strong> (Product Engineering @ Techyfe &amp; CodeReveals).
+            We started this journey when we realized how much time students, creators, and corporate teams were wasting switching between bloated, paywalled desktop software just to compress a PDF, convert video formats, or verify AI text.
           </p>
-          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-            What started as an internal toolset quickly grew into a comprehensive platform. Today, we are a passionate team 
-            of developers, designers, and problem solvers dedicated to making the web a more productive place for everyone.
+          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-10">
+            What started as an internal engineering toolset quickly grew into a global WebAssembly-powered platform. Today, we are dedicated to providing 100% free, private, client-side tools with zero server file retention and zero paywalls for everyday creators.
           </p>
+
+          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a 
+              href="/auth/login" 
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-base tracking-tight transition-all shadow-sm border border-black/10"
+            >
+              <span>Get Started Free</span>
+              <span className="text-slate-950">↗</span>
+            </a>
+            <a 
+              href="/tools" 
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-900 dark:border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white font-medium text-base tracking-tight transition-all shadow-2xs hover:border-black dark:hover:border-white"
+            >
+              <span>Explore 100+ Tools</span>
+              <span>→</span>
+            </a>
+          </div>
         </div>
       </section>
     </div>

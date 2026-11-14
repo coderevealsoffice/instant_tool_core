@@ -18,12 +18,21 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
       {
-        userAgent: 'Mediapartners-Google',
-        allow: '/',
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
+        userAgent: [
+          'Googlebot',
+          'Mediapartners-Google',
+          'Google-Extended',
+          'ChatGPT-User',
+          'GPTBot',
+          'PerplexityBot',
+          'ClaudeBot',
+        ],
+        allow: [
+          '/',
+          '/llms.txt',
+          '/llms-full.txt',
+          '/ads.txt',
+        ],
         disallow: [
           '/dashboard/',
           '/admin/',
