@@ -290,6 +290,12 @@ function generateSEOData(toolName: string, category: "video" | "audio" | "pdf" |
         description: pick(zzDescPool2, 5),
         imageText: "",
         color: "bg-slate-100"
+      },
+      {
+        title: `Universal ${toolName} on Any Device`,
+        description: `Process your ${categoryContext} seamlessly across Mac, Windows, Linux, iOS, and Android with zero plugins or installation required.`,
+        imageText: "",
+        color: "bg-emerald-100"
       }
     ],
     howToImage: "",

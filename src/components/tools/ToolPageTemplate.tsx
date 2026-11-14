@@ -34,6 +34,609 @@ export interface Tutorial {
   color: string
 }
 
+export interface ToolMockupData {
+  feat1: {
+    sourceIcon: string
+    sourceName: string
+    badgeText: string
+    cols: Array<{
+      tag: string
+      label: string
+      status: string
+      statusColor?: string
+    }>
+    statusBarText: string
+    statusExecution: string
+    checkmarks: [string, string]
+  }
+  feat2: {
+    protocolTitle: string
+    badgeText: string
+    rows: Array<{
+      label: string
+      value: string
+      valueColor?: string
+    }>
+    footerText: string
+    checkmarks: [string, string]
+  }
+  feat3: {
+    title: string
+    badgeText: string
+    devices: string[]
+    footerText: string
+    checkmarks: [string, string]
+  }
+}
+
+export function getToolMockupData(slug: string, title: string, category: string): ToolMockupData {
+  const s = slug.toLowerCase()
+  const t = title.toLowerCase()
+  const isPdf = category === "pdf-tools" || t.includes("pdf")
+  const isVideo = category === "video-tools" || t.includes("video")
+  const isAudio = category === "audio-tools" || t.includes("audio")
+  const isImage = category === "image-tools" || t.includes("image") || t.includes("heic") || t.includes("jpg") || t.includes("png")
+  const isSeo = category === "seo-tools" || category === "ai-tools" || t.includes("plagiarism") || t.includes("aeo") || t.includes("geo") || t.includes("seo") || t.includes("density")
+
+  // 1. UNLOCK PDF
+  if (s.includes("unlock") || t.includes("unlock")) {
+    return {
+      feat1: {
+        sourceIcon: "🔒",
+        sourceName: "Source: Protected_Document.pdf",
+        badgeText: "PASSWORD PROTECTED • 3.2 MB",
+        cols: [
+          { tag: "SECURITY", label: "AES-256 Lock", status: "🔒 Key Required", statusColor: "text-amber-600 dark:text-amber-400" },
+          { tag: "DECRYPTION", label: "In-RAM Engine", status: "⚡ Verified 0.08s", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "OUTPUT", label: "Unlocked_Document.pdf", status: "✓ Full Access Granted", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Password restrictions removed (Print, Edit & Copy Enabled)",
+        statusExecution: "Execution: 0.18s",
+        checkmarks: [
+          "Instant removal of owner and user passwords with 100% layout fidelity",
+          "Client-side in-RAM decryption: your passwords are never saved or stored"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Zero-Knowledge Decryption Protocol",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Password Storage", value: "0 ms (Never Cached or Logged)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Decryption Cipher", value: "Client-Side AES-256 / RC4", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Cloud Server Retention", value: "0 MB (Processed in Client RAM)", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ Verified Zero-Knowledge Client-Side Decryption",
+        checkmarks: [
+          "Passwords are decrypted locally in your browser and never sent to servers",
+          "Instant cryptographic purge immediately upon session completion"
+        ]
+      },
+      feat3: {
+        title: "Universal Unlock PDF on Any Device",
+        badgeText: "WEBASSEMBLY",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 2. PROTECT PDF
+  if (s.includes("protect") || t.includes("protect")) {
+    return {
+      feat1: {
+        sourceIcon: "📄",
+        sourceName: "Source: Confidential_Agreement.pdf",
+        badgeText: "UNRESTRICTED • 2.6 MB",
+        cols: [
+          { tag: "INPUT", label: "Plain Document", status: "🔓 Unprotected", statusColor: "text-amber-600 dark:text-amber-400" },
+          { tag: "CIPHER", label: "AES-256 Encryption", status: "🛡️ Salted SHA-256", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "TARGET", label: "Protected_Agreement.pdf", status: "✓ Password Locked", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Military-grade AES-256 encryption applied",
+        statusExecution: "Execution: 0.22s",
+        checkmarks: [
+          "Bank-grade AES-256 encryption restricts unauthorized reading, printing, and copying",
+          "Compatible with all standard PDF readers (Adobe Acrobat, Apple Preview, Chrome)"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Cryptographic Armor Protocol",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Encryption Standard", value: "AES-256-CBC / SHA-256", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Access Permissions", value: "Print, Copy & Edit Locked", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Key Custody", value: "Zero-Knowledge (User Only)", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ Bank-Grade AES-256 Document Confidentiality",
+        checkmarks: [
+          "Strict zero-knowledge architecture: only you possess the unlocking credentials",
+          "End-to-end client cryptographic generation with zero external exposure"
+        ]
+      },
+      feat3: {
+        title: "Universal Protect PDF on Any Device",
+        badgeText: "WEBASSEMBLY",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 3. MERGE PDF
+  if (s.includes("merge") || t.includes("merge")) {
+    return {
+      feat1: {
+        sourceIcon: "📑",
+        sourceName: "Source: 3 Documents Selected",
+        badgeText: "9 TOTAL PAGES • 5.8 MB",
+        cols: [
+          { tag: "DOC 1", label: "Sales_Q1.pdf", status: "✓ 4 Pages", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "DOC 2", label: "Sales_Q2.pdf", status: "✓ 3 Pages", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "DOC 3", label: "Summary.pdf", status: "✓ 2 Pages", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "3 Documents fused into Unified_Report.pdf",
+        statusExecution: "Execution: 0.42s",
+        checkmarks: [
+          "Combine multiple PDF files into one continuous, structured document",
+          "Drag to reorder pages and preserve bookmarks, outlines, and hyperlinks"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Document Fusion Security Protocol",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Sequence Integrity", value: "Exact Page Order Verified", valueColor: "text-slate-900 dark:text-white" },
+          { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Server Retention", value: "0 MB (Purged Upon Download)", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ Zero-Retention Document Fusion Guarantee",
+        checkmarks: [
+          "All source documents and merged outputs are permanently wiped after download",
+          "Zero metadata or proprietary content leakage across combined files"
+        ]
+      },
+      feat3: {
+        title: "Universal Merge PDF on Any Device",
+        badgeText: "WEBASSEMBLY",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 4. COMPRESS (PDF / Image / Video)
+  if (s.includes("compress") || t.includes("compress")) {
+    const isHeavyDoc = isPdf
+    return {
+      feat1: {
+        sourceIcon: "🗜️",
+        sourceName: isHeavyDoc ? "Source: Presentation_Deck.pdf" : isVideo ? "Source: 4K_Footage.mp4" : "Source: High_Res_Asset.png",
+        badgeText: "ORIGINAL: 28.4 MB",
+        cols: [
+          { tag: "BEFORE", label: "Original Asset", status: "28.4 MB (Heavy)", statusColor: "text-amber-600 dark:text-amber-400" },
+          { tag: "OPTIMIZATION", label: "Vector & Stream Cleaned", status: "⚡ Lossless DPI Preserved", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "AFTER", label: "Compressed_File", status: "✓ 2.3 MB (-92%)", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Size reduced by 92% • Saved 26.1 MB",
+        statusExecution: "Execution: 0.28s",
+        checkmarks: [
+          "Shrink file size up to 90% without compromising visual clarity or typography",
+          "Optimized for email attachments, web uploads, and lightning-fast sharing"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Lossless Compression Sandbox",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Visual Integrity", value: "300 DPI Sharpness Retained", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Metadata Stripping", value: "EXIF & Tracking Tags Removed", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Cloud Purge Timer", value: "Auto-Purged on Download", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ Lossless Security & Data Protection Guarantee",
+        checkmarks: [
+          "Files are processed in an isolated in-memory container and wiped immediately",
+          "Preserves font embeddings and high-resolution assets losslessly"
+        ]
+      },
+      feat3: {
+        title: `Universal ${title} on Any Device`,
+        badgeText: "WEBASSEMBLY",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 5. SPLIT PDF
+  if (s.includes("split") || t.includes("split")) {
+    return {
+      feat1: {
+        sourceIcon: "📄",
+        sourceName: "Source: Annual_Financial_Report.pdf",
+        badgeText: "12 PAGES • 4.8 MB",
+        cols: [
+          { tag: "PART 1", label: "Pages 1–4", status: "✓ 1.2 MB", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "PART 2", label: "Pages 5–8", status: "✓ 1.4 MB", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "PART 3", label: "Pages 9–12", status: "✓ 1.6 MB", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Document separation complete",
+        statusExecution: "Execution: 0.38s",
+        checkmarks: [
+          "Extract individual pages or custom ranges with lossless visual fidelity",
+          "Preserves fonts, vector drawings, annotations, and form fields intact"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Document Segmentation Sandbox",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Permanent Disk Storage", value: "0 MB (In-RAM Only)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Automatic Purge Timer", value: "2h 00m Auto-Delete", valueColor: "text-slate-900 dark:text-white" }
+        ],
+        footerText: "🛡️ Verified GDPR & ISO 27001 Data Confidentiality",
+        checkmarks: [
+          "Zero cloud retention: files auto-purged from server memory after processing",
+          "Bank-grade 256-bit TLS client-side encryption standard on all document operations"
+        ]
+      },
+      feat3: {
+        title: "Universal Split PDF on Any Device",
+        badgeText: "WEBASSEMBLY",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 6. SIGN PDF
+  if (s.includes("sign") || t.includes("sign")) {
+    return {
+      feat1: {
+        sourceIcon: "✍️",
+        sourceName: "Source: Executive_NDA_Agreement.pdf",
+        badgeText: "4 PAGES • 1.9 MB",
+        cols: [
+          { tag: "SIGNATURE", label: "Vector Signature", status: "✓ Anti-Aliased", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "STAMP", label: "Position Placed", status: "✓ Verified Coordinates", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "OUTPUT", label: "Signed_NDA.pdf", status: "✓ Legally Binding", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Digital signature embedded into PDF streams",
+        statusExecution: "Execution: 0.15s",
+        checkmarks: [
+          "Place smooth digital signatures, dates, and custom text stamps with pixel precision",
+          "Export legally binding documents compliant with eIDAS and ESIGN standards"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Digital Signature Security Engine",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Audit Checksum", value: "SHA-256 Hash Verified", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Signature Privacy", value: "Rendered Locally in Browser", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Tamper Protection", value: "Standard ISO Flattening", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ eIDAS & ESIGN Compliant Browser Security",
+        checkmarks: [
+          "Signatures are created and rendered entirely on your device for absolute privacy",
+          "Zero document storage: signed PDFs are encrypted in RAM and wiped on export"
+        ]
+      },
+      feat3: {
+        title: "Universal Sign PDF on Any Device",
+        badgeText: "WEBASSEMBLY",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 7. CONVERTERS (PDF to Word/Excel, Word to PDF, etc.)
+  if (s.includes("to-") || t.includes("to ")) {
+    return {
+      feat1: {
+        sourceIcon: "🔄",
+        sourceName: "Source: Document_Report.pdf",
+        badgeText: "OCR & VECTOR • 3.8 MB",
+        cols: [
+          { tag: "INPUT", label: "PDF Streams", status: "Vector & Text Maps", statusColor: "text-amber-600 dark:text-amber-400" },
+          { tag: "PARSING", label: "Layout Reconstruction", status: "⚡ Tables & Columns Kept", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "OUTPUT", label: "Target Document", status: "✓ 100% Editable", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Document conversion complete with zero layout drift",
+        statusExecution: "Execution: 0.45s",
+        checkmarks: [
+          "Preserves precise fonts, margins, tables, and images with zero drift",
+          "High-speed client and cloud rendering for instant editable downloads"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Format Conversion Sandbox",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Font & Style Mapping", value: "TrueType / OpenType Retained", valueColor: "text-slate-900 dark:text-white" },
+          { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Server Retention", value: "0 MB (Purged Upon Download)", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ Confidential Enterprise Document Conversion",
+        checkmarks: [
+          "Proprietary fonts and embedded assets remain completely private and unaltered",
+          "Automatic server memory flush immediately after file conversion completes"
+        ]
+      },
+      feat3: {
+        title: `Universal ${title} on Any Device`,
+        badgeText: "WEBASSEMBLY",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 8. VIDEO DOWNLOADERS (YouTube, Instagram, etc.)
+  if (s.includes("downloader") || t.includes("downloader")) {
+    return {
+      feat1: {
+        sourceIcon: "🎬",
+        sourceName: "Source: 4K HDR Video Stream",
+        badgeText: "MAX BITRATE • AVAILABLE",
+        cols: [
+          { tag: "4K ULTRA HD", label: "2160p @ 60fps", status: "✓ HDR MP4 Stream", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "FULL HD", label: "1080p @ 60fps", status: "✓ Universal Playback", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "AUDIO MASTER", label: "MP3 @ 320kbps", status: "✓ Lossless Stereo", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "High-speed video stream extracted & ready",
+        statusExecution: "Latency: 14ms",
+        checkmarks: [
+          "Download crystal-clear 4K, 1080p, and 60fps videos without re-encoding quality loss",
+          "Unlimited daily downloads with zero watermarks, ads, or account requirements"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Direct Anonymous Stream Gateway",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "User Identification", value: "100% Anonymous (No Logins)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Download Pipeline", value: "Official High-Speed CDN Tunnel", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Rate Limiting", value: "Uncapped Multi-Thread Buffer", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ 100% Anonymous & Secure Media Streaming",
+        checkmarks: [
+          "We never record your IP, download history, or personal browsing data",
+          "Zero adware, bloatware, or tracking cookies: direct stream delivery only"
+        ]
+      },
+      feat3: {
+        title: `Universal ${title} on Any Device`,
+        badgeText: "MULTI-PLATFORM",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 9. VIDEO TOOLS
+  if (isVideo) {
+    return {
+      feat1: {
+        sourceIcon: "🎥",
+        sourceName: "Source: Raw_Footage_4K.mp4",
+        badgeText: "60 FPS • 420 MB",
+        cols: [
+          { tag: "TIMELINE", label: "Frame-Accurate Cut", status: "✓ Keyframe Aligned", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "CODEC", label: "H.264 / AAC", status: "⚡ GPU Accelerated", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "EXPORT", label: "Rendered.mp4", status: "✓ Pristine Color Gamut", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Hardware-accelerated video rendering complete",
+        statusExecution: "Bitrate: 22 Mbps",
+        checkmarks: [
+          "Frame-accurate trimming and editing with zero re-encoding generational loss",
+          "Hardware-accelerated rendering in your browser using modern WebCodecs APIs"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Hardware-Accelerated Video Pipeline",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Processing Engine", value: "Browser WebCodecs / Local GPU", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Cloud Upload Footprint", value: "0 MB (Processed Locally)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Color Fidelity", value: "Rec.709 / sRGB Unaltered", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ 100% On-Device Browser Video Processing",
+        checkmarks: [
+          "Video data stays inside your device's GPU memory — never uploaded to external servers",
+          "No file size limits or bandwidth throttling on local browser processing"
+        ]
+      },
+      feat3: {
+        title: `Universal ${title} on Any Device`,
+        badgeText: "WEBCODECS",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 10. AUDIO TOOLS
+  if (isAudio) {
+    return {
+      feat1: {
+        sourceIcon: "🎵",
+        sourceName: "Source: Master_Recording.wav",
+        badgeText: "24-BIT 96KHZ • 48 MB",
+        cols: [
+          { tag: "CHANNELS", label: "Stereo L/R", status: "✓ Phase Aligned", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "DSP BUFFER", label: "32-Bit Float Engine", status: "⚡ Sub-ms Latency", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "EXPORT", label: "Master_Output.mp3", status: "✓ 320kbps Hi-Fi", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Digital signal processing complete",
+        statusExecution: "THD: 0.0001%",
+        checkmarks: [
+          "Studio-grade 32-bit floating-point audio processing with zero dithering noise",
+          "Preserves wide dynamic range, stereo staging, and pristine frequency response"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Web Audio API DSP Sandbox",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Processing Node", value: "Client Web Audio Context", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Upload Bandwidth", value: "0 MB (Runs Locally in Browser)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Dynamic Range", value: "Full 24-bit Depth Preserved", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ Studio Master Quality & Complete Privacy",
+        checkmarks: [
+          "Your audio never leaves your machine: all DSP occurs in local client memory",
+          "Lightning-fast real-time waveform visualization and zero upload delays"
+        ]
+      },
+      feat3: {
+        title: `Universal ${title} on Any Device`,
+        badgeText: "WEB AUDIO API",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 11. IMAGE TOOLS
+  if (isImage) {
+    return {
+      feat1: {
+        sourceIcon: "🖼️",
+        sourceName: "Source: IMG_9042_AppleProRAW.heic",
+        badgeText: "APPLE HEIF • 14.2 MB",
+        cols: [
+          { tag: "SOURCE", label: "High-Efficiency HEIC", status: "Display P3 Gamut", statusColor: "text-amber-600 dark:text-amber-400" },
+          { tag: "WASM ENGINE", label: "Color Space Remap", status: "⚡ Lossless sRGB Map", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "OUTPUT", label: "IMG_9042.jpg", status: "✓ 1.8 MB (Universal)", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Lossless image conversion complete",
+        statusExecution: "Execution: 0.11s",
+        checkmarks: [
+          "Convert iPhone HEIC and next-gen image formats to universal high-res JPG/PNG",
+          "Preserves full color profile fidelity and high-contrast dynamic details"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Client-Side Canvas Sandbox",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Processing Engine", value: "HTML5 Canvas / WebAssembly", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Photo Privacy", value: "0 MB Uploaded to Cloud", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "EXIF Scrubbing", value: "GPS & Metadata Cleaned", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ Private On-Device Photo Processing",
+        checkmarks: [
+          "Photos are converted locally on your hardware with 0 bytes sent to external servers",
+          "Optional GPS location and camera EXIF metadata scrubbing for private sharing"
+        ]
+      },
+      feat3: {
+        title: `Universal ${title} on Any Device`,
+        badgeText: "CANVAS WASM",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 12. SEO & AI TOOLS
+  if (isSeo) {
+    return {
+      feat1: {
+        sourceIcon: "🔍",
+        sourceName: "Source: Article_Draft_GEO.docx",
+        badgeText: "2,140 WORDS • 99% SCORE",
+        cols: [
+          { tag: "ORIGINALITY", label: "Humanized Perplexity", status: "✓ 99.4% Authentic", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "GEO CITATIONS", label: "Perplexity & SearchGPT", status: "⚡ Direct Answer Ready", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "DUPLICATION", label: "Global Web Index", status: "✓ 0.0% Match Detected", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Content audit complete • Search & AI Ready",
+        statusExecution: "Score: 99/100",
+        checkmarks: [
+          "Audit sentence-level uniqueness, burstiness, and natural human conversational style",
+          "Optimized for AI generative citation engines like ChatGPT Search and Perplexity"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Zero-Retention Content Privacy Sandbox",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "AI Training Protection", value: "Zero Training / No Data Mining", valueColor: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Search Index Exclusion", value: "No-Index Sandbox Protocol", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Intellectual Property", value: "100% Owned by Creator", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ 100% Confidential Intellectual Property Retained",
+        checkmarks: [
+          "Your proprietary draft text is never logged, indexed, or used to train AI models",
+          "Immediate memory wipe once audit report and recommendations are generated"
+        ]
+      },
+      feat3: {
+        title: `Universal ${title} on Any Device`,
+        badgeText: "ZERO-DATA-MINING",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // 13. DEFAULT FALLBACK
+  return {
+    feat1: {
+      sourceIcon: "⚡",
+      sourceName: `Source: ${title.replace(/\s+/g, '_')}_Document`,
+      badgeText: "OPTIMIZED • READY",
+      cols: [
+        { tag: "INPUT", label: "Source Asset", status: "✓ Validated", statusColor: "text-emerald-600 dark:text-emerald-400" },
+        { tag: "ENGINE", label: `${title} Engine`, status: "⚡ High-Speed Processing", statusColor: "text-sky-600 dark:text-sky-400" },
+        { tag: "OUTPUT", label: "Optimized File", status: "✓ Ready to Download", statusColor: "text-emerald-600 dark:text-emerald-400" }
+      ],
+      statusBarText: `${title} processing complete`,
+      statusExecution: "Execution: 0.16s",
+      checkmarks: [
+        "Lossless quality retention with zero compression artifacts",
+        "Unlimited daily tasks with zero watermarks or registration"
+      ]
+    },
+    feat2: {
+      protocolTitle: "Sandbox Security Protocol",
+      badgeText: "ACTIVE",
+      rows: [
+        { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
+        { label: "Permanent Disk Storage", value: "0 MB (In-RAM Only)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+        { label: "Automatic Purge Timer", value: "2h 00m Auto-Delete", valueColor: "text-slate-900 dark:text-white" }
+      ],
+      footerText: "🛡️ Verified GDPR & ISO 27001 Data Confidentiality",
+      checkmarks: [
+        "Zero cloud retention: files auto-purged from server memory",
+        "Bank-grade 256-bit TLS client-side encryption standard"
+      ]
+    },
+    feat3: {
+      title: `Universal ${title} on Any Device`,
+      badgeText: "WEBASSEMBLY",
+      devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+      footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+      checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+    }
+  }
+}
+
 interface ToolPageTemplateProps {
   title: string
   description?: string
@@ -138,6 +741,9 @@ export function ToolPageTemplate({
   const isVideo = category === "video-tools" || title.toLowerCase().includes("video")
   const isAudio = category === "audio-tools" || title.toLowerCase().includes("audio")
   const isImage = category === "image-tools" || title.toLowerCase().includes("image")
+  const isSeo = category === "seo-tools" || category === "ai-tools" || title.toLowerCase().includes("seo") || title.toLowerCase().includes("aeo") || title.toLowerCase().includes("geo")
+
+  const mockupData = getToolMockupData(slug, title, category)
 
   const displayHeadline = isPdf
     ? `${title} Files Online Instantly`
@@ -149,15 +755,47 @@ export function ToolPageTemplate({
       : `Fast, secure, and private browser-based tool. 100% free with zero watermarks or data retention.`
   )
 
-  const previewTiles = isPdf
-    ? ["Pages 1–2", "Pages 3–4", "Pages 5–6", "Pages 7–8", "Pages 9–10", "Pages 11–12"]
-    : isVideo
-    ? ["0:00", "0:15", "0:30", "0:45", "1:00", "1:15"]
-    : isAudio
-    ? ["Track 1", "320kbps", "Hi-Fi", "Stereo", "Lossless", "Master"]
-    : isImage
-    ? ["PNG", "JPG", "WEBP", "SVG", "AVIF", "PDF"]
-    : ["Verified", "Private", "Fast", "Lossless", "100% Free", "Secure"]
+  const previewTiles = (() => {
+    const s = slug.toLowerCase()
+    const t = title.toLowerCase()
+    if (s.includes("unlock") || t.includes("unlock")) {
+      return ["Protected", "Key Check", "Decrypted", "Print ✓", "Copy ✓", "Edit ✓"]
+    }
+    if (s.includes("protect") || t.includes("protect")) {
+      return ["AES-256", "Encrypted", "Password", "Secure ✓", "Private ✓", "Locked ✓"]
+    }
+    if (s.includes("merge") || t.includes("merge")) {
+      return ["Doc 1", "Doc 2", "Doc 3", "Merged ✓", "In Order", "Unified"]
+    }
+    if (s.includes("compress") || t.includes("compress")) {
+      return ["-90% Size", "2.3 MB", "Vector OK", "300 DPI", "Lossless", "Fast ✓"]
+    }
+    if (s.includes("sign") || t.includes("sign")) {
+      return ["Vector", "Stamp", "Placed", "Legal ✓", "Flattened", "Signed ✓"]
+    }
+    if (s.includes("split") || t.includes("split")) {
+      return ["Pages 1–2", "Pages 3–4", "Pages 5–6", "Pages 7–8", "Pages 9–10", "Pages 11–12"]
+    }
+    if (s.includes("to-word") || t.includes("to word")) {
+      return ["Header", "Paragraph", "Table", "Images", "Styles", ".DOCX ✓"]
+    }
+    if (s.includes("to-excel") || t.includes("to excel")) {
+      return ["Sheet 1", "Formulas", "Columns", "Data Map", "Cells", ".XLSX ✓"]
+    }
+    if (isVideo) {
+      return ["0:00", "0:15", "0:30", "0:45", "1:00", "1:15"]
+    }
+    if (isAudio) {
+      return ["Track 1", "320kbps", "Hi-Fi", "Stereo", "Lossless", "Master"]
+    }
+    if (isImage) {
+      return ["PNG", "JPG", "WEBP", "SVG", "AVIF", "Lossless"]
+    }
+    if (isSeo) {
+      return ["99% Unique", "Humanized", "GEO Ready", "Zero Risk", "AEO Citations", "Verified"]
+    }
+    return ["Verified", "Private", "Fast", "Lossless", "100% Free", "Secure"]
+  })()
 
   const fileAcceptType = isPdf 
     ? ".pdf,application/pdf" 
@@ -363,11 +1001,17 @@ export function ToolPageTemplate({
         </div>
       </section>
 
-      {/* 2. Sona-Style Zig-Zag Content Features (Clean Product Mockups replacing broken CSS art) */}
+      {/* 2. Sona-Style Zig-Zag Content Features (Tailored Dynamic Mockups per Tool) */}
       {zigZagFeatures.length > 0 && (
         <section className="py-20 px-4 bg-white dark:bg-slate-950 overflow-hidden font-sans border-t border-slate-100 dark:border-slate-800/80">
           <div className="container mx-auto max-w-6xl space-y-24">
-            {zigZagFeatures.map((feature, idx) => (
+            {zigZagFeatures.map((feature, idx) => {
+              const currentCheckmarks = 
+                idx === 0 ? mockupData.feat1.checkmarks :
+                idx === 1 ? mockupData.feat2.checkmarks :
+                mockupData.feat3.checkmarks
+
+              return (
               <div key={idx} className="grid md:grid-cols-12 gap-12 lg:gap-16 items-center">
                 
                 {/* Text Column */}
@@ -389,16 +1033,16 @@ export function ToolPageTemplate({
                   <div className="space-y-2.5 pt-2 text-sm font-medium text-slate-700 dark:text-slate-300">
                     <div className="flex items-center gap-2.5">
                       <div className="w-5 h-5 rounded-full bg-[#D7FB8E] text-slate-950 flex items-center justify-center text-xs font-black shadow-2xs">✓</div>
-                      <span>{idx === 0 ? "Lossless quality retention with zero compression artifacts" : idx === 1 ? "Zero cloud retention: files auto-purged from server memory" : "Works on Chrome, Safari, Edge, Firefox, iOS & Android"}</span>
+                      <span>{currentCheckmarks[0]}</span>
                     </div>
                     <div className="flex items-center gap-2.5">
                       <div className="w-5 h-5 rounded-full bg-[#D7FB8E] text-slate-950 flex items-center justify-center text-xs font-black shadow-2xs">✓</div>
-                      <span>{idx === 0 ? "Unlimited daily tasks with zero watermarks or registration" : idx === 1 ? "Bank-grade 256-bit TLS client-side encryption standard" : "No desktop software or browser extension installation needed"}</span>
+                      <span>{currentCheckmarks[1]}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Visual Product Mockup Card (Sona.ai Clean Widget Design) */}
+                {/* Visual Product Mockup Card (Sona.ai Clean Widget Design - Dynamic per Tool) */}
                 <div className={`md:col-span-6 ${idx % 2 === 1 ? 'md:order-1' : ''}`}>
                   <div className="rounded-[2rem] bg-[#FAFAFA] dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-xs relative overflow-hidden">
                     
@@ -406,118 +1050,89 @@ export function ToolPageTemplate({
                     <div className="absolute top-0 right-0 w-48 h-48 bg-[#D7FB8E]/15 rounded-full blur-3xl pointer-events-none" />
                     
                     {idx === 0 ? (
-                      /* Visual 1: Document Splitting / Processing Widget */
+                      /* Visual 1: Core Processing Widget (Dynamic per Tool) */
                       <div className="space-y-4 relative z-10">
                         <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-                            <span>📄</span>
-                            <span>Source: Annual_Financial_Report.pdf</span>
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider truncate pr-2">
+                            <span>{mockupData.feat1.sourceIcon}</span>
+                            <span className="truncate">{mockupData.feat1.sourceName}</span>
                           </div>
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#D7FB8E] text-slate-950 text-[10px] font-black uppercase tracking-wider">
-                            12 Pages • 4.8 MB
+                          <span className="px-2.5 py-0.5 rounded-full bg-[#D7FB8E] text-slate-950 text-[10px] font-black uppercase tracking-wider shrink-0">
+                            {mockupData.feat1.badgeText}
                           </span>
                         </div>
 
-                        {/* Splitting Branches */}
+                        {/* 3 Step / Column Cards */}
                         <div className="grid grid-cols-3 gap-2.5 pt-2">
-                          <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center shadow-2xs space-y-1.5">
-                            <div className="text-[10px] font-bold text-slate-400 uppercase">Part 1</div>
-                            <div className="text-xs font-extrabold text-slate-900 dark:text-white">Pages 1–4</div>
-                            <div className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
-                              <span>✓</span> 1.2 MB
+                          {mockupData.feat1.cols.map((col, cIdx) => (
+                            <div key={cIdx} className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center shadow-2xs space-y-1.5">
+                              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{col.tag}</div>
+                              <div className="text-xs font-extrabold text-slate-900 dark:text-white truncate">{col.label}</div>
+                              <div className={`inline-flex items-center gap-1 text-[10px] font-bold ${col.statusColor || "text-emerald-600 dark:text-emerald-400"}`}>
+                                {col.status}
+                              </div>
                             </div>
-                          </div>
-
-                          <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center shadow-2xs space-y-1.5">
-                            <div className="text-[10px] font-bold text-slate-400 uppercase">Part 2</div>
-                            <div className="text-xs font-extrabold text-slate-900 dark:text-white">Pages 5–8</div>
-                            <div className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
-                              <span>✓</span> 1.4 MB
-                            </div>
-                          </div>
-
-                          <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center shadow-2xs space-y-1.5">
-                            <div className="text-[10px] font-bold text-slate-400 uppercase">Part 3</div>
-                            <div className="text-xs font-extrabold text-slate-900 dark:text-white">Pages 9–12</div>
-                            <div className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
-                              <span>✓</span> 1.6 MB
-                            </div>
-                          </div>
+                          ))}
                         </div>
 
                         {/* Status bar */}
                         <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-between text-xs font-medium text-emerald-800 dark:text-emerald-300">
-                          <span className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                            Separation complete
+                          <span className="flex items-center gap-1.5 truncate pr-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                            <span className="truncate">{mockupData.feat1.statusBarText}</span>
                           </span>
-                          <span className="font-mono font-bold text-[11px]">Execution: 0.38s</span>
+                          <span className="font-mono font-bold text-[11px] shrink-0">{mockupData.feat1.statusExecution}</span>
                         </div>
                       </div>
                     ) : idx === 1 ? (
-                      /* Visual 2: Security & Privacy Status Widget */
+                      /* Visual 2: Security & Privacy Status Widget (Dynamic per Tool) */
                       <div className="space-y-3.5 relative z-10">
                         <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider truncate pr-2">
                             <span>🔒</span>
-                            <span>Sandbox Security Protocol</span>
+                            <span className="truncate">{mockupData.feat2.protocolTitle}</span>
                           </div>
-                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-[10px] font-black uppercase tracking-wider">
-                            ACTIVE
+                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-[10px] font-black uppercase tracking-wider shrink-0">
+                            {mockupData.feat2.badgeText}
                           </span>
                         </div>
 
                         <div className="space-y-2">
-                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
-                            <span className="text-slate-600 dark:text-slate-400 font-medium">In-Transit Encryption</span>
-                            <span className="font-mono font-bold text-slate-900 dark:text-white">TLS 1.3 / AES-256</span>
-                          </div>
-
-                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
-                            <span className="text-slate-600 dark:text-slate-400 font-medium">Permanent Disk Storage</span>
-                            <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">0 MB (In-RAM Only)</span>
-                          </div>
-
-                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
-                            <span className="text-slate-600 dark:text-slate-400 font-medium">Automatic Purge Timer</span>
-                            <span className="font-mono font-bold text-slate-900 dark:text-white">2h 00m Auto-Delete</span>
-                          </div>
+                          {mockupData.feat2.rows.map((row, rIdx) => (
+                            <div key={rIdx} className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+                              <span className="text-slate-600 dark:text-slate-400 font-medium">{row.label}</span>
+                              <span className={`font-mono font-bold ${row.valueColor || "text-slate-900 dark:text-white"}`}>{row.value}</span>
+                            </div>
+                          ))}
                         </div>
 
                         <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-center text-xs font-semibold text-emerald-800 dark:text-emerald-300">
-                          🛡️ Verified GDPR &amp; ISO 27001 Data Confidentiality
+                          {mockupData.feat2.footerText}
                         </div>
                       </div>
                     ) : (
                       /* Visual 3: Universal Browser & Device Compatibility */
                       <div className="space-y-3.5 relative z-10">
                         <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider truncate pr-2">
                             <span>💻</span>
-                            <span>Universal Compatibility</span>
+                            <span className="truncate">{mockupData.feat3.title}</span>
                           </div>
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#D7FB8E] text-slate-950 text-[10px] font-black uppercase tracking-wider">
-                            WEBASSEMBLY
+                          <span className="px-2.5 py-0.5 rounded-full bg-[#D7FB8E] text-slate-950 text-[10px] font-black uppercase tracking-wider shrink-0">
+                            {mockupData.feat3.badgeText}
                           </span>
                         </div>
 
                         <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
-                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200">
-                            <span className="text-emerald-500 font-bold">✓</span> macOS Safari &amp; Chrome
-                          </div>
-                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200">
-                            <span className="text-emerald-500 font-bold">✓</span> Windows 11 &amp; Edge
-                          </div>
-                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200">
-                            <span className="text-emerald-500 font-bold">✓</span> iOS &amp; iPadOS Safari
-                          </div>
-                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200">
-                            <span className="text-emerald-500 font-bold">✓</span> Android Mobile Chrome
-                          </div>
+                          {mockupData.feat3.devices.map((device, dIdx) => (
+                            <div key={dIdx} className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200">
+                              <span className="text-emerald-500 font-bold">✓</span> {device}
+                            </div>
+                          ))}
                         </div>
 
                         <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-center text-xs font-medium text-slate-600 dark:text-slate-400">
-                          Zero RAM hogging • No installer • High-efficiency client execution
+                          {mockupData.feat3.footerText}
                         </div>
                       </div>
                     )}
@@ -526,7 +1141,8 @@ export function ToolPageTemplate({
                 </div>
 
               </div>
-            ))}
+              )
+            })}
           </div>
         </section>
       )}
