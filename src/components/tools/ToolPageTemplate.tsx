@@ -301,70 +301,219 @@ export function ToolPageTemplate({
         </div>
       </section>
 
-      {/* 2. Zig-Zag Content Features */}
+      {/* 2. Sona-Style Zig-Zag Content Features (Clean Product Mockups replacing broken CSS art) */}
       {zigZagFeatures.length > 0 && (
-        <section className="py-20 px-4 bg-white dark:bg-slate-950 overflow-hidden">
-          <div className="container mx-auto max-w-5xl space-y-24">
+        <section className="py-20 px-4 bg-white dark:bg-slate-950 overflow-hidden font-sans border-t border-slate-100 dark:border-slate-800/80">
+          <div className="container mx-auto max-w-6xl space-y-24">
             {zigZagFeatures.map((feature, idx) => (
-              <div key={idx} className="grid md:grid-cols-2 gap-16 items-center">
-                <div className={`${idx % 2 === 1 ? 'md:order-2' : ''}`}>
-                  <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">{feature.title}</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">{feature.description}</p>
-                </div>
-                <div className={`relative ${idx % 2 === 1 ? 'md:order-1' : ''}`}>
-                  <div className={`absolute inset-0 ${feature.color} dark:opacity-80 rounded-3xl transform ${idx % 2 === 0 ? '-rotate-3' : 'rotate-3'} scale-105`}></div>
-                  {/* Decorative CSS Art replacing broken images */}
-                  <div className="relative rounded-2xl shadow-xl w-full border dark:border-slate-800 aspect-video overflow-hidden bg-slate-900 flex items-center justify-center">
-                    <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
-                    <div className={`absolute inset-0 ${feature.color} opacity-40 mix-blend-overlay`}></div>
-                    <div className="relative z-10 w-48 h-48 rounded-full border-4 border-white/10 flex items-center justify-center animate-[spin_30s_linear_infinite]">
-                       <div className="w-32 h-32 rounded-full border-4 border-white/20 border-dashed flex items-center justify-center animate-[spin_20s_linear_infinite_reverse]">
-                          <div className={`w-16 h-16 rounded-xl ${feature.color} shadow-2xl rotate-12`}></div>
-                       </div>
+              <div key={idx} className="grid md:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                {/* Text Column */}
+                <div className={`md:col-span-6 ${idx % 2 === 1 ? 'md:order-2 md:pl-4' : 'md:pr-4'}`}>
+                  {/* Category Pill Tag */}
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-4 border border-slate-200 dark:border-slate-700">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#D7FB8E]"></span>
+                    {idx === 0 ? "◆ High-Speed Engine" : idx === 1 ? "◆ Enterprise Security" : "◆ Multi-Platform"}
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight leading-snug">
+                    {feature.title}
+                  </h3>
+
+                  <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed mb-6 font-normal">
+                    {feature.description}
+                  </p>
+
+                  <div className="space-y-2.5 pt-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-5 h-5 rounded-full bg-[#D7FB8E] text-slate-950 flex items-center justify-center text-xs font-black shadow-2xs">✓</div>
+                      <span>{idx === 0 ? "Lossless quality retention with zero compression artifacts" : idx === 1 ? "Zero cloud retention: files auto-purged from server memory" : "Works on Chrome, Safari, Edge, Firefox, iOS & Android"}</span>
+                    </div>
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-5 h-5 rounded-full bg-[#D7FB8E] text-slate-950 flex items-center justify-center text-xs font-black shadow-2xs">✓</div>
+                      <span>{idx === 0 ? "Unlimited daily tasks with zero watermarks or registration" : idx === 1 ? "Bank-grade 256-bit TLS client-side encryption standard" : "No desktop software or browser extension installation needed"}</span>
                     </div>
                   </div>
                 </div>
+
+                {/* Visual Product Mockup Card (Sona.ai Clean Widget Design) */}
+                <div className={`md:col-span-6 ${idx % 2 === 1 ? 'md:order-1' : ''}`}>
+                  <div className="rounded-[2rem] bg-[#FAFAFA] dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-xs relative overflow-hidden">
+                    
+                    {/* Background Soft Glow */}
+                    <div className="absolute top-0 right-0 w-48 h-48 bg-[#D7FB8E]/15 rounded-full blur-3xl pointer-events-none" />
+                    
+                    {idx === 0 ? (
+                      /* Visual 1: Document Splitting / Processing Widget */
+                      <div className="space-y-4 relative z-10">
+                        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                            <span>📄</span>
+                            <span>Source: Annual_Financial_Report.pdf</span>
+                          </div>
+                          <span className="px-2.5 py-0.5 rounded-full bg-[#D7FB8E] text-slate-950 text-[10px] font-black uppercase tracking-wider">
+                            12 Pages • 4.8 MB
+                          </span>
+                        </div>
+
+                        {/* Splitting Branches */}
+                        <div className="grid grid-cols-3 gap-2.5 pt-2">
+                          <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center shadow-2xs space-y-1.5">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase">Part 1</div>
+                            <div className="text-xs font-extrabold text-slate-900 dark:text-white">Pages 1–4</div>
+                            <div className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                              <span>✓</span> 1.2 MB
+                            </div>
+                          </div>
+
+                          <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center shadow-2xs space-y-1.5">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase">Part 2</div>
+                            <div className="text-xs font-extrabold text-slate-900 dark:text-white">Pages 5–8</div>
+                            <div className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                              <span>✓</span> 1.4 MB
+                            </div>
+                          </div>
+
+                          <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center shadow-2xs space-y-1.5">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase">Part 3</div>
+                            <div className="text-xs font-extrabold text-slate-900 dark:text-white">Pages 9–12</div>
+                            <div className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                              <span>✓</span> 1.6 MB
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Status bar */}
+                        <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-between text-xs font-medium text-emerald-800 dark:text-emerald-300">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Separation complete
+                          </span>
+                          <span className="font-mono font-bold text-[11px]">Execution: 0.38s</span>
+                        </div>
+                      </div>
+                    ) : idx === 1 ? (
+                      /* Visual 2: Security & Privacy Status Widget */
+                      <div className="space-y-3.5 relative z-10">
+                        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                            <span>🔒</span>
+                            <span>Sandbox Security Protocol</span>
+                          </div>
+                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-[10px] font-black uppercase tracking-wider">
+                            ACTIVE
+                          </span>
+                        </div>
+
+                        <div className="space-y-2">
+                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+                            <span className="text-slate-600 dark:text-slate-400 font-medium">In-Transit Encryption</span>
+                            <span className="font-mono font-bold text-slate-900 dark:text-white">TLS 1.3 / AES-256</span>
+                          </div>
+
+                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+                            <span className="text-slate-600 dark:text-slate-400 font-medium">Permanent Disk Storage</span>
+                            <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">0 MB (In-RAM Only)</span>
+                          </div>
+
+                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+                            <span className="text-slate-600 dark:text-slate-400 font-medium">Automatic Purge Timer</span>
+                            <span className="font-mono font-bold text-slate-900 dark:text-white">2h 00m Auto-Delete</span>
+                          </div>
+                        </div>
+
+                        <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-center text-xs font-semibold text-emerald-800 dark:text-emerald-300">
+                          🛡️ Verified GDPR &amp; ISO 27001 Data Confidentiality
+                        </div>
+                      </div>
+                    ) : (
+                      /* Visual 3: Universal Browser & Device Compatibility */
+                      <div className="space-y-3.5 relative z-10">
+                        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                            <span>💻</span>
+                            <span>Universal Compatibility</span>
+                          </div>
+                          <span className="px-2.5 py-0.5 rounded-full bg-[#D7FB8E] text-slate-950 text-[10px] font-black uppercase tracking-wider">
+                            WEBASSEMBLY
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
+                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200">
+                            <span className="text-emerald-500 font-bold">✓</span> macOS Safari &amp; Chrome
+                          </div>
+                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200">
+                            <span className="text-emerald-500 font-bold">✓</span> Windows 11 &amp; Edge
+                          </div>
+                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200">
+                            <span className="text-emerald-500 font-bold">✓</span> iOS &amp; iPadOS Safari
+                          </div>
+                          <div className="p-2.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-2 text-slate-800 dark:text-slate-200">
+                            <span className="text-emerald-500 font-bold">✓</span> Android Mobile Chrome
+                          </div>
+                        </div>
+
+                        <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-center text-xs font-medium text-slate-600 dark:text-slate-400">
+                          Zero RAM hogging • No installer • High-efficiency client execution
+                        </div>
+                      </div>
+                    )}
+
+                  </div>
+                </div>
+
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {/* 3. How-To Block */}
+      {/* 3. How-To Block (Sona-Harmonized Step Timeline) */}
       {howToSteps.length > 0 && (
-        <section className="py-16 px-4" id="how-to-steps">
+        <section className="py-20 px-4 font-sans bg-slate-50/60 dark:bg-slate-900/30 border-t border-slate-200/80 dark:border-slate-800/80" id="how-to-steps">
           <div className="container mx-auto max-w-5xl">
-            <div className="bg-emerald-50/50 dark:bg-emerald-950/20 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-12 border border-emerald-100 dark:border-emerald-900/30">
-              <div className="w-full md:w-1/3 flex justify-center">
-                 {/* Decorative CSS Art replacing broken images */}
-                 <div className="relative rounded-2xl shadow-lg aspect-square w-full max-w-sm overflow-hidden bg-gradient-to-tr from-emerald-600 to-teal-600 flex items-center justify-center p-8">
-                    <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
-                    <div className="relative z-10 w-full h-full bg-white/10 backdrop-blur-md rounded-xl border border-white/20 flex flex-col items-center justify-center p-6 space-y-6 shadow-2xl">
-                       <div className="flex gap-3">
-                         <div className="w-12 h-12 rounded-xl bg-white shadow-lg flex items-center justify-center text-emerald-600 font-black text-xl">1</div>
-                         <div className="w-12 h-12 rounded-xl bg-white/70 shadow flex items-center justify-center text-emerald-900 font-black text-xl">2</div>
-                         <div className="w-12 h-12 rounded-xl bg-white/40 shadow flex items-center justify-center text-emerald-100 font-black text-xl">3</div>
-                       </div>
-                       <div className="w-full space-y-3">
-                         <div className="w-3/4 h-3 bg-white/40 rounded-full mx-auto"></div>
-                         <div className="w-1/2 h-3 bg-white/20 rounded-full mx-auto"></div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-              <div className="w-full md:w-2/3">
-                <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">{howToTitle}</h2>
-                <ol className="space-y-4">
-                  {howToSteps.map((step, idx) => (
-                    <li key={idx} className="flex gap-4">
-                      <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold shrink-0 mt-1">
+            <div className="rounded-[2.5rem] p-8 md:p-14 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center gap-12">
+              
+              {/* Left Timeline Card */}
+              <div className="w-full md:w-2/5 flex justify-center">
+                <div className="w-full max-w-sm rounded-3xl bg-[#FAFAFA] dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-2xs">
+                  <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 pb-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <span>Workflow Steps</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">100% Free</span>
+                  </div>
+
+                  {howToSteps.map((_, idx) => (
+                    <div key={idx} className="flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 shadow-2xs">
+                      <div className="w-7 h-7 rounded-xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center font-black text-xs border border-black/10">
                         {idx + 1}
                       </div>
-                      <p className="text-slate-700 dark:text-slate-300 text-lg">{step}</p>
+                      <span className="truncate">Step {idx + 1}: {idx === 0 ? "Select & upload files" : idx === 1 ? "Configure preferences" : "Download output"}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Steps Text */}
+              <div className="w-full md:w-3/5">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-4">
+                  <span>◆ Step-by-Step Guide</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
+                  {howToTitle}
+                </h2>
+                <ol className="space-y-4">
+                  {howToSteps.map((step, idx) => (
+                    <li key={idx} className="flex items-start gap-4 p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800/80">
+                      <div className="w-8 h-8 rounded-xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center font-black text-sm shrink-0 border border-black/10 mt-0.5 shadow-2xs">
+                        {idx + 1}
+                      </div>
+                      <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed pt-0.5">{step}</p>
                     </li>
                   ))}
                 </ol>
               </div>
+
             </div>
           </div>
         </section>
@@ -372,17 +521,17 @@ export function ToolPageTemplate({
 
       {/* 4. Grid Features */}
       {gridFeatures.length > 0 && (
-        <section className="py-20 px-4 bg-white dark:bg-slate-950">
+        <section className="py-20 px-4 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800/80">
           <div className="container mx-auto max-w-5xl">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-16">{gridTitle}</h2>
-            <div className="grid md:grid-cols-3 gap-x-8 gap-y-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white text-center mb-16 tracking-tight">{gridTitle}</h2>
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
               {gridFeatures.map((feat, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-slate-50 dark:bg-slate-900 rounded-2xl shadow-sm text-blue-600 border border-slate-100 dark:border-slate-800">
+                <div key={i} className="p-6 rounded-3xl bg-[#FAFAFA] dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 text-center hover:border-emerald-400 dark:hover:border-emerald-600 transition-all duration-300">
+                  <div className="w-14 h-14 mx-auto mb-5 flex items-center justify-center bg-[#D7FB8E]/30 dark:bg-[#D7FB8E]/20 text-slate-950 dark:text-[#D7FB8E] rounded-2xl shadow-2xs border border-black/5 dark:border-white/5">
                     {feat.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{feat.title}</h3>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{feat.description}</p>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{feat.title}</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{feat.description}</p>
                 </div>
               ))}
             </div>
@@ -436,9 +585,9 @@ export function ToolPageTemplate({
                      </div>
                   </div>
                   <div className="border dark:border-slate-800 border-t-0 rounded-b-xl p-6 bg-white dark:bg-slate-900 group-hover:shadow-lg dark:group-hover:shadow-slate-800/50 transition-all h-full">
-                    <h3 className="font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">{tut.title}</h3>
+                    <h3 className="font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">{tut.title}</h3>
                     <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">{tut.description}</p>
-                    <span className="text-blue-600 dark:text-blue-400 font-semibold text-sm mt-4 inline-block">Read article →</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold text-sm mt-4 inline-block">Read article →</span>
                   </div>
                 </Link>
               ))}
