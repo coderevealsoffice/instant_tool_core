@@ -47,46 +47,52 @@ export function AiShortsScriptGeneratorCanvas() {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row h-[calc(100vh-64px)] w-full bg-slate-50 dark:bg-slate-900">
+    <div className="flex flex-col lg:flex-row min-h-[540px] w-full rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden">
       
       {/* Sidebar Controls */}
-      <div className="w-full lg:w-[350px] border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col overflow-y-auto shrink-0">
-        <div className="flex items-start gap-4 mb-8">
-          <div className="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
-            <Video className="w-6 h-6" />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">Shorts Script</h2>
-            <p className="text-sm text-slate-500">TikTok, Reels & Shorts</p>
-          </div>
-        </div>
-
-        <div className="space-y-6 flex-1">
-          <div>
-            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Video Topic or Idea</label>
-            <textarea 
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              placeholder="e.g., 3 psychological tricks to study faster..."
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none text-slate-700 dark:text-slate-300 resize-none h-32"
-            />
-            <p className="text-xs text-slate-500 mt-2">
-              Provide a clear idea. The AI will structure it into a 60s viral script.
-            </p>
+      <div className="w-full lg:w-[380px] border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 bg-[#FAFAFA] dark:bg-slate-950 p-6 sm:p-8 flex flex-col justify-between shrink-0">
+        <div>
+          <div className="flex items-center gap-3.5 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center shrink-0 border border-black/10 shadow-2xs">
+              <Video className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-0.5 tracking-tight">Shorts Script</h2>
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">TikTok, Reels & Shorts</p>
+            </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Select Tone</label>
-            <div className="grid grid-cols-2 gap-2">
-              {["Energetic", "Educational", "Storytelling", "Controversial"].map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setTone(t)}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${tone === t ? 'bg-purple-50 border-purple-200 text-purple-700 dark:bg-purple-900/20 dark:border-purple-800 dark:text-purple-400' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-900'}`}
-                >
-                  {t}
-                </button>
-              ))}
+          <div className="space-y-4">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Video Topic or Idea</label>
+              <textarea 
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                placeholder="e.g., 3 psychological tricks to study faster..."
+                className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none text-slate-900 dark:text-white resize-none h-32 text-sm font-medium transition-all"
+              />
+              <p className="text-xs text-slate-500 mt-2">
+                Provide a clear idea. The AI will structure it into a 60s viral script.
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Select Tone</label>
+              <div className="grid grid-cols-2 gap-2">
+                {["Energetic", "Educational", "Storytelling", "Controversial"].map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setTone(t)}
+                    className={`px-3 py-2 text-xs font-semibold rounded-xl border transition-all cursor-pointer ${
+                      tone === t 
+                        ? 'bg-[#D7FB8E] border-black/10 text-slate-950 shadow-2xs' 
+                        : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60'
+                    }`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -94,39 +100,40 @@ export function AiShortsScriptGeneratorCanvas() {
         <button
           onClick={handleGenerate}
           disabled={isGenerating || !topic.trim()}
-          className="mt-6 w-full bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-bold rounded-xl py-4 flex items-center justify-center transition-transform active:scale-[0.98] shadow-lg shadow-purple-500/20"
+          className="mt-6 w-full bg-[#D7FB8E] hover:bg-[#cbf777] disabled:opacity-50 text-slate-950 font-semibold text-sm sm:text-base rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all border border-black/10 shadow-sm hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
         >
-          {isGenerating ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <Zap className="w-5 h-5 mr-2" />}
-          {isGenerating ? 'Writing Script...' : 'Generate Script'}
+          {isGenerating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Zap className="w-5 h-5" />}
+          <span>{isGenerating ? 'Writing Script...' : 'Generate Script'}</span>
         </button>
       </div>
 
       {/* Main Area */}
-      <div className="flex-1 p-4 lg:p-6 flex flex-col min-h-0 overflow-hidden">
+      <div className="flex-1 p-4 sm:p-6 bg-white dark:bg-slate-900 flex flex-col min-h-[420px]">
         
         {/* Output Pane */}
-        <div className="flex-1 bg-white dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col overflow-hidden relative">
-          <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800/50 bg-slate-50/50 dark:bg-slate-900/20 flex justify-between items-center">
-            <span className="font-semibold text-purple-600 dark:text-purple-500 flex items-center">
-              <Sparkles className="w-4 h-4 mr-2" />
+        <div className="flex-1 bg-[#FAFAFA] dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs flex flex-col overflow-hidden relative">
+          <div className="px-5 py-3.5 border-b border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900/60 flex justify-between items-center">
+            <span className="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <Sparkles className="w-4 h-4 text-slate-600 dark:text-slate-400" />
               Generated Script (Hook + Body + CTA)
             </span>
             {script && (
               <button 
                 onClick={handleCopy}
-                className="flex items-center text-xs font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700"
+                className="flex items-center gap-1.5 text-xs font-semibold text-slate-950 bg-[#D7FB8E] hover:bg-[#cbf777] px-3.5 py-1.5 rounded-xl border border-black/10 transition-all shadow-2xs cursor-pointer"
               >
-                {isCopied ? <CheckCircle className="w-4 h-4 mr-1 text-green-500" /> : <Copy className="w-4 h-4 mr-1" />}
-                {isCopied ? 'Copied' : 'Copy Text'}
+                {isCopied ? <CheckCircle className="w-4 h-4 text-emerald-700" /> : <Copy className="w-4 h-4" />}
+                <span>{isCopied ? 'Copied!' : 'Copy Script'}</span>
               </button>
             )}
           </div>
           
           <div className="flex-1 relative p-6">
             {!script && !isGenerating && (
-              <div className="h-full flex flex-col items-center justify-center text-slate-400">
-                <Search className="w-12 h-12 mb-4 opacity-20" />
-                <p>Enter an idea to generate a viral script</p>
+              <div className="h-full flex flex-col items-center justify-center text-slate-400 py-12">
+                <Search className="w-12 h-12 mb-3 opacity-25" />
+                <p className="text-sm font-medium">Enter an idea to generate a viral short script</p>
               </div>
             )}
             
@@ -134,15 +141,15 @@ export function AiShortsScriptGeneratorCanvas() {
               <textarea
                 readOnly
                 value={script}
-                className="w-full h-full bg-transparent outline-none resize-none text-slate-700 dark:text-slate-300 text-base leading-relaxed whitespace-pre-wrap"
+                className="w-full h-full min-h-[260px] bg-transparent outline-none resize-none text-slate-800 dark:text-slate-200 text-sm sm:text-base leading-relaxed whitespace-pre-wrap font-sans"
               />
             )}
             
             {isGenerating && (
-              <div className="absolute inset-0 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center">
-                <div className="flex flex-col items-center text-purple-600">
-                  <Loader2 className="w-10 h-10 animate-spin mb-4" />
-                  <span className="font-medium text-lg text-slate-700 dark:text-slate-300">Writing a viral script...</span>
+              <div className="absolute inset-0 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xs flex items-center justify-center">
+                <div className="flex flex-col items-center text-slate-900 dark:text-white">
+                  <Loader2 className="w-10 h-10 animate-spin mb-3 text-emerald-500" />
+                  <span className="font-semibold text-base">Writing a viral script...</span>
                 </div>
               </div>
             )}

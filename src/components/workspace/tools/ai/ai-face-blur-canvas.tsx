@@ -131,7 +131,8 @@ export function AiFaceBlurCanvas() {
 
   if (!activeFile) {
     return (
-      <div className="flex flex-col items-center justify-center h-full text-slate-400 bg-white dark:bg-slate-900 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-8 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
+      <div 
+        className="flex flex-col items-center justify-center min-h-[440px] w-full text-slate-400 bg-[#FAFAFA] dark:bg-slate-950 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-[2rem] p-8 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all cursor-pointer"
         onClick={() => document.getElementById('face-blur-upload')?.click()}
       >
         <input 
@@ -144,33 +145,35 @@ export function AiFaceBlurCanvas() {
             if (file) useWorkspaceStore.getState().addFiles([file])
           }}
         />
-        <ScanFace className="w-16 h-16 mb-4 text-slate-300 dark:text-slate-600" />
-        <p className="text-lg font-semibold text-slate-600 dark:text-slate-300 mb-2">No image selected</p>
-        <p className="text-sm">Click here to upload an image to blur faces.</p>
+        <div className="w-14 h-14 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center mb-4 border border-black/10 shadow-sm">
+          <ScanFace className="w-7 h-7" />
+        </div>
+        <p className="text-base font-bold text-slate-800 dark:text-slate-200 mb-1">No image selected</p>
+        <p className="text-xs text-slate-500 font-medium">Click to select a photo to automatically detect and blur faces.</p>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col lg:flex-row h-[calc(100vh-64px)] w-full bg-slate-50 dark:bg-slate-900">
+    <div className="flex flex-col lg:flex-row min-h-[540px] w-full rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden">
       {/* Main Canvas Area */}
-      <div className="flex-1 p-4 lg:p-6 flex flex-col min-h-0">
-        <div className="flex-1 bg-black rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-center overflow-hidden shadow-inner relative">
+      <div className="flex-1 p-4 sm:p-6 flex flex-col min-h-[380px] bg-white dark:bg-slate-900">
+        <div className="flex-1 bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-center overflow-hidden shadow-2xs relative">
           
           <img ref={imageRef} alt="Original" className="hidden" />
           
           <div className="w-full h-full flex items-center justify-center p-4">
              <canvas 
                ref={canvasRef} 
-               className="max-w-full max-h-full object-contain drop-shadow-2xl"
+               className="max-w-full max-h-[460px] object-contain drop-shadow-md rounded-xl"
              />
           </div>
 
           {!modelsLoaded && (
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-10">
-              <div className="flex items-center gap-3 bg-white dark:bg-slate-900 px-6 py-3 rounded-full font-semibold shadow-xl">
-                 <Loader2 className="w-5 h-5 animate-spin text-blue-600" />
-                 <span>Loading AI Models...</span>
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-10">
+              <div className="flex items-center gap-3 bg-white dark:bg-slate-900 px-5 py-2.5 rounded-xl font-semibold text-xs border border-black/10 shadow-xl">
+                 <Loader2 className="w-4 h-4 animate-spin text-emerald-500" />
+                 <span>Loading Face Detection Model...</span>
               </div>
             </div>
           )}
@@ -178,27 +181,29 @@ export function AiFaceBlurCanvas() {
       </div>
 
       {/* Sidebar Controls */}
-      <div className="w-full lg:w-[400px] border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col overflow-y-auto">
-        <div className="flex items-start gap-4 mb-8">
-          <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-            <ScanFace className="w-6 h-6" />
+      <div className="w-full lg:w-[380px] border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-800 bg-[#FAFAFA] dark:bg-slate-950 p-6 sm:p-8 flex flex-col justify-between shrink-0">
+        <div>
+          <div className="flex items-center gap-3.5 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center shrink-0 border border-black/10 shadow-2xs">
+              <ScanFace className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-0.5 tracking-tight">Face Blur</h2>
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Privacy & Anonymization</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">Face Blur</h2>
-            <p className="text-sm text-slate-500">Automatically detect and blur faces for privacy.</p>
+
+          <div className="bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 p-4 rounded-xl text-xs font-medium border border-slate-200/80 dark:border-slate-800 mb-6 shadow-2xs leading-relaxed">
+            Runs client-side in your browser using TensorFlow TinyFace. Your photos never leave your device, ensuring zero data retention and complete privacy.
           </div>
         </div>
 
-        <div className="bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 p-4 rounded-xl text-sm font-medium border border-blue-200 dark:border-blue-800/30 mb-8">
-          This tool runs entirely on your device. Your photos are never uploaded to any server, guaranteeing 100% privacy.
-        </div>
-
-        <div className="mt-auto pt-6 space-y-4">
+        <div className="mt-6 pt-4 space-y-3">
           {!isDone ? (
              <button
                 onClick={handleProcess}
                 disabled={isProcessing || !modelsLoaded}
-                className="w-full h-14 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 text-white font-bold rounded-xl flex items-center justify-center space-x-2 transition-all shadow-lg active:scale-[0.98]"
+                className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] disabled:opacity-50 text-slate-950 font-semibold text-sm sm:text-base rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all border border-black/10 shadow-sm hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
                 {isProcessing ? (
                   <>
@@ -215,7 +220,7 @@ export function AiFaceBlurCanvas() {
           ) : (
              <button
                 onClick={handleDownload}
-                className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl flex items-center justify-center space-x-2 transition-all shadow-lg hover:shadow-emerald-600/20 active:scale-[0.98]"
+                className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-sm sm:text-base rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all border border-black/10 shadow-sm hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 <span>Download Result</span>

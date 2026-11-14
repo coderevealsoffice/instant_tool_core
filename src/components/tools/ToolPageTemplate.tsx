@@ -70,375 +70,244 @@ export interface ToolMockupData {
 }
 
 export function getToolMockupData(slug: string, title: string, category: string): ToolMockupData {
-  const s = slug.toLowerCase()
-  const t = title.toLowerCase()
-  const isPdf = category === "pdf-tools" || t.includes("pdf")
-  const isVideo = category === "video-tools" || t.includes("video")
-  const isAudio = category === "audio-tools" || t.includes("audio")
-  const isImage = category === "image-tools" || t.includes("image") || t.includes("heic") || t.includes("jpg") || t.includes("png")
-  const isSeo = category === "seo-tools" || category === "ai-tools" || t.includes("plagiarism") || t.includes("aeo") || t.includes("geo") || t.includes("seo") || t.includes("density")
+  const cat = (category || "").toLowerCase()
+  const s = (slug || "").toLowerCase()
+  const t = (title || "").toLowerCase()
 
-  // 1. UNLOCK PDF
-  if (s.includes("unlock") || t.includes("unlock")) {
-    return {
-      feat1: {
-        sourceIcon: "🔒",
-        sourceName: "Source: Protected_Document.pdf",
-        badgeText: "PASSWORD PROTECTED • 3.2 MB",
-        cols: [
-          { tag: "SECURITY", label: "AES-256 Lock", status: "🔒 Key Required", statusColor: "text-amber-600 dark:text-amber-400" },
-          { tag: "DECRYPTION", label: "In-RAM Engine", status: "⚡ Verified 0.08s", statusColor: "text-sky-600 dark:text-sky-400" },
-          { tag: "OUTPUT", label: "Unlocked_Document.pdf", status: "✓ Full Access Granted", statusColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        statusBarText: "Password restrictions removed (Print, Edit & Copy Enabled)",
-        statusExecution: "Execution: 0.18s",
-        checkmarks: [
-          "Instant removal of owner and user passwords with 100% layout fidelity",
-          "Client-side in-RAM decryption: your passwords are never saved or stored"
-        ]
-      },
-      feat2: {
-        protocolTitle: "Zero-Knowledge Decryption Protocol",
-        badgeText: "ACTIVE",
-        rows: [
-          { label: "Password Storage", value: "0 ms (Never Cached or Logged)", valueColor: "text-emerald-600 dark:text-emerald-400" },
-          { label: "Decryption Cipher", value: "Client-Side AES-256 / RC4", valueColor: "text-slate-900 dark:text-white" },
-          { label: "Cloud Server Retention", value: "0 MB (Processed in Client RAM)", valueColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        footerText: "🛡️ Verified Zero-Knowledge Client-Side Decryption",
-        checkmarks: [
-          "Passwords are decrypted locally in your browser and never sent to servers",
-          "Instant cryptographic purge immediately upon session completion"
-        ]
-      },
-      feat3: {
-        title: "Universal Unlock PDF on Any Device",
-        badgeText: "WEBASSEMBLY",
-        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
-        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
-        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+  // ==========================================
+  // 1. VIDEO TOOLS (video-tools) - NEVER SHOW PDF!
+  // ==========================================
+  if (cat === "video-tools" || (!cat.includes("pdf") && !cat.includes("audio") && t.includes("video"))) {
+    // 1A. Video Downloaders
+    if (s.includes("downloader") || t.includes("downloader")) {
+      return {
+        feat1: {
+          sourceIcon: "🎬",
+          sourceName: "Source: 4K_HDR_Video_Stream.mp4",
+          badgeText: "MAX BITRATE • AVAILABLE",
+          cols: [
+            { tag: "4K ULTRA HD", label: "2160p @ 60fps", status: "✓ HDR MP4 Stream", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "FULL HD", label: "1080p @ 60fps", status: "✓ Universal Playback", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "AUDIO MASTER", label: "MP3 @ 320kbps", status: "✓ Lossless Stereo", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "High-speed video stream extracted & ready for download",
+          statusExecution: "Latency: 14ms",
+          checkmarks: [
+            "Download crystal-clear 4K, 1080p, and 60fps videos without re-encoding quality loss",
+            "Unlimited daily downloads with zero watermarks, ads, or account requirements"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Direct Anonymous Stream Gateway",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "User Identification", value: "100% Anonymous (No Logins)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Download Pipeline", value: "Official High-Speed CDN Tunnel", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Rate Limiting", value: "Uncapped Multi-Thread Buffer", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ 100% Anonymous & Secure Media Streaming",
+          checkmarks: [
+            "We never record your IP, download history, or personal browsing data",
+            "Zero adware, bloatware, or tracking cookies: direct stream delivery only"
+          ]
+        },
+        feat3: {
+          title: `Universal ${title} on Any Device`,
+          badgeText: "MULTI-PLATFORM",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
       }
     }
-  }
 
-  // 2. PROTECT PDF
-  if (s.includes("protect") || t.includes("protect")) {
-    return {
-      feat1: {
-        sourceIcon: "📄",
-        sourceName: "Source: Confidential_Agreement.pdf",
-        badgeText: "UNRESTRICTED • 2.6 MB",
-        cols: [
-          { tag: "INPUT", label: "Plain Document", status: "🔓 Unprotected", statusColor: "text-amber-600 dark:text-amber-400" },
-          { tag: "CIPHER", label: "AES-256 Encryption", status: "🛡️ Salted SHA-256", statusColor: "text-sky-600 dark:text-sky-400" },
-          { tag: "TARGET", label: "Protected_Agreement.pdf", status: "✓ Password Locked", statusColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        statusBarText: "Military-grade AES-256 encryption applied",
-        statusExecution: "Execution: 0.22s",
-        checkmarks: [
-          "Bank-grade AES-256 encryption restricts unauthorized reading, printing, and copying",
-          "Compatible with all standard PDF readers (Adobe Acrobat, Apple Preview, Chrome)"
-        ]
-      },
-      feat2: {
-        protocolTitle: "Cryptographic Armor Protocol",
-        badgeText: "ACTIVE",
-        rows: [
-          { label: "Encryption Standard", value: "AES-256-CBC / SHA-256", valueColor: "text-slate-900 dark:text-white" },
-          { label: "Access Permissions", value: "Print, Copy & Edit Locked", valueColor: "text-emerald-600 dark:text-emerald-400" },
-          { label: "Key Custody", value: "Zero-Knowledge (User Only)", valueColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        footerText: "🛡️ Bank-Grade AES-256 Document Confidentiality",
-        checkmarks: [
-          "Strict zero-knowledge architecture: only you possess the unlocking credentials",
-          "End-to-end client cryptographic generation with zero external exposure"
-        ]
-      },
-      feat3: {
-        title: "Universal Protect PDF on Any Device",
-        badgeText: "WEBASSEMBLY",
-        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
-        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
-        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+    // 1B. Add Audio to Video
+    if (s.includes("add-audio") || (t.includes("add") && t.includes("audio"))) {
+      return {
+        feat1: {
+          sourceIcon: "🎬",
+          sourceName: "Source: Project_Footage_1080p.mp4",
+          badgeText: "AV-MUX • 42 MB",
+          cols: [
+            { tag: "VIDEO TRACK", label: "1080p 60fps Video", status: "✓ H.264 Stream Kept", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "AUDIO TRACK", label: "Soundtrack.mp3", status: "⚡ 320kbps Aligned", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "MUXED OUTPUT", label: "Rendered_Video.mp4", status: "✓ Perfect Sync", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "Audio track muxed and synchronized losslessly",
+          statusExecution: "Bitrate: 18 Mbps",
+          checkmarks: [
+            "Add, replace, or overlay audio tracks with zero video compression loss",
+            "Synchronize audio and video streams with millisecond frame accuracy"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Hardware-Accelerated AV Muxing Sandbox",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Video Re-encoding", value: "Zero Loss (Direct Stream Copy)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Processing Environment", value: "Client WebCodecs / Local GPU", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Cloud Server Storage", value: "0 MB (Local In-Memory Muxing)", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ 100% Private On-Device Video Processing",
+          checkmarks: [
+            "Video and audio streams are processed in local GPU memory with zero cloud uploads",
+            "Immediate memory purge upon file export with 100% privacy guarantee"
+          ]
+        },
+        feat3: {
+          title: "Universal Video & Audio Muxer on Any Device",
+          badgeText: "WEBCODECS",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
       }
     }
-  }
 
-  // 3. MERGE PDF
-  if (s.includes("merge") || t.includes("merge")) {
-    return {
-      feat1: {
-        sourceIcon: "📑",
-        sourceName: "Source: 3 Documents Selected",
-        badgeText: "9 TOTAL PAGES • 5.8 MB",
-        cols: [
-          { tag: "DOC 1", label: "Sales_Q1.pdf", status: "✓ 4 Pages", statusColor: "text-emerald-600 dark:text-emerald-400" },
-          { tag: "DOC 2", label: "Sales_Q2.pdf", status: "✓ 3 Pages", statusColor: "text-emerald-600 dark:text-emerald-400" },
-          { tag: "DOC 3", label: "Summary.pdf", status: "✓ 2 Pages", statusColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        statusBarText: "3 Documents fused into Unified_Report.pdf",
-        statusExecution: "Execution: 0.42s",
-        checkmarks: [
-          "Combine multiple PDF files into one continuous, structured document",
-          "Drag to reorder pages and preserve bookmarks, outlines, and hyperlinks"
-        ]
-      },
-      feat2: {
-        protocolTitle: "Document Fusion Security Protocol",
-        badgeText: "ACTIVE",
-        rows: [
-          { label: "Sequence Integrity", value: "Exact Page Order Verified", valueColor: "text-slate-900 dark:text-white" },
-          { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
-          { label: "Server Retention", value: "0 MB (Purged Upon Download)", valueColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        footerText: "🛡️ Zero-Retention Document Fusion Guarantee",
-        checkmarks: [
-          "All source documents and merged outputs are permanently wiped after download",
-          "Zero metadata or proprietary content leakage across combined files"
-        ]
-      },
-      feat3: {
-        title: "Universal Merge PDF on Any Device",
-        badgeText: "WEBASSEMBLY",
-        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
-        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
-        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+    // 1C. Add Text or Image / Watermark to Video
+    if (s.includes("add-text") || s.includes("add-image") || t.includes("watermark") || t.includes("logo")) {
+      return {
+        feat1: {
+          sourceIcon: "🎬",
+          sourceName: "Source: Master_Video_Edit.mp4",
+          badgeText: "OVERLAY • 58 MB",
+          cols: [
+            { tag: "SOURCE VIDEO", label: "1080p 60fps", status: "✓ Frame Sync Active", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "OVERLAY LAYER", label: "Graphic / Typography", status: "⚡ Alpha Transparency", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "COMPOSITE", label: "Exported_Video.mp4", status: "✓ Anti-Aliased", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "Video overlay composite rendered successfully",
+          statusExecution: "Execution: 0.34s",
+          checkmarks: [
+            "Overlay logos, watermarks, and custom text with pixel-precise position and timing",
+            "Hardware-accelerated compositing maintains pristine video color and frame rates"
+          ]
+        },
+        feat2: {
+          protocolTitle: "GPU-Accelerated Video Composition Pipeline",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Alpha Blending", value: "Hardware-Accelerated GPU Shaders", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Cloud Storage", value: "0 MB (Never Uploaded to Cloud)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Color Accuracy", value: "Rec.709 sRGB Preserved", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ Private On-Device Video Rendering",
+          checkmarks: [
+            "Your video assets never leave your computer: all blending runs in browser GPU",
+            "Zero watermarks or compression artifacts added to your final video"
+          ]
+        },
+        feat3: {
+          title: `Universal ${title} on Any Device`,
+          badgeText: "GPU SHADERS",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
       }
     }
-  }
 
-  // 4. COMPRESS (PDF / Image / Video)
-  if (s.includes("compress") || t.includes("compress")) {
-    const isHeavyDoc = isPdf
-    return {
-      feat1: {
-        sourceIcon: "🗜️",
-        sourceName: isHeavyDoc ? "Source: Presentation_Deck.pdf" : isVideo ? "Source: 4K_Footage.mp4" : "Source: High_Res_Asset.png",
-        badgeText: "ORIGINAL: 28.4 MB",
-        cols: [
-          { tag: "BEFORE", label: "Original Asset", status: "28.4 MB (Heavy)", statusColor: "text-amber-600 dark:text-amber-400" },
-          { tag: "OPTIMIZATION", label: "Vector & Stream Cleaned", status: "⚡ Lossless DPI Preserved", statusColor: "text-sky-600 dark:text-sky-400" },
-          { tag: "AFTER", label: "Compressed_File", status: "✓ 2.3 MB (-92%)", statusColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        statusBarText: "Size reduced by 92% • Saved 26.1 MB",
-        statusExecution: "Execution: 0.28s",
-        checkmarks: [
-          "Shrink file size up to 90% without compromising visual clarity or typography",
-          "Optimized for email attachments, web uploads, and lightning-fast sharing"
-        ]
-      },
-      feat2: {
-        protocolTitle: "Lossless Compression Sandbox",
-        badgeText: "ACTIVE",
-        rows: [
-          { label: "Visual Integrity", value: "300 DPI Sharpness Retained", valueColor: "text-slate-900 dark:text-white" },
-          { label: "Metadata Stripping", value: "EXIF & Tracking Tags Removed", valueColor: "text-emerald-600 dark:text-emerald-400" },
-          { label: "Cloud Purge Timer", value: "Auto-Purged on Download", valueColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        footerText: "🛡️ Lossless Security & Data Protection Guarantee",
-        checkmarks: [
-          "Files are processed in an isolated in-memory container and wiped immediately",
-          "Preserves font embeddings and high-resolution assets losslessly"
-        ]
-      },
-      feat3: {
-        title: `Universal ${title} on Any Device`,
-        badgeText: "WEBASSEMBLY",
-        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
-        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
-        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+    // 1D. Merge Videos
+    if (s.includes("merge") || t.includes("merge")) {
+      return {
+        feat1: {
+          sourceIcon: "🎬",
+          sourceName: "Source: 3 Video Clips Selected",
+          badgeText: "COMBINED • 142 MB",
+          cols: [
+            { tag: "CLIP 1", label: "Intro_Scene.mp4", status: "✓ 00:15 (1080p)", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "CLIP 2", label: "Main_Content.mp4", status: "✓ 02:40 (1080p)", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "CLIP 3", label: "Outro.mp4", status: "✓ 00:20 (1080p)", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "3 Video clips concatenated into single stream",
+          statusExecution: "Execution: 0.52s",
+          checkmarks: [
+            "Join multiple video clips into one continuous video without re-encoding quality loss",
+            "Rearrange video order with simple drag-and-drop and instant playback preview"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Seamless Video Concatenation Engine",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Codec Normalization", value: "Auto-Aligned Framerate & Aspect", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Storage Footprint", value: "0 MB (Rendered Locally in Browser)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Audio-Video Drift", value: "0ms Lip-Sync Maintained", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ Lossless Concatenation & Data Privacy",
+          checkmarks: [
+            "All clips are processed in local browser memory and merged seamlessly",
+            "Zero cloud uploads: your personal and business videos remain completely private"
+          ]
+        },
+        feat3: {
+          title: "Universal Video Merger on Any Device",
+          badgeText: "MULTI-FORMAT",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
       }
     }
-  }
 
-  // 5. SPLIT PDF
-  if (s.includes("split") || t.includes("split")) {
-    return {
-      feat1: {
-        sourceIcon: "📄",
-        sourceName: "Source: Annual_Financial_Report.pdf",
-        badgeText: "12 PAGES • 4.8 MB",
-        cols: [
-          { tag: "PART 1", label: "Pages 1–4", status: "✓ 1.2 MB", statusColor: "text-emerald-600 dark:text-emerald-400" },
-          { tag: "PART 2", label: "Pages 5–8", status: "✓ 1.4 MB", statusColor: "text-emerald-600 dark:text-emerald-400" },
-          { tag: "PART 3", label: "Pages 9–12", status: "✓ 1.6 MB", statusColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        statusBarText: "Document separation complete",
-        statusExecution: "Execution: 0.38s",
-        checkmarks: [
-          "Extract individual pages or custom ranges with lossless visual fidelity",
-          "Preserves fonts, vector drawings, annotations, and form fields intact"
-        ]
-      },
-      feat2: {
-        protocolTitle: "Document Segmentation Sandbox",
-        badgeText: "ACTIVE",
-        rows: [
-          { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
-          { label: "Permanent Disk Storage", value: "0 MB (In-RAM Only)", valueColor: "text-emerald-600 dark:text-emerald-400" },
-          { label: "Automatic Purge Timer", value: "2h 00m Auto-Delete", valueColor: "text-slate-900 dark:text-white" }
-        ],
-        footerText: "🛡️ Verified GDPR & ISO 27001 Data Confidentiality",
-        checkmarks: [
-          "Zero cloud retention: files auto-purged from server memory after processing",
-          "Bank-grade 256-bit TLS client-side encryption standard on all document operations"
-        ]
-      },
-      feat3: {
-        title: "Universal Split PDF on Any Device",
-        badgeText: "WEBASSEMBLY",
-        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
-        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
-        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+    // 1E. Extract Audio from Video
+    if (s.includes("extract-audio") || (t.includes("extract") && t.includes("audio"))) {
+      return {
+        feat1: {
+          sourceIcon: "🎵",
+          sourceName: "Source: Video_Interview.mp4",
+          badgeText: "AUDIO DEMUX • 65 MB",
+          cols: [
+            { tag: "INPUT VIDEO", label: "1080p Video File", status: "✓ AAC / MP3 Stream", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "DEMUX ENGINE", label: "Direct Stream Extract", status: "⚡ No Re-encoding", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "OUTPUT AUDIO", label: "Extracted_Sound.mp3", status: "✓ 320kbps Lossless", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "High-fidelity audio stream extracted from video",
+          statusExecution: "Execution: 0.12s",
+          checkmarks: [
+            "Extract crystal-clear MP3, WAV, or AAC audio tracks from any video format",
+            "Lossless extraction preserves full dynamic range without re-compression"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Direct Stream Demuxing Engine",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Re-encoding Loss", value: "Zero Loss (Direct Stream Copy)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Cloud Retention", value: "0 MB (Extracted in Client RAM)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Audio Channels", value: "Stereo 48kHz Preserved", valueColor: "text-slate-900 dark:text-white" }
+          ],
+          footerText: "🛡️ 100% Private Media Demuxing",
+          checkmarks: [
+            "Extract audio tracks in milliseconds directly on your device",
+            "Zero logs, zero cloud storage: extracted audio is downloaded directly"
+          ]
+        },
+        feat3: {
+          title: "Universal Audio Extractor on Any Device",
+          badgeText: "WASM DEMUXER",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
       }
     }
-  }
 
-  // 6. SIGN PDF
-  if (s.includes("sign") || t.includes("sign")) {
-    return {
-      feat1: {
-        sourceIcon: "✍️",
-        sourceName: "Source: Executive_NDA_Agreement.pdf",
-        badgeText: "4 PAGES • 1.9 MB",
-        cols: [
-          { tag: "SIGNATURE", label: "Vector Signature", status: "✓ Anti-Aliased", statusColor: "text-emerald-600 dark:text-emerald-400" },
-          { tag: "STAMP", label: "Position Placed", status: "✓ Verified Coordinates", statusColor: "text-sky-600 dark:text-sky-400" },
-          { tag: "OUTPUT", label: "Signed_NDA.pdf", status: "✓ Legally Binding", statusColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        statusBarText: "Digital signature embedded into PDF streams",
-        statusExecution: "Execution: 0.15s",
-        checkmarks: [
-          "Place smooth digital signatures, dates, and custom text stamps with pixel precision",
-          "Export legally binding documents compliant with eIDAS and ESIGN standards"
-        ]
-      },
-      feat2: {
-        protocolTitle: "Digital Signature Security Engine",
-        badgeText: "ACTIVE",
-        rows: [
-          { label: "Audit Checksum", value: "SHA-256 Hash Verified", valueColor: "text-slate-900 dark:text-white" },
-          { label: "Signature Privacy", value: "Rendered Locally in Browser", valueColor: "text-emerald-600 dark:text-emerald-400" },
-          { label: "Tamper Protection", value: "Standard ISO Flattening", valueColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        footerText: "🛡️ eIDAS & ESIGN Compliant Browser Security",
-        checkmarks: [
-          "Signatures are created and rendered entirely on your device for absolute privacy",
-          "Zero document storage: signed PDFs are encrypted in RAM and wiped on export"
-        ]
-      },
-      feat3: {
-        title: "Universal Sign PDF on Any Device",
-        badgeText: "WEBASSEMBLY",
-        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
-        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
-        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
-      }
-    }
-  }
-
-  // 7. CONVERTERS (PDF to Word/Excel, Word to PDF, etc.)
-  if (s.includes("to-") || t.includes("to ")) {
-    return {
-      feat1: {
-        sourceIcon: "🔄",
-        sourceName: "Source: Document_Report.pdf",
-        badgeText: "OCR & VECTOR • 3.8 MB",
-        cols: [
-          { tag: "INPUT", label: "PDF Streams", status: "Vector & Text Maps", statusColor: "text-amber-600 dark:text-amber-400" },
-          { tag: "PARSING", label: "Layout Reconstruction", status: "⚡ Tables & Columns Kept", statusColor: "text-sky-600 dark:text-sky-400" },
-          { tag: "OUTPUT", label: "Target Document", status: "✓ 100% Editable", statusColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        statusBarText: "Document conversion complete with zero layout drift",
-        statusExecution: "Execution: 0.45s",
-        checkmarks: [
-          "Preserves precise fonts, margins, tables, and images with zero drift",
-          "High-speed client and cloud rendering for instant editable downloads"
-        ]
-      },
-      feat2: {
-        protocolTitle: "Format Conversion Sandbox",
-        badgeText: "ACTIVE",
-        rows: [
-          { label: "Font & Style Mapping", value: "TrueType / OpenType Retained", valueColor: "text-slate-900 dark:text-white" },
-          { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
-          { label: "Server Retention", value: "0 MB (Purged Upon Download)", valueColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        footerText: "🛡️ Confidential Enterprise Document Conversion",
-        checkmarks: [
-          "Proprietary fonts and embedded assets remain completely private and unaltered",
-          "Automatic server memory flush immediately after file conversion completes"
-        ]
-      },
-      feat3: {
-        title: `Universal ${title} on Any Device`,
-        badgeText: "WEBASSEMBLY",
-        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
-        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
-        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
-      }
-    }
-  }
-
-  // 8. VIDEO DOWNLOADERS (YouTube, Instagram, etc.)
-  if (s.includes("downloader") || t.includes("downloader")) {
-    return {
-      feat1: {
-        sourceIcon: "🎬",
-        sourceName: "Source: 4K HDR Video Stream",
-        badgeText: "MAX BITRATE • AVAILABLE",
-        cols: [
-          { tag: "4K ULTRA HD", label: "2160p @ 60fps", status: "✓ HDR MP4 Stream", statusColor: "text-emerald-600 dark:text-emerald-400" },
-          { tag: "FULL HD", label: "1080p @ 60fps", status: "✓ Universal Playback", statusColor: "text-sky-600 dark:text-sky-400" },
-          { tag: "AUDIO MASTER", label: "MP3 @ 320kbps", status: "✓ Lossless Stereo", statusColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        statusBarText: "High-speed video stream extracted & ready",
-        statusExecution: "Latency: 14ms",
-        checkmarks: [
-          "Download crystal-clear 4K, 1080p, and 60fps videos without re-encoding quality loss",
-          "Unlimited daily downloads with zero watermarks, ads, or account requirements"
-        ]
-      },
-      feat2: {
-        protocolTitle: "Direct Anonymous Stream Gateway",
-        badgeText: "ACTIVE",
-        rows: [
-          { label: "User Identification", value: "100% Anonymous (No Logins)", valueColor: "text-emerald-600 dark:text-emerald-400" },
-          { label: "Download Pipeline", value: "Official High-Speed CDN Tunnel", valueColor: "text-slate-900 dark:text-white" },
-          { label: "Rate Limiting", value: "Uncapped Multi-Thread Buffer", valueColor: "text-emerald-600 dark:text-emerald-400" }
-        ],
-        footerText: "🛡️ 100% Anonymous & Secure Media Streaming",
-        checkmarks: [
-          "We never record your IP, download history, or personal browsing data",
-          "Zero adware, bloatware, or tracking cookies: direct stream delivery only"
-        ]
-      },
-      feat3: {
-        title: `Universal ${title} on Any Device`,
-        badgeText: "MULTI-PLATFORM",
-        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
-        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
-        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
-      }
-    }
-  }
-
-  // 9. VIDEO TOOLS
-  if (isVideo) {
+    // 1F. All Other Video Tools (trim, crop, rotate, flip, change-speed, editor, loop, volume, stabilize, etc.)
     return {
       feat1: {
         sourceIcon: "🎥",
         sourceName: "Source: Raw_Footage_4K.mp4",
         badgeText: "60 FPS • 420 MB",
         cols: [
-          { tag: "TIMELINE", label: "Frame-Accurate Cut", status: "✓ Keyframe Aligned", statusColor: "text-emerald-600 dark:text-emerald-400" },
-          { tag: "CODEC", label: "H.264 / AAC", status: "⚡ GPU Accelerated", statusColor: "text-sky-600 dark:text-sky-400" },
-          { tag: "EXPORT", label: "Rendered.mp4", status: "✓ Pristine Color Gamut", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          { tag: "TIMELINE", label: "Keyframe Selection", status: "✓ Frame Accurate", statusColor: "text-emerald-600 dark:text-emerald-400" },
+          { tag: "CODEC", label: "Hardware WebCodecs", status: "⚡ GPU Accelerated", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "EXPORT", label: "Processed_Video.mp4", status: "✓ Pristine Color", statusColor: "text-emerald-600 dark:text-emerald-400" }
         ],
         statusBarText: "Hardware-accelerated video rendering complete",
-        statusExecution: "Bitrate: 22 Mbps",
+        statusExecution: "Bitrate: 24 Mbps",
         checkmarks: [
-          "Frame-accurate trimming and editing with zero re-encoding generational loss",
+          "Frame-accurate editing with zero re-encoding generational loss",
           "Hardware-accelerated rendering in your browser using modern WebCodecs APIs"
         ]
       },
@@ -466,8 +335,97 @@ export function getToolMockupData(slug: string, title: string, category: string)
     }
   }
 
-  // 10. AUDIO TOOLS
-  if (isAudio) {
+  // ==========================================
+  // 2. AUDIO TOOLS (audio-tools) - NEVER SHOW PDF!
+  // ==========================================
+  if (cat === "audio-tools" || (!cat.includes("pdf") && !cat.includes("video") && t.includes("audio"))) {
+    // 2A. Audio Enhancer
+    if (s.includes("enhanc") || t.includes("enhanc")) {
+      return {
+        feat1: {
+          sourceIcon: "🎙️",
+          sourceName: "Source: Vocal_Recording_Draft.wav",
+          badgeText: "AI NOISE REMOVAL • 38 MB",
+          cols: [
+            { tag: "SPECTRAL CLEAN", label: "De-Noise & De-Reverb", status: "✓ -28dB Room Echo", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "CLARITY DSP", label: "Vocal Presence EQ", status: "⚡ Crisp Harmonic Boost", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "MASTER EXPORT", label: "Enhanced_Master.mp3", status: "✓ Studio Quality", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "Background hiss and room reverb eliminated losslessly",
+          statusExecution: "THD: 0.0001%",
+          checkmarks: [
+            "Remove background noise, hums, and room reverberation with neural speech clarity",
+            "Studio-grade output optimized for podcasts, voiceovers, and musical vocals"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Studio DSP Speech Isolation Sandbox",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Processing Engine", value: "Client Web Audio API / Local DSP", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Cloud Upload", value: "0 MB (Runs Locally in Browser)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Dynamic Range", value: "Full 24-bit Depth Preserved", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ Studio Master Quality & Complete Audio Privacy",
+          checkmarks: [
+            "Your audio never leaves your machine: all DSP occurs in local client memory",
+            "Lightning-fast real-time waveform visualization and zero upload delays"
+          ]
+        },
+        feat3: {
+          title: "Universal Audio Enhancer on Any Device",
+          badgeText: "WEB AUDIO DSP",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
+      }
+    }
+
+    // 2B. Trim Audio
+    if (s.includes("trim") || t.includes("trim")) {
+      return {
+        feat1: {
+          sourceIcon: "✂️",
+          sourceName: "Source: Song_Track_Master.mp3",
+          badgeText: "320KBPS • 9.4 MB",
+          cols: [
+            { tag: "START POINT", label: "00:14.20", status: "✓ Snap to Zero-Crossing", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "END POINT", label: "02:45.00", status: "✓ Clean Fade-Out Added", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "OUTPUT FILE", label: "Trimmed_Audio.mp3", status: "✓ Lossless Cut", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "Sample-accurate audio cut complete",
+          statusExecution: "Latency: 4ms",
+          checkmarks: [
+            "Cut, trim, and split audio tracks with sample-accurate waveform precision",
+            "Apply smooth fade-in and fade-out envelopes to prevent clipping clicks"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Sample-Accurate Web Audio Sandbox",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Cut Precision", value: "Zero-Crossing Sample Level", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Cloud Storage", value: "0 MB (Memory Buffer Only)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Bitrate Retention", value: "Original 320kbps Lossless", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ 100% Private In-Browser Audio Editing",
+          checkmarks: [
+            "Audio cuts happen directly on your machine in real time with zero latency",
+            "Zero cloud uploads: your original audio file stays 100% private"
+          ]
+        },
+        feat3: {
+          title: "Universal Audio Trimmer on Any Device",
+          badgeText: "WEB AUDIO API",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
+      }
+    }
+
+    // 2C. All Other Audio Tools (volume, speed, pitch, equalizer, joiner, reverse, etc.)
     return {
       feat1: {
         sourceIcon: "🎵",
@@ -509,8 +467,10 @@ export function getToolMockupData(slug: string, title: string, category: string)
     }
   }
 
-  // 11. IMAGE TOOLS
-  if (isImage) {
+  // ==========================================
+  // 3. IMAGE TOOLS (image-tools) - NEVER SHOW PDF!
+  // ==========================================
+  if (cat === "image-tools" || (!cat.includes("pdf") && (t.includes("image") || t.includes("heic") || t.includes("photo")))) {
     return {
       feat1: {
         sourceIcon: "🖼️",
@@ -552,8 +512,10 @@ export function getToolMockupData(slug: string, title: string, category: string)
     }
   }
 
-  // 12. SEO & AI TOOLS
-  if (isSeo) {
+  // ==========================================
+  // 4. SEO & AI TOOLS (seo-tools, ai-tools)
+  // ==========================================
+  if (cat === "seo-tools" || cat === "ai-tools" || t.includes("seo") || t.includes("aeo") || t.includes("geo") || t.includes("plagiarism")) {
     return {
       feat1: {
         sourceIcon: "🔍",
@@ -595,11 +557,317 @@ export function getToolMockupData(slug: string, title: string, category: string)
     }
   }
 
-  // 13. DEFAULT FALLBACK
+  // ==========================================
+  // 5. PDF TOOLS (pdf-tools) - ONLY when category is pdf-tools or title explicitly mentions PDF
+  // ==========================================
+  if (cat === "pdf-tools" || t.includes("pdf")) {
+    // 5A. Unlock PDF
+    if (s.includes("unlock") || t.includes("unlock")) {
+      return {
+        feat1: {
+          sourceIcon: "🔒",
+          sourceName: "Source: Protected_Document.pdf",
+          badgeText: "PASSWORD PROTECTED • 3.2 MB",
+          cols: [
+            { tag: "SECURITY", label: "AES-256 Lock", status: "🔒 Key Required", statusColor: "text-amber-600 dark:text-amber-400" },
+            { tag: "DECRYPTION", label: "In-RAM Engine", status: "⚡ Verified 0.08s", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "OUTPUT", label: "Unlocked_Document.pdf", status: "✓ Full Access Granted", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "Password restrictions removed (Print, Edit & Copy Enabled)",
+          statusExecution: "Execution: 0.18s",
+          checkmarks: [
+            "Instant removal of owner and user passwords with 100% layout fidelity",
+            "Client-side in-RAM decryption: your passwords are never saved or stored"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Zero-Knowledge Decryption Protocol",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Password Storage", value: "0 ms (Never Cached or Logged)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Decryption Cipher", value: "Client-Side AES-256 / RC4", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Cloud Server Retention", value: "0 MB (Processed in Client RAM)", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ Verified Zero-Knowledge Client-Side Decryption",
+          checkmarks: [
+            "Passwords are decrypted locally in your browser and never sent to servers",
+            "Instant cryptographic purge immediately upon session completion"
+          ]
+        },
+        feat3: {
+          title: "Universal Unlock PDF on Any Device",
+          badgeText: "WEBASSEMBLY",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
+      }
+    }
+
+    // 5B. Protect PDF
+    if (s.includes("protect") || t.includes("protect")) {
+      return {
+        feat1: {
+          sourceIcon: "📄",
+          sourceName: "Source: Confidential_Agreement.pdf",
+          badgeText: "UNRESTRICTED • 2.6 MB",
+          cols: [
+            { tag: "INPUT", label: "Plain Document", status: "🔓 Unprotected", statusColor: "text-amber-600 dark:text-amber-400" },
+            { tag: "CIPHER", label: "AES-256 Encryption", status: "🛡️ Salted SHA-256", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "TARGET", label: "Protected_Agreement.pdf", status: "✓ Password Locked", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "Military-grade AES-256 encryption applied",
+          statusExecution: "Execution: 0.22s",
+          checkmarks: [
+            "Bank-grade AES-256 encryption restricts unauthorized reading, printing, and copying",
+            "Compatible with all standard PDF readers (Adobe Acrobat, Apple Preview, Chrome)"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Cryptographic Armor Protocol",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Encryption Standard", value: "AES-256-CBC / SHA-256", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Access Permissions", value: "Print, Copy & Edit Locked", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Key Custody", value: "Zero-Knowledge (User Only)", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ Bank-Grade AES-256 Document Confidentiality",
+          checkmarks: [
+            "Strict zero-knowledge architecture: only you possess the unlocking credentials",
+            "End-to-end client cryptographic generation with zero external exposure"
+          ]
+        },
+        feat3: {
+          title: "Universal Protect PDF on Any Device",
+          badgeText: "WEBASSEMBLY",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
+      }
+    }
+
+    // 5C. Merge PDF
+    if (s.includes("merge") || t.includes("merge")) {
+      return {
+        feat1: {
+          sourceIcon: "📑",
+          sourceName: "Source: 3 Documents Selected",
+          badgeText: "9 TOTAL PAGES • 5.8 MB",
+          cols: [
+            { tag: "DOC 1", label: "Sales_Q1.pdf", status: "✓ 4 Pages", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "DOC 2", label: "Sales_Q2.pdf", status: "✓ 3 Pages", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "DOC 3", label: "Summary.pdf", status: "✓ 2 Pages", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "3 Documents fused into Unified_Report.pdf",
+          statusExecution: "Execution: 0.42s",
+          checkmarks: [
+            "Combine multiple PDF files into one continuous, structured document",
+            "Drag to reorder pages and preserve bookmarks, outlines, and hyperlinks"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Document Fusion Security Protocol",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Sequence Integrity", value: "Exact Page Order Verified", valueColor: "text-slate-900 dark:text-white" },
+            { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Server Retention", value: "0 MB (Purged Upon Download)", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ Zero-Retention Document Fusion Guarantee",
+          checkmarks: [
+            "All source documents and merged outputs are permanently wiped after download",
+            "Zero metadata or proprietary content leakage across combined files"
+          ]
+        },
+        feat3: {
+          title: "Universal Merge PDF on Any Device",
+          badgeText: "WEBASSEMBLY",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
+      }
+    }
+
+    // 5D. Compress PDF
+    if (s.includes("compress") || t.includes("compress")) {
+      return {
+        feat1: {
+          sourceIcon: "🗜️",
+          sourceName: "Source: Presentation_Deck.pdf",
+          badgeText: "ORIGINAL: 28.4 MB",
+          cols: [
+            { tag: "BEFORE", label: "Original PDF", status: "28.4 MB (Heavy)", statusColor: "text-amber-600 dark:text-amber-400" },
+            { tag: "OPTIMIZATION", label: "Vector & Stream Cleaned", status: "⚡ Lossless DPI Preserved", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "AFTER", label: "Compressed_File.pdf", status: "✓ 2.3 MB (-92%)", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "Size reduced by 92% • Saved 26.1 MB",
+          statusExecution: "Execution: 0.28s",
+          checkmarks: [
+            "Shrink PDF file size up to 90% without compromising visual clarity or typography",
+            "Optimized for email attachments, web uploads, and lightning-fast sharing"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Lossless Compression Sandbox",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Visual Integrity", value: "300 DPI Sharpness Retained", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Metadata Stripping", value: "EXIF & Tracking Tags Removed", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Cloud Purge Timer", value: "Auto-Purged on Download", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ Lossless Security & Data Protection Guarantee",
+          checkmarks: [
+            "Files are processed in an isolated in-memory container and wiped immediately",
+            "Preserves font embeddings and high-resolution assets losslessly"
+          ]
+        },
+        feat3: {
+          title: "Universal Compress PDF on Any Device",
+          badgeText: "WEBASSEMBLY",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
+      }
+    }
+
+    // 5E. Split PDF
+    if (s.includes("split") || t.includes("split")) {
+      return {
+        feat1: {
+          sourceIcon: "📄",
+          sourceName: "Source: Annual_Financial_Report.pdf",
+          badgeText: "12 PAGES • 4.8 MB",
+          cols: [
+            { tag: "PART 1", label: "Pages 1–4", status: "✓ 1.2 MB", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "PART 2", label: "Pages 5–8", status: "✓ 1.4 MB", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "PART 3", label: "Pages 9–12", status: "✓ 1.6 MB", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "Document separation complete",
+          statusExecution: "Execution: 0.38s",
+          checkmarks: [
+            "Extract individual pages or custom ranges with lossless visual fidelity",
+            "Preserves fonts, vector drawings, annotations, and form fields intact"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Document Segmentation Sandbox",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Permanent Disk Storage", value: "0 MB (In-RAM Only)", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Automatic Purge Timer", value: "2h 00m Auto-Delete", valueColor: "text-slate-900 dark:text-white" }
+          ],
+          footerText: "🛡️ Verified GDPR & ISO 27001 Data Confidentiality",
+          checkmarks: [
+            "Zero cloud retention: files auto-purged from server memory after processing",
+            "Bank-grade 256-bit TLS client-side encryption standard on all document operations"
+          ]
+        },
+        feat3: {
+          title: "Universal Split PDF on Any Device",
+          badgeText: "WEBASSEMBLY",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
+      }
+    }
+
+    // 5F. Sign PDF
+    if (s.includes("sign") || t.includes("sign")) {
+      return {
+        feat1: {
+          sourceIcon: "✍️",
+          sourceName: "Source: Executive_NDA_Agreement.pdf",
+          badgeText: "4 PAGES • 1.9 MB",
+          cols: [
+            { tag: "SIGNATURE", label: "Vector Signature", status: "✓ Anti-Aliased", statusColor: "text-emerald-600 dark:text-emerald-400" },
+            { tag: "STAMP", label: "Position Placed", status: "✓ Verified Coordinates", statusColor: "text-sky-600 dark:text-sky-400" },
+            { tag: "OUTPUT", label: "Signed_NDA.pdf", status: "✓ Legally Binding", statusColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          statusBarText: "Digital signature embedded into PDF streams",
+          statusExecution: "Execution: 0.15s",
+          checkmarks: [
+            "Place smooth digital signatures, dates, and custom text stamps with pixel precision",
+            "Export legally binding documents compliant with eIDAS and ESIGN standards"
+          ]
+        },
+        feat2: {
+          protocolTitle: "Digital Signature Security Engine",
+          badgeText: "ACTIVE",
+          rows: [
+            { label: "Audit Checksum", value: "SHA-256 Hash Verified", valueColor: "text-slate-900 dark:text-white" },
+            { label: "Signature Privacy", value: "Rendered Locally in Browser", valueColor: "text-emerald-600 dark:text-emerald-400" },
+            { label: "Tamper Protection", value: "Standard ISO Flattening", valueColor: "text-emerald-600 dark:text-emerald-400" }
+          ],
+          footerText: "🛡️ eIDAS & ESIGN Compliant Browser Security",
+          checkmarks: [
+            "Signatures are created and rendered entirely on your device for absolute privacy",
+            "Zero document storage: signed PDFs are encrypted in RAM and wiped on export"
+          ]
+        },
+        feat3: {
+          title: "Universal Sign PDF on Any Device",
+          badgeText: "WEBASSEMBLY",
+          devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+          footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+          checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+        }
+      }
+    }
+
+    // 5G. PDF Converters (pdf-to-word, pdf-to-excel, word-to-pdf, etc.)
+    return {
+      feat1: {
+        sourceIcon: "🔄",
+        sourceName: "Source: Document_Report.pdf",
+        badgeText: "OCR & VECTOR • 3.8 MB",
+        cols: [
+          { tag: "INPUT", label: "PDF Streams", status: "Vector & Text Maps", statusColor: "text-amber-600 dark:text-amber-400" },
+          { tag: "PARSING", label: "Layout Reconstruction", status: "⚡ Tables & Columns Kept", statusColor: "text-sky-600 dark:text-sky-400" },
+          { tag: "OUTPUT", label: "Target Document", status: "✓ 100% Editable", statusColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        statusBarText: "Document conversion complete with zero layout drift",
+        statusExecution: "Execution: 0.45s",
+        checkmarks: [
+          "Preserves precise fonts, margins, tables, and images with zero drift",
+          "High-speed client and cloud rendering for instant editable downloads"
+        ]
+      },
+      feat2: {
+        protocolTitle: "Format Conversion Sandbox",
+        badgeText: "ACTIVE",
+        rows: [
+          { label: "Font & Style Mapping", value: "TrueType / OpenType Retained", valueColor: "text-slate-900 dark:text-white" },
+          { label: "In-Transit Encryption", value: "TLS 1.3 / AES-256", valueColor: "text-slate-900 dark:text-white" },
+          { label: "Server Retention", value: "0 MB (Purged Upon Download)", valueColor: "text-emerald-600 dark:text-emerald-400" }
+        ],
+        footerText: "🛡️ Confidential Enterprise Document Conversion",
+        checkmarks: [
+          "Proprietary fonts and embedded assets remain completely private and unaltered",
+          "Automatic server memory flush immediately after file conversion completes"
+        ]
+      },
+      feat3: {
+        title: `Universal ${title} on Any Device`,
+        badgeText: "WEBASSEMBLY",
+        devices: ["macOS Safari & Chrome", "Windows 11 & Edge", "iOS & iPadOS Safari", "Android Mobile Chrome"],
+        footerText: "Zero RAM hogging • No installer • High-efficiency client execution",
+        checkmarks: ["Works on Chrome, Safari, Edge, Firefox, iOS & Android", "No desktop software or browser extension installation needed"]
+      }
+    }
+  }
+
+  // ==========================================
+  // 6. DEFAULT FALLBACK (for Dev, Text, Color Tools, etc.)
+  // ==========================================
   return {
     feat1: {
       sourceIcon: "⚡",
-      sourceName: `Source: ${title.replace(/\s+/g, '_')}_Document`,
+      sourceName: `Source: ${title.replace(/\s+/g, '_')}_Input`,
       badgeText: "OPTIMIZED • READY",
       cols: [
         { tag: "INPUT", label: "Source Asset", status: "✓ Validated", statusColor: "text-emerald-600 dark:text-emerald-400" },

@@ -115,7 +115,8 @@ export function AiSmartCropCanvas() {
 
   if (!activeFile) {
     return (
-      <div className="flex flex-col items-center justify-center h-full text-slate-400 bg-white dark:bg-slate-900 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-8 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
+      <div 
+        className="flex flex-col items-center justify-center min-h-[440px] w-full text-slate-400 bg-[#FAFAFA] dark:bg-slate-950 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-[2rem] p-8 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all cursor-pointer"
         onClick={() => document.getElementById('smart-crop-upload')?.click()}
       >
         <input 
@@ -128,84 +129,103 @@ export function AiSmartCropCanvas() {
             if (file) useWorkspaceStore.getState().addFiles([file])
           }}
         />
-        <Crop className="w-16 h-16 mb-4 text-slate-300 dark:text-slate-600" />
-        <p className="text-lg font-semibold text-slate-600 dark:text-slate-300 mb-2">No image selected</p>
-        <p className="text-sm">Click here to upload an image for Smart Cropping.</p>
+        <div className="w-14 h-14 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center mb-4 border border-black/10 shadow-sm">
+          <Crop className="w-7 h-7" />
+        </div>
+        <p className="text-base font-bold text-slate-800 dark:text-slate-200 mb-1">No image selected</p>
+        <p className="text-xs text-slate-500 font-medium">Click to select an image for AI content-aware smart cropping.</p>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col lg:flex-row h-[calc(100vh-64px)] w-full bg-slate-50 dark:bg-slate-900">
+    <div className="flex flex-col lg:flex-row min-h-[540px] w-full rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden">
       {/* Main Canvas Area */}
-      <div className="flex-1 p-4 lg:p-6 flex flex-col min-h-0">
-        <div className="flex-1 bg-slate-200 dark:bg-slate-950/50 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-center overflow-hidden shadow-inner relative pattern-grid-lg">
+      <div className="flex-1 p-4 sm:p-6 flex flex-col min-h-[380px] bg-white dark:bg-slate-900">
+        <div className="flex-1 bg-[#FAFAFA] dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-center overflow-hidden shadow-2xs relative">
           
           <img ref={imageRef} alt="Original" className="hidden" />
           
           <div className="w-full h-full flex items-center justify-center p-4">
              <canvas 
                ref={canvasRef} 
-               className="max-w-full max-h-full object-contain drop-shadow-2xl rounded-xl"
+               className="max-w-full max-h-[460px] object-contain drop-shadow-md rounded-xl"
              />
           </div>
         </div>
       </div>
 
       {/* Sidebar Controls */}
-      <div className="w-full lg:w-[400px] border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col overflow-y-auto">
-        <div className="flex items-start gap-4 mb-8">
-          <div className="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-400 flex items-center justify-center shrink-0">
-            <Crop className="w-6 h-6" />
+      <div className="w-full lg:w-[380px] border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-800 bg-[#FAFAFA] dark:bg-slate-950 p-6 sm:p-8 flex flex-col justify-between shrink-0">
+        <div>
+          <div className="flex items-center gap-3.5 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center shrink-0 border border-black/10 shadow-2xs">
+              <Crop className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-0.5 tracking-tight">AI Smart Crop</h2>
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Content-Aware Framing</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">AI Smart Crop</h2>
-            <p className="text-sm text-slate-500">Automatically find the most interesting part of the image.</p>
+
+          <div className="space-y-4">
+            <div>
+               <div className="flex items-center gap-2 mb-3">
+                 <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                   <LayoutGrid className="w-4 h-4 text-slate-500" /> Target Aspect Ratio
+                 </h3>
+               </div>
+               <div className="grid grid-cols-3 gap-2.5">
+                  <button
+                    onClick={() => setAspectRatio("1:1")}
+                    className={`py-3 px-2 rounded-xl border flex flex-col items-center justify-center gap-2 transition-all cursor-pointer ${
+                      aspectRatio === "1:1" 
+                        ? "border-black/20 bg-[#D7FB8E] text-slate-950 font-bold shadow-2xs" 
+                        : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className="w-5 h-5 border-2 border-current rounded-xs"></div>
+                    <span className="text-[11px] font-semibold">1:1 Square</span>
+                  </button>
+                  <button
+                    onClick={() => setAspectRatio("16:9")}
+                    className={`py-3 px-2 rounded-xl border flex flex-col items-center justify-center gap-2 transition-all cursor-pointer ${
+                      aspectRatio === "16:9" 
+                        ? "border-black/20 bg-[#D7FB8E] text-slate-950 font-bold shadow-2xs" 
+                        : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className="w-7 h-4 border-2 border-current rounded-xs"></div>
+                    <span className="text-[11px] font-semibold">16:9 Video</span>
+                  </button>
+                  <button
+                    onClick={() => setAspectRatio("9:16")}
+                    className={`py-3 px-2 rounded-xl border flex flex-col items-center justify-center gap-2 transition-all cursor-pointer ${
+                      aspectRatio === "9:16" 
+                        ? "border-black/20 bg-[#D7FB8E] text-slate-950 font-bold shadow-2xs" 
+                        : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className="w-4 h-7 border-2 border-current rounded-xs"></div>
+                    <span className="text-[11px] font-semibold">9:16 Story</span>
+                  </button>
+               </div>
+            </div>
           </div>
         </div>
 
-        <div className="space-y-6">
-          <div>
-             <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
-               <LayoutGrid className="w-4 h-4 text-orange-500" /> Target Aspect Ratio
-             </h3>
-             <div className="grid grid-cols-3 gap-3">
-                <button
-                  onClick={() => setAspectRatio("1:1")}
-                  className={`py-3 px-2 rounded-xl border-2 flex flex-col items-center justify-center gap-2 transition-all ${aspectRatio === "1:1" ? "border-orange-500 bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold shadow-sm" : "border-slate-200 dark:border-slate-700 text-slate-500 hover:border-slate-300 dark:hover:border-slate-600"}`}
-                >
-                  <div className="w-6 h-6 border-2 border-current rounded-sm"></div>
-                  <span className="text-xs">1:1 Square</span>
-                </button>
-                <button
-                  onClick={() => setAspectRatio("16:9")}
-                  className={`py-3 px-2 rounded-xl border-2 flex flex-col items-center justify-center gap-2 transition-all ${aspectRatio === "16:9" ? "border-orange-500 bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold shadow-sm" : "border-slate-200 dark:border-slate-700 text-slate-500 hover:border-slate-300 dark:hover:border-slate-600"}`}
-                >
-                  <div className="w-8 h-5 border-2 border-current rounded-sm"></div>
-                  <span className="text-xs">16:9 Video</span>
-                </button>
-                <button
-                  onClick={() => setAspectRatio("9:16")}
-                  className={`py-3 px-2 rounded-xl border-2 flex flex-col items-center justify-center gap-2 transition-all ${aspectRatio === "9:16" ? "border-orange-500 bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold shadow-sm" : "border-slate-200 dark:border-slate-700 text-slate-500 hover:border-slate-300 dark:hover:border-slate-600"}`}
-                >
-                  <div className="w-5 h-8 border-2 border-current rounded-sm"></div>
-                  <span className="text-xs">9:16 Story</span>
-                </button>
-             </div>
-          </div>
-        </div>
-
-        <div className="mt-auto pt-6 space-y-4">
+        <div className="mt-6 pt-4 space-y-3">
           {!isDone ? (
              <button
                 onClick={handleProcess}
                 disabled={isProcessing}
-                className="w-full h-14 bg-orange-600 hover:bg-orange-700 disabled:opacity-50 text-white font-bold rounded-xl flex items-center justify-center space-x-2 transition-all shadow-lg active:scale-[0.98]"
+                className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] disabled:opacity-50 text-slate-950 font-semibold text-sm sm:text-base rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all border border-black/10 shadow-sm hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
                 {isProcessing ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Analyzing...</span>
+                    <span>Analyzing Saliency...</span>
                   </>
                 ) : (
                   <>
@@ -217,7 +237,7 @@ export function AiSmartCropCanvas() {
           ) : (
              <button
                 onClick={handleDownload}
-                className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl flex items-center justify-center space-x-2 transition-all shadow-lg hover:shadow-emerald-600/20 active:scale-[0.98]"
+                className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-sm sm:text-base rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all border border-black/10 shadow-sm hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 <span>Download Cropped Image</span>

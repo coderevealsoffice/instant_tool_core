@@ -87,21 +87,21 @@ export function AiYoutubeSummarizerCanvas() {
     <div className="w-full max-w-4xl mx-auto space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       
       {/* Input Section */}
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
-            <PlaySquare className="w-5 h-5" />
+      <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-[2rem] shadow-sm border border-slate-200/90 dark:border-slate-800">
+        <div className="flex items-center gap-3.5 mb-6">
+          <div className="w-12 h-12 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center border border-black/10 shadow-2xs shrink-0">
+            <PlaySquare className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-slate-900">AI YouTube Summarizer</h2>
-            <p className="text-sm text-slate-500">Paste a YouTube link to instantly summarize the video.</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">AI YouTube Summarizer</h2>
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Paste a YouTube link to instantly summarize the video</p>
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
           <input
             type="text"
-            className="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition-all text-slate-700 placeholder:text-slate-400"
+            className="flex-1 px-4 py-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900 transition-all text-slate-900 dark:text-white placeholder:text-slate-400 text-sm font-medium"
             placeholder="https://www.youtube.com/watch?v=..."
             value={videoUrl}
             onChange={(e) => setVideoUrl(e.target.value)}
@@ -110,12 +110,12 @@ export function AiYoutubeSummarizerCanvas() {
           <button
             onClick={handleSummarize}
             disabled={isLoading || !videoUrl}
-            className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+            className="px-6 py-3.5 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all border border-black/10 shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap text-sm sm:text-base hover:scale-[1.01] active:scale-[0.99]"
           >
             {isLoading ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
+              <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
             ) : (
-              <Sparkles className="w-5 h-5" />
+              <Sparkles className="w-5 h-5 text-slate-950" />
             )}
             Summarize Video
           </button>
@@ -124,25 +124,25 @@ export function AiYoutubeSummarizerCanvas() {
 
       {/* Output Section */}
       {summary && (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 animate-in fade-in slide-in-from-bottom-2 duration-300">
-          <div className="flex items-center justify-between mb-4 pb-4 border-b border-slate-100">
-            <h3 className="font-semibold text-slate-800 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-blue-500" /> 
+        <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-[2rem] shadow-sm border border-slate-200/90 dark:border-slate-800 animate-in fade-in slide-in-from-bottom-2 duration-300">
+          <div className="flex items-center justify-between mb-4 pb-4 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               Summary Output
             </h3>
             <button
               onClick={handleCopy}
-              className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-500 flex items-center gap-2 text-sm font-medium"
+              className="px-3.5 py-1.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-xs border border-black/10 transition-all shadow-2xs flex items-center gap-1.5 cursor-pointer"
             >
               {isCopied ? (
-                <><CheckCircle className="w-4 h-4 text-green-500" /> Copied</>
+                <><CheckCircle className="w-4 h-4 text-emerald-700" /> Copied!</>
               ) : (
                 <><Copy className="w-4 h-4" /> Copy Text</>
               )}
             </button>
           </div>
 
-          <div className="text-slate-700">
+          <div className="text-slate-800 dark:text-slate-200">
             {renderFormattedText(summary)}
           </div>
         </div>

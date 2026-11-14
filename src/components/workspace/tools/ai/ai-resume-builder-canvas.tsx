@@ -73,75 +73,75 @@ export function AiResumeBuilderCanvas() {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row h-[calc(100vh-64px)] w-full bg-slate-50 dark:bg-slate-900">
+    <div className="flex flex-col lg:flex-row min-h-[580px] w-full rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden">
       
       {/* Sidebar Controls */}
-      <div className="w-full lg:w-[400px] border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col shrink-0">
-        <div className="p-6 border-b border-slate-100 dark:border-slate-800">
-          <div className="flex items-start gap-4 mb-2">
-            <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+      <div className="w-full lg:w-[400px] border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 bg-[#FAFAFA] dark:bg-slate-950 flex flex-col shrink-0">
+        <div className="p-6 border-b border-slate-200/80 dark:border-slate-800">
+          <div className="flex items-center gap-3.5 mb-1">
+            <div className="w-12 h-12 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center shrink-0 border border-black/10 shadow-2xs">
               <FileBadge2 className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-1">AI Resume</h2>
-              <p className="text-sm text-slate-500">ATS-Friendly Builder</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-0.5 tracking-tight">AI Resume</h2>
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">ATS-Optimized Builder</p>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-6 space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Target Job Title</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Target Job Title</label>
             <input
               type="text"
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
               placeholder="e.g. Senior Frontend Developer"
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all text-slate-700 dark:text-slate-300"
+              className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all text-slate-900 dark:text-white text-sm font-medium"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Your Details (Dump Everything)</label>
-            <p className="text-xs text-slate-500 mb-2">Paste your LinkedIn profile text, old resume, or just a messy list of your skills and work history. AI will structure and rewrite it professionally.</p>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Your Experience & History</label>
+            <p className="text-xs text-slate-500 mb-2">Paste your LinkedIn text, old resume, or a rough list of skills and achievements. AI will structure and polish it into ATS-winning bullet points.</p>
             <textarea
               value={rawDetails}
               onChange={(e) => setRawDetails(e.target.value)}
               placeholder="E.g. My name is Alex. I worked at Google for 3 years as a dev using React and Node. Before that I was at a startup..."
-              className="w-full h-64 p-4 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all resize-none text-slate-700 dark:text-slate-300 text-sm leading-relaxed"
+              className="w-full h-56 p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all resize-none text-slate-900 dark:text-white text-sm font-medium leading-relaxed"
             />
           </div>
 
           <button
             onClick={handleGenerate}
             disabled={isGenerating || !rawDetails.trim()}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold rounded-xl py-4 flex items-center justify-center transition-transform active:scale-[0.98] shadow-lg shadow-blue-500/20"
+            className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] disabled:opacity-50 text-slate-950 font-semibold text-sm sm:text-base rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all border border-black/10 shadow-sm hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
           >
             {isGenerating ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <Sparkles className="w-5 h-5 mr-2" />}
-            {isGenerating ? 'Structuring Resume...' : 'Generate Resume'}
+            <span>{isGenerating ? 'Structuring Resume...' : 'Generate Resume'}</span>
           </button>
         </div>
       </div>
 
       {/* Main Preview Area */}
-      <div className="flex-1 bg-slate-100 dark:bg-slate-950 overflow-y-auto p-4 md:p-8 flex flex-col items-center">
+      <div className="flex-1 bg-slate-100 dark:bg-slate-950 overflow-y-auto p-4 md:p-8 flex flex-col items-center min-h-[440px]">
         
         {!resumeData ? (
-          <div className="flex-1 flex flex-col items-center justify-center text-center max-w-md">
-             <div className="w-24 h-24 bg-blue-100 dark:bg-blue-900/30 text-blue-500 rounded-full flex items-center justify-center mb-6">
-               <FileText className="w-12 h-12" />
+          <div className="flex-1 flex flex-col items-center justify-center text-center max-w-md py-12">
+             <div className="w-16 h-16 bg-[#D7FB8E] text-slate-950 border border-black/10 rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+               <FileText className="w-8 h-8" />
              </div>
-             <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">Preview Your Resume</h3>
-             <p className="text-slate-500">Provide your details and click generate. AI will build a professional, ATS-optimized resume right here.</p>
+             <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2">Preview Your Resume</h3>
+             <p className="text-sm text-slate-500">Provide your details and click generate. AI will build a professional, ATS-optimized resume right here.</p>
           </div>
         ) : (
           <div className="w-full max-w-[210mm] flex flex-col">
             <div className="flex justify-end mb-4">
                <button 
                  onClick={downloadPDF}
-                 className="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm font-semibold flex items-center transition-colors"
+                 className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 px-5 py-2.5 rounded-xl border border-black/10 shadow-sm font-semibold text-sm flex items-center gap-2 transition-all cursor-pointer"
                >
-                 <Download className="w-4 h-4 mr-2" />
+                 <Download className="w-4 h-4" />
                  Download PDF
                </button>
             </div>
