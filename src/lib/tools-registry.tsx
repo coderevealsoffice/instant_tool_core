@@ -1,5 +1,4 @@
 import React from "react"
-import dynamic from "next/dynamic"
 import { UploadCloud, FileDown, Loader2, ShieldCheck, Star, Clock, BookOpen, FileBadge2, Braces, Sparkles, FileText, Bot, Globe, Hash, CheckCircle2, Zap, SlidersHorizontal, Search, FileCode, Cpu } from "lucide-react"
 import { ImageConverterUploader } from "@/components/tools/ImageConverterUploader"
 import { VideoTrimmer } from "@/components/tools/VideoTrimmer"
@@ -60,10 +59,12 @@ import { AiThumbnailGeneratorCanvas } from "@/components/workspace/tools/ai/ai-t
 import { AiLinkedinPostGeneratorCanvas } from "@/components/workspace/tools/ai/ai-linkedin-post-generator-canvas"
 import { AiPodcastNotesGeneratorCanvas } from "@/components/workspace/tools/ai/ai-podcast-notes-generator-canvas"
 import { AiVideoCaptionGeneratorCanvas } from "@/components/workspace/tools/ai/ai-video-caption-generator-canvas"
-const AiFaceBlurCanvas = dynamic(() => import("@/components/workspace/tools/ai/ai-face-blur-canvas").then(mod => mod.AiFaceBlurCanvas), { ssr: false })
-const AiImageUpscalerCanvas = dynamic(() => import("@/components/workspace/tools/ai/ai-image-upscaler-canvas").then(mod => mod.AiImageUpscalerCanvas), { ssr: false })
-const AiSmartCropCanvas = dynamic(() => import("@/components/workspace/tools/ai/ai-smart-crop-canvas").then(mod => mod.AiSmartCropCanvas), { ssr: false })
-const AiImageEditorCanvas = dynamic(() => import("@/components/workspace/tools/ai/ai-image-editor-canvas").then(mod => mod.AiImageEditorCanvas), { ssr: false })
+import {
+  ClientAiFaceBlurCanvas,
+  ClientAiImageUpscalerCanvas,
+  ClientAiSmartCropCanvas,
+  ClientAiImageEditorCanvas
+} from "@/components/tools/ClientToolCanvases"
 
 // Image Tools
 import { HeicToJpgCanvas } from "@/components/workspace/tools/converters/heic-to-jpg-canvas"
@@ -1206,14 +1207,14 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
       title: "AI Face Blur",
       description: "Automatically detect and blur faces in photos for privacy.",
       headerColorClass: "bg-blue-600",
-      toolComponent: <AiFaceBlurCanvas />,
+      toolComponent: <ClientAiFaceBlurCanvas />,
       ...generateSEOData("AI Face Blur", "image")
     },
     "ai-image-upscaler": {
       title: "AI Image Upscaler",
       description: "Enhance and enlarge your images without losing quality using AI.",
       headerColorClass: "bg-indigo-600",
-      toolComponent: <AiImageUpscalerCanvas />,
+      toolComponent: <ClientAiImageUpscalerCanvas />,
       ...generateSEOData("AI Image Upscaler", "image")
     },
     "ai-youtube-keyword-generator": {
@@ -1262,14 +1263,14 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
       title: "AI Smart Crop",
       description: "Automatically find and crop the most interesting part of an image.",
       headerColorClass: "bg-orange-600",
-      toolComponent: <AiSmartCropCanvas />,
+      toolComponent: <ClientAiSmartCropCanvas />,
       ...generateSEOData("AI Smart Crop", "image")
     },
     "ai-image-editor": {
       title: "AI Image Editor",
       description: "A powerful, free AI-powered image editor for your browser.",
       headerColorClass: "bg-purple-600",
-      toolComponent: <AiImageEditorCanvas />,
+      toolComponent: <ClientAiImageEditorCanvas />,
       ...generateSEOData("AI Image Editor", "image")
     },
     "ai-ebook-generator": {
