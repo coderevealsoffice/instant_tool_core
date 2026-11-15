@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma/client"
+import { safeDbQuery } from "@/lib/prisma/safe-query"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { FileText, ChevronRight, Clock } from "lucide-react"
@@ -151,13 +152,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonicalSlug = LEGAL_ALIASES[slug] || slug
   let title = DEFAULT_LEGAL_PAGES[canonicalSlug]?.title || "Legal Document"
 
-  try {
-    const page = await prisma.legalPage.findUnique({ where: { slug: canonicalSlug } })
-    if (page?.title) {
-      title = page.title
-    }
-  } catch (e) {
-    // DB blip fallback
+  const page = await safeDbQuery(
+    () => prisma.legalPage.findUnique({ where: { slug: canonicalSlug } }),
+    null
+  )
+  if (page?.title) {
+    title = page.title
   }
 
   return {
@@ -180,20 +180,14 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
   const canonicalSlug = LEGAL_ALIASES[slug] || slug
   const fallback = DEFAULT_LEGAL_PAGES[canonicalSlug]
 
-  let pageTitle = fallback?.title
-  let pageContent = fallback?.content
-  let pageUpdatedAt = fallback?.updatedAt ? new Date(fallback.updatedAt) : new Date()
+  const dbPage = await safeDbQuery(
+    () => prisma.legalPage.findUnique({ where: { slug: canonicalSlug } }),
+    null
+  )
 
-  try {
-    const dbPage = await prisma.legalPage.findUnique({ where: { slug: canonicalSlug } })
-    if (dbPage) {
-      pageTitle = dbPage.title
-      pageContent = dbPage.content
-      pageUpdatedAt = dbPage.updatedAt
-    }
-  } catch (err) {
-    console.warn(`Using fallback legal content for ${canonicalSlug}:`, err)
-  }
+  const pageTitle = dbPage?.title || fallback?.title
+  const pageContent = dbPage?.content || fallback?.content
+  const pageUpdatedAt = dbPage?.updatedAt ? new Date(dbPage.updatedAt) : (fallback?.updatedAt ? new Date(fallback.updatedAt) : new Date())
 
   if (!pageTitle || !pageContent) {
     notFound()

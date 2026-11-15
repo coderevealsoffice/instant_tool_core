@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { HelpCircle } from "lucide-react"
 import prisma from "@/lib/prisma/client"
+import { safeDbQuery } from "@/lib/prisma/safe-query"
 
 export const metadata = {
   title: "Frequently Asked Questions (FAQ) | InstantTool",
@@ -54,19 +55,15 @@ const FALLBACK_FAQS = [
 ];
 
 export default async function FaqsPage() {
-  let faqs = FALLBACK_FAQS;
-
-  try {
-    const dbFaqs = await prisma.fAQ.findMany({
+  const dbFaqs = await safeDbQuery(
+    () => prisma.fAQ.findMany({
       where: { isActive: true },
       orderBy: { order: "asc" },
-    });
-    if (dbFaqs && dbFaqs.length > 0) {
-      faqs = dbFaqs;
-    }
-  } catch (err) {
-    console.warn("Using fallback FAQs due to DB connection:", err);
-  }
+    }),
+    []
+  );
+
+  const faqs = (dbFaqs && dbFaqs.length > 0) ? dbFaqs : FALLBACK_FAQS;
 
   const faqSchema = {
     "@context": "https://schema.org",

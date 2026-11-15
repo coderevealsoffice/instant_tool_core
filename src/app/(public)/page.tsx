@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 };
 
 import prisma from "@/lib/prisma/client"
+import { safeDbQuery } from "@/lib/prisma/safe-query"
 
 export const revalidate = 3600; // Cache page for 1 hour for ultra-fast TTFB
 
@@ -87,19 +88,15 @@ const FALLBACK_PLANS: DisplayPlan[] = [
 ];
 
 export default async function HomePage() {
-  let plans: DisplayPlan[] = FALLBACK_PLANS;
-  try {
-    const dbPlans = await prisma.plan.findMany({
+  const dbPlans = await safeDbQuery(
+    () => prisma.plan.findMany({
       where: { isActive: true },
       orderBy: { priceMonthly: 'asc' }
-    });
-    if (dbPlans && dbPlans.length > 0) {
-      plans = dbPlans;
-    }
-  } catch (err) {
-    // Database connection fallback during build or network blips
-    console.warn("Using fallback plans due to DB connection:", err);
-  }
+    }),
+    []
+  );
+
+  const plans: DisplayPlan[] = (dbPlans && dbPlans.length > 0) ? dbPlans : FALLBACK_PLANS;
   const appBaseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://devigo.cloud";
 
   const schema = {

@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Check } from "lucide-react"
 import { AdSlot } from "@/components/common/AdSlot"
 import prisma from "@/lib/prisma/client"
+import { safeDbQuery } from "@/lib/prisma/safe-query"
 
 export const metadata = {
   title: "Pricing & Plans - Affordable Premium File Tools | InstantTool",
@@ -68,18 +69,15 @@ const FALLBACK_PLANS: DisplayPlan[] = [
 ];
 
 export default async function PricingPage() {
-  let plans: DisplayPlan[] = FALLBACK_PLANS;
-  try {
-    const dbPlans = await prisma.plan.findMany({
+  const dbPlans = await safeDbQuery(
+    () => prisma.plan.findMany({
       where: { isActive: true },
       orderBy: { priceMonthly: 'asc' }
-    });
-    if (dbPlans && dbPlans.length > 0) {
-      plans = dbPlans;
-    }
-  } catch (err) {
-    console.warn("Using fallback plans on pricing page:", err);
-  }
+    }),
+    []
+  );
+
+  const plans: DisplayPlan[] = (dbPlans && dbPlans.length > 0) ? dbPlans : FALLBACK_PLANS;
 
   const schema = {
     "@context": "https://schema.org",

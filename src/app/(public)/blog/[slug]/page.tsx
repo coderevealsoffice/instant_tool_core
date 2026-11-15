@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma/client"
+import { safeDbQuery } from "@/lib/prisma/safe-query"
 import Link from "next/link"
 import { format } from "date-fns"
 import { ArrowLeft, User, Calendar, Tag } from "lucide-react"
@@ -11,32 +12,29 @@ export const dynamic = "force-dynamic"
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  try {
-    const post = await prisma.blogPost.findUnique({ where: { slug } })
-    if (!post) {
-      return { title: "Not Found | Instant Tool" }
-    }
-    return {
-      title: post.metaTitle || `${post.title} | Instant Tool`,
-      description: post.metaDesc || post.excerpt || `Read ${post.title} on Instant Tool.`,
-    }
-  } catch (err) {
+  const post = await safeDbQuery(
+    () => prisma.blogPost.findUnique({ where: { slug } }),
+    null
+  )
+  if (!post) {
     return { title: "Blog Post | Instant Tool" }
+  }
+  return {
+    title: post.metaTitle || `${post.title} | Instant Tool`,
+    description: post.metaDesc || post.excerpt || `Read ${post.title} on Instant Tool.`,
   }
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   
-  let post: any = null
-  try {
-    post = await prisma.blogPost.findUnique({
+  const post = await safeDbQuery(
+    () => prisma.blogPost.findUnique({
       where: { slug },
       include: { category: true }
-    })
-  } catch (err) {
-    console.warn("Could not fetch blog post:", err)
-  }
+    }),
+    null
+  )
 
   if (!post || !post.isPublished) {
     notFound()

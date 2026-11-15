@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import prisma from "@/lib/prisma/client"
+import { safeDbQuery } from "@/lib/prisma/safe-query"
 import { format } from "date-fns"
 import { Search, ArrowRight } from "lucide-react"
 
@@ -17,10 +18,11 @@ export const metadata = {
 export default async function BlogFeedPage({
   searchParams,
 }: {
-  searchParams: { category?: string; search?: string }
+  searchParams: Promise<{ category?: string; search?: string }> | { category?: string; search?: string }
 }) {
-  const categoryFilter = searchParams.category
-  const searchQuery = searchParams.search
+  const resolvedParams = searchParams instanceof Promise ? await searchParams : (searchParams || {})
+  const categoryFilter = resolvedParams.category
+  const searchQuery = resolvedParams.search
 
   const whereClause: any = { isPublished: true }
   
@@ -35,26 +37,29 @@ export default async function BlogFeedPage({
     ]
   }
 
-  let posts: any[] = []
-  let categories: string[] = ["All"]
-
-  try {
-    posts = await prisma.blogPost.findMany({
+  // Safely query posts with fallback so it never hangs Next.js build
+  const posts = await safeDbQuery(
+    () => prisma.blogPost.findMany({
       where: whereClause,
       include: { category: true },
       orderBy: { createdAt: "desc" }
-    })
+    }),
+    []
+  )
 
-    // Get all categories for the filter
-    const allPostsForCategories = await prisma.blogPost.findMany({
+  // Safely query categories with fallback
+  const allPostsForCategories = await safeDbQuery(
+    () => prisma.blogPost.findMany({
       where: { isPublished: true },
       include: { category: true }
-    })
-    const uniqueCategories = Array.from(new Set(allPostsForCategories.map(p => p.category?.name).filter((name): name is string => Boolean(name))))
-    categories = ["All", ...uniqueCategories]
-  } catch (err) {
-    console.warn("Could not fetch blog posts during render:", err)
-  }
+    }),
+    []
+  )
+
+  const uniqueCategories = Array.from(
+    new Set(allPostsForCategories.map(p => p.category?.name).filter((name): name is string => Boolean(name)))
+  )
+  const categories = ["All", ...uniqueCategories]
 
   const featuredPost = posts.length > 0 && !categoryFilter && !searchQuery ? posts[0] : null
   const gridPosts = featuredPost ? posts.slice(1) : posts
