@@ -6,7 +6,11 @@ const connectionString = process.env.DATABASE_URL || "postgres://pradeepyadav@12
 console.log("PRISMA CONNECTING TO:", connectionString)
 
 const prismaClientSingleton = () => {
-  const pool = new Pool({ connectionString })
+  const pool = new Pool({
+    connectionString,
+    connectionTimeoutMillis: 5000,
+    idleTimeoutMillis: 10000,
+  })
   const adapter = new PrismaPg(pool)
   return new PrismaClient({ adapter })
 }

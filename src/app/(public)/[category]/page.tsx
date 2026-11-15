@@ -1,26 +1,37 @@
 import prisma from "@/lib/prisma/client"
 import { notFound } from "next/navigation"
 
+export const dynamic = "force-dynamic"
+
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }) {
   const resolvedParams = await params
-  const page = await prisma.legalPage.findUnique({
-    where: { slug: resolvedParams.category },
-  })
+  try {
+    const page = await prisma.legalPage.findUnique({
+      where: { slug: resolvedParams.category },
+    })
 
-  if (!page) {
-    return { title: "Page Not Found | Instant Tool" }
-  }
+    if (!page) {
+      return { title: "Page Not Found | Instant Tool" }
+    }
 
-  return {
-    title: `${page.title} | Instant Tool`,
+    return {
+      title: `${page.title} | Instant Tool`,
+    }
+  } catch (err) {
+    return { title: "Instant Tool" }
   }
 }
 
 export default async function LegalPage({ params }: { params: Promise<{ category: string }> }) {
   const resolvedParams = await params
-  const page = await prisma.legalPage.findUnique({
-    where: { slug: resolvedParams.category },
-  })
+  let page: any = null
+  try {
+    page = await prisma.legalPage.findUnique({
+      where: { slug: resolvedParams.category },
+    })
+  } catch (err) {
+    console.warn("Could not fetch page:", err)
+  }
 
   if (!page) {
     notFound()

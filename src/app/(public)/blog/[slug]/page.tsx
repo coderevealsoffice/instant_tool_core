@@ -7,27 +7,36 @@ import { ArrowLeft, User, Calendar, Tag } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
+export const dynamic = "force-dynamic"
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const post = await prisma.blogPost.findUnique({ where: { slug } })
-
-  if (!post) {
-    return { title: "Not Found | Instant Tool" }
-  }
-
-  return {
-    title: post.metaTitle || `${post.title} | Instant Tool`,
-    description: post.metaDesc || post.excerpt || `Read ${post.title} on Instant Tool.`,
+  try {
+    const post = await prisma.blogPost.findUnique({ where: { slug } })
+    if (!post) {
+      return { title: "Not Found | Instant Tool" }
+    }
+    return {
+      title: post.metaTitle || `${post.title} | Instant Tool`,
+      description: post.metaDesc || post.excerpt || `Read ${post.title} on Instant Tool.`,
+    }
+  } catch (err) {
+    return { title: "Blog Post | Instant Tool" }
   }
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   
-  const post = await prisma.blogPost.findUnique({
-    where: { slug },
-    include: { category: true }
-  })
+  let post: any = null
+  try {
+    post = await prisma.blogPost.findUnique({
+      where: { slug },
+      include: { category: true }
+    })
+  } catch (err) {
+    console.warn("Could not fetch blog post:", err)
+  }
 
   if (!post || !post.isPublished) {
     notFound()

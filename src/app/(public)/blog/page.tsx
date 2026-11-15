@@ -4,6 +4,8 @@ import prisma from "@/lib/prisma/client"
 import { format } from "date-fns"
 import { Search, ArrowRight } from "lucide-react"
 
+export const dynamic = "force-dynamic"
+
 export const metadata = {
   title: "InstantTool Blog - File Management Tips & Tricks",
   description: "Read the latest tips, tricks, and updates on file management, productivity, and how to get the most out of InstantTool.",
@@ -33,19 +35,26 @@ export default async function BlogFeedPage({
     ]
   }
 
-  const posts = await prisma.blogPost.findMany({
-    where: whereClause,
-    include: { category: true },
-    orderBy: { createdAt: "desc" }
-  })
+  let posts: any[] = []
+  let categories: string[] = ["All"]
 
-  // Get all categories for the filter
-  const allPostsForCategories = await prisma.blogPost.findMany({
-    where: { isPublished: true },
-    include: { category: true }
-  })
-  const uniqueCategories = Array.from(new Set(allPostsForCategories.map(p => p.category?.name).filter(Boolean)))
-  const categories = ["All", ...uniqueCategories]
+  try {
+    posts = await prisma.blogPost.findMany({
+      where: whereClause,
+      include: { category: true },
+      orderBy: { createdAt: "desc" }
+    })
+
+    // Get all categories for the filter
+    const allPostsForCategories = await prisma.blogPost.findMany({
+      where: { isPublished: true },
+      include: { category: true }
+    })
+    const uniqueCategories = Array.from(new Set(allPostsForCategories.map(p => p.category?.name).filter((name): name is string => Boolean(name))))
+    categories = ["All", ...uniqueCategories]
+  } catch (err) {
+    console.warn("Could not fetch blog posts during render:", err)
+  }
 
   const featuredPost = posts.length > 0 && !categoryFilter && !searchQuery ? posts[0] : null
   const gridPosts = featuredPost ? posts.slice(1) : posts
