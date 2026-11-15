@@ -230,9 +230,9 @@ export function InstagramDownloaderCanvas() {
                   href={result.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-pink-500/20"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold rounded-xl border border-black/10 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
                 >
-                  <Download className="w-5 h-5" />
+                  <Download className="w-5 h-5 text-slate-950" />
                   Download {getPostType()}
                 </a>
               </div>

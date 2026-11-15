@@ -44,8 +44,8 @@ export function ColorPickerCanvas() {
   return (
     <div className="flex flex-col items-center justify-start h-full w-full space-y-6 pt-4">
       <div className="flex items-center space-x-4">
-        <div className="w-16 h-16 rounded-2xl bg-pink-500 flex items-center justify-center shadow-2xl">
-          <Pipette className="w-8 h-8 text-white" />
+        <div className="w-14 h-14 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center border border-black/10 shadow-2xs">
+          <Pipette className="w-7 h-7 text-slate-950" />
         </div>
         <div>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Color Picker</h2>

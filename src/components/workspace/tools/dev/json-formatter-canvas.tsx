@@ -77,9 +77,9 @@ export function JsonFormatterCanvas() {
           <button
             onClick={handleFormat}
             disabled={!inputJson.trim()}
-            className="w-full bg-teal-600 hover:bg-teal-700 disabled:opacity-50 text-white font-bold rounded-xl py-3.5 flex items-center justify-center transition-transform active:scale-[0.98]"
+            className="w-full bg-[#D7FB8E] hover:bg-[#cbf777] disabled:opacity-50 text-slate-950 font-semibold rounded-xl py-3.5 flex items-center justify-center border border-black/10 shadow-sm transition-transform active:scale-[0.98] cursor-pointer"
           >
-            <Play className="w-4 h-4 mr-2" />
+            <Play className="w-4 h-4 mr-2 text-slate-950" />
             Format JSON
           </button>
 

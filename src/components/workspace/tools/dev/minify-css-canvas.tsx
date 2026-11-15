@@ -45,8 +45,8 @@ export function MinifyCssCanvas() {
     <div className="max-w-6xl mx-auto space-y-6">
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-            <FileCode2 className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center border border-black/10 shadow-2xs">
+            <FileCode2 className="w-5 h-5 text-slate-950" />
           </div>
           <div>
             <h2 className="text-lg font-bold text-slate-900">CSS Minifier</h2>
@@ -93,9 +93,9 @@ export function MinifyCssCanvas() {
         <button
           onClick={handleProcess}
           disabled={isProcessing || !inputCode.trim()}
-          className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center gap-2 disabled:opacity-50"
+          className="px-8 py-3.5 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold rounded-xl border border-black/10 shadow-sm transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
         >
-          {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5" />}
+          {isProcessing ? <Loader2 className="w-5 h-5 animate-spin text-slate-950" /> : <Play className="w-5 h-5 text-slate-950" />}
           Minify CSS
         </button>
       </div>

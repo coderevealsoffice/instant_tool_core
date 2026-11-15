@@ -103,8 +103,8 @@ export function AiPdfChatbotCanvas() {
       {/* Header */}
       <div className="px-6 py-4 border-b dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-fuchsia-100 dark:bg-fuchsia-900/30 rounded-xl flex items-center justify-center">
-            <Bot className="w-5 h-5 text-fuchsia-600" />
+          <div className="w-10 h-10 bg-[#D7FB8E] text-slate-950 rounded-xl flex items-center justify-center border border-black/10 shadow-2xs">
+            <Bot className="w-5 h-5 text-slate-950" />
           </div>
           <div>
             <h2 className="font-bold text-slate-800 dark:text-slate-200">AI PDF Chatbot</h2>
@@ -125,23 +125,23 @@ export function AiPdfChatbotCanvas() {
         
         {!file && !isExtracting && (
           <div className="h-full flex flex-col items-center justify-center">
-            <div className="w-24 h-24 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center mb-6 shadow-sm border border-slate-100 dark:border-slate-700">
-              <FileText className="w-10 h-10 text-slate-400" />
+            <div className="w-20 h-20 bg-[#D7FB8E] text-slate-950 rounded-2xl flex items-center justify-center mb-6 border border-black/10 shadow-2xs">
+              <FileText className="w-9 h-9 text-slate-950" />
             </div>
             <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Upload a PDF</h3>
             <p className="text-slate-500 mb-8 max-w-sm text-center">
               Our AI will read your document and let you ask questions, summarize content, or find specific information instantly.
             </p>
-            <label className="cursor-pointer bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-bold py-3 px-8 rounded-full shadow-md transition-all flex items-center gap-2">
-              <Upload className="w-5 h-5" /> Choose PDF File
+            <label className="cursor-pointer bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold py-3 px-8 rounded-xl border border-black/10 shadow-sm transition-all flex items-center gap-2">
+              <Upload className="w-5 h-5 text-slate-950" /> Choose PDF File
               <input type="file" accept=".pdf" className="hidden" onChange={handleFileUpload} />
             </label>
           </div>
         )}
 
         {isExtracting && (
-          <div className="h-full flex flex-col items-center justify-center text-fuchsia-600">
-            <Loader2 className="w-10 h-10 animate-spin mb-4" />
+          <div className="h-full flex flex-col items-center justify-center text-slate-950 dark:text-white">
+            <Loader2 className="w-10 h-10 animate-spin mb-4 text-emerald-500" />
             <p className="font-bold animate-pulse">Reading document...</p>
           </div>
         )}
@@ -150,23 +150,23 @@ export function AiPdfChatbotCanvas() {
           <div className="space-y-6">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex gap-4 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === "user" ? "bg-blue-100 text-blue-600" : "bg-fuchsia-100 text-fuchsia-600"}`}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === "user" ? "bg-slate-900 text-white" : "bg-[#D7FB8E] text-slate-950 border border-black/10"}`}>
                   {msg.role === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
                 </div>
-                <div className={`px-5 py-3 rounded-2xl max-w-[80%] shadow-sm ${msg.role === "user" ? "bg-blue-600 text-white rounded-tr-sm" : "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-tl-sm"}`}>
+                <div className={`px-5 py-3 rounded-2xl max-w-[80%] shadow-sm ${msg.role === "user" ? "bg-slate-900 text-white rounded-tr-sm" : "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-tl-sm"}`}>
                   <p className="whitespace-pre-wrap leading-relaxed">{msg.content}</p>
                 </div>
               </div>
             ))}
             {isTyping && (
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-fuchsia-100 text-fuchsia-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#D7FB8E] text-slate-950 border border-black/10 flex items-center justify-center flex-shrink-0">
                   <Bot className="w-4 h-4" />
                 </div>
                 <div className="px-5 py-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-tl-sm flex gap-1">
-                  <span className="w-2 h-2 bg-slate-300 rounded-full animate-bounce"></span>
-                  <span className="w-2 h-2 bg-slate-300 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></span>
-                  <span className="w-2 h-2 bg-slate-300 rounded-full animate-bounce" style={{ animationDelay: "0.4s" }}></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce"></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></span>
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: "0.4s" }}></span>
                 </div>
               </div>
             )}
@@ -187,14 +187,14 @@ export function AiPdfChatbotCanvas() {
             }}
             placeholder={file ? "Ask a question about your PDF..." : "Upload a PDF first"}
             disabled={!file || isExtracting || isTyping}
-            className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-full py-4 pl-6 pr-14 text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-fuchsia-500 outline-none disabled:opacity-50"
+            className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-full py-4 pl-6 pr-14 text-slate-800 dark:text-slate-200 focus:ring-2 focus:ring-emerald-500 outline-none disabled:opacity-50"
           />
           <button 
             onClick={handleSendMessage}
             disabled={!input.trim() || !file || isTyping}
-            className="absolute right-2 w-10 h-10 bg-fuchsia-600 hover:bg-fuchsia-700 text-white rounded-full flex items-center justify-center transition-colors disabled:opacity-50"
+            className="absolute right-2 w-10 h-10 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 border border-black/10 rounded-full flex items-center justify-center transition-colors disabled:opacity-50 cursor-pointer shadow-2xs"
           >
-            <Send className="w-4 h-4 ml-0.5" />
+            <Send className="w-4 h-4 ml-0.5 text-slate-950" />
           </button>
         </div>
       </div>

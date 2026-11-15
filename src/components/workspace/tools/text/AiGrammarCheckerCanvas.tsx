@@ -58,7 +58,7 @@ export function AiGrammarCheckerCanvas() {
             <select 
               value={tone}
               onChange={(e) => setTone(e.target.value)}
-              className="text-sm bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-fuchsia-500 font-medium"
+              className="text-sm bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
             >
               <option value="Professional">Professional</option>
               <option value="Friendly">Friendly</option>
@@ -82,12 +82,12 @@ export function AiGrammarCheckerCanvas() {
             <Button 
               onClick={handleFixGrammar}
               disabled={isProcessing || !text.trim()}
-              className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-bold rounded-xl shadow-md disabled:opacity-70"
+              className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold rounded-xl border border-black/10 shadow-sm cursor-pointer disabled:opacity-70"
             >
               {isProcessing ? (
-                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Fixing...</>
+                <><Loader2 className="w-4 h-4 mr-2 animate-spin text-slate-950" /> Fixing...</>
               ) : (
-                <><Wand2 className="w-4 h-4 mr-2" /> Fix Grammar</>
+                <><Wand2 className="w-4 h-4 mr-2 text-slate-950" /> Fix Grammar</>
               )}
             </Button>
           </div>
@@ -97,13 +97,13 @@ export function AiGrammarCheckerCanvas() {
         <div className="bg-slate-50 dark:bg-slate-900/50 rounded-3xl p-6 shadow-inner border border-slate-200 dark:border-slate-800 flex flex-col h-[500px]">
           <div className="flex justify-between items-center mb-4">
             <label className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-fuchsia-500" />
+              <Sparkles className="w-4 h-4 text-emerald-600" />
               Corrected Text
             </label>
             {correctedText && (
               <button 
                 onClick={handleCopy}
-                className="text-slate-500 hover:text-fuchsia-600 transition-colors p-1"
+                className="text-slate-500 hover:text-emerald-600 transition-colors p-1"
                 title="Copy to clipboard"
               >
                 {copied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5" />}

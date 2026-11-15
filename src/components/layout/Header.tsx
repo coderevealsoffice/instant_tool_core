@@ -305,7 +305,7 @@ export function Header() {
           >
             <button 
               onClick={() => setActiveDropdown(activeDropdown === "ai" ? null : "ai")}
-              className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-fuchsia-600 dark:hover:text-fuchsia-500 transition-colors uppercase flex items-center gap-1 bg-fuchsia-50 dark:bg-fuchsia-900/30 px-3 py-1.5 rounded-full border border-fuchsia-100 dark:border-fuchsia-800 cursor-pointer"
+              className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white transition-colors uppercase flex items-center gap-1 bg-[#D7FB8E]/30 dark:bg-[#D7FB8E]/10 px-3 py-1.5 rounded-full border border-black/10 dark:border-[#D7FB8E]/20 cursor-pointer"
             >
               AI Tools <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === "ai" ? "rotate-180" : ""}`} />
             </button>
@@ -319,9 +319,9 @@ export function Header() {
                       key={idx} 
                       href={tool.href} 
                       onClick={closeAllDropdowns}
-                      className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20 hover:text-fuchsia-600 rounded-md transition-colors"
+                      className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-[#D7FB8E]/20 dark:hover:bg-[#D7FB8E]/10 hover:text-slate-950 dark:hover:text-white rounded-md transition-colors"
                     >
-                      <span className="text-slate-400 group-hover:text-fuchsia-600 transition-colors">{tool.icon}</span>
+                      <span className="text-slate-500 group-hover:text-slate-950 transition-colors">{tool.icon}</span>
                       <span className="truncate">{tool.name}</span>
                     </Link>
                   ))}
@@ -329,7 +329,7 @@ export function Header() {
                   <Link 
                     href="/ai-tools" 
                     onClick={closeAllDropdowns}
-                    className="mt-1 pt-2 border-t border-slate-100 dark:border-slate-800 text-center text-xs font-bold text-fuchsia-600 dark:text-fuchsia-400 hover:text-fuchsia-700 dark:hover:text-fuchsia-300 transition-colors"
+                    className="mt-1 pt-2 border-t border-slate-100 dark:border-slate-800 text-center text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline transition-colors"
                   >
                     View all AI tools &rarr;
                   </Link>

@@ -297,18 +297,18 @@ export function YoutubeDownloaderCanvas() {
                     <button
                       key={q.label}
                       onClick={() => handleDownloadClick(q.url, false)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-red-100 bg-red-50 hover:bg-red-600 hover:border-red-600 hover:text-white rounded-xl text-sm font-bold text-red-600 transition-all shadow-sm hover:shadow-md"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#D7FB8E] hover:bg-[#cbf777] rounded-xl text-sm font-semibold text-slate-950 border border-black/10 transition-all shadow-sm cursor-pointer"
                     >
-                      <Download className="w-4 h-4" />
+                      <Download className="w-4 h-4 text-slate-950" />
                       {q.label}
                     </button>
                   ))
                 ) : (
                   <button
                     onClick={() => handleDownloadClick(getDownloadUrl(), mode === "audio")}
-                    className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-red-600/20"
+                    className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold rounded-xl border border-black/10 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
                   >
-                    <Download className="w-5 h-5" />
+                    <Download className="w-5 h-5 text-slate-950" />
                     {mode === "audio" ? "Download Audio" : "Download Video"}
                   </button>
                 )}

@@ -432,7 +432,7 @@ export function HeroSection() {
               InstantTool helps creators and professionals eliminate bloated software. Merge PDFs, trim 4K videos, transcode media, and run Copyleaks-grade AI detection—100% free and private in your browser.
             </p>
 
-            {/* Action Buttons (Exact Sona.ai Dual CTAs: Pastel Lime Primary + Clean Dark Outline Secondary) */}
+            {/* Action Buttons (Exact Sona.ai Signature Pastel Lime Primary CTA) */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mb-10">
               <Link
                 href="/tools"
@@ -440,14 +440,6 @@ export function HeroSection() {
               >
                 <span>Explore 100+ Free Tools</span>
                 <ArrowUpRight className="w-4 h-4 text-slate-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Link>
-
-              <Link
-                href="/workspace"
-                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-900 dark:border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white font-medium text-[15px] sm:text-base tracking-tight transition-all shadow-2xs hover:border-black dark:hover:border-white group text-center"
-              >
-                <span>Take a tour</span>
-                <ArrowRight className="w-4 h-4 text-slate-900 dark:text-white group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
 

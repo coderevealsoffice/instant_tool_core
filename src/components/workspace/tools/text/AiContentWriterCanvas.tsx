@@ -47,13 +47,12 @@ export function AiContentWriterCanvas() {
   return (
     <div className="flex flex-col items-center justify-start h-full w-full space-y-6 pt-4">
       <div className="flex items-center space-x-4">
-        <div className="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-2xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 opacity-50 mix-blend-overlay"></div>
-          <Sparkles className="w-8 h-8 text-white relative z-10" />
+        <div className="w-14 h-14 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center border border-black/10 shadow-2xs">
+          <Sparkles className="w-7 h-7 text-slate-950" />
         </div>
         <div>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            AI Content Writer <span className="bg-gradient-to-r from-indigo-500 to-purple-500 text-transparent bg-clip-text text-sm px-2 py-0.5 rounded-full border border-indigo-200 dark:border-indigo-800">Pro</span>
+            AI Content Writer <span className="bg-[#D7FB8E] text-slate-950 text-xs font-bold px-2.5 py-0.5 rounded-full border border-black/10">PRO</span>
           </h2>
           <p className="text-slate-500 dark:text-slate-400 text-sm">Generate rich HTML blog posts and articles ready for your CMS.</p>
         </div>
@@ -114,16 +113,16 @@ export function AiContentWriterCanvas() {
             <button 
               onClick={handleGenerate}
               disabled={!prompt.trim() || isGenerating}
-              className="mt-2 w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-bold hover:from-indigo-700 hover:to-purple-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-md hover:shadow-lg"
+              className="mt-2 w-full py-3.5 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold rounded-xl border border-black/10 shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
             >
               {isGenerating ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
                   Generating...
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-5 h-5" />
+                  <Sparkles className="w-5 h-5 text-slate-950" />
                   Generate AI Content
                 </>
               )}

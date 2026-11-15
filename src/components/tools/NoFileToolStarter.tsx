@@ -35,21 +35,21 @@ export function NoFileToolStarter({
 
   return (
     <div
-      className="relative rounded-xl border-4 border-dashed border-slate-300 dark:border-slate-700 p-8 md:p-16 text-center text-slate-800 dark:text-slate-200 bg-white/50 dark:bg-slate-900/50 transition-all duration-300 hover:border-fuchsia-400 dark:hover:border-fuchsia-600 hover:bg-white dark:hover:bg-slate-900"
+      className="relative rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 p-8 sm:p-12 text-center text-slate-900 dark:text-white shadow-sm transition-all"
     >
-      <div className="w-16 h-16 mb-6 mx-auto flex items-center justify-center text-slate-400 dark:text-slate-500">
-        {icon || <Play className="w-12 h-12" />}
+      <div className="w-14 h-14 rounded-2xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center mx-auto mb-4 border border-black/10 shadow-2xs">
+        {icon || <Play className="w-7 h-7" />}
       </div>
-      <h3 className="text-2xl font-bold mb-3">{toolName}</h3>
-      <p className="text-slate-600 dark:text-slate-400 mb-8">
-        {description || "This tool generates a new file directly in your browser. Click below to begin."}
+      <h3 className="text-xl sm:text-2xl font-bold mb-2 tracking-tight">{toolName}</h3>
+      <p className="text-slate-600 dark:text-slate-400 text-sm max-w-md mx-auto mb-6">
+        {description || "This tool operates directly in your browser. Click below to launch."}
       </p>
       <button
         disabled={isProcessing}
-        className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-full font-bold shadow-xl hover:bg-opacity-90 transition-all disabled:opacity-60"
+        className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 px-7 py-3 rounded-xl font-semibold text-sm sm:text-base border border-black/10 shadow-sm transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 cursor-pointer"
         onClick={handleStart}
       >
-        {isProcessing ? "Opening Workspace..." : buttonText}
+        {isProcessing ? "Opening Tool Canvas..." : buttonText}
       </button>
     </div>
   )

@@ -60,8 +60,8 @@ export function CodeToImageCanvas() {
     <div className="max-w-6xl mx-auto space-y-6">
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-            <Code2 className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center border border-black/10 shadow-2xs">
+            <Code2 className="w-5 h-5 text-slate-950" />
           </div>
           <div>
             <h2 className="text-lg font-bold text-slate-900">Code to Image</h2>
@@ -133,9 +133,9 @@ export function CodeToImageCanvas() {
               <button
                 onClick={() => handleExport('png')}
                 disabled={isExporting}
-                className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
+                className="w-full py-3 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold rounded-xl border border-black/10 shadow-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
               >
-                <ImageIcon className="w-4 h-4" /> Export PNG
+                <ImageIcon className="w-4 h-4 text-slate-950" /> Export PNG
               </button>
               <button
                 onClick={() => handleExport('svg')}

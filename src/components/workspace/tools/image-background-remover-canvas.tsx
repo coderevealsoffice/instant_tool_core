@@ -85,7 +85,7 @@ export function ImageBackgroundRemoverCanvas() {
       {/* Uploader Section */}
       {!originalImage && (
         <div 
-          className={`relative rounded-3xl border-4 border-dashed transition-all p-12 text-center bg-white dark:bg-slate-900 ${isDragging ? "border-fuchsia-500 bg-fuchsia-50 dark:bg-fuchsia-900/20" : "border-slate-200 dark:border-slate-800 hover:border-fuchsia-300"}`}
+          className={`relative rounded-3xl border-4 border-dashed transition-all p-12 text-center bg-white dark:bg-slate-900 ${isDragging ? "border-emerald-500 bg-emerald-50/40 dark:bg-emerald-950/20" : "border-slate-200 dark:border-slate-800 hover:border-emerald-300"}`}
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
           onDragLeave={() => setIsDragging(false)}
           onDrop={(e) => { 
@@ -101,14 +101,14 @@ export function ImageBackgroundRemoverCanvas() {
             ref={fileInputRef}
             onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])}
           />
-          <div className="w-20 h-20 bg-fuchsia-100 dark:bg-fuchsia-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <UploadCloud className="w-10 h-10 text-fuchsia-600 dark:text-fuchsia-400" />
+          <div className="w-20 h-20 bg-[#D7FB8E] text-slate-950 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-black/10 shadow-2xs">
+            <UploadCloud className="w-10 h-10 text-slate-950" />
           </div>
           <h3 className="text-2xl font-bold mb-4 text-slate-800 dark:text-slate-200">Remove Image Background</h3>
           <p className="text-slate-500 mb-8 max-w-md mx-auto">Upload any image to automatically remove its background using our free on-device AI.</p>
           <Button 
             size="lg" 
-            className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white rounded-full px-8 h-14 font-bold shadow-lg"
+            className="bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 rounded-xl px-8 h-14 font-semibold border border-black/10 shadow-sm cursor-pointer"
             onClick={() => fileInputRef.current?.click()}
           >
             Choose Image
@@ -149,9 +149,9 @@ export function ImageBackgroundRemoverCanvas() {
                 {processedImage ? (
                   <img src={processedImage} className="max-w-full max-h-[300px] object-contain" alt="Processed" />
                 ) : isProcessing ? (
-                  <div className="text-center p-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-xl border border-fuchsia-100 dark:border-fuchsia-900/30 shadow-lg">
-                    <Loader2 className="w-10 h-10 animate-spin text-fuchsia-500 mx-auto mb-4" />
-                    <p className="font-semibold text-fuchsia-700 dark:text-fuchsia-400">{progressText}</p>
+                  <div className="text-center p-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-xl border border-slate-200 dark:border-slate-800 shadow-lg">
+                    <Loader2 className="w-10 h-10 animate-spin text-emerald-500 mx-auto mb-4" />
+                    <p className="font-semibold text-slate-900 dark:text-white">{progressText}</p>
                     <p className="text-xs text-slate-500 mt-2 max-w-[200px] mx-auto">This happens completely in your browser.</p>
                   </div>
                 ) : (
