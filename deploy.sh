@@ -4,7 +4,8 @@ set -e
 echo "🚀 Starting Deployment..."
 
 echo "📥 1. Pulling latest code..."
-git pull origin main
+git fetch origin main
+git reset --hard origin/main
 
 echo "📦 2. Generating Prisma Client..."
 npx prisma generate
@@ -14,6 +15,7 @@ npm run build
 
 echo "🔄 4. Restarting PM2 process..."
 pm2 restart instant-tool-ai || pm2 start ecosystem.config.js
+pm2 save
 
 echo "✅ Deployment Successful! Check https://devigo.cloud"
 
