@@ -9,10 +9,26 @@ import { Search, ArrowRight, BookOpen, Clock, Tag } from "lucide-react"
 export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
-  title: "InstantTool Blog - File Management, AI Productivity & Speed Tips",
+  title: "InstantTool Blog - Productivity, AI & Speed Guides",
   description: "Read in-depth guides, technical tutorials, and product updates on PDF editing, video compression, client-side WebAssembly, and AI automation.",
   alternates: {
     canonical: "https://devigo.cloud/blog"
+  },
+  keywords: [
+    "InstantTool blog", "pdf guides", "video compression tutorial", "webassembly tutorials",
+    "ai productivity tips", "speed guides", "file conversion blog"
+  ],
+  openGraph: {
+    title: "InstantTool Blog - Productivity, AI & Speed Guides",
+    description: "Read in-depth guides, technical tutorials, and product updates on PDF editing, video compression, client-side WebAssembly, and AI automation.",
+    url: "https://devigo.cloud/blog",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "InstantTool Blog - Productivity, AI & Speed Guides",
+    description: "Read in-depth guides, technical tutorials, and product updates on PDF editing, video compression, client-side WebAssembly, and AI automation.",
   }
 };
 

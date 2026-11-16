@@ -13,10 +13,26 @@ import {
 import { AdSlot } from "@/components/common/AdSlot"
 
 export const metadata = {
-  title: "InstantTool for Creators - Free Multimedia Suite for YouTubers & Podcasters",
-  description: "Free browser tools for modern content creators: trim 4K footage without re-encoding, crop 9:16 vertical shorts, isolate transparent thumbnail graphics, and master podcast audio with zero watermarks.",
+  title: "InstantTool for Creators - Free Video & Audio Suite",
+  description: "Free browser tools for creators: trim 4K footage without re-encoding, crop 9:16 vertical shorts, create thumbnails, and master audio with zero watermarks.",
   alternates: {
     canonical: "https://devigo.cloud/creators"
+  },
+  keywords: [
+    "tools for creators", "youtube shorts cropper", "trim 4k video online", "audio mastering free",
+    "thumbnail generator free", "video tools for youtubers", "InstantTool creators"
+  ],
+  openGraph: {
+    title: "InstantTool for Creators - Free Video & Audio Suite",
+    description: "Free browser tools for creators: trim 4K footage without re-encoding, crop 9:16 vertical shorts, create thumbnails, and master audio with zero watermarks.",
+    url: "https://devigo.cloud/creators",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "InstantTool for Creators - Free Video & Audio Suite",
+    description: "Free browser tools for creators: trim 4K footage without re-encoding, crop 9:16 vertical shorts, create thumbnails, and master audio with zero watermarks.",
   }
 };
 

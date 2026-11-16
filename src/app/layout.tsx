@@ -80,6 +80,9 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "google15fe68b4ac2831d1",
+  },
+  alternates: {
+    canonical: "https://devigo.cloud",
   }
 };
 

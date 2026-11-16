@@ -5,9 +5,25 @@ import { safeDbQuery } from "@/lib/prisma/safe-query"
 
 export const metadata = {
   title: "Frequently Asked Questions (FAQ) | InstantTool",
-  description: "Got questions? Find answers about InstantTool's features, pricing, security, and how to use our suite of file tools.",
+  description: "Got questions? Find clear answers regarding InstantTool features, WebAssembly privacy architecture, pricing plans, and how to use our 100+ free file tools.",
   alternates: {
     canonical: "https://devigo.cloud/faqs"
+  },
+  keywords: [
+    "InstantTool FAQ", "file tools help", "webassembly privacy faq", "is instant tool free",
+    "pdf tools questions", "video downloader faq", "InstantTool support"
+  ],
+  openGraph: {
+    title: "Frequently Asked Questions (FAQ) | InstantTool",
+    description: "Got questions? Find clear answers regarding InstantTool features, WebAssembly privacy architecture, pricing plans, and how to use our 100+ free file tools.",
+    url: "https://devigo.cloud/faqs",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Frequently Asked Questions (FAQ) | InstantTool",
+    description: "Got questions? Find clear answers regarding InstantTool features, WebAssembly privacy architecture, pricing plans, and how to use our 100+ free file tools.",
   }
 };
 

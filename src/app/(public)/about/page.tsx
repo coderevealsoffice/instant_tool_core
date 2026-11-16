@@ -3,10 +3,26 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "About Techyfe - Our Mission, Editorial Standards & Security Architecture",
+  title: "About Us - Mission, Standards & Security | InstantTool",
   description: "Learn about Techyfe's mission to provide fast, secure, and client-side WebAssembly file and AI tools for everyone with zero server data retention.",
   alternates: {
     canonical: "https://devigo.cloud/about"
+  },
+  keywords: [
+    "About InstantTool", "Techyfe mission", "webassembly security", "client side file tools",
+    "zero retention tools", "free productivity suite", "about us"
+  ],
+  openGraph: {
+    title: "About Us - Mission, Standards & Security | InstantTool",
+    description: "Learn about Techyfe's mission to provide fast, secure, and client-side WebAssembly file and AI tools for everyone with zero server data retention.",
+    url: "https://devigo.cloud/about",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us - Mission, Standards & Security | InstantTool",
+    description: "Learn about Techyfe's mission to provide fast, secure, and client-side WebAssembly file and AI tools for everyone with zero server data retention.",
   }
 };
 

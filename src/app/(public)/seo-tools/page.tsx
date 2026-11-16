@@ -12,7 +12,19 @@ export const metadata = {
     "SEO tools", "plagiarism checker", "AEO tools", "GEO tools", "Generative Engine Optimization",
     "meta tag generator", "keyword density analyzer", "schema generator", "robots.txt generator",
     "readability checker", "InstantTool"
-  ]
+  ],
+  openGraph: {
+    title: "Free Professional SEO, AEO & GEO Tools | InstantTool",
+    description: "Free online suite for Plagiarism Checking, AEO & GEO content auditing, Meta Tag simulation, Keyword Density analysis, and JSON-LD schema generation.",
+    url: "https://devigo.cloud/seo-tools",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Professional SEO, AEO & GEO Tools | InstantTool",
+    description: "Free online suite for Plagiarism Checking, AEO & GEO content auditing, Meta Tag simulation, Keyword Density analysis, and JSON-LD schema generation.",
+  }
 };
 
 export default function SeoToolsPage() {

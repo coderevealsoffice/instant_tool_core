@@ -4,10 +4,26 @@ import {
 } from "lucide-react"
 
 export const metadata = {
-  title: "Free Online Audio Tools - Edit, Trim & Convert MP3s | InstantTool",
-  description: "Edit your audio files online for free. Trim MP3s, change volume, convert formats, and more directly in your browser.",
+  title: "Free Online Audio Tools - Trim, Join & Edit MP3 | InstantTool",
+  description: "Edit your audio files online for free. Trim MP3s, change volume, adjust pitch, join multiple tracks, and convert audio formats directly in your browser.",
   alternates: {
     canonical: "https://devigo.cloud/audio-tools"
+  },
+  keywords: [
+    "audio tools online", "trim audio", "audio joiner", "joiner", "change audio pitch",
+    "mp3 cutter free", "audio equalizer online", "voice recorder online", "InstantTool"
+  ],
+  openGraph: {
+    title: "Free Online Audio Tools - Trim, Join & Edit MP3 | InstantTool",
+    description: "Edit your audio files online for free. Trim MP3s, change volume, adjust pitch, join multiple tracks, and convert audio formats directly in your browser.",
+    url: "https://devigo.cloud/audio-tools",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online Audio Tools - Trim, Join & Edit MP3 | InstantTool",
+    description: "Edit your audio files online for free. Trim MP3s, change volume, adjust pitch, join multiple tracks, and convert audio formats directly in your browser.",
   }
 };
 

@@ -4,15 +4,27 @@ import { AdSlot } from "@/components/common/AdSlot"
 import { FileText, CheckCircle2, Shield, Zap, Sparkles, ArrowRight, Lock, Laptop } from "lucide-react"
 
 export const metadata = {
-  title: "Free Online PDF Tools - Merge, Split, Compress & Edit | InstantTool",
+  title: "Free Online PDF Tools - Merge, Split & Compress | InstantTool",
   description: "The ultimate suite of 18+ free online PDF tools. Merge, split, compress, sign, unlock, and convert PDFs directly in your browser with zero file retention.",
   alternates: {
     canonical: "https://devigo.cloud/pdf-tools"
   },
   keywords: [
     "free PDF tools", "merge PDF", "split PDF", "compress PDF", "sign PDF online",
-    "convert PDF to Word", "protect PDF", "PDF to Excel", "WebAssembly PDF editor", "InstantTool"
-  ]
+    "convert PDF to Word", "protect PDF", "PDF to Excel", "WebAssembly PDF editor", "ilovepdf alternative", "InstantTool"
+  ],
+  openGraph: {
+    title: "Free Online PDF Tools - Merge, Split & Compress | InstantTool",
+    description: "The ultimate suite of 18+ free online PDF tools. Merge, split, compress, sign, unlock, and convert PDFs directly in your browser with zero file retention.",
+    url: "https://devigo.cloud/pdf-tools",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online PDF Tools - Merge, Split & Compress | InstantTool",
+    description: "The ultimate suite of 18+ free online PDF tools. Merge, split, compress, sign, unlock, and convert PDFs directly in your browser with zero file retention.",
+  }
 };
 
 export default function PDFToolsCategoryPage() {

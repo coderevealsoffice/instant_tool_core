@@ -4,15 +4,27 @@ import { AdSlot } from "@/components/common/AdSlot"
 import { Bot, Sparkles, CheckCircle2, Shield, Zap, ArrowRight, Brain, Cpu, Wand2 } from "lucide-react"
 
 export const metadata = {
-  title: "Free Online AI Tools - Writers, Detectors & Enhancers | InstantTool",
+  title: "Free Online AI Tools - Writers & Detectors | InstantTool",
   description: "Supercharge your workflow with 10+ free AI tools. Detect AI content, summarize transcripts, enhance images, and audit content for GEO and AEO citations.",
   alternates: {
     canonical: "https://devigo.cloud/ai-tools"
   },
   keywords: [
     "free AI tools", "AI detector", "AI content optimizer", "GEO optimization",
-    "AEO tools", "AI text summarizer", "AI image enhancer", "InstantTool"
-  ]
+    "AEO tools", "AI text summarizer", "AI image enhancer", "caption generator free", "InstantTool"
+  ],
+  openGraph: {
+    title: "Free Online AI Tools - Writers & Detectors | InstantTool",
+    description: "Supercharge your workflow with 10+ free AI tools. Detect AI content, summarize transcripts, enhance images, and audit content for GEO and AEO citations.",
+    url: "https://devigo.cloud/ai-tools",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online AI Tools - Writers & Detectors | InstantTool",
+    description: "Supercharge your workflow with 10+ free AI tools. Detect AI content, summarize transcripts, enhance images, and audit content for GEO and AEO citations.",
+  }
 };
 
 export default function AiToolsPage() {

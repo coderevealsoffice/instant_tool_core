@@ -7,10 +7,26 @@ import prisma from "@/lib/prisma/client"
 import { safeDbQuery } from "@/lib/prisma/safe-query"
 
 export const metadata = {
-  title: "Pricing & Plans - Affordable Premium File Tools | InstantTool",
-  description: "Choose the perfect plan for your needs. Use credits for flexible usage or subscribe for unlimited batch processing with InstantTool.",
+  title: "Pricing & Plans - Pro Subscriptions & Credits | InstantTool",
+  description: "Simple, transparent pricing for creators and teams. Access high-capacity PDF processing, batch media conversion, and dedicated AI quotas with InstantTool.",
   alternates: {
     canonical: "https://devigo.cloud/pricing"
+  },
+  keywords: [
+    "InstantTool pricing", "pro file tools", "batch pdf conversion", "ai tool credits",
+    "unlimited pdf compressor", "business media tools", "instant tool plans"
+  ],
+  openGraph: {
+    title: "Pricing & Plans - Pro Subscriptions & Credits | InstantTool",
+    description: "Simple, transparent pricing for creators and teams. Access high-capacity PDF processing, batch media conversion, and dedicated AI quotas with InstantTool.",
+    url: "https://devigo.cloud/pricing",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pricing & Plans - Pro Subscriptions & Credits | InstantTool",
+    description: "Simple, transparent pricing for creators and teams. Access high-capacity PDF processing, batch media conversion, and dedicated AI quotas with InstantTool.",
   }
 };
 

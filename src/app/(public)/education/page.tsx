@@ -14,10 +14,26 @@ import {
 import { AdSlot } from "@/components/common/AdSlot"
 
 export const metadata = {
-  title: "InstantTool for Education - 100% Free Tools for Students, Researchers & Teachers",
-  description: "Free digital utilities for academic productivity: compress research PDFs, merge thesis chapters, extract textbook quotes with OCR, and format presentations with zero subscription fees.",
+  title: "InstantTool for Education - Free Student & Teacher Tools",
+  description: "Free digital utilities for academic productivity: compress research PDFs, merge thesis chapters, extract textbook quotes with OCR, and format presentations.",
   alternates: {
     canonical: "https://devigo.cloud/education"
+  },
+  keywords: [
+    "tools for students", "free academic tools", "thesis pdf merger", "research paper compressor",
+    "free ocr for students", "education tools", "InstantTool education"
+  ],
+  openGraph: {
+    title: "InstantTool for Education - Free Student & Teacher Tools",
+    description: "Free digital utilities for academic productivity: compress research PDFs, merge thesis chapters, extract textbook quotes with OCR, and format presentations.",
+    url: "https://devigo.cloud/education",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "InstantTool for Education - Free Student & Teacher Tools",
+    description: "Free digital utilities for academic productivity: compress research PDFs, merge thesis chapters, extract textbook quotes with OCR, and format presentations.",
   }
 };
 

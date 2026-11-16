@@ -2,10 +2,26 @@ import Link from "next/link"
 import { ArrowRightLeft, Music, FileText, Image as ImageIcon, BookOpen, FileArchive } from "lucide-react"
 
 export const metadata = {
-  title: "Free Online File Converters - Document, Image, Media | InstantTool",
-  description: "Convert any file format instantly online. Fast, secure, and free converters for PDFs, images, videos, and audio.",
+  title: "Free Online File Converters - PDF, Image & Video | InstantTool",
+  description: "Convert any file format instantly online. Fast, secure, and free converters for PDFs, images, videos, audio, and documents with zero server data retention.",
   alternates: {
     canonical: "https://devigo.cloud/converters"
+  },
+  keywords: [
+    "file converter online", "free online converter", "convert pdf", "video converter",
+    "image converter online", "audio converter", "document converter", "InstantTool"
+  ],
+  openGraph: {
+    title: "Free Online File Converters - PDF, Image & Video | InstantTool",
+    description: "Convert any file format instantly online. Fast, secure, and free converters for PDFs, images, videos, audio, and documents with zero server data retention.",
+    url: "https://devigo.cloud/converters",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online File Converters - PDF, Image & Video | InstantTool",
+    description: "Convert any file format instantly online. Fast, secure, and free converters for PDFs, images, videos, audio, and documents with zero server data retention.",
   }
 };
 

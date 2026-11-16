@@ -126,29 +126,33 @@ export default async function DynamicToolPage({ params }: DynamicToolPageProps) 
 }
 
 function generateSeoDescription(title: string, rawDesc: string): string {
+  const cleanTitle = (title || "").split(/\s*[-–—|:]\s*/)[0].trim()
   let desc = (rawDesc || "").trim()
   if (desc.endsWith('.')) desc = desc.slice(0, -1).trim()
 
-  if (desc.length > 158) {
-    const truncated = desc.slice(0, 155)
+  if (desc.length > 155) {
+    const truncated = desc.slice(0, 150)
     const lastSpace = truncated.lastIndexOf(' ')
     desc = (lastSpace > 100 ? truncated.slice(0, lastSpace) : truncated).trim() + '.'
   } else if (desc.length < 120) {
     const candidates = [
       ` 100% free, private in-browser tool with zero watermarks.`,
       ` Fast, private and free with no registration required.`,
-      ` 100% free and secure in your browser.`
+      ` 100% free and secure in your browser with zero data logs.`
     ]
+    let attached = false
     for (const c of candidates) {
-      if (desc.length + c.length <= 158) {
-        desc = `${desc}.${c}`
+      if ((desc + c).length <= 158 && (desc + c).length >= 130) {
+        desc = desc + c
+        attached = true
         break
       }
     }
-  }
-
-  if (desc.length > 158) {
-    desc = desc.slice(0, 155).trim() + "..."
+    if (!attached || desc.length < 130) {
+      desc = `${cleanTitle} online free. Fast, private in-browser WebAssembly processing with zero watermarks and no registration required.`
+    }
+  } else {
+    desc = desc + '.'
   }
   return desc
 }
@@ -161,6 +165,7 @@ export async function generateMetadata({ params }: DynamicToolPageProps): Promis
     return { title: "Tool Not Found | InstantTool" }
   }
 
+  const cleanToolName = (config.title || "").split(/\s*[-–—|:]\s*/)[0].trim()
   const isPdf = resolvedParams.category === "pdf-tools"
   const isVideo = resolvedParams.category === "video-tools"
   const isAudio = resolvedParams.category === "audio-tools"
@@ -168,26 +173,32 @@ export async function generateMetadata({ params }: DynamicToolPageProps): Promis
   const isColor = resolvedParams.category === "color-tools"
 
   const seoTitle = isPdf
-    ? `${config.title} Online Free - iLovePDF Alternative | InstantTool`
+    ? `${cleanToolName} Online Free - iLovePDF Alt | InstantTool`
     : isColor
-    ? `${config.title} Online - Color Picker & Palette | InstantTool`
-    : `${config.title} Online Free | InstantTool`
+    ? `${cleanToolName} Online - Color Picker & Palette | InstantTool`
+    : `${cleanToolName} Online Free | InstantTool`
 
   const seoDescription = generateSeoDescription(config.title, config.description)
 
   const seoKeywords = [
-    config.title,
-    `${config.title.toLowerCase()} free`,
-    `${config.title.toLowerCase()} online`,
-    `${config.title.toLowerCase()} no watermark`,
-    ...(isPdf ? ["ilovepdf", "ilovepdf alternative", "i love pdf", "smallpdf alternative", "no watermark pdf", "free pdf tools"] : []),
-    ...(isVideo ? ["video to audio converter online free", "youtube downloader", "video trimmer online", "video cutter"] : []),
-    ...(isAudio ? ["audio joiner", "joiner", "audio merger online", "mp3 cutter online", "audio speed changer"] : []),
-    ...(isAi ? ["caption generator free", "ai youtube keyword generator", "ai caption generator", "free ai tools"] : []),
-    ...(isColor ? ["color picker online", "online color picker", "palette generator", "hex color finder"] : []),
+    cleanToolName,
+    `${cleanToolName.toLowerCase()} online`,
+    `${cleanToolName.toLowerCase()} free`,
+    `${cleanToolName.toLowerCase()} no watermark`,
+    `best ${cleanToolName.toLowerCase()}`,
+    `${cleanToolName.toLowerCase()} tool`,
+    ...(isPdf ? ["ilovepdf", "ilovepdf alternative", "smallpdf alternative", "compress pdf free", "merge pdf free", "no watermark pdf", "free pdf tools"] : []),
+    ...(isVideo ? ["video to audio converter online free", "youtube downloader free", "video trimmer online", "video cutter", "download video hd"] : []),
+    ...(isAudio ? ["audio joiner", "joiner", "audio merger online", "mp3 cutter online", "audio speed changer", "extract audio from video"] : []),
+    ...(isAi ? ["caption generator free", "ai youtube keyword generator", "ai caption generator", "free ai tools", "ai detector free"] : []),
+    ...(isColor ? ["color picker online", "online color picker", "palette generator", "hex color finder", "color code extractor"] : []),
     "free online tools",
+    "webassembly tools",
     "InstantTool"
   ]
+
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://devigo.cloud"
+  const fullCanonicalUrl = `${appUrl}/${resolvedParams.category}/${resolvedParams.slug}`
 
   return {
     title: seoTitle,
@@ -205,19 +216,19 @@ export async function generateMetadata({ params }: DynamicToolPageProps): Promis
       },
     },
     alternates: {
-      canonical: `/${resolvedParams.category}/${resolvedParams.slug}`
+      canonical: fullCanonicalUrl
     },
     openGraph: {
       title: seoTitle,
       description: seoDescription,
-      url: `/${resolvedParams.category}/${resolvedParams.slug}`,
+      url: fullCanonicalUrl,
       siteName: "InstantTool",
       images: [
         {
           url: "https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=1200&q=80",
           width: 1200,
           height: 630,
-          alt: config.title,
+          alt: cleanToolName,
         }
       ],
       type: "website",

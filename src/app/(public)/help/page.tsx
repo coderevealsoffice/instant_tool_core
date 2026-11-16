@@ -14,10 +14,26 @@ import {
 import { AdSlot } from "@/components/common/AdSlot"
 
 export const metadata = {
-  title: "Help Center & Troubleshooting Guide | InstantTool Support",
-  description: "Browse the InstantTool Help Center for troubleshooting advice, WebAssembly guides, file conversion tips, and official support contacts.",
+  title: "Help Center & Troubleshooting Guide | InstantTool",
+  description: "Browse the InstantTool Help Center for quick troubleshooting, WebAssembly guides, file conversion tips, and official customer support contacts.",
   alternates: {
     canonical: "https://devigo.cloud/help"
+  },
+  keywords: [
+    "InstantTool help", "file tools support", "webassembly troubleshooting", "file conversion help",
+    "pdf tools guide", "contact instant tool", "support center"
+  ],
+  openGraph: {
+    title: "Help Center & Troubleshooting Guide | InstantTool",
+    description: "Browse the InstantTool Help Center for quick troubleshooting, WebAssembly guides, file conversion tips, and official customer support contacts.",
+    url: "https://devigo.cloud/help",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Help Center & Troubleshooting Guide | InstantTool",
+    description: "Browse the InstantTool Help Center for quick troubleshooting, WebAssembly guides, file conversion tips, and official customer support contacts.",
   }
 };
 

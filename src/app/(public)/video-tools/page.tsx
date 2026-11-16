@@ -4,15 +4,27 @@ import { AdSlot } from "@/components/common/AdSlot"
 import { Video, CheckCircle2, Shield, Zap, Sparkles, ArrowRight, Laptop, Film, Scissors } from "lucide-react"
 
 export const metadata = {
-  title: "Free Online Video Editor & Tools - Trim, Compress, Convert | InstantTool",
+  title: "Free Online Video Editor & Downloader Tools | InstantTool",
   description: "Professional video editing tools in your browser. Trim, crop, merge, compress, and convert videos easily without watermarks or software installation.",
   alternates: {
     canonical: "https://devigo.cloud/video-tools"
   },
   keywords: [
     "free video tools", "video editor online", "trim video", "merge video", "crop video",
-    "screen recorder", "remove watermark", "video to audio", "WebAssembly video editor", "InstantTool"
-  ]
+    "youtube downloader free", "download video", "screen recorder", "video to audio", "InstantTool"
+  ],
+  openGraph: {
+    title: "Free Online Video Editor & Downloader Tools | InstantTool",
+    description: "Professional video editing tools in your browser. Trim, crop, merge, compress, and convert videos easily without watermarks or software installation.",
+    url: "https://devigo.cloud/video-tools",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online Video Editor & Downloader Tools | InstantTool",
+    description: "Professional video editing tools in your browser. Trim, crop, merge, compress, and convert videos easily without watermarks or software installation.",
+  }
 };
 
 export default function VideoToolsCategoryPage() {

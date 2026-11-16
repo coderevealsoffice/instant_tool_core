@@ -2,10 +2,26 @@ import Link from "next/link"
 import { QrCode, Link as LinkIcon, Mail, Wifi, Phone, MapPin, Text, CreditCard } from "lucide-react"
 
 export const metadata = {
-  title: "Free Custom QR Code Generator - Links, Text & WiFi | InstantTool",
-  description: "Create custom QR codes for free. Generate dynamic QR codes for URLs, WiFi, VCards, and more with our easy-to-use tool.",
+  title: "Free Custom QR Code Generator - Links & WiFi | InstantTool",
+  description: "Create custom QR codes for free. Generate dynamic QR codes for URLs, WiFi networks, vCards, text, and emails with logos and high-resolution export.",
   alternates: {
     canonical: "https://devigo.cloud/qr-tools"
+  },
+  keywords: [
+    "qr code generator", "free qr code", "custom qr code with logo", "wifi qr code",
+    "vcard qr code", "url qr code generator", "InstantTool"
+  ],
+  openGraph: {
+    title: "Free Custom QR Code Generator - Links & WiFi | InstantTool",
+    description: "Create custom QR codes for free. Generate dynamic QR codes for URLs, WiFi networks, vCards, text, and emails with logos and high-resolution export.",
+    url: "https://devigo.cloud/qr-tools",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Custom QR Code Generator - Links & WiFi | InstantTool",
+    description: "Create custom QR codes for free. Generate dynamic QR codes for URLs, WiFi networks, vCards, text, and emails with logos and high-resolution export.",
   }
 };
 

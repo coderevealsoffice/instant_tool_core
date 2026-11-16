@@ -7,6 +7,22 @@ export const metadata: Metadata = {
   description: "Explore free, step-by-step masterclasses on PDF compression, client-side WebAssembly conversion, video audio extraction, and YouTube SEO optimization.",
   alternates: {
     canonical: "https://devigo.cloud/tutorials"
+  },
+  keywords: [
+    "InstantTool tutorials", "pdf guides", "how to compress pdf", "how to extract audio from video",
+    "webassembly tutorials", "how to merge pdfs", "step by step guides"
+  ],
+  openGraph: {
+    title: "Tutorials & Step-by-Step Guides | InstantTool",
+    description: "Explore free, step-by-step masterclasses on PDF compression, client-side WebAssembly conversion, video audio extraction, and YouTube SEO optimization.",
+    url: "https://devigo.cloud/tutorials",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tutorials & Step-by-Step Guides | InstantTool",
+    description: "Explore free, step-by-step masterclasses on PDF compression, client-side WebAssembly conversion, video audio extraction, and YouTube SEO optimization.",
   }
 };
 

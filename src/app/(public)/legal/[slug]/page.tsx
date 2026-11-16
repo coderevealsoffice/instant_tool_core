@@ -26,10 +26,34 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const fallback = DEFAULT_LEGAL_PAGES[canonicalSlug]
   const title = dbPage?.title || fallback?.title || "Legal Document"
 
+  const fullLegalUrl = `https://devigo.cloud/legal/${canonicalSlug}`
+  const legalDesc = `Read the official ${title} for InstantTool. Learn about our commitment to user privacy, zero data retention, transparency, and global regulatory standards.`
+
   return {
     title: `${title} | InstantTool Legal & Compliance`,
-    description: `Read the official ${title} for InstantTool. Learn about our commitment to user privacy, zero data retention, transparency, and global regulatory standards.`,
-    alternates: { canonical: `https://devigo.cloud/legal/${canonicalSlug}` },
+    description: legalDesc,
+    keywords: [
+      title,
+      `${title.toLowerCase()} instanttool`,
+      "terms and privacy",
+      "gdpr compliance",
+      "ccpa privacy",
+      "legal policy",
+      "InstantTool"
+    ],
+    alternates: { canonical: fullLegalUrl },
+    openGraph: {
+      title: `${title} | InstantTool Legal & Compliance`,
+      description: legalDesc,
+      url: fullLegalUrl,
+      siteName: "InstantTool",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | InstantTool Legal & Compliance`,
+      description: legalDesc,
+    }
   }
 }
 

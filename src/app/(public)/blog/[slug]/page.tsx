@@ -29,13 +29,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: "Blog Post | InstantTool" }
   }
 
-  const title = post.metaTitle || `${post.title} | InstantTool Knowledge Base`
-  const description = post.metaDesc || post.excerpt || `Read ${post.title} on InstantTool.`
+  const title = post.metaTitle || `${post.title} | InstantTool`
+  let rawDesc = (post.metaDesc || post.excerpt || `Read the complete guide to ${post.title} on InstantTool.`).trim()
+  if (rawDesc.length > 158) {
+    const cut = rawDesc.slice(0, 155)
+    const sp = cut.lastIndexOf(' ')
+    rawDesc = (sp > 100 ? cut.slice(0, sp) : cut).trim() + '...'
+  } else if (rawDesc.length < 120) {
+    rawDesc = `${rawDesc} Read step-by-step instructions and best practices on InstantTool.`
+    if (rawDesc.length > 158) rawDesc = rawDesc.slice(0, 155).trim() + '.'
+  }
+  const description = rawDesc
   const canonicalUrl = `https://devigo.cloud/blog/${slug}`
 
   return {
     title,
     description,
+    keywords: [
+      post.title,
+      `${post.title.toLowerCase()} guide`,
+      "tutorial",
+      "free online tools",
+      "InstantTool"
+    ],
     alternates: {
       canonical: canonicalUrl,
     },

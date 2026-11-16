@@ -2,10 +2,26 @@ import Link from "next/link"
 import { Image as ImageIcon, Crop, RotateCw, Maximize, Eraser, Sliders, ArrowRightLeft, Layers, Sparkles, Palette, FileText } from "lucide-react"
 
 export const metadata = {
-  title: "Free Online Image Tools - Bulk Compress, HEIC & AI Tools | InstantTool",
+  title: "Free Online Image Tools - Compress, Convert & Edit | InstantTool",
   description: "Powerful online image editing tools. Bulk compress images, convert HEIC to JPG, remove backgrounds with AI, and enhance photos instantly.",
   alternates: {
     canonical: "https://devigo.cloud/image-tools"
+  },
+  keywords: [
+    "free image tools", "bulk image compressor", "heic to jpg", "convert image online",
+    "remove background online", "image upscaler", "photo editor online", "InstantTool"
+  ],
+  openGraph: {
+    title: "Free Online Image Tools - Compress, Convert & Edit | InstantTool",
+    description: "Powerful online image editing tools. Bulk compress images, convert HEIC to JPG, remove backgrounds with AI, and enhance photos instantly.",
+    url: "https://devigo.cloud/image-tools",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online Image Tools - Compress, Convert & Edit | InstantTool",
+    description: "Powerful online image editing tools. Bulk compress images, convert HEIC to JPG, remove backgrounds with AI, and enhance photos instantly.",
   }
 };
 

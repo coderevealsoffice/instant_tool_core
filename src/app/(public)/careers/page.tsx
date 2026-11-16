@@ -1,8 +1,8 @@
 import { Briefcase, MapPin, Clock } from "lucide-react"
 
 export const metadata = {
-  title: "Careers at InstantTool - Join Our Mission",
-  description: "We are hiring! Join the team at InstantTool and help us build the future of web-based productivity tools.",
+  title: "Careers at InstantTool - Join Our Engineering Team",
+  description: "Join the InstantTool and Techyfe team. Explore open engineering careers in full-stack web development, client-side WebAssembly, cloud DevOps, and AI.",
   alternates: {
     canonical: "https://devigo.cloud/careers"
   }

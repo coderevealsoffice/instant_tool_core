@@ -13,10 +13,26 @@ import {
 import { AdSlot } from "@/components/common/AdSlot"
 
 export const metadata = {
-  title: "InstantTool for Business - Private, High-Performance File & Media Utilities",
-  description: "Enterprise-grade digital utilities for corporate workflows: sign PDF contracts, compress sensitive financial statements, and convert media client-side with zero cloud data retention.",
+  title: "InstantTool for Business - Corporate File & Media Suite",
+  description: "Enterprise digital utilities for corporate workflows: sign PDF contracts, compress financial records, and convert media client-side with zero data retention.",
   alternates: {
     canonical: "https://devigo.cloud/business"
+  },
+  keywords: [
+    "business pdf tools", "enterprise document security", "sign pdf contracts",
+    "private corporate converters", "client side media tools", "InstantTool business"
+  ],
+  openGraph: {
+    title: "InstantTool for Business - Corporate File & Media Suite",
+    description: "Enterprise digital utilities for corporate workflows: sign PDF contracts, compress financial records, and convert media client-side with zero data retention.",
+    url: "https://devigo.cloud/business",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "InstantTool for Business - Corporate File & Media Suite",
+    description: "Enterprise digital utilities for corporate workflows: sign PDF contracts, compress financial records, and convert media client-side with zero data retention.",
   }
 };
 

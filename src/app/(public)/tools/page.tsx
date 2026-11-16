@@ -6,8 +6,31 @@ import { TOOL_CATEGORIES } from "@/config/menu"
 export const metadata = {
   title: "All Free Online Tools - PDF, Video, Audio & AI | InstantTool",
   description: "Explore our complete suite of 100% free browser tools for PDFs, Videos, Images, Audio, and AI generation. Fast, secure, and private in your browser.",
+  keywords: [
+    "free online tools",
+    "pdf tools online",
+    "video editor online",
+    "audio trimmer online",
+    "format converter",
+    "seo tools free",
+    "ai tools online",
+    "no watermark tools",
+    "InstantTool"
+  ],
   alternates: {
     canonical: "https://devigo.cloud/tools"
+  },
+  openGraph: {
+    title: "All Free Online Tools - PDF, Video, Audio & AI | InstantTool",
+    description: "Explore our complete suite of 100% free browser tools for PDFs, Videos, Images, Audio, and AI generation. Fast, secure, and private in your browser.",
+    url: "https://devigo.cloud/tools",
+    siteName: "InstantTool",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "All Free Online Tools - PDF, Video, Audio & AI | InstantTool",
+    description: "Explore our complete suite of 100% free browser tools for PDFs, Videos, Images, Audio, and AI generation. Fast, secure, and private in your browser.",
   }
 };
 

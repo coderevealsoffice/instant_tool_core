@@ -7,7 +7,7 @@ import { NewsletterForm } from "@/components/layout/NewsletterForm"
 export function Footer() {
   return (
     <footer className="w-full bg-slate-50 dark:bg-[#0B0F19] text-slate-900 dark:text-slate-200 mt-auto transition-colors duration-300 border-t border-slate-200 dark:border-slate-800/50">
-      
+
       {/* Newsletter Section */}
       <div className="border-b border-slate-200 dark:border-slate-800/50">
         <div className="container mx-auto px-3 sm:px-4 max-w-7xl py-10 md:py-16">
@@ -30,7 +30,7 @@ export function Footer() {
       {/* Main Footer Links */}
       <div className="container mx-auto px-3 sm:px-4 max-w-7xl py-12 sm:py-16">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-8">
-          
+
           {/* Brand & Contact Info */}
           <div className="lg:w-1/3 flex flex-col space-y-6">
             <Link href="/" className="font-extrabold text-2xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
@@ -43,7 +43,7 @@ export function Footer() {
               />
               <span>InstantTool</span>
             </Link>
-            
+
             <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-xs">
               Your all-in-one platform for video editing, PDF conversions, and media manipulation — right in your browser.
             </p>
@@ -55,7 +55,7 @@ export function Footer() {
               </a>
               <div className="flex items-start gap-3 text-xs text-slate-500 dark:text-slate-400">
                 <MapPin className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
-                <span>Sector 62, Noida, Uttar Pradesh 201309, India</span>
+                <span>Techyfe Office, Sector 62, Noida, Uttar Pradesh 201309, India</span>
               </div>
             </div>
           </div>
@@ -70,8 +70,8 @@ export function Footer() {
                 <ul className="space-y-3">
                   {section.items.map((item, itemIdx) => (
                     <li key={itemIdx}>
-                      <Link 
-                        href={item.href} 
+                      <Link
+                        href={item.href}
                         className="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
                       >
                         {item.label}
@@ -81,6 +81,42 @@ export function Footer() {
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* SEO Topical Hubs & Deep Interlinking */}
+        <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800/60">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+            Popular Tool Suites &amp; Topic Hubs:
+          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-600 dark:text-slate-400">
+            <Link href="/pdf-tools" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">PDF Tools Hub</Link>
+            <span>•</span>
+            <Link href="/video-tools" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Video Tools Hub</Link>
+            <span>•</span>
+            <Link href="/audio-tools" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Audio Tools Hub</Link>
+            <span>•</span>
+            <Link href="/image-tools" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Image Tools Hub</Link>
+            <span>•</span>
+            <Link href="/seo-tools" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">SEO &amp; AEO Tools</Link>
+            <span>•</span>
+            <Link href="/ai-tools" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">AI Content Generators</Link>
+            <span>•</span>
+            <Link href="/converters" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Universal Format Converters</Link>
+            <span>•</span>
+            <Link href="/tools" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Browse All 104+ Free Tools</Link>
+            <span>•</span>
+            <Link href="/pricing" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Pro &amp; Business Pricing</Link>
+            <span>•</span>
+            <Link href="/education" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">For Students &amp; Researchers</Link>
+            <span>•</span>
+            <Link href="/creators" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">For Content Creators</Link>
+            <span>•</span>
+            <Link href="/business" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">For Corporate Teams</Link>
+            <span>•</span>
+            <Link href="/tutorials" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Step-by-Step Tutorials</Link>
+            <span>•</span>
+            <Link href="/blog" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Engineering &amp; Speed Blog</Link>
           </div>
         </div>
       </div>

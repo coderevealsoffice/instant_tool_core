@@ -90,24 +90,58 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const legalTitle = dbPage?.title || fallbackLegal?.title
 
   if (legalTitle) {
+    const fullLegalCanonical = `https://devigo.cloud/legal/${canonicalSlug}`
     return {
       title: `${legalTitle} | InstantTool Legal & Compliance`,
-      description: `Read the official ${legalTitle} for InstantTool. Learn about our data protection standards, client-side zero file retention, and AdSense compliance.`,
-      alternates: { canonical: `https://devigo.cloud/legal/${canonicalSlug}` },
+      description: `Read the official ${legalTitle} for InstantTool. Learn about our user privacy commitments, zero data retention, and global compliance standards.`,
+      alternates: { canonical: fullLegalCanonical },
+      openGraph: {
+        title: `${legalTitle} | InstantTool Legal & Compliance`,
+        description: `Read the official ${legalTitle} for InstantTool. Learn about our user privacy commitments, zero data retention, and global compliance standards.`,
+        url: fullLegalCanonical,
+        siteName: "InstantTool",
+        type: "website",
+      },
     }
   }
 
   // 2. Check if it's a Tool Category
   const catInfo = resolveCategoryInfo(rawSlug)
   if (catInfo) {
+    const fullCatCanonical = `https://devigo.cloud/${rawSlug}`
+    const catTitle = `Free Online ${catInfo.title} - Fast & Private | InstantTool`
+    const catDesc = `Explore free online ${catInfo.title.toLowerCase()}. Fast, private client-side WebAssembly processing with zero watermarks and no registration required.`
     return {
-      title: `Free Online ${catInfo.title} - Fast, Private & Zero Watermarks | InstantTool`,
-      description: `Explore our 100% free online ${catInfo.title.toLowerCase()}. Process files directly in your web browser with client-side WebAssembly, zero uploads, and instant export.`,
-      alternates: { canonical: `https://devigo.cloud/${rawSlug}` },
+      title: catTitle,
+      description: catDesc,
+      keywords: [
+        catInfo.title,
+        `${catInfo.title.toLowerCase()} online`,
+        `free ${catInfo.title.toLowerCase()}`,
+        "webassembly tools",
+        "free online tools",
+        "InstantTool"
+      ],
+      alternates: { canonical: fullCatCanonical },
+      openGraph: {
+        title: catTitle,
+        description: catDesc,
+        url: fullCatCanonical,
+        siteName: "InstantTool",
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: catTitle,
+        description: catDesc,
+      }
     }
   }
 
-  return { title: "InstantTool - Free Web Tools" }
+  return { 
+    title: "InstantTool - Free Online File & Media Tools",
+    alternates: { canonical: `https://devigo.cloud/${rawSlug}` }
+  }
 }
 
 export default async function DynamicCategoryOrLegalPage({ params }: { params: Promise<{ category: string }> }) {
