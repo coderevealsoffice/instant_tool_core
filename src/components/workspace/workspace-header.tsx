@@ -11,7 +11,8 @@ interface WorkspaceHeaderProps {
 
 export function WorkspaceHeader({ toolName, onFinish, isProcessing }: WorkspaceHeaderProps) {
   // Format tool name: merge-pdf -> Merge
-  const title = toolName.split("-")[0].charAt(0).toUpperCase() + toolName.split("-")[0].slice(1)
+  const rawWord = (toolName || "Workspace").split("-")[0]
+  const title = rawWord ? (rawWord.charAt(0).toUpperCase() + rawWord.slice(1)) : "Workspace"
 
   return (
     <header className="h-16 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4 shrink-0 shadow-sm z-10">

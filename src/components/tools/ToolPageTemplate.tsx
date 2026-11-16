@@ -1045,7 +1045,7 @@ export function ToolPageTemplate({
   const safeSlug = (slug || "").toLowerCase()
 
   // Clean title to avoid long messy compound titles like "Plagiarism Checker - 100% Free..."
-  const cleanTitle = (safeTitle || "").split(" - ")[0].split(" | ")[0].trim()
+  const cleanTitle = (safeTitle || "").split(/\s*[-–—|:]\s*/)[0].trim()
 
   // Dynamic category and format helpers tailored to each page
   const categoryLabel = (category || "TOOLS").replace(/-/g, ' ').toUpperCase()

@@ -29,8 +29,16 @@ export function NoFileToolStarter({
   const handleStart = () => {
     setIsProcessing(true)
     clearFiles()
-    setContext(category, toolSlug)
-    router.push(`/workspace?tool=${toolSlug}&category=${category}`)
+    const resolvedCategory = category && category !== "misc" ? category : (
+      toolSlug.includes("video") || toolSlug.includes("recorder") ? "video-tools" :
+      toolSlug.includes("audio") || toolSlug.includes("voice") || toolSlug.includes("speech") ? "audio-tools" :
+      toolSlug.includes("pdf") ? "pdf-tools" :
+      toolSlug.includes("ai") ? "ai-tools" :
+      toolSlug.includes("json") || toolSlug.includes("minify") || toolSlug.includes("format") || toolSlug.includes("code") ? "dev-tools" :
+      "tools"
+    )
+    setContext(resolvedCategory, toolSlug)
+    router.push(`/workspace?tool=${toolSlug}&category=${resolvedCategory}`)
   }
 
   return (

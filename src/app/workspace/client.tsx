@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useEffect } from "react"
+import React, { Component, ErrorInfo, ReactNode, Suspense, useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import dynamic from "next/dynamic"
 import { WorkspaceSidebar } from "@/components/workspace/workspace-sidebar"
@@ -94,8 +94,54 @@ import { useWorkspaceStore } from "@/store/workspace-store"
 import { mergePdfs } from "@/lib/pdf/merge"
 import { getFFmpeg } from "@/lib/ffmpeg/client"
 import { fetchFile } from "@ffmpeg/util"
-import { useState } from "react"
 import { toast } from "sonner"
+
+interface ErrorBoundaryProps {
+  children: ReactNode
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean
+}
+
+class CanvasErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(): ErrorBoundaryState {
+    return { hasError: true }
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("Canvas error caught by boundary:", error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="max-w-xl mx-auto p-8 my-8 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 flex items-center justify-center mx-auto mb-4 font-bold text-lg">
+            !
+          </div>
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Canvas Unavailable</h3>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-6">
+            An unexpected error occurred while loading this canvas. Please reload or select another tool from the sidebar.
+          </p>
+          <button
+            onClick={() => this.setState({ hasError: false })}
+            className="px-5 py-2.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-xs transition-all shadow-xs cursor-pointer border border-black/10"
+          >
+            Try Reloading Canvas
+          </button>
+        </div>
+      )
+    }
+
+    return this.props.children
+  }
+}
 
 function WorkspaceRouter() {
   const searchParams = useSearchParams()
@@ -479,7 +525,9 @@ function WorkspaceRouter() {
           isProcessing={isProcessing}
         />
         <div className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-900/50 p-4">
-          {renderCanvas()}
+          <CanvasErrorBoundary>
+            {renderCanvas()}
+          </CanvasErrorBoundary>
         </div>
       </main>
     </>
