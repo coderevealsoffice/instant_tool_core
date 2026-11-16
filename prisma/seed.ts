@@ -40,12 +40,12 @@ async function main() {
 
   // 3. Seed Tool Definitions
   const tools = [
-    { name: "Compress PDF", slug: "compress-pdf", category: ToolCategory.PDF, description: "Reduce PDF file size", creditCost: 2 },
-    { name: "Merge PDF", slug: "merge-pdf", category: ToolCategory.PDF, description: "Combine multiple PDFs", creditCost: 2 },
-    { name: "Split PDF", slug: "split-pdf", category: ToolCategory.PDF, description: "Extract pages from PDF", creditCost: 2 },
-    { name: "Compress Image", slug: "compress-image", category: ToolCategory.IMAGE, description: "Reduce Image file size", creditCost: 1 },
-    { name: "Convert Image", slug: "convert-image", category: ToolCategory.IMAGE, description: "Convert Image format", creditCost: 1 },
-    { name: "QR Generator", slug: "qr-generator", category: ToolCategory.QR, description: "Generate QR codes", creditCost: 1 },
+    { name: "Compress PDF", slug: "compress-pdf", category: ToolCategory.PDF, creditCost: 2 },
+    { name: "Merge PDF", slug: "merge-pdf", category: ToolCategory.PDF, creditCost: 2 },
+    { name: "Split PDF", slug: "split-pdf", category: ToolCategory.PDF, creditCost: 2 },
+    { name: "Compress Image", slug: "compress-image", category: ToolCategory.IMAGE, creditCost: 1 },
+    { name: "Convert Image", slug: "convert-image", category: ToolCategory.IMAGE, creditCost: 1 },
+    { name: "QR Generator", slug: "qr-generator", category: ToolCategory.QR, creditCost: 1 },
   ]
 
   for (const tool of tools) {
