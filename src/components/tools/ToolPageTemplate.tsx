@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { CheckCircle2, ChevronDown, ChevronUp, ArrowRight, ArrowUpRight, UploadCloud, FileText } from "lucide-react"
 import { SupportDonationCTA } from "./SupportDonationCTA"
 import { AdSlot } from "@/components/common/AdSlot"
+import { BUILTIN_BLOG_POSTS } from "@/lib/blogs-data"
 
 export interface Feature {
   title: string
@@ -1013,6 +1014,20 @@ export function ToolPageTemplate({
 
   const mockupData = getToolMockupData(slug, title, category)
 
+  // Select top 3 relevant articles for internal linking and depth
+  const relevantBlogs = BUILTIN_BLOG_POSTS.filter(b => {
+    const cat = category.toLowerCase()
+    if (cat.includes("pdf") && b.categoryName === "PDF Tools") return true
+    if (cat.includes("video") && b.categoryName === "Video Tools") return true
+    if (cat.includes("audio") && (b.categoryName === "Video Tools" || b.categoryName === "Technology")) return true
+    if (cat.includes("image") && b.categoryName === "Image Tools") return true
+    if (cat.includes("seo") && (b.categoryName === "Creators" || b.categoryName === "Technology")) return true
+    if (cat.includes("ai") && (b.categoryName === "Creators" || b.categoryName === "Technology")) return true
+    return false
+  }).slice(0, 3)
+
+  const displayBlogs = relevantBlogs.length >= 3 ? relevantBlogs : BUILTIN_BLOG_POSTS.slice(0, 3)
+
   const displayHeadline = isPdf
     ? `${title} Files Online Instantly`
     : `${title} Online Free`
@@ -1516,36 +1531,148 @@ export function ToolPageTemplate({
         </section>
       )}
 
-      {/* 6. Tutorials */}
-      {tutorials.length > 0 && (
-        <section className="py-20 px-4 bg-white dark:bg-slate-950">
-          <div className="container mx-auto max-w-5xl">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-12">{tutorialsTitle}</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {tutorials.map((tut, i) => (
-                <Link key={i} href={tut.link} className="group block">
-                  <div className={`h-40 rounded-t-xl ${tut.color} dark:opacity-80 flex items-center justify-center p-6 transition-transform group-hover:scale-[1.02]`}>
-                     {/* Placeholder icon/graphic for tutorial */}
-                     <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                        <div className="w-8 h-8 bg-white rounded-sm shadow-sm transform rotate-12 group-hover:rotate-45 transition-transform duration-500"></div>
-                     </div>
-                  </div>
-                  <div className="border dark:border-slate-800 border-t-0 rounded-b-xl p-6 bg-white dark:bg-slate-900 group-hover:shadow-lg dark:group-hover:shadow-slate-800/50 transition-all h-full">
-                    <h3 className="font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">{tut.title}</h3>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-3">{tut.description}</p>
-                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold text-sm mt-4 inline-block">Read article →</span>
-                  </div>
-                </Link>
-              ))}
+      {/* 6. Technical Specifications & Standards */}
+      <section className="py-20 px-4 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800/80 font-sans">
+        <div className="container mx-auto max-w-5xl">
+          <div className="max-w-3xl mx-auto text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-4 border border-slate-200 dark:border-slate-700">
+              <span>◆ Technical Architecture</span>
             </div>
-            <div className="mt-12 text-center">
-              <Link href="/blog">
-                <Button variant="outline" className="px-8 rounded-full font-semibold dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">View All Articles</Button>
-              </Link>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
+              Technical Specifications &amp; Compatibility
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+              Built with client-side WebAssembly, high-throughput memory buffers, and zero server storage retention.
+            </p>
+          </div>
+
+          <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 overflow-hidden bg-[#FAFAFA] dark:bg-slate-900/40 shadow-xs mb-16">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900 text-slate-900 dark:text-white font-bold">
+                    <th className="py-4 px-6">Specification</th>
+                    <th className="py-4 px-6">Standard Supported</th>
+                    <th className="py-4 px-6">Privacy &amp; Security Impact</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200/70 dark:divide-slate-800 text-slate-600 dark:text-slate-300 text-xs sm:text-sm">
+                  <tr>
+                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Execution Engine</td>
+                    <td className="py-4 px-6 font-mono text-emerald-600 dark:text-emerald-400 font-bold">Client-Side WebAssembly (WASM)</td>
+                    <td className="py-4 px-6">Executes locally inside your browser sandbox; no unencrypted network transit</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Format Compatibility</td>
+                    <td className="py-4 px-6 font-mono">{isPdf ? "PDF 1.4 – 2.0, PDF/A, ISO 32000" : isVideo ? "MP4, MOV, MKV, WebM, AVI" : isAudio ? "MP3, WAV, AAC, M4A, FLAC" : isImage ? "PNG, JPG, WebP, SVG, AVIF, HEIC" : "Universal Web & Media Standards"}</td>
+                    <td className="py-4 px-6">Full backward and forward compliance with desktop and mobile viewers</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Encryption Channel</td>
+                    <td className="py-4 px-6 font-mono text-slate-900 dark:text-white font-semibold">TLS 1.3 / 256-Bit SSL</td>
+                    <td className="py-4 px-6">Cryptographic validation prevents man-in-the-middle inspection or eavesdropping</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Data Retention Policy</td>
+                    <td className="py-4 px-6 font-mono text-emerald-600 dark:text-emerald-400 font-bold">0 MB Disk Storage (In-RAM Only)</td>
+                    <td className="py-4 px-6">Working memory is wiped permanently as soon as your session or download completes</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Supported Platforms</td>
+                    <td className="py-4 px-6">macOS, Windows 11, iOS, Android, Linux, ChromeOS</td>
+                    <td className="py-4 px-6">Zero executable software, plugins, or browser extensions to install</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-        </section>
-      )}
+
+          {/* Architecture Comparison Table */}
+          <div className="rounded-[2.5rem] p-8 md:p-12 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm">
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight text-center">
+              Why Use InstantTool Instead of Legacy Cloud Converters?
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="p-6 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/80 dark:border-emerald-800/60 space-y-3">
+                <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-extrabold text-sm uppercase tracking-wider">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                  <span>InstantTool Modern Architecture</span>
+                </div>
+                <ul className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                  <li>• <strong>Local Browser Processing:</strong> Fast client-side execution with zero upload latency.</li>
+                  <li>• <strong>Zero Document Logging:</strong> Sensitive contracts and files are never stored on server disks.</li>
+                  <li>• <strong>100% Free Core Tools:</strong> No mandatory credit card registration or surprise payment blocks.</li>
+                  <li>• <strong>Zero Watermarks:</strong> Clean, pristine downloads ready for professional use.</li>
+                </ul>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-extrabold text-sm uppercase tracking-wider">
+                  <span className="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-xs font-black">✕</span>
+                  <span>Legacy Cloud Converter Sites</span>
+                </div>
+                <ul className="space-y-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                  <li>• Uploads confidential documents across the public internet to third-party cloud servers.</li>
+                  <li>• Stores files on disk for hours or days, creating vulnerability honeypots.</li>
+                  <li>• Enforces strict 2-file daily caps and demands recurring monthly subscriptions.</li>
+                  <li>• Degrades image/video quality or stamps watermarks to force paid upgrades.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Relevant Educational Guides & Tutorials (Internal Linking) */}
+      <section className="py-20 px-4 bg-slate-50/60 dark:bg-slate-900/40 border-t border-slate-200/80 dark:border-slate-800/80 font-sans">
+        <div className="container mx-auto max-w-5xl">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200 dark:border-emerald-800">
+                <span>◆ Knowledge Base &amp; Tutorials</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                Recommended Guides &amp; Deep Dives
+              </h2>
+            </div>
+            <Link href="/blog" className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline">
+              View all 12+ guides →
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {displayBlogs.map((post) => (
+              <Link 
+                key={post.id} 
+                href={`/blog/${post.slug}`} 
+                className="group flex flex-col p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-emerald-400 dark:hover:border-emerald-600 hover:shadow-md transition-all duration-300"
+              >
+                <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-800">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider mb-2">
+                  <span className="text-emerald-600 dark:text-emerald-400">{post.categoryName}</span>
+                  <span className="text-slate-400 font-normal">{post.readTime}</span>
+                </div>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
+                  {post.title}
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-4 leading-relaxed flex-grow">
+                  {post.excerpt}
+                </p>
+                <div className="text-xs font-bold text-emerald-600 dark:text-emerald-400 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1">
+                  Read guide →
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* 7. Bottom Sections */}
       <section className="py-12 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900">
