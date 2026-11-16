@@ -420,10 +420,10 @@ export function HeroSection() {
             </div>
 
             {/* Giant Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.65rem] font-bold text-slate-900 dark:text-white tracking-tight leading-[1.08] mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-[3.65rem] font-bold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-6">
               Every tool you need,
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500">
-                built for speed.
+                {" "}built for speed.
               </span>
             </h1>
 
@@ -472,7 +472,7 @@ export function HeroSection() {
           </div>
 
           {/* ─── RIGHT COLUMN: Infinite Scrolling 3-Column Showcase (Sona Style) ─── */}
-          <div className="lg:col-span-7 relative h-[640px] lg:h-[700px] overflow-hidden rounded-3xl marquee-container">
+          <div className="lg:col-span-7 relative h-[420px] sm:h-[600px] lg:h-[700px] overflow-hidden rounded-3xl marquee-container">
 
             {/* Top Gradient Fade Mask */}
             <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#FAFAFA] dark:from-slate-950 via-[#FAFAFA]/80 dark:via-slate-950/80 to-transparent z-20"></div>

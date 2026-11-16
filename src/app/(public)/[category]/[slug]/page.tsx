@@ -130,21 +130,49 @@ export async function generateMetadata({ params }: DynamicToolPageProps): Promis
   const config = getToolConfig(resolvedParams.category, resolvedParams.slug)
   
   if (!config) {
-    return { title: "Tool Not Found | Instant Tool" }
+    return { title: "Tool Not Found | InstantTool" }
   }
 
+  const isPdf = resolvedParams.category === "pdf-tools"
+  const isVideo = resolvedParams.category === "video-tools"
+  const isAudio = resolvedParams.category === "audio-tools"
+  const isAi = resolvedParams.category === "ai-tools"
+  const isColor = resolvedParams.category === "color-tools"
+
+  const seoTitle = isPdf
+    ? `${config.title} Online Free - iLovePDF Alternative | InstantTool`
+    : isColor
+    ? `${config.title} Online - Color Picker & Palette | InstantTool`
+    : `${config.title} Online Free | InstantTool`
+
+  const seoKeywords = [
+    config.title,
+    `${config.title.toLowerCase()} free`,
+    `${config.title.toLowerCase()} online`,
+    `${config.title.toLowerCase()} no watermark`,
+    ...(isPdf ? ["ilovepdf", "ilovepdf alternative", "i love pdf", "smallpdf alternative", "no watermark pdf", "free pdf tools"] : []),
+    ...(isVideo ? ["video to audio converter online free", "youtube downloader", "video trimmer online", "video cutter"] : []),
+    ...(isAudio ? ["audio joiner", "joiner", "audio merger online", "mp3 cutter online", "audio speed changer"] : []),
+    ...(isAi ? ["caption generator free", "ai youtube keyword generator", "ai caption generator", "free ai tools"] : []),
+    ...(isColor ? ["color picker online", "online color picker", "palette generator", "hex color finder"] : []),
+    "free online tools",
+    "InstantTool"
+  ]
+
   return {
-    title: `${config.title} Online Free | Instant Tool`,
-    description: config.description.length > 50 ? config.description : `${config.description} Fast, secure, and free online tool. No installation or registration required.`,
-    keywords: [config.title, "free online tool", "Instant Tool", "compress", "convert", "edit", "PDF tool", "image tool", "secure", "AEO", "AI optimized", "no watermark"],
+    title: seoTitle,
+    description: config.description.length > 50 
+      ? `${config.description} 100% free, private in-browser WebAssembly processing with zero watermarks and no registration required.`
+      : `${config.description} Fast, secure, and free online tool with zero watermarks. No installation or registration required.`,
+    keywords: seoKeywords,
     alternates: {
       canonical: `/${resolvedParams.category}/${resolvedParams.slug}`
     },
     openGraph: {
-      title: `${config.title} Online Free | Instant Tool`,
+      title: seoTitle,
       description: config.description,
       url: `/${resolvedParams.category}/${resolvedParams.slug}`,
-      siteName: "Instant Tool",
+      siteName: "InstantTool",
       images: [
         {
           url: "https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=1200&q=80",
@@ -157,7 +185,7 @@ export async function generateMetadata({ params }: DynamicToolPageProps): Promis
     },
     twitter: {
       card: "summary_large_image",
-      title: `${config.title} Online Free | Instant Tool`,
+      title: seoTitle,
       description: config.description,
       images: ["https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=1200&q=80"],
     }

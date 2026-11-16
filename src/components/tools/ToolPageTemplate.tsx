@@ -1150,7 +1150,7 @@ export function ToolPageTemplate({
                 </div>
 
                 {/* Giant Tool Headline (Tailored to PDF / Current Tool) */}
-                <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-slate-900 dark:text-white tracking-tight leading-[1.08] mb-6">
+                <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-bold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-6">
                   {displayHeadline}
                 </h1>
 
@@ -1163,7 +1163,7 @@ export function ToolPageTemplate({
                 <div className="flex items-center gap-3 w-full sm:w-auto mb-4">
                   <button
                     onClick={handleChooseFilesClick}
-                    className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer text-center"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer text-center"
                   >
                     <span>Choose {title} Files</span>
                     <ArrowUpRight className="w-4 h-4 text-slate-950" />
@@ -1173,10 +1173,10 @@ export function ToolPageTemplate({
               </div>
 
               {/* Right Column: Sona.ai Overlapping Interactive Cards (Tailored to Current Tool) */}
-              <div className="lg:col-span-5 relative flex items-center justify-center min-h-[380px] w-full py-6">
+              <div className="lg:col-span-5 relative flex items-center justify-center min-h-[360px] sm:min-h-[380px] w-full py-4 sm:py-6 overflow-hidden sm:overflow-visible max-w-[340px] sm:max-w-none mx-auto">
                 
                 {/* 1. Sona.ai Back Lime Card (Dynamic per Category) */}
-                <div className="w-[270px] sm:w-[310px] rounded-3xl bg-[#D7FB8E] p-6 text-slate-950 shadow-md border border-black/5 flex flex-col justify-between absolute right-0 sm:right-4 top-0 transform translate-x-1 sm:translate-x-0">
+                <div className="w-[250px] sm:w-[310px] rounded-3xl bg-[#D7FB8E] p-5 sm:p-6 text-slate-950 shadow-md border border-black/5 flex flex-col justify-between absolute right-1 sm:right-4 top-0 transform translate-x-0">
                   <div>
                     <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-slate-700 mb-1.5">
                       {categoryLabel}
@@ -1208,7 +1208,7 @@ export function ToolPageTemplate({
                 {/* 2. Sona.ai Front Sky Blue Card (Active Dropzone) */}
                 <div
                   onClick={handleChooseFilesClick}
-                  className="w-[270px] sm:w-[310px] rounded-3xl bg-[#BAE6FD] dark:bg-sky-950 p-6 shadow-2xl border border-sky-300 dark:border-sky-800 hover:scale-[1.02] transition-all cursor-pointer relative z-20 transform -translate-x-6 sm:-translate-x-12 translate-y-16 sm:translate-y-20"
+                  className="w-[250px] sm:w-[310px] rounded-3xl bg-[#BAE6FD] dark:bg-sky-950 p-5 sm:p-6 shadow-2xl border border-sky-300 dark:border-sky-800 hover:scale-[1.02] transition-all cursor-pointer relative z-20 transform -translate-x-4 sm:-translate-x-12 translate-y-12 sm:translate-y-20"
                 >
                   <div>
                     <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-sky-900 dark:text-sky-300 mb-1.5">

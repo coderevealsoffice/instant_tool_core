@@ -5,7 +5,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { MAIN_MENU, TOOL_CATEGORIES } from "@/config/menu"
-import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react"
+import { ChevronDown, ChevronRight, Menu, X, ArrowUpRight, Sparkles, BookOpen, FileText, Phone, Award, Layers } from "lucide-react"
 
 import { useSession } from "next-auth/react"
 import { ThemeToggle } from "./ThemeToggle"
@@ -15,8 +15,21 @@ export function Header() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isLockedClosed, setIsLockedClosed] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [expandedMobileCategory, setExpandedMobileCategory] = useState<string | null>("PDF Tools")
   const { data: session } = useSession()
   const [credits, setCredits] = useState<number | null>(null)
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isMobileMenuOpen])
 
   // Automatically close all dropdowns & mobile menus on navigation and window events
   useEffect(() => {
@@ -361,44 +374,188 @@ export function Header() {
               </Link>
             </>
           )}
-          <button className="lg:hidden p-1 bg-slate-100 dark:bg-slate-800 rounded-md" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <button 
+            type="button"
+            className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold text-xs uppercase tracking-wider transition-all border border-slate-200/80 dark:border-slate-700 shadow-2xs cursor-pointer select-none" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+          >
             {isMobileMenuOpen ? (
-              <X className="w-5 h-5 text-slate-700 dark:text-slate-300" />
+              <>
+                <X className="w-4 h-4 text-slate-700 dark:text-slate-300" />
+                <span>Close</span>
+              </>
             ) : (
-              <Menu className="w-5 h-5 text-slate-700 dark:text-slate-300" />
+              <>
+                <Menu className="w-4 h-4 text-slate-700 dark:text-slate-300" />
+                <span>Menu</span>
+              </>
             )}
           </button>
         </div>
 
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Modern Fullscreen Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-16 left-0 right-0 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-xl overflow-y-auto" style={{ maxHeight: "calc(100vh - 4rem)" }}>
-          <div className="p-4 flex flex-col gap-4">
-            <Link href="/seo-tools" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors uppercase py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-              <span>SEO & AEO Tools</span>
-              <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full font-extrabold">NEW</span>
-            </Link>
-            <Link href="/pdf-tools" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-red-600 transition-colors uppercase py-2 border-b border-slate-100 dark:border-slate-800">PDF Tools</Link>
-            <Link href="/video-tools" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-red-600 transition-colors uppercase py-2 border-b border-slate-100 dark:border-slate-800">Video Tools</Link>
-            <Link href="/ai-tools" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-fuchsia-600 hover:text-fuchsia-700 transition-colors uppercase py-2 border-b border-slate-100 dark:border-slate-800">AI Tools</Link>
-            <Link href="/tools" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-red-600 transition-colors uppercase py-2">All Tools →</Link>
+        <div className="lg:hidden fixed inset-x-0 top-16 bottom-0 z-50 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 shadow-2xl overflow-y-auto animate-in fade-in-50 slide-in-from-top-2 duration-200">
+          <div className="p-4 sm:p-6 space-y-6 max-w-lg mx-auto">
             
-            <div className="h-px bg-slate-100 dark:bg-slate-800 my-2"></div>
-            
-            {session ? (
-              <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 dark:text-slate-200 py-2">Dashboard</Link>
-            ) : (
+            {/* Top Primary Action Banner */}
+            <div className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/90 dark:border-slate-800 shadow-2xs">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                  ◆ Instant Online Suite
+                </span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
+                  100% Free &bull; No Sign-Up
+                </span>
+              </div>
               <Link 
-                href="/auth/login" 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#D7FB8E] text-slate-950 font-medium text-sm tracking-tight shadow-xs"
+                href="/tools" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-bold text-sm tracking-tight transition-all shadow-xs"
               >
-                <span>Free Workspace</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-slate-950" />
+                <span>Explore All 100+ Tools</span>
+                <ArrowUpRight className="w-4 h-4 text-slate-950" />
               </Link>
-            )}
+            </div>
+
+            {/* Category Tool Accordions */}
+            <div className="space-y-3">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-1">
+                Tool Categories
+              </div>
+
+              {TOOL_CATEGORIES.map((category) => {
+                const isExpanded = expandedMobileCategory === category.title
+
+                return (
+                  <div 
+                    key={category.title}
+                    className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 overflow-hidden"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setExpandedMobileCategory(isExpanded ? null : category.title)}
+                      className="w-full p-4 flex items-center justify-between font-bold text-sm text-slate-900 dark:text-white text-left hover:bg-slate-100/60 dark:hover:bg-slate-800/50 transition-colors"
+                    >
+                      <span className="flex items-center gap-2">
+                        <span>{category.title}</span>
+                        <span className="text-[10px] text-slate-400 font-mono font-normal">
+                          ({category.tools?.length || 0})
+                        </span>
+                      </span>
+                      <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
+                    </button>
+
+                    {isExpanded && (
+                      <div className="p-3 pt-0 border-t border-slate-100 dark:border-slate-800/80 space-y-1 animate-in fade-in-50 duration-150">
+                        {category.tools?.slice(0, 8).map((tool, idx) => (
+                          <Link
+                            key={idx}
+                            href={tool.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="flex items-center gap-2.5 p-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                          >
+                            <span className="w-5 h-5 flex items-center justify-center text-slate-400">{tool.icon}</span>
+                            <span className="truncate">{tool.name}</span>
+                          </Link>
+                        ))}
+                        <Link
+                          href={category.title.toLowerCase().includes("seo") ? "/seo-tools" : category.title.toLowerCase().includes("pdf") ? "/pdf-tools" : category.title.toLowerCase().includes("video") ? "/video-tools" : category.title.toLowerCase().includes("ai") ? "/ai-tools" : "/tools"}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="block text-center text-xs font-bold text-emerald-600 dark:text-emerald-400 p-2 hover:underline"
+                        >
+                          View all {category.title} →
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Company & Knowledge Base Links */}
+            <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-1">
+                Company &amp; Guides
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/blog"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600"
+                >
+                  <BookOpen className="w-4 h-4 text-emerald-500" />
+                  <span>Blog &amp; Guides</span>
+                </Link>
+
+                <Link
+                  href="/tutorials"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600"
+                >
+                  <Sparkles className="w-4 h-4 text-purple-500" />
+                  <span>Tutorials</span>
+                </Link>
+
+                <Link
+                  href="/about"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600"
+                >
+                  <Award className="w-4 h-4 text-sky-500" />
+                  <span>About Techyfe</span>
+                </Link>
+
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600"
+                >
+                  <Phone className="w-4 h-4 text-emerald-500" />
+                  <span>Contact Us</span>
+                </Link>
+              </div>
+
+              <Link
+                href="/pricing"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-600"
+              >
+                <span className="flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-emerald-500" />
+                  <span>Subscription Plans</span>
+                </span>
+                <span className="text-[10px] text-slate-400">Optional Pro &rarr;</span>
+              </Link>
+            </div>
+
+            {/* User Session / Workspace */}
+            <div className="pt-2">
+              {session ? (
+                <Link 
+                  href="/dashboard" 
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm tracking-tight shadow-xs"
+                >
+                  <span>Go to Dashboard</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              ) : (
+                <Link 
+                  href="/auth/login" 
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm tracking-tight shadow-xs"
+                >
+                  <span>Log In / Register</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              )}
+            </div>
+
           </div>
         </div>
       )}

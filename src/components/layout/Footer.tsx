@@ -89,7 +89,7 @@ export function Footer() {
       <div className="border-t border-slate-200 dark:border-slate-800/50 py-6">
         <div className="container mx-auto px-4 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500 dark:text-slate-500">
-            © {new Date().getFullYear()} InstantTool. All rights reserved.
+            © {new Date().getFullYear()} InstantTool by Techyfe. All rights reserved.
           </p>
           <div className="text-sm text-slate-500 dark:text-slate-500 flex items-center gap-1">
             Made with <span className="text-red-500 animate-pulse">❤️</span> for the people of the internet.

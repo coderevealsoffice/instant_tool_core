@@ -25,8 +25,8 @@ const urbanist = Urbanist({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://devigo.cloud"),
-  title: "Instant Tool | Free PDF, Image & QR Code Tools",
-  description: "Free online tools to compress, merge, split, and rotate PDFs, compress and convert images, and generate QR codes quickly and securely.",
+  title: "InstantTool - Free Online Tools (iLovePDF Alternative, Compress PDF, Video & AI Tools)",
+  description: "Free online tools like iLovePDF: Compress PDF, Merge PDF, Split PDF, PDF to Word, JPG to PDF, Video to Audio Converter, YouTube Downloader, and AI Caption Generator. 100% free, private WebAssembly processing with zero watermarks.",
   robots: {
     index: true,
     follow: true,
@@ -39,16 +39,27 @@ export const metadata: Metadata = {
     },
   },
   keywords: [
-    "PDF tools",
-    "compress PDF",
-    "merge PDF",
-    "split PDF",
-    "rotate PDF",
+    "ilovepdf",
+    "i love pdf alternative",
+    "pdf to word",
+    "jpg to pdf",
+    "word to pdf",
+    "compress pdf",
+    "merge pdf",
+    "split pdf",
+    "pdf to excel",
+    "pdf editor online",
+    "caption generator free",
+    "youtube downloader",
+    "color picker online",
+    "video to audio converter online free",
     "image compressor",
-    "image converter",
-    "QR code generator",
+    "audio joiner",
+    "joiner",
+    "ai content detector",
     "free online tools",
-    "Instant Tool"
+    "no watermark pdf tools",
+    "InstantTool"
   ],
   icons: {
     icon: [

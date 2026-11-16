@@ -36,26 +36,37 @@ import type { Metadata } from 'next'
 export const revalidate = 3600; // Cache page for 1 hour for ultra-fast TTFB
 
 export const metadata: Metadata = {
-  title: "InstantTool - 100% Free Online PDF, Video, Image, Audio & AI Productivity Tools",
-  description: "Access 100+ free online tools for PDF editing, video trimming, image optimization, audio conversion, and AI creation. Process files privately inside your browser with client-side WebAssembly and zero server data retention.",
+  title: "InstantTool - Free Online Tools (iLovePDF Alternative, Compress PDF, Video & AI Tools)",
+  description: "Free online file tools like iLovePDF: Compress PDF, Merge PDF, Split PDF, PDF to Word, JPG to PDF, Video to Audio Converter, YouTube Downloader, and AI Caption Generator. 100% free, private WebAssembly processing with zero watermarks.",
   alternates: {
     canonical: "/"
   },
   keywords: [
+    "ilovepdf",
+    "i love pdf alternative",
+    "pdf to word",
+    "jpg to pdf",
+    "word to pdf",
+    "compress pdf",
+    "merge pdf",
+    "split pdf",
+    "pdf to excel",
+    "pdf editor online",
+    "caption generator free",
+    "youtube downloader",
+    "color picker online",
+    "video to audio converter online free",
+    "image compressor",
+    "audio joiner",
+    "joiner",
+    "extract audio from video",
+    "ai content detector",
     "free online tools",
-    "PDF tools",
-    "image converter",
-    "AI tools",
-    "WebAssembly tools",
-    "private PDF editor",
-    "video trimmer online",
-    "compress image without losing quality",
-    "audio converter",
     "no watermark free tools",
     "InstantTool"
   ],
   openGraph: {
-    title: "InstantTool - 100% Free Online PDF, Video, Image, Audio & AI Productivity Tools",
+    title: "InstantTool - Free Online Tools (iLovePDF Alternative, Compress PDF, Video & AI)",
     description: "Access 100+ free online tools for PDF editing, video trimming, image optimization, audio conversion, and AI creation. 100% private in-browser processing with zero data retention.",
     url: "/",
     siteName: "InstantTool",
@@ -64,7 +75,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "InstantTool - 100% Free Online PDF, Video, Image, Audio & AI Tools",
+    title: "InstantTool - Free Online PDF, Video, Image, Audio & AI Tools",
     description: "Private in-browser file utilities. Zero cloud file retention, zero watermarks, and instant WebAssembly performance.",
     images: ["https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=1200&q=80"],
   }
@@ -652,7 +663,88 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. Frequently Asked Questions (FAQ) */}
+      {/* 8. High-Volume SEO Search & Fast Tool Hub (Mobile-Responsive Grid) */}
+      <section className="py-20 px-4 bg-white dark:bg-slate-950 font-sans border-t border-slate-200/80 dark:border-slate-800/80">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-14 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold tracking-wider uppercase mb-3 shadow-2xs">
+              <span>◆ Popular Online Searches</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
+              Top Searched Tools on InstantTool
+            </h2>
+            <p className="text-xs sm:text-base text-slate-600 dark:text-slate-400">
+              One-click access to our highest-ranked online utilities — 100% free with no watermarks or registrations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Column 1: PDF Tools (iLovePDF Alternative) */}
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-3 pb-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <span>PDF Utilities (iLovePDF)</span>
+                <span className="text-[10px] text-emerald-600 font-mono">Popular</span>
+              </h3>
+              <ul className="space-y-2 text-xs">
+                <li><Link href="/pdf-tools/compress-pdf" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">Compress PDF Online Free</Link></li>
+                <li><Link href="/pdf-tools/merge-pdf" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">Merge PDF Files (Combine)</Link></li>
+                <li><Link href="/pdf-tools/split-pdf" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">Split PDF &amp; Extract Pages</Link></li>
+                <li><Link href="/pdf-tools/pdf-to-word" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">PDF to Word Converter (.docx)</Link></li>
+                <li><Link href="/pdf-tools/jpg-to-pdf" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">JPG to PDF / Image to PDF</Link></li>
+                <li><Link href="/pdf-tools/word-to-pdf" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">Word to PDF Converter</Link></li>
+                <li><Link href="/pdf-tools/pdf-to-excel" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">PDF to Excel (.xlsx)</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 2: Video & Downloader Tools */}
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-3 pb-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <span>Video &amp; Downloaders</span>
+                <span className="text-[10px] text-sky-600 font-mono">Trending</span>
+              </h3>
+              <ul className="space-y-2 text-xs">
+                <li><Link href="/video-tools/video-downloader" className="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 font-medium block">Free YouTube Video Downloader</Link></li>
+                <li><Link href="/video-tools/trim" className="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 font-medium block">Online Video Trimmer &amp; Cutter</Link></li>
+                <li><Link href="/audio-tools" className="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 font-medium block">Video to Audio Converter Online</Link></li>
+                <li><Link href="/video-tools/crop" className="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 font-medium block">Crop Video for Reels / TikTok</Link></li>
+                <li><Link href="/video-tools/change-speed" className="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-400 font-medium block">Video Speed Changer</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 3: Audio & Speech Tools */}
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-3 pb-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <span>Audio Tools (Joiner)</span>
+                <span className="text-[10px] text-purple-600 font-mono">Hi-Fi</span>
+              </h3>
+              <ul className="space-y-2 text-xs">
+                <li><Link href="/audio-tools/joiner" className="text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 font-medium block">Audio Joiner &amp; Track Merger</Link></li>
+                <li><Link href="/audio-tools/trim" className="text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 font-medium block">MP3 Cutter &amp; Audio Trimmer</Link></li>
+                <li><Link href="/audio-tools/change-volume" className="text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 font-medium block">Volume Booster (200% Gain)</Link></li>
+                <li><Link href="/audio-tools/change-speed" className="text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 font-medium block">Change Audio Speed / BPM</Link></li>
+                <li><Link href="/audio-tools/reverse" className="text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 font-medium block">Reverse Audio Player</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 4: AI & Creator Tools */}
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-3 pb-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <span>AI &amp; Design Suite</span>
+                <span className="text-[10px] text-emerald-600 font-mono">AI Pro</span>
+              </h3>
+              <ul className="space-y-2 text-xs">
+                <li><Link href="/ai-tools/ai-video-caption-generator" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">Caption Generator Free (AI Hooks)</Link></li>
+                <li><Link href="/color-tools/color-palette" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">Color Picker Online &amp; Palette</Link></li>
+                <li><Link href="/ai-tools/ai-youtube-keyword-generator" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">AI YouTube Keyword Generator</Link></li>
+                <li><Link href="/seo-tools/ai-detector" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">AI Content Detector (Copyleaks)</Link></li>
+                <li><Link href="/ai-tools/remove-background" className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium block">Remove Image Background HD</Link></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Frequently Asked Questions (FAQ) */}
       <section className="py-24 px-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800/80 font-sans">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-16">
