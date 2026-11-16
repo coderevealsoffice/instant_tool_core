@@ -1,24 +1,12 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, Playfair_Display, Urbanist } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const urbanist = Urbanist({
-  variable: "--font-urbanist",
   subsets: ["latin"],
   display: "swap",
 });
@@ -103,10 +91,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${urbanist.variable} h-full antialiased font-sans`}
+      className={`${inter.variable} h-full antialiased font-sans`}
       suppressHydrationWarning
     >
       <head>
+        {/* Resource Hints for Optimal LCP & FCP */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+
+        {/* Agentic Resource Discovery (ARD) Specification for AI Agents */}
+        <link rel="ard" type="application/json" href="/.well-known/ard.json" />
+
         {/* Google AdSense Primary Script Tag - Static in <head> for AdSense Crawler Verification */}
         <script
           async

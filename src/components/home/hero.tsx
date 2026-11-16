@@ -40,7 +40,7 @@ type ShowcaseCard =
 const COLUMN_ONE_CARDS: ShowcaseCard[] = [
   {
     type: "photo",
-    imageUrl: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=360&q=70",
     label: "4K Timeline Production",
     href: "/video-tools/trim"
   },
@@ -74,7 +74,7 @@ const COLUMN_ONE_CARDS: ShowcaseCard[] = [
   },
   {
     type: "photo",
-    imageUrl: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=360&q=70",
     label: "UI & Product Design",
     href: "/tools"
   },
@@ -171,7 +171,7 @@ const COLUMN_TWO_CARDS: ShowcaseCard[] = [
   },
   {
     type: "photo",
-    imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=360&q=70",
     label: "Growth Marketing Lab",
     href: "/seo-tools/geo-aeo-auditor"
   },
@@ -204,7 +204,7 @@ const COLUMN_TWO_CARDS: ShowcaseCard[] = [
   },
   {
     type: "photo",
-    imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=360&q=70",
     label: "Modern SaaS Workspace",
     href: "/workspace"
   },
@@ -268,7 +268,7 @@ const COLUMN_THREE_CARDS: ShowcaseCard[] = [
   },
   {
     type: "photo",
-    imageUrl: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=360&q=70",
     label: "Podcast Audio Studio",
     href: "/audio-tools/volume"
   },
@@ -302,7 +302,7 @@ const COLUMN_THREE_CARDS: ShowcaseCard[] = [
   },
   {
     type: "photo",
-    imageUrl: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=360&q=70",
     label: "Creative Commons",
     href: "/workspace"
   },
@@ -344,6 +344,9 @@ export function HeroSection() {
             alt={card.label}
             loading="lazy"
             decoding="async"
+            fetchPriority="low"
+            width={400}
+            height={300}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           {/* Subtle bottom gradient & frosted tag */}
@@ -376,9 +379,9 @@ export function HeroSection() {
             <div className="text-[10px] font-extrabold uppercase tracking-wide text-emerald-600 dark:text-emerald-400 mb-0.5">
               {card.badge}
             </div>
-            <h4 className="font-extrabold text-slate-900 dark:text-white text-[13px] leading-snug line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+            <p className="font-extrabold text-slate-900 dark:text-white text-[13px] leading-snug line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
               {card.title}
-            </h4>
+            </p>
           </div>
 
           {/* Micro Visual */}
@@ -445,25 +448,25 @@ export function HeroSection() {
 
             {/* Trust Marks & Ratings */}
             <div className="pt-6 border-t border-slate-200/80 dark:border-slate-800/80 w-full max-w-md space-y-3">
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
-                <div className="flex text-amber-400 text-sm">
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-800 dark:text-slate-200">
+                <div className="flex text-amber-500 text-sm">
                   ★★★★★
                 </div>
                 <span>4.9 / 5 rating from 40,000+ creators &amp; pros</span>
               </div>
-              <div className="flex flex-wrap items-center gap-3.5 text-xs font-medium text-slate-500 dark:text-slate-400">
-                <span className="flex items-center gap-1">
-                  <Check className="w-3.5 h-3.5 text-emerald-500" />
+              <div className="flex flex-wrap items-center gap-3.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                <span className="flex items-center gap-1.5 text-slate-800 dark:text-slate-200 font-semibold">
+                  <Check className="w-4 h-4 text-emerald-700 dark:text-emerald-400 font-bold shrink-0" />
                   Client-side WebAssembly
                 </span>
                 <span>•</span>
-                <span className="flex items-center gap-1">
-                  <Check className="w-3.5 h-3.5 text-emerald-500" />
+                <span className="flex items-center gap-1.5 text-slate-800 dark:text-slate-200 font-semibold">
+                  <Check className="w-4 h-4 text-emerald-700 dark:text-emerald-400 font-bold shrink-0" />
                   Zero server file retention
                 </span>
                 <span>•</span>
-                <span className="flex items-center gap-1">
-                  <Check className="w-3.5 h-3.5 text-emerald-500" />
+                <span className="flex items-center gap-1.5 text-slate-800 dark:text-slate-200 font-semibold">
+                  <Check className="w-4 h-4 text-emerald-700 dark:text-emerald-400 font-bold shrink-0" />
                   No sign up required
                 </span>
               </div>

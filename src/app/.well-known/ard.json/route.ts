@@ -1,0 +1,53 @@
+import { NextResponse } from "next/server"
+
+export const dynamic = "force-static"
+
+export async function GET() {
+  const manifest = {
+    "$schema": "https://agenticresource.org/schemas/ard-v1.json",
+    "name": "InstantTool",
+    "description": "High-throughput, 100% private in-browser WebAssembly tools for PDF editing, video trimming, format converters, audio processing, and AI creator utilities.",
+    "version": "1.0.0",
+    "url": "https://devigo.cloud",
+    "provider": {
+      "name": "Techyfe",
+      "url": "https://devigo.cloud",
+      "contact": "info.techyfe@gmail.com"
+    },
+    "capabilities": [
+      {
+        "id": "pdf-tools",
+        "name": "PDF Manipulation & Conversion",
+        "description": "Merge, split, compress, protect, sign, and convert PDF documents with client-side WebAssembly.",
+        "endpoint": "https://devigo.cloud/pdf-tools"
+      },
+      {
+        "id": "video-tools",
+        "name": "Video & Media Downloader",
+        "description": "Fast video trimming, audio extraction, volume boost, and high-speed video downloader.",
+        "endpoint": "https://devigo.cloud/video-tools"
+      },
+      {
+        "id": "ai-tools",
+        "name": "AI Content & Creator Tools",
+        "description": "AI viral caption generator, content detector, and YouTube summarization tools.",
+        "endpoint": "https://devigo.cloud/ai-tools"
+      },
+      {
+        "id": "converters",
+        "name": "Universal Format Converters",
+        "description": "Lossless image, document, font, and archive converters with zero server uploads.",
+        "endpoint": "https://devigo.cloud/converters"
+      }
+    ]
+  }
+
+  return NextResponse.json(manifest, {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+      "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800"
+    }
+  })
+}
