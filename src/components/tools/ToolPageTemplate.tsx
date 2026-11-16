@@ -1004,29 +1004,33 @@ export function ToolPageTemplate({
     }
   }
 
-  // Dynamic category and format helpers tailored to each page
-  const categoryLabel = category.replace(/-/g, ' ').toUpperCase()
-  const isPdf = category === "pdf-tools" || title.toLowerCase().includes("pdf")
-  const isVideo = category === "video-tools" || title.toLowerCase().includes("video")
-  const isAudio = category === "audio-tools" || title.toLowerCase().includes("audio")
-  const isImage = category === "image-tools" || title.toLowerCase().includes("image")
-  const isSeo = category === "seo-tools" || category === "ai-tools" || title.toLowerCase().includes("seo") || title.toLowerCase().includes("aeo") || title.toLowerCase().includes("geo")
+  // Safe sanitized props to avoid null pointer exceptions during SSR or client hydration
+  const safeCategory = (category || "").toLowerCase()
+  const safeTitle = title || "Tool"
+  const safeSlug = (slug || "").toLowerCase()
 
-  const mockupData = getToolMockupData(slug, title, category)
+  // Dynamic category and format helpers tailored to each page
+  const categoryLabel = (category || "TOOLS").replace(/-/g, ' ').toUpperCase()
+  const isPdf = safeCategory === "pdf-tools" || safeTitle.toLowerCase().includes("pdf")
+  const isVideo = safeCategory === "video-tools" || safeTitle.toLowerCase().includes("video")
+  const isAudio = safeCategory === "audio-tools" || safeTitle.toLowerCase().includes("audio")
+  const isImage = safeCategory === "image-tools" || safeTitle.toLowerCase().includes("image")
+  const isSeo = safeCategory === "seo-tools" || safeCategory === "ai-tools" || safeTitle.toLowerCase().includes("seo") || safeTitle.toLowerCase().includes("aeo") || safeTitle.toLowerCase().includes("geo")
+
+  const mockupData = getToolMockupData(safeSlug, safeTitle, safeCategory)
 
   // Select top 3 relevant articles for internal linking and depth
-  const relevantBlogs = BUILTIN_BLOG_POSTS.filter(b => {
-    const cat = category.toLowerCase()
-    if (cat.includes("pdf") && b.categoryName === "PDF Tools") return true
-    if (cat.includes("video") && b.categoryName === "Video Tools") return true
-    if (cat.includes("audio") && (b.categoryName === "Video Tools" || b.categoryName === "Technology")) return true
-    if (cat.includes("image") && b.categoryName === "Image Tools") return true
-    if (cat.includes("seo") && (b.categoryName === "Creators" || b.categoryName === "Technology")) return true
-    if (cat.includes("ai") && (b.categoryName === "Creators" || b.categoryName === "Technology")) return true
+  const relevantBlogs = (BUILTIN_BLOG_POSTS || []).filter(b => {
+    if (safeCategory.includes("pdf") && b.categoryName === "PDF Tools") return true
+    if (safeCategory.includes("video") && b.categoryName === "Video Tools") return true
+    if (safeCategory.includes("audio") && (b.categoryName === "Video Tools" || b.categoryName === "Technology")) return true
+    if (safeCategory.includes("image") && b.categoryName === "Image Tools") return true
+    if (safeCategory.includes("seo") && (b.categoryName === "Creators" || b.categoryName === "Technology")) return true
+    if (safeCategory.includes("ai") && (b.categoryName === "Creators" || b.categoryName === "Technology")) return true
     return false
   }).slice(0, 3)
 
-  const displayBlogs = relevantBlogs.length >= 3 ? relevantBlogs : BUILTIN_BLOG_POSTS.slice(0, 3)
+  const displayBlogs = relevantBlogs.length >= 3 ? relevantBlogs : (BUILTIN_BLOG_POSTS || []).slice(0, 3)
 
   const displayHeadline = isPdf
     ? `${title} Files Online Instantly`
@@ -1039,8 +1043,8 @@ export function ToolPageTemplate({
   )
 
   const previewTiles = (() => {
-    const s = slug.toLowerCase()
-    const t = title.toLowerCase()
+    const s = safeSlug
+    const t = safeTitle.toLowerCase()
     if (s.includes("unlock") || t.includes("unlock")) {
       return ["Protected", "Key Check", "Decrypted", "Print ✓", "Copy ✓", "Edit ✓"]
     }

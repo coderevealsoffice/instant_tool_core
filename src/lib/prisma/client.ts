@@ -5,37 +5,12 @@ import os from 'os'
 import fs from 'fs'
 import path from 'path'
 
-// Bulletproof .env loading for scripts and standalone runners (e.g. seed scripts)
-if (!process.env.DATABASE_URL) {
+// Bulletproof .env loading for standalone scripts when DATABASE_URL is not yet set
+if (!process.env.DATABASE_URL && typeof window === 'undefined' && process.env.NEXT_RUNTIME !== 'nodejs') {
   try {
-    // Try dotenv first
     require('dotenv').config()
   } catch {
     // Ignore
-  }
-
-  // If still not set, parse .env directly from disk
-  if (!process.env.DATABASE_URL) {
-    try {
-      const candidates = [
-        path.resolve(process.cwd(), '.env'),
-        path.resolve(process.cwd(), '.env.local'),
-        path.resolve(__dirname, '../../../.env'),
-        path.resolve(__dirname, '../../.env'),
-      ]
-      for (const envPath of candidates) {
-        if (fs.existsSync(envPath)) {
-          const content = fs.readFileSync(envPath, 'utf-8')
-          const match = content.match(/^DATABASE_URL=["']?([^"'\r\n]+)["']?/m)
-          if (match && match[1]) {
-            process.env.DATABASE_URL = match[1]
-            break
-          }
-        }
-      }
-    } catch {
-      // Ignore
-    }
   }
 }
 
