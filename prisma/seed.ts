@@ -1,3 +1,4 @@
+import "dotenv/config"
 import { ToolCategory } from "@prisma/client"
 import prisma from "../src/lib/prisma/client"
 import bcrypt from "bcryptjs"
