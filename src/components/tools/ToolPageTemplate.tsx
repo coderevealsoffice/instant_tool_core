@@ -959,6 +959,24 @@ export function ToolPageTemplate({
 
   const handleFiles = (newFiles: File[]) => {
     if (newFiles.length > 0) {
+      if (toolComponent) {
+        const container = document.getElementById("tool-canvas-container")
+        if (container) {
+          container.scrollIntoView({ behavior: "smooth" })
+          const innerFileInput = container.querySelector('input[type="file"]') as HTMLInputElement
+          if (innerFileInput) {
+            try {
+              const dt = new DataTransfer()
+              newFiles.forEach(f => dt.items.add(f))
+              innerFileInput.files = dt.files
+              innerFileInput.dispatchEvent(new Event("change", { bubbles: true }))
+              return
+            } catch {
+              // fallback
+            }
+          }
+        }
+      }
       setContext(category, slug)
       addFiles(newFiles)
       router.push(`/workspace?tool=${slug}&category=${category}`)
@@ -966,6 +984,22 @@ export function ToolPageTemplate({
   }
 
   const handleChooseFilesClick = () => {
+    if (toolComponent) {
+      const container = document.getElementById("tool-canvas-container")
+      if (container) {
+        container.scrollIntoView({ behavior: "smooth" })
+        const innerUploadBtn = container.querySelector('input[type="file"]') as HTMLInputElement
+        if (innerUploadBtn) {
+          innerUploadBtn.click()
+          return
+        }
+        const innerBtn = container.querySelector('button') as HTMLButtonElement
+        if (innerBtn) {
+          innerBtn.focus()
+          return
+        }
+      }
+    }
     fileInputRef.current?.click()
   }
 
@@ -1122,14 +1156,14 @@ export function ToolPageTemplate({
     <div className="flex flex-col min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
       
       {/* 1. Sona-Style Hero Section with Full Drag-and-Drop Dropzone */}
-      <section className="pt-8 sm:pt-12 pb-12 px-4 bg-white dark:bg-slate-950 font-sans transition-colors duration-300">
+      <section className="pt-4 sm:pt-10 pb-8 sm:pb-12 px-2 sm:px-4 lg:px-6 bg-white dark:bg-slate-950 font-sans transition-colors duration-300">
         <div className="container mx-auto max-w-7xl">
           <div 
             onDragEnter={!isDownloader ? handleDragEnter : undefined}
             onDragOver={!isDownloader ? handleDragOver : undefined}
             onDragLeave={!isDownloader ? handleDragLeave : undefined}
             onDrop={!isDownloader ? handleDrop : undefined}
-            className={`rounded-[2.5rem] bg-[#FAFAFA] dark:bg-slate-900/60 border transition-all p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-xs ${
+            className={`rounded-2xl sm:rounded-[2.5rem] bg-[#FAFAFA] dark:bg-slate-900/60 border transition-all p-3.5 sm:p-8 lg:p-14 relative overflow-hidden shadow-xs ${
               isDragging && !isDownloader
                 ? "border-emerald-500 ring-4 ring-emerald-500/20 bg-emerald-50/40 dark:bg-emerald-950/20" 
                 : "border-slate-200/90 dark:border-slate-800"
@@ -1137,14 +1171,14 @@ export function ToolPageTemplate({
           >
             {/* Full-Card Drag & Drop Overlay */}
             {isDragging && !isDownloader && (
-              <div className="absolute inset-0 bg-[#D7FB8E]/95 dark:bg-slate-900/95 backdrop-blur-md z-50 flex flex-col items-center justify-center border-4 border-dashed border-emerald-600 dark:border-emerald-400 rounded-[2.5rem] p-8 text-center animate-in fade-in-50 duration-150 pointer-events-none">
-                <div className="w-20 h-20 rounded-full bg-emerald-600 text-white flex items-center justify-center mb-4 animate-bounce shadow-xl">
-                  <UploadCloud className="w-10 h-10" />
+              <div className="absolute inset-0 bg-[#D7FB8E]/95 dark:bg-slate-900/95 backdrop-blur-md z-50 flex flex-col items-center justify-center border-4 border-dashed border-emerald-600 dark:border-emerald-400 rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-8 text-center animate-in fade-in-50 duration-150 pointer-events-none">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-emerald-600 text-white flex items-center justify-center mb-4 animate-bounce shadow-xl">
+                  <UploadCloud className="w-8 h-8 sm:w-10 sm:h-10" />
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white mb-2 tracking-tight">
+                <h3 className="text-xl sm:text-3xl font-black text-slate-950 dark:text-white mb-2 tracking-tight">
                   Drop your {cleanTitle} files right here!
                 </h3>
-                <p className="text-slate-800 dark:text-slate-300 font-semibold text-sm sm:text-base">
+                <p className="text-slate-800 dark:text-slate-300 font-semibold text-xs sm:text-base">
                   Release anywhere in this card to begin processing immediately in your browser
                 </p>
               </div>
@@ -1154,33 +1188,33 @@ export function ToolPageTemplate({
             <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-[#D7FB8E]/15 dark:bg-[#D7FB8E]/10 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 right-10 w-[350px] h-[350px] bg-sky-500/10 dark:bg-sky-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center relative z-10">
               
               {/* Left Column: Tool Specific Headline, Description & Primary Action Button */}
               <div className="lg:col-span-7 flex flex-col items-start text-left">
                 
                 {/* Top Pill Tag */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-black tracking-wider uppercase mb-5 shadow-2xs">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-[11px] sm:text-xs font-black tracking-wider uppercase mb-4 shadow-2xs">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                   ◆ {isDownloader ? "100% Free Video & Audio Downloader" : "100% Free & Private Tools"}
                 </div>
 
                 {/* Tool Headline - Sized nicely and cleanly */}
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
+                <h1 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-3">
                   {displayHeadline}
                 </h1>
 
                 {/* Subheadline */}
-                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl font-normal leading-relaxed mb-6">
+                <p className="text-xs sm:text-base text-slate-600 dark:text-slate-300 max-w-xl font-normal leading-relaxed mb-5">
                   {displaySubtitle}
                 </p>
 
                 {/* Primary Action Button or Direct URL Input for Downloaders */}
                 {isDownloader ? (
                   <div className="w-full max-w-xl mb-4">
-                    <div className="flex flex-col gap-2 p-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md">
+                    <div className="flex flex-col gap-2 p-2 sm:p-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md">
                       <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300 px-1">
-                        <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                        <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider text-[11px]">
                           <Link2 className="w-3.5 h-3.5" /> Direct Video URL
                         </span>
                         <span className="text-[10px] text-slate-400 font-mono">YouTube, X, FB, Instagram</span>
@@ -1191,7 +1225,7 @@ export function ToolPageTemplate({
                           value={heroUrl}
                           onChange={(e) => setHeroUrl(e.target.value)}
                           placeholder="Paste video link here (YouTube, X, FB, Instagram)..."
-                          className="flex-1 px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-sm text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500"
+                          className="flex-1 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500"
                         />
                         <button
                           type="button"
@@ -1210,7 +1244,7 @@ export function ToolPageTemplate({
                               }
                             }
                           }}
-                          className="px-6 py-3 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-bold text-sm tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer flex items-center justify-center gap-2 shrink-0"
+                          className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-bold text-xs sm:text-sm tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer flex items-center justify-center gap-2 shrink-0"
                         >
                           <span>Download Video</span>
                           <ArrowRight className="w-4 h-4 text-slate-950" />
@@ -1222,7 +1256,7 @@ export function ToolPageTemplate({
                   <div className="flex items-center gap-3 w-full sm:w-auto mb-4">
                     <button
                       onClick={handleChooseFilesClick}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-sm sm:text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer text-center"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-xs sm:text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer text-center"
                     >
                       <span>Choose {cleanTitle} Files</span>
                       <ArrowUpRight className="w-4 h-4 text-slate-950" />
@@ -1233,33 +1267,33 @@ export function ToolPageTemplate({
               </div>
 
               {/* Right Column: Sona.ai Overlapping Interactive Cards (Tailored to Current Tool) */}
-              <div className="lg:col-span-5 relative flex items-center justify-center min-h-[360px] sm:min-h-[380px] w-full py-4 sm:py-6 overflow-hidden sm:overflow-visible max-w-[340px] sm:max-w-none mx-auto">
+              <div className="lg:col-span-5 relative flex items-center justify-center min-h-[280px] sm:min-h-[380px] w-full py-2 sm:py-6 overflow-hidden sm:overflow-visible max-w-full sm:max-w-none mx-auto">
                 
                 {/* 1. Sona.ai Back Lime Card (Dynamic per Category) */}
-                <div className="w-[250px] sm:w-[310px] rounded-3xl bg-[#D7FB8E] p-5 sm:p-6 text-slate-950 shadow-md border border-black/5 flex flex-col justify-between absolute right-1 sm:right-4 top-0 transform translate-x-0">
+                <div className="w-[220px] sm:w-[310px] rounded-2xl sm:rounded-3xl bg-[#D7FB8E] p-3.5 sm:p-6 text-slate-950 shadow-md border border-black/5 flex flex-col justify-between absolute right-1 sm:right-4 top-0 transform translate-x-0">
                   <div>
-                    <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-slate-700 mb-1.5">
+                    <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-slate-700 mb-1">
                       {isDownloader ? "STREAM EXTRACTOR" : categoryLabel}
                     </div>
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/10 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider mb-2.5">
+                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/10 text-slate-950 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider mb-2">
                       <span>◆</span> {isDownloader ? "FAST CDN" : "INSTANT ENGINE"}
                     </div>
-                    <h4 className="text-sm sm:text-base font-bold text-slate-950 leading-snug">
+                    <h4 className="text-xs sm:text-base font-bold text-slate-950 leading-snug">
                       {isDownloader ? `${cleanTitle} High Speed` : `${cleanTitle} Auto-Processed`}
                     </h4>
 
                     {/* 6 Feature / Part Preview Tiles */}
-                    <div className="grid grid-cols-3 gap-2 my-3.5">
+                    <div className="grid grid-cols-3 gap-1.5 sm:gap-2 my-2.5 sm:my-3.5">
                       {previewTiles.map((tile, i) => (
-                        <div key={i} className="aspect-square rounded-xl bg-[#cbf777] border border-black/5 flex flex-col items-center justify-center text-slate-950 shadow-2xs p-1">
-                          <span className="text-[9px] font-mono font-bold text-slate-700 truncate max-w-full">{tile}</span>
-                          <span className="text-xs font-black">✓</span>
+                        <div key={i} className="aspect-square rounded-lg sm:rounded-xl bg-[#cbf777] border border-black/5 flex flex-col items-center justify-center text-slate-950 shadow-2xs p-1">
+                          <span className="text-[8px] sm:text-[9px] font-mono font-bold text-slate-700 truncate max-w-full">{tile}</span>
+                          <span className="text-[10px] sm:text-xs font-black">✓</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="text-[11px] font-bold text-slate-900 flex items-center justify-between pt-1">
+                  <div className="text-[10px] sm:text-[11px] font-bold text-slate-900 flex items-center justify-between pt-1">
                     <span>100% Quality Preserved</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
@@ -1274,30 +1308,30 @@ export function ToolPageTemplate({
                       handleChooseFilesClick()
                     }
                   }}
-                  className="w-[250px] sm:w-[310px] rounded-3xl bg-[#BAE6FD] dark:bg-sky-950 p-5 sm:p-6 shadow-2xl border border-sky-300 dark:border-sky-800 hover:scale-[1.02] transition-all cursor-pointer relative z-20 transform -translate-x-4 sm:-translate-x-12 translate-y-12 sm:translate-y-20"
+                  className="w-[230px] sm:w-[310px] rounded-2xl sm:rounded-3xl bg-[#BAE6FD] dark:bg-sky-950 p-3.5 sm:p-6 shadow-2xl border border-sky-300 dark:border-sky-800 hover:scale-[1.02] transition-all cursor-pointer relative z-20 transform -translate-x-3 sm:-translate-x-12 translate-y-8 sm:translate-y-20"
                 >
                   <div>
-                    <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-sky-900 dark:text-sky-300 mb-1.5">
+                    <div className="text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase text-sky-900 dark:text-sky-300 mb-1">
                       {isDownloader ? "URL LINK PROCESSOR" : "CLIENT SANDBOX"}
                     </div>
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-200/80 dark:bg-sky-900/80 text-sky-950 dark:text-sky-200 text-[10px] font-extrabold uppercase tracking-wider mb-2.5">
+                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-sky-200/80 dark:bg-sky-900/80 text-sky-950 dark:text-sky-200 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider mb-2">
                       <span>◆</span> {isDownloader ? "NO FILE UPLOAD" : "ZERO DATA RETENTION"}
                     </div>
-                    <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-snug">
+                    <h4 className="text-xs sm:text-base font-bold text-slate-900 dark:text-white leading-snug">
                       {isDownloader ? "Paste Video Link to Download" : `Drop ${cleanTitle} files here`}
                     </h4>
 
                     {/* Modern Drag and Drop Graphic */}
-                    <div className="my-3.5 p-3.5 bg-white/80 dark:bg-slate-900/80 rounded-2xl border border-sky-200/80 dark:border-sky-800 flex flex-col items-center justify-center text-center shadow-2xs">
+                    <div className="my-2.5 sm:my-3.5 p-2.5 sm:p-3.5 bg-white/80 dark:bg-slate-900/80 rounded-xl sm:rounded-2xl border border-sky-200/80 dark:border-sky-800 flex flex-col items-center justify-center text-center shadow-2xs">
                       {isDownloader ? (
-                        <Link2 className="w-8 h-8 text-sky-600 dark:text-sky-400 mb-1 animate-pulse" />
+                        <Link2 className="w-6 h-6 sm:w-8 sm:h-8 text-sky-600 dark:text-sky-400 mb-1 animate-pulse" />
                       ) : (
-                        <UploadCloud className="w-8 h-8 text-sky-600 dark:text-sky-400 mb-1 animate-pulse" />
+                        <UploadCloud className="w-6 h-6 sm:w-8 sm:h-8 text-sky-600 dark:text-sky-400 mb-1 animate-pulse" />
                       )}
-                      <p className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
+                      <p className="text-[11px] sm:text-xs font-bold text-slate-900 dark:text-white leading-tight">
                         {isDownloader ? "Paste link from any video" : "Drag & drop files here"}
                       </p>
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+                      <p className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
                         {formatBadgeText}
                       </p>
                     </div>
@@ -1313,7 +1347,7 @@ export function ToolPageTemplate({
                         handleChooseFilesClick()
                       }
                     }}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
+                    className="w-full py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all shadow-sm cursor-pointer"
                   >
                     <span>{isDownloader ? "Paste Video Link" : `Select ${cleanTitle} Files`}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
@@ -1328,7 +1362,7 @@ export function ToolPageTemplate({
 
           {/* Interactive In-Page Tool Canvas (rendered for tools with interactive editors like Plagiarism Checker, AI Detector, Word Counter) */}
           {toolComponent && (
-            <div id="tool-canvas-container" className="mt-10 max-w-5xl mx-auto w-full">
+            <div id="tool-canvas-container" className="mt-6 sm:mt-10 max-w-5xl mx-auto w-full px-0 sm:px-2">
               {toolComponent}
             </div>
           )}
@@ -1348,17 +1382,17 @@ export function ToolPageTemplate({
           />
 
           {/* Checkmarks under tool */}
-          <div className="mt-8 flex flex-wrap justify-center gap-6 max-w-3xl mx-auto">
+          <div className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-3 sm:gap-6 max-w-3xl mx-auto px-1">
             {topCheckmarks.map((text, i) => (
-              <div key={i} className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 font-medium">
-                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                {text}
+              <div key={i} className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 shrink-0" />
+                <span>{text}</span>
               </div>
             ))}
           </div>
 
           {/* AdSense In-Content Placement */}
-          <div className="mt-10 max-w-4xl mx-auto">
+          <div className="mt-6 sm:mt-10 max-w-4xl mx-auto px-0 sm:px-4">
             <AdSlot slotId="tool-inline-banner" className="bg-slate-50/50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800" />
           </div>
         </div>
@@ -1366,8 +1400,8 @@ export function ToolPageTemplate({
 
       {/* 2. Sona-Style Zig-Zag Content Features (Tailored Dynamic Mockups per Tool) */}
       {zigZagFeatures.length > 0 && (
-        <section className="py-20 px-4 bg-white dark:bg-slate-950 overflow-hidden font-sans border-t border-slate-100 dark:border-slate-800/80">
-          <div className="container mx-auto max-w-6xl space-y-24">
+        <section className="py-10 sm:py-20 px-2 sm:px-4 bg-white dark:bg-slate-950 overflow-hidden font-sans border-t border-slate-100 dark:border-slate-800/80">
+          <div className="container mx-auto max-w-6xl space-y-12 sm:space-y-24">
             {zigZagFeatures.map((feature, idx) => {
               const currentCheckmarks = 
                 idx === 0 ? mockupData.feat1.checkmarks :
@@ -1375,31 +1409,31 @@ export function ToolPageTemplate({
                 mockupData.feat3.checkmarks
 
               return (
-              <div key={idx} className="grid md:grid-cols-12 gap-12 lg:gap-16 items-center">
+              <div key={idx} className="grid md:grid-cols-12 gap-8 lg:gap-16 items-center">
                 
                 {/* Text Column */}
                 <div className={`md:col-span-6 ${idx % 2 === 1 ? 'md:order-2 md:pl-4' : 'md:pr-4'}`}>
                   {/* Category Pill Tag */}
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-4 border border-slate-200 dark:border-slate-700">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 border border-slate-200 dark:border-slate-700">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#D7FB8E]"></span>
                     {idx === 0 ? "◆ High-Speed Engine" : idx === 1 ? "◆ Enterprise Security" : "◆ Multi-Platform"}
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight leading-snug">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-2.5 sm:mb-3 tracking-tight leading-snug">
                     {feature.title}
                   </h3>
 
-                  <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed mb-6 font-normal">
+                  <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-base leading-relaxed mb-4 sm:mb-6 font-normal">
                     {feature.description}
                   </p>
 
-                  <div className="space-y-2.5 pt-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+                  <div className="space-y-2 pt-1 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-[#D7FB8E] text-slate-950 flex items-center justify-center text-xs font-black shadow-2xs">✓</div>
+                      <div className="w-5 h-5 rounded-full bg-[#D7FB8E] text-slate-950 flex items-center justify-center text-xs font-black shadow-2xs shrink-0">✓</div>
                       <span>{currentCheckmarks[0]}</span>
                     </div>
                     <div className="flex items-center gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-[#D7FB8E] text-slate-950 flex items-center justify-center text-xs font-black shadow-2xs">✓</div>
+                      <div className="w-5 h-5 rounded-full bg-[#D7FB8E] text-slate-950 flex items-center justify-center text-xs font-black shadow-2xs shrink-0">✓</div>
                       <span>{currentCheckmarks[1]}</span>
                     </div>
                   </div>
@@ -1407,7 +1441,7 @@ export function ToolPageTemplate({
 
                 {/* Visual Product Mockup Card (Sona.ai Clean Widget Design - Dynamic per Tool) */}
                 <div className={`md:col-span-6 ${idx % 2 === 1 ? 'md:order-1' : ''}`}>
-                  <div className="rounded-[2rem] bg-[#FAFAFA] dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-xs relative overflow-hidden">
+                  <div className="rounded-2xl sm:rounded-[2rem] bg-[#FAFAFA] dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-4 sm:p-8 shadow-xs relative overflow-hidden">
                     
                     {/* Background Soft Glow */}
                     <div className="absolute top-0 right-0 w-48 h-48 bg-[#D7FB8E]/15 rounded-full blur-3xl pointer-events-none" />
@@ -1512,21 +1546,21 @@ export function ToolPageTemplate({
 
       {/* 3. How-To Block (Sona-Harmonized Step Timeline) */}
       {howToSteps.length > 0 && (
-        <section className="py-20 px-4 font-sans bg-slate-50/60 dark:bg-slate-900/30 border-t border-slate-200/80 dark:border-slate-800/80" id="how-to-steps">
+        <section className="py-10 sm:py-20 px-2 sm:px-4 font-sans bg-slate-50/60 dark:bg-slate-900/30 border-t border-slate-200/80 dark:border-slate-800/80" id="how-to-steps">
           <div className="container mx-auto max-w-5xl">
-            <div className="rounded-[2.5rem] p-8 md:p-14 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center gap-12">
+            <div className="rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-8 md:p-14 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center gap-8 md:gap-12">
               
               {/* Left Timeline Card */}
               <div className="w-full md:w-2/5 flex justify-center">
-                <div className="w-full max-w-sm rounded-3xl bg-[#FAFAFA] dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-2xs">
+                <div className="w-full max-w-sm rounded-2xl sm:rounded-3xl bg-[#FAFAFA] dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-4 sm:p-6 space-y-3 sm:space-y-4 shadow-2xs">
                   <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 pb-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
                     <span>Workflow Steps</span>
                     <span className="text-emerald-600 dark:text-emerald-400 font-bold">100% Free</span>
                   </div>
 
                   {howToSteps.map((_, idx) => (
-                    <div key={idx} className="flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 shadow-2xs">
-                      <div className="w-7 h-7 rounded-xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center font-black text-xs border border-black/10">
+                    <div key={idx} className="flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 shadow-2xs">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg sm:rounded-xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center font-black text-xs border border-black/10 shrink-0">
                         {idx + 1}
                       </div>
                       <span className="truncate">Step {idx + 1}: {idx === 0 ? "Select & upload files" : idx === 1 ? "Configure preferences" : "Download output"}</span>
@@ -1537,19 +1571,19 @@ export function ToolPageTemplate({
 
               {/* Right Steps Text */}
               <div className="w-full md:w-3/5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4">
                   <span>◆ Step-by-Step Guide</span>
                 </div>
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-5 tracking-tight">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-5 tracking-tight">
                   {howToTitle}
                 </h2>
-                <ol className="space-y-4">
+                <ol className="space-y-3 sm:space-y-4">
                   {howToSteps.map((step, idx) => (
-                    <li key={idx} className="flex items-start gap-4 p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800/80">
-                      <div className="w-8 h-8 rounded-xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center font-black text-sm shrink-0 border border-black/10 mt-0.5 shadow-2xs">
+                    <li key={idx} className="flex items-start gap-3 sm:gap-4 p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800/80">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#D7FB8E] text-slate-950 flex items-center justify-center font-black text-xs sm:text-sm shrink-0 border border-black/10 mt-0.5 shadow-2xs">
                         {idx + 1}
                       </div>
-                      <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed pt-0.5">{step}</p>
+                      <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-base leading-relaxed pt-0.5">{step}</p>
                     </li>
                   ))}
                 </ol>
@@ -1562,17 +1596,17 @@ export function ToolPageTemplate({
 
       {/* 4. Grid Features */}
       {gridFeatures.length > 0 && (
-        <section className="py-20 px-4 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800/80">
+        <section className="py-10 sm:py-20 px-2 sm:px-4 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800/80">
           <div className="container mx-auto max-w-5xl">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white text-center mb-12 tracking-tight">{gridTitle}</h2>
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white text-center mb-8 sm:mb-12 tracking-tight">{gridTitle}</h2>
+            <div className="grid md:grid-cols-3 gap-4 sm:gap-8">
               {gridFeatures.map((feat, i) => (
-                <div key={i} className="p-6 rounded-3xl bg-[#FAFAFA] dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 text-center hover:border-emerald-400 dark:hover:border-emerald-600 transition-all duration-300">
-                  <div className="w-14 h-14 mx-auto mb-5 flex items-center justify-center bg-[#D7FB8E]/30 dark:bg-[#D7FB8E]/20 text-slate-950 dark:text-[#D7FB8E] rounded-2xl shadow-2xs border border-black/5 dark:border-white/5">
+                <div key={i} className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#FAFAFA] dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 text-center hover:border-emerald-400 dark:hover:border-emerald-600 transition-all duration-300">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 sm:mb-5 flex items-center justify-center bg-[#D7FB8E]/30 dark:bg-[#D7FB8E]/20 text-slate-950 dark:text-[#D7FB8E] rounded-xl sm:rounded-2xl shadow-2xs border border-black/5 dark:border-white/5">
                     {feat.icon}
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{feat.title}</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{feat.description}</p>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-1.5 sm:mb-2">{feat.title}</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">{feat.description}</p>
                 </div>
               ))}
             </div>
@@ -1582,25 +1616,25 @@ export function ToolPageTemplate({
 
       {/* 5. FAQs */}
       {faqs.length > 0 && (
-        <section className="py-20 px-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+        <section className="py-10 sm:py-20 px-2 sm:px-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
           <div className="container mx-auto max-w-3xl">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">{faqTitle}</h2>
-            <div className="space-y-4">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white text-center mb-6 sm:mb-10">{faqTitle}</h2>
+            <div className="space-y-3 sm:space-y-4">
               {faqs.map((faq, idx) => (
                 <div key={idx} className="bg-white dark:bg-slate-950 border dark:border-slate-800 rounded-xl overflow-hidden transition-all duration-200">
                   <button 
                     onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="w-full text-left px-6 py-5 flex items-center justify-between font-semibold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-900 focus:outline-none"
+                    className="w-full text-left px-4 py-3.5 sm:px-6 sm:py-5 flex items-center justify-between font-semibold text-xs sm:text-base text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-900 focus:outline-none"
                   >
-                    {faq.question}
+                    <span>{faq.question}</span>
                     {openFaq === idx ? (
-                      <ChevronUp className="w-5 h-5 text-slate-400" />
+                      <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 shrink-0 ml-2" />
                     ) : (
-                      <ChevronDown className="w-5 h-5 text-slate-400" />
+                      <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 shrink-0 ml-2" />
                     )}
                   </button>
                   {openFaq === idx && (
-                    <div className="px-6 pb-5 text-slate-600 dark:text-slate-400 leading-relaxed border-t dark:border-slate-800 pt-4">
+                    <div className="px-4 pb-4 sm:px-6 sm:pb-5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t dark:border-slate-800 pt-3 sm:pt-4">
                       {faq.answer}
                     </div>
                   )}
@@ -1612,55 +1646,55 @@ export function ToolPageTemplate({
       )}
 
       {/* 6. Technical Specifications & Standards */}
-      <section className="py-20 px-4 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800/80 font-sans">
+      <section className="py-10 sm:py-20 px-2 sm:px-4 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800/80 font-sans">
         <div className="container mx-auto max-w-5xl">
-          <div className="max-w-3xl mx-auto text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-4 border border-slate-200 dark:border-slate-700">
+          <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 border border-slate-200 dark:border-slate-700">
               <span>◆ Technical Architecture</span>
             </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-4 tracking-tight">
               Technical Specifications &amp; Compatibility
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-base leading-relaxed">
               Built with client-side WebAssembly, high-throughput memory buffers, and zero server storage retention.
             </p>
           </div>
 
-          <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800 overflow-hidden bg-[#FAFAFA] dark:bg-slate-900/40 shadow-xs mb-16">
+          <div className="rounded-2xl sm:rounded-3xl border border-slate-200/90 dark:border-slate-800 overflow-hidden bg-[#FAFAFA] dark:bg-slate-900/40 shadow-xs mb-8 sm:mb-16">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm border-collapse">
+              <table className="w-full text-left text-xs sm:text-sm border-collapse">
                 <thead>
                   <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900 text-slate-900 dark:text-white font-bold">
-                    <th className="py-4 px-6">Specification</th>
-                    <th className="py-4 px-6">Standard Supported</th>
-                    <th className="py-4 px-6">Privacy &amp; Security Impact</th>
+                    <th className="py-3 px-3 sm:py-4 sm:px-6">Specification</th>
+                    <th className="py-3 px-3 sm:py-4 sm:px-6">Standard Supported</th>
+                    <th className="py-3 px-3 sm:py-4 sm:px-6">Privacy &amp; Security Impact</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200/70 dark:divide-slate-800 text-slate-600 dark:text-slate-300 text-xs sm:text-sm">
                   <tr>
-                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Execution Engine</td>
-                    <td className="py-4 px-6 font-mono text-emerald-600 dark:text-emerald-400 font-bold">Client-Side WebAssembly (WASM)</td>
-                    <td className="py-4 px-6">Executes locally inside your browser sandbox; no unencrypted network transit</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6 font-bold text-slate-900 dark:text-white">Execution Engine</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6 font-mono text-emerald-600 dark:text-emerald-400 font-bold">Client-Side WebAssembly (WASM)</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6">Executes locally inside your browser sandbox; no unencrypted network transit</td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Format Compatibility</td>
-                    <td className="py-4 px-6 font-mono">{isPdf ? "PDF 1.4 – 2.0, PDF/A, ISO 32000" : isVideo ? "MP4, MOV, MKV, WebM, AVI" : isAudio ? "MP3, WAV, AAC, M4A, FLAC" : isImage ? "PNG, JPG, WebP, SVG, AVIF, HEIC" : "Universal Web & Media Standards"}</td>
-                    <td className="py-4 px-6">Full backward and forward compliance with desktop and mobile viewers</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6 font-bold text-slate-900 dark:text-white">Format Compatibility</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6 font-mono">{isPdf ? "PDF 1.4 – 2.0, PDF/A, ISO 32000" : isVideo ? "MP4, MOV, MKV, WebM, AVI" : isAudio ? "MP3, WAV, AAC, M4A, FLAC" : isImage ? "PNG, JPG, WebP, SVG, AVIF, HEIC" : "Universal Web & Media Standards"}</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6">Full backward and forward compliance with desktop and mobile viewers</td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Encryption Channel</td>
-                    <td className="py-4 px-6 font-mono text-slate-900 dark:text-white font-semibold">TLS 1.3 / 256-Bit SSL</td>
-                    <td className="py-4 px-6">Cryptographic validation prevents man-in-the-middle inspection or eavesdropping</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6 font-bold text-slate-900 dark:text-white">Encryption Channel</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6 font-mono text-slate-900 dark:text-white font-semibold">TLS 1.3 / 256-Bit SSL</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6">Cryptographic validation prevents man-in-the-middle inspection or eavesdropping</td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Data Retention Policy</td>
-                    <td className="py-4 px-6 font-mono text-emerald-600 dark:text-emerald-400 font-bold">0 MB Disk Storage (In-RAM Only)</td>
-                    <td className="py-4 px-6">Working memory is wiped permanently as soon as your session or download completes</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6 font-bold text-slate-900 dark:text-white">Data Retention Policy</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6 font-mono text-emerald-600 dark:text-emerald-400 font-bold">0 MB Disk Storage (In-RAM Only)</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6">Working memory is wiped permanently as soon as your session or download completes</td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">Supported Platforms</td>
-                    <td className="py-4 px-6">macOS, Windows 11, iOS, Android, Linux, ChromeOS</td>
-                    <td className="py-4 px-6">Zero executable software, plugins, or browser extensions to install</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6 font-bold text-slate-900 dark:text-white">Supported Platforms</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6">macOS, Windows 11, iOS, Android, Linux, ChromeOS</td>
+                    <td className="py-3 px-3 sm:py-4 sm:px-6">Zero executable software, plugins, or browser extensions to install</td>
                   </tr>
                 </tbody>
               </table>
@@ -1668,17 +1702,17 @@ export function ToolPageTemplate({
           </div>
 
           {/* Architecture Comparison Table */}
-          <div className="rounded-[2.5rem] p-8 md:p-12 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm">
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight text-center">
+          <div className="rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-8 md:p-12 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm">
+            <h3 className="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6 tracking-tight text-center">
               Why Use InstantTool Instead of Legacy Cloud Converters?
             </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-6 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/80 dark:border-emerald-800/60 space-y-3">
-                <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-extrabold text-sm uppercase tracking-wider">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+              <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/80 dark:border-emerald-800/60 space-y-2.5 sm:space-y-3">
+                <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-extrabold text-xs sm:text-sm uppercase tracking-wider">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 shrink-0" />
                   <span>InstantTool Modern Architecture</span>
                 </div>
-                <ul className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                   <li>• <strong>Local Browser Processing:</strong> Fast client-side execution with zero upload latency.</li>
                   <li>• <strong>Zero Document Logging:</strong> Sensitive contracts and files are never stored on server disks.</li>
                   <li>• <strong>100% Free Core Tools:</strong> No mandatory credit card registration or surprise payment blocks.</li>
@@ -1686,12 +1720,12 @@ export function ToolPageTemplate({
                 </ul>
               </div>
 
-              <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-3">
-                <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-extrabold text-sm uppercase tracking-wider">
-                  <span className="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-xs font-black">✕</span>
+              <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2.5 sm:space-y-3">
+                <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-extrabold text-xs sm:text-sm uppercase tracking-wider">
+                  <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-xs font-black shrink-0">✕</span>
                   <span>Legacy Cloud Converter Sites</span>
                 </div>
-                <ul className="space-y-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                   <li>• Uploads confidential documents across the public internet to third-party cloud servers.</li>
                   <li>• Stores files on disk for hours or days, creating vulnerability honeypots.</li>
                   <li>• Enforces strict 2-file daily caps and demands recurring monthly subscriptions.</li>
@@ -1704,28 +1738,28 @@ export function ToolPageTemplate({
       </section>
 
       {/* 7. Relevant Educational Guides & Tutorials (Internal Linking) */}
-      <section className="py-20 px-4 bg-slate-50/60 dark:bg-slate-900/40 border-t border-slate-200/80 dark:border-slate-800/80 font-sans">
+      <section className="py-10 sm:py-20 px-2 sm:px-4 bg-slate-50/60 dark:bg-slate-900/40 border-t border-slate-200/80 dark:border-slate-800/80 font-sans">
         <div className="container mx-auto max-w-5xl">
-          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 sm:gap-4 mb-8 sm:mb-12">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-200 dark:border-emerald-800">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-2 sm:mb-3 border border-emerald-200 dark:border-emerald-800">
                 <span>◆ Knowledge Base &amp; Tutorials</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Recommended Guides &amp; Deep Dives
               </h2>
             </div>
-            <Link href="/blog" className="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline">
+            <Link href="/blog" className="text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline">
               View all 12+ guides →
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
             {displayBlogs.map((post) => (
               <Link 
                 key={post.id} 
                 href={`/blog/${post.slug}`} 
-                className="group flex flex-col p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-emerald-400 dark:hover:border-emerald-600 hover:shadow-md transition-all duration-300"
+                className="group flex flex-col p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-emerald-400 dark:hover:border-emerald-600 hover:shadow-md transition-all duration-300"
               >
                 <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-800">
                   <img 

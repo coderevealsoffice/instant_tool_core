@@ -10,13 +10,13 @@ export function Footer() {
       
       {/* Newsletter Section */}
       <div className="border-b border-slate-200 dark:border-slate-800/50">
-        <div className="container mx-auto px-4 max-w-7xl py-12 md:py-16">
+        <div className="container mx-auto px-3 sm:px-4 max-w-7xl py-10 md:py-16">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div className="max-w-xl">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-slate-900 dark:text-white">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2 sm:mb-3 text-slate-900 dark:text-white">
                 Stay ahead of the curve
               </h2>
-              <p className="text-slate-500 dark:text-slate-400 text-base md:text-lg">
+              <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base md:text-lg">
                 Get weekly tips on video editing, format conversions, and productivity tools. Join 10,000+ subscribers.
               </p>
             </div>
@@ -28,7 +28,7 @@ export function Footer() {
       </div>
 
       {/* Main Footer Links */}
-      <div className="container mx-auto px-4 max-w-7xl py-16">
+      <div className="container mx-auto px-3 sm:px-4 max-w-7xl py-12 sm:py-16">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-8">
           
           {/* Brand & Contact Info */}
@@ -87,7 +87,7 @@ export function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-slate-200 dark:border-slate-800/50 py-6">
-        <div className="container mx-auto px-4 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="container mx-auto px-3 sm:px-4 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500 dark:text-slate-500">
             © {new Date().getFullYear()} InstantTool by Techyfe. All rights reserved.
           </p>

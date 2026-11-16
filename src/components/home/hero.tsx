@@ -401,7 +401,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative pt-12 pb-20 lg:pt-16 lg:pb-24 px-4 w-full bg-[#FAFAFA] dark:bg-slate-950 overflow-hidden font-sans border-b border-slate-200/70 dark:border-slate-800/60">
+    <section className="relative pt-8 sm:pt-12 pb-14 sm:pb-20 lg:pt-16 lg:pb-24 px-2 sm:px-4 w-full bg-[#FAFAFA] dark:bg-slate-950 overflow-hidden font-sans border-b border-slate-200/70 dark:border-slate-800/60">
 
       {/* Background Soft Glows */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>

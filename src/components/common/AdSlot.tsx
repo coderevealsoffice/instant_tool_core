@@ -70,20 +70,26 @@ export function AdSlot({ slotId, className = "" }: AdSlotProps) {
     return <div className={`animate-pulse bg-slate-100 dark:bg-slate-800 rounded flex items-center justify-center ${className}`} style={{ minHeight: "100px" }} />
   }
 
+  const isNumericSlot = /^\d+$/.test(slotId)
+
   return (
-    <div 
-      ref={adRef} 
-      className={`w-full overflow-hidden flex items-center justify-center text-slate-400 text-sm ${className}`}
-      style={{ minHeight: "90px" }}
-    >
-      <ins 
-        className="adsbygoogle"
-        style={{ display: "block", minWidth: "250px", width: "100%" }}
-        data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-1199452179361457"}
-        data-ad-slot={slotId}
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
+    <div className={`w-full my-6 flex flex-col items-center justify-center ${className}`}>
+      <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600 mb-1.5 select-none">
+        Advertisement
+      </span>
+      <div 
+        ref={adRef} 
+        className="w-full overflow-hidden flex items-center justify-center min-h-[90px] bg-slate-50/50 dark:bg-slate-900/30 rounded-xl border border-slate-100 dark:border-slate-800/60"
+      >
+        <ins 
+          className="adsbygoogle"
+          style={{ display: "block", minWidth: "250px", width: "100%", textAlign: "center" }}
+          data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-1199452179361457"}
+          {...(isNumericSlot ? { "data-ad-slot": slotId } : {})}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+      </div>
     </div>
   )
 }

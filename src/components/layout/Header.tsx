@@ -99,7 +99,7 @@ export function Header() {
 
   return (
     <header className="border-b dark:border-slate-800 bg-white dark:bg-slate-950 sticky top-0 z-50 transition-colors duration-300">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="container mx-auto px-2.5 sm:px-4 h-16 flex items-center justify-between">
         
         {/* Logo */}
         <Link href="/" className="font-black text-2xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">

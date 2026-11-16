@@ -1,6 +1,6 @@
 import Link from "next/link"
 import {
-  Scissors, Volume2, FastForward, AudioLines, Sliders, MoveRight, Mic, Merge, Music
+  Scissors, Volume2, FastForward, AudioLines, Sliders, MoveRight, Mic, Merge, Music, Sparkles
 } from "lucide-react"
 
 export const metadata = {
@@ -12,49 +12,50 @@ export const metadata = {
 };
 
 const audioTools = [
-  { slug: "trim",           title: "Trim Audio",       icon: <Scissors className="w-6 h-6" />,     description: "Cut your audio files online for free." },
-  { slug: "change-volume",  title: "Change Volume",    icon: <Volume2 className="w-6 h-6" />,      description: "Increase or decrease the volume of your audio files." },
-  { slug: "change-speed",   title: "Change Speed",     icon: <FastForward className="w-6 h-6" />,  description: "Speed up or slow down an audio file." },
-  { slug: "pitch",          title: "Change Pitch",     icon: <AudioLines className="w-6 h-6" />,   description: "Shift the pitch of your audio up or down." },
-  { slug: "equalizer",      title: "Equalizer",        icon: <Sliders className="w-6 h-6" />,      description: "Fine-tune the frequency balance of your audio." },
-  { slug: "reverse",        title: "Reverse Audio",    icon: <MoveRight className="w-6 h-6" />,    description: "Play your audio file in reverse." },
-  { slug: "recorder",       title: "Voice Recorder",   icon: <Mic className="w-6 h-6" />,          description: "Record audio online directly from your microphone." },
-  { slug: "joiner",         title: "Audio Joiner",     icon: <Merge className="w-6 h-6" />,        description: "Merge multiple audio tracks into a single file." },
+  { slug: "enhancer",       title: "Audio Enhancer",   icon: <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />,   description: "Remove background noise and enhance speech clarity." },
+  { slug: "trim",           title: "Trim Audio",       icon: <Scissors className="w-5 h-5 sm:w-6 sm:h-6" />,   description: "Cut and trim your audio and MP3 files online for free." },
+  { slug: "change-volume",  title: "Change Volume",    icon: <Volume2 className="w-5 h-5 sm:w-6 sm:h-6" />,    description: "Increase or decrease the volume of your audio files." },
+  { slug: "change-speed",   title: "Change Speed",     icon: <FastForward className="w-5 h-5 sm:w-6 sm:h-6" />,description: "Speed up or slow down an audio file." },
+  { slug: "pitch",          title: "Change Pitch",     icon: <AudioLines className="w-5 h-5 sm:w-6 sm:h-6" />, description: "Shift the pitch of your audio up or down." },
+  { slug: "equalizer",      title: "Equalizer",        icon: <Sliders className="w-5 h-5 sm:w-6 sm:h-6" />,    description: "Fine-tune the frequency balance of your audio." },
+  { slug: "reverse",        title: "Reverse Audio",    icon: <MoveRight className="w-5 h-5 sm:w-6 sm:h-6" />,  description: "Play your audio file in reverse." },
+  { slug: "recorder",       title: "Voice Recorder",   icon: <Mic className="w-5 h-5 sm:w-6 sm:h-6" />,        description: "Record audio online directly from your microphone." },
+  { slug: "joiner",         title: "Audio Joiner",     icon: <Merge className="w-5 h-5 sm:w-6 sm:h-6" />,      description: "Merge multiple audio tracks into a single file." },
 ]
 
 export default function AudioToolsCategoryPage() {
   return (
-    <div className="py-20 px-4 bg-white dark:bg-slate-950 min-h-screen">
+    <div className="py-10 sm:py-20 px-2.5 sm:px-4 bg-white dark:bg-slate-950 min-h-screen font-sans">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 dark:bg-emerald-900/40 rounded-2xl mb-6">
-            <Music className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+        <div className="text-center mb-10 sm:mb-16">
+          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-emerald-100 dark:bg-emerald-900/40 rounded-2xl mb-4 sm:mb-6">
+            <Music className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
             Audio Tools
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xs sm:text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Powerful, free online audio tools — trim, mix, convert, and enhance your audio files in seconds.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6">
           {audioTools.map((tool) => (
             <Link
               key={tool.slug}
               href={`/audio-tools/${tool.slug}`}
-              className="group flex items-start gap-4 bg-slate-50 dark:bg-slate-900 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 border border-slate-200 dark:border-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 rounded-xl p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+              className="group flex items-start gap-3.5 sm:gap-4 bg-slate-50 dark:bg-slate-900 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 border border-slate-200 dark:border-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 rounded-2xl p-4 sm:p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
             >
-              <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                 {tool.icon}
               </div>
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-white mb-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+              <div className="min-w-0">
+                <h3 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm mb-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors truncate">
                   {tool.title}
                 </h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400 leading-snug">
+                <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">
                   {tool.description}
                 </p>
               </div>
@@ -63,18 +64,18 @@ export default function AudioToolsCategoryPage() {
         </div>
 
         {/* SEO Block */}
-        <div className="mt-20 max-w-3xl mx-auto prose prose-slate dark:prose-invert">
-          <h2>Everything You Need for Audio Editing</h2>
+        <div className="mt-12 sm:mt-20 max-w-3xl mx-auto prose prose-slate dark:prose-invert text-xs sm:text-sm leading-relaxed">
+          <h2 className="text-lg sm:text-2xl font-bold">Everything You Need for Audio Editing</h2>
           <p>
             Our free online audio tools let you edit, enhance, and convert audio without installing any software.
             Whether you need to trim a recording, boost the volume, or reverse a sound effect — we have you covered.
           </p>
-          <h3>How It Works</h3>
+          <h3 className="text-base sm:text-xl font-bold">How It Works</h3>
           <p>
             Select the tool you need, upload your audio file, adjust your settings, and download the result. 
             Most tools process files directly in your browser for maximum speed and privacy.
           </p>
-          <h3>Why Use InstantTool?</h3>
+          <h3 className="text-base sm:text-xl font-bold">Why Use InstantTool?</h3>
           <ul>
             <li><strong>Free to Use:</strong> All tools are free with no sign-up required.</li>
             <li><strong>Privacy First:</strong> Client-side tools never upload your files to the cloud.</li>

@@ -118,11 +118,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         "dateModified": (post.updatedAt ? new Date(post.updatedAt) : publishedDate).toISOString(),
         "author": {
           "@type": "Person",
-          "name": post.author || "InstantTool Editorial"
+          "name": post.author || "Techyfe Editorial Board"
         },
         "publisher": {
           "@type": "Organization",
-          "name": "InstantTool",
+          "name": "Techyfe",
           "url": "https://devigo.cloud",
           "logo": {
             "@type": "ImageObject",
@@ -203,8 +203,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 {(post.author || "IT").slice(0, 2).toUpperCase()}
               </div>
               <div>
-                <div className="font-bold text-slate-900 dark:text-white">{post.author || "InstantTool Editorial"}</div>
-                <div className="text-xs text-slate-500">Verified Technical Guide</div>
+                <div className="font-bold text-slate-900 dark:text-white">{post.author || "Techyfe Editorial Board"}</div>
+                <div className="text-xs text-slate-500">Verified Technical Guide • Techyfe</div>
               </div>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono">

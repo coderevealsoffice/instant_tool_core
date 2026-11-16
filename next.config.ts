@@ -2,6 +2,19 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  async rewrites() {
+    return [
+      { source: "/privacy-policy", destination: "/legal/privacy-policy" },
+      { source: "/privacy", destination: "/legal/privacy-policy" },
+      { source: "/terms-of-service", destination: "/legal/terms-of-service" },
+      { source: "/terms", destination: "/legal/terms-of-service" },
+      { source: "/cookie-policy", destination: "/legal/cookie-policy" },
+      { source: "/cookies", destination: "/legal/cookie-policy" },
+      { source: "/refund-policy", destination: "/legal/refund-policy" },
+      { source: "/disclaimer", destination: "/legal/disclaimer" },
+      { source: "/editorial-policy", destination: "/about" },
+    ];
+  },
   async headers() {
     return [
       {

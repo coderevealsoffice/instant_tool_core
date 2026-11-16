@@ -25,8 +25,8 @@ const urbanist = Urbanist({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://devigo.cloud"),
-  title: "InstantTool - Free Online Tools (iLovePDF Alternative, Compress PDF, Video & AI Tools)",
-  description: "Free online tools like iLovePDF: Compress PDF, Merge PDF, Split PDF, PDF to Word, JPG to PDF, Video to Audio Converter, YouTube Downloader, and AI Caption Generator. 100% free, private WebAssembly processing with zero watermarks.",
+  title: "InstantTool - Free Online Tools (PDF Alternative, Compress PDF, Video & AI Tools)",
+  description: "Free online tools pdf: Compress PDF, Merge PDF, Split PDF, PDF to Word, JPG to PDF, Video to Audio Converter, YouTube Downloader, and AI Caption Generator. 100% free, private WebAssembly processing with zero watermarks.",
   robots: {
     index: true,
     follow: true,
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     },
   },
   keywords: [
-    "ilovepdf",
-    "i love pdf alternative",
+    "pdf converter",
+    "pdf compressor",
     "pdf to word",
     "jpg to pdf",
     "word to pdf",
@@ -106,25 +106,15 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${urbanist.variable} h-full antialiased font-sans`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        {/* Google AdSense Dynamic Script - Injected cleanly after hydration to avoid SSR mismatch & data-nscript warnings */}
-        <Script
-          id="google-adsense"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                if (typeof window !== 'undefined' && !document.querySelector('script[src*="adsbygoogle.js"]')) {
-                  var s = document.createElement('script');
-                  s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1199452179361457';
-                  s.async = true;
-                  s.crossOrigin = 'anonymous';
-                  document.head.appendChild(s);
-                }
-              })();
-            `
-          }}
+      <head>
+        {/* Google AdSense Primary Script Tag - Static in <head> for AdSense Crawler Verification */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1199452179361457"
+          crossOrigin="anonymous"
         />
+      </head>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
 
         {/* Global Organization Schema for AEO/GEO/SEO */}
         <script
