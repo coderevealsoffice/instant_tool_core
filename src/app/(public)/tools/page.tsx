@@ -40,7 +40,7 @@ export default function AllToolsPage() {
               height={48}
               className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl object-contain shadow-xs"
             />
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-slate-900 dark:text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
               Instant<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500">Tool</span>
             </h1>
           </div>

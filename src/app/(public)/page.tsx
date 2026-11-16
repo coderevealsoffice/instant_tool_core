@@ -201,7 +201,7 @@ export default function HomePage() {
               <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>Zero-Retention Privacy Architecture</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
               Engineered for Absolute Document Privacy
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed">
@@ -268,7 +268,7 @@ export default function HomePage() {
             <span className="inline-block py-1 px-3.5 rounded-full bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs font-bold tracking-wider uppercase mb-4">
               AI ENGINE &bull; CREATOR OPTIMIZATION
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
               Supercharge Content Creation with AI
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
@@ -389,7 +389,7 @@ export default function HomePage() {
             <span className="inline-block py-1 px-3.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold tracking-wider uppercase mb-4">
               COMPREHENSIVE UTILITY ECOSYSTEM
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
               Explore 100+ Free Online Utilities
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
@@ -454,7 +454,7 @@ export default function HomePage() {
             <span className="inline-block py-1 px-3.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold tracking-wider uppercase mb-4 border border-emerald-200/80 dark:border-emerald-800">
               REAL-WORLD USE CASES
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
               Engineered for High-Stakes Demands
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed">
@@ -557,7 +557,7 @@ export default function HomePage() {
             <span className="inline-block py-1 px-3.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold tracking-wider uppercase mb-4">
               ARCHITECTURAL COMPARISON
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
               InstantTool vs. Legacy Cloud File Sites
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed">
@@ -617,7 +617,7 @@ export default function HomePage() {
                 <BookOpen className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>Editorial Knowledge Base &bull; 12+ Guides</span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Engineering Masterclasses &amp; Guides
               </h2>
             </div>
@@ -751,7 +751,7 @@ export default function HomePage() {
             <span className="inline-block py-1 px-3.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold tracking-wider uppercase mb-4">
               COMMON QUESTIONS
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
               Frequently Asked Questions
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg">

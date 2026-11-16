@@ -30,9 +30,13 @@ export function YoutubeDownloaderCanvas() {
 
   const handlePaste = async () => {
     try {
-      const text = await navigator.clipboard.readText()
-      setUrl(text)
-      toast.success("Link pasted from clipboard!")
+      if (typeof navigator !== "undefined" && navigator.clipboard?.readText) {
+        const text = await navigator.clipboard.readText()
+        setUrl(text)
+        toast.success("Link pasted from clipboard!")
+      } else {
+        toast.error("Please paste your link directly into the input.")
+      }
     } catch {
       toast.error("Could not access clipboard. Please paste manually.")
     }

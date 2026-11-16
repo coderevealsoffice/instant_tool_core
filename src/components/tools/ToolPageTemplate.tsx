@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useWorkspaceStore } from "@/store/workspace-store"
 import { Button } from "@/components/ui/button"
-import { CheckCircle2, ChevronDown, ChevronUp, ArrowRight, ArrowUpRight, UploadCloud, FileText } from "lucide-react"
+import { CheckCircle2, ChevronDown, ChevronUp, ArrowRight, ArrowUpRight, UploadCloud, FileText, Link2 } from "lucide-react"
 import { SupportDonationCTA } from "./SupportDonationCTA"
 import { AdSlot } from "@/components/common/AdSlot"
 import { BUILTIN_BLOG_POSTS } from "@/lib/blogs-data"
@@ -951,6 +951,7 @@ export function ToolPageTemplate({
 }: ToolPageTemplateProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(0)
   const [isDragging, setIsDragging] = useState(false)
+  const [heroUrl, setHeroUrl] = useState("")
   const dragCounter = useRef(0)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
@@ -1009,15 +1010,19 @@ export function ToolPageTemplate({
   const safeTitle = title || "Tool"
   const safeSlug = (slug || "").toLowerCase()
 
+  // Clean title to avoid long messy compound titles like "Plagiarism Checker - 100% Free..."
+  const cleanTitle = (safeTitle || "").split(" - ")[0].split(" | ")[0].trim()
+
   // Dynamic category and format helpers tailored to each page
   const categoryLabel = (category || "TOOLS").replace(/-/g, ' ').toUpperCase()
-  const isPdf = safeCategory === "pdf-tools" || safeTitle.toLowerCase().includes("pdf")
-  const isVideo = safeCategory === "video-tools" || safeTitle.toLowerCase().includes("video")
-  const isAudio = safeCategory === "audio-tools" || safeTitle.toLowerCase().includes("audio")
-  const isImage = safeCategory === "image-tools" || safeTitle.toLowerCase().includes("image")
-  const isSeo = safeCategory === "seo-tools" || safeCategory === "ai-tools" || safeTitle.toLowerCase().includes("seo") || safeTitle.toLowerCase().includes("aeo") || safeTitle.toLowerCase().includes("geo")
+  const isPdf = safeCategory === "pdf-tools" || cleanTitle.toLowerCase().includes("pdf")
+  const isVideo = safeCategory === "video-tools" || cleanTitle.toLowerCase().includes("video")
+  const isAudio = safeCategory === "audio-tools" || cleanTitle.toLowerCase().includes("audio")
+  const isImage = safeCategory === "image-tools" || cleanTitle.toLowerCase().includes("image")
+  const isSeo = safeCategory === "seo-tools" || safeCategory === "ai-tools" || cleanTitle.toLowerCase().includes("seo") || cleanTitle.toLowerCase().includes("aeo") || cleanTitle.toLowerCase().includes("geo")
+  const isDownloader = safeSlug.includes("downloader") || cleanTitle.toLowerCase().includes("downloader")
 
-  const mockupData = getToolMockupData(safeSlug, safeTitle, safeCategory)
+  const mockupData = getToolMockupData(safeSlug, cleanTitle, safeCategory)
 
   // Select top 3 relevant articles for internal linking and depth
   const relevantBlogs = (BUILTIN_BLOG_POSTS || []).filter(b => {
@@ -1033,11 +1038,17 @@ export function ToolPageTemplate({
   const displayBlogs = relevantBlogs.length >= 3 ? relevantBlogs : (BUILTIN_BLOG_POSTS || []).slice(0, 3)
 
   const displayHeadline = isPdf
-    ? `${title} Files Online Instantly`
-    : `${title} Online Free`
+    ? `${cleanTitle} Online`
+    : isDownloader
+    ? `${cleanTitle} Online Free`
+    : cleanTitle.toLowerCase().includes("online") || cleanTitle.toLowerCase().includes("free")
+    ? cleanTitle
+    : `${cleanTitle} Online Free`
 
   const displaySubtitle = description || (
-    isPdf 
+    isDownloader
+      ? `Paste any video or audio link to download instantly in full HD or MP3 with high-speed direct extraction.`
+      : isPdf 
       ? `Extract pages, convert formats, or separate your PDF with high precision. 100% free, private in your browser with zero data retention.`
       : `Fast, secure, and private browser-based tool. 100% free with zero watermarks or data retention.`
   )
@@ -1045,6 +1056,9 @@ export function ToolPageTemplate({
   const previewTiles = (() => {
     const s = safeSlug
     const t = safeTitle.toLowerCase()
+    if (isDownloader || s.includes("downloader") || t.includes("downloader")) {
+      return ["4K UHD", "1080p HD", "720p HD", "MP3 Audio", "320kbps", "No Watermark"]
+    }
     if (s.includes("unlock") || t.includes("unlock")) {
       return ["Protected", "Key Check", "Decrypted", "Print ✓", "Copy ✓", "Edit ✓"]
     }
@@ -1094,7 +1108,9 @@ export function ToolPageTemplate({
     ? "image/*" 
     : "*"
 
-  const formatBadgeText = isPdf 
+  const formatBadgeText = isDownloader
+    ? "YouTube, X, FB & Instagram URLs"
+    : isPdf 
     ? ".PDF files up to 100MB" 
     : isVideo 
     ? ".MP4, .MOV, .MKV up to 500MB" 
@@ -1109,26 +1125,26 @@ export function ToolPageTemplate({
       <section className="pt-8 sm:pt-12 pb-12 px-4 bg-white dark:bg-slate-950 font-sans transition-colors duration-300">
         <div className="container mx-auto max-w-7xl">
           <div 
-            onDragEnter={handleDragEnter}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
+            onDragEnter={!isDownloader ? handleDragEnter : undefined}
+            onDragOver={!isDownloader ? handleDragOver : undefined}
+            onDragLeave={!isDownloader ? handleDragLeave : undefined}
+            onDrop={!isDownloader ? handleDrop : undefined}
             className={`rounded-[2.5rem] bg-[#FAFAFA] dark:bg-slate-900/60 border transition-all p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-xs ${
-              isDragging 
+              isDragging && !isDownloader
                 ? "border-emerald-500 ring-4 ring-emerald-500/20 bg-emerald-50/40 dark:bg-emerald-950/20" 
                 : "border-slate-200/90 dark:border-slate-800"
             }`}
           >
             {/* Full-Card Drag & Drop Overlay */}
-            {isDragging && (
+            {isDragging && !isDownloader && (
               <div className="absolute inset-0 bg-[#D7FB8E]/95 dark:bg-slate-900/95 backdrop-blur-md z-50 flex flex-col items-center justify-center border-4 border-dashed border-emerald-600 dark:border-emerald-400 rounded-[2.5rem] p-8 text-center animate-in fade-in-50 duration-150 pointer-events-none">
                 <div className="w-20 h-20 rounded-full bg-emerald-600 text-white flex items-center justify-center mb-4 animate-bounce shadow-xl">
                   <UploadCloud className="w-10 h-10" />
                 </div>
-                <h3 className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white mb-2 tracking-tight">
-                  Drop your {title} files right here!
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white mb-2 tracking-tight">
+                  Drop your {cleanTitle} files right here!
                 </h3>
-                <p className="text-slate-800 dark:text-slate-300 font-semibold text-base sm:text-lg">
+                <p className="text-slate-800 dark:text-slate-300 font-semibold text-sm sm:text-base">
                   Release anywhere in this card to begin processing immediately in your browser
                 </p>
               </div>
@@ -1144,31 +1160,75 @@ export function ToolPageTemplate({
               <div className="lg:col-span-7 flex flex-col items-start text-left">
                 
                 {/* Top Pill Tag */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-black tracking-wider uppercase mb-6 shadow-2xs">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-black tracking-wider uppercase mb-5 shadow-2xs">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  ◆ 100% Free &amp; Private Tools
+                  ◆ {isDownloader ? "100% Free Video & Audio Downloader" : "100% Free & Private Tools"}
                 </div>
 
-                {/* Giant Tool Headline (Tailored to PDF / Current Tool) */}
-                <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-bold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-6">
+                {/* Tool Headline - Sized nicely and cleanly */}
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
                   {displayHeadline}
                 </h1>
 
-                {/* Subheadline (Tailored to PDF / Current Tool) */}
-                <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl font-normal leading-relaxed mb-8">
+                {/* Subheadline */}
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl font-normal leading-relaxed mb-6">
                   {displaySubtitle}
                 </p>
 
-                {/* Single Sona.ai Primary Action Button */}
-                <div className="flex items-center gap-3 w-full sm:w-auto mb-4">
-                  <button
-                    onClick={handleChooseFilesClick}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer text-center"
-                  >
-                    <span>Choose {title} Files</span>
-                    <ArrowUpRight className="w-4 h-4 text-slate-950" />
-                  </button>
-                </div>
+                {/* Primary Action Button or Direct URL Input for Downloaders */}
+                {isDownloader ? (
+                  <div className="w-full max-w-xl mb-4">
+                    <div className="flex flex-col gap-2 p-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md">
+                      <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300 px-1">
+                        <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                          <Link2 className="w-3.5 h-3.5" /> Direct Video URL
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-mono">YouTube, X, FB, Instagram</span>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <input
+                          type="text"
+                          value={heroUrl}
+                          onChange={(e) => setHeroUrl(e.target.value)}
+                          placeholder="Paste video link here (YouTube, X, FB, Instagram)..."
+                          className="flex-1 px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-sm text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const container = document.getElementById("tool-canvas-container")
+                            if (container) {
+                              container.scrollIntoView({ behavior: "smooth" })
+                              const canvasInput = container.querySelector('input[type="text"]') as HTMLInputElement
+                              if (canvasInput) {
+                                if (heroUrl) {
+                                  canvasInput.value = heroUrl
+                                  canvasInput.dispatchEvent(new Event("input", { bubbles: true }))
+                                }
+                                const fetchBtn = container.querySelector('button.bg-\\[\\#D7FB8E\\], button:has(svg.lucide-sparkles)') as HTMLButtonElement
+                                if (fetchBtn && heroUrl) fetchBtn.click()
+                              }
+                            }
+                          }}
+                          className="px-6 py-3 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-bold text-sm tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer flex items-center justify-center gap-2 shrink-0"
+                        >
+                          <span>Download Video</span>
+                          <ArrowRight className="w-4 h-4 text-slate-950" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-3 w-full sm:w-auto mb-4">
+                    <button
+                      onClick={handleChooseFilesClick}
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-sm sm:text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer text-center"
+                    >
+                      <span>Choose {cleanTitle} Files</span>
+                      <ArrowUpRight className="w-4 h-4 text-slate-950" />
+                    </button>
+                  </div>
+                )}
 
               </div>
 
@@ -1179,13 +1239,13 @@ export function ToolPageTemplate({
                 <div className="w-[250px] sm:w-[310px] rounded-3xl bg-[#D7FB8E] p-5 sm:p-6 text-slate-950 shadow-md border border-black/5 flex flex-col justify-between absolute right-1 sm:right-4 top-0 transform translate-x-0">
                   <div>
                     <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-slate-700 mb-1.5">
-                      {categoryLabel}
+                      {isDownloader ? "STREAM EXTRACTOR" : categoryLabel}
                     </div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/10 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider mb-2.5">
-                      <span>◆</span> INSTANT ENGINE
+                      <span>◆</span> {isDownloader ? "FAST CDN" : "INSTANT ENGINE"}
                     </div>
                     <h4 className="text-sm sm:text-base font-bold text-slate-950 leading-snug">
-                      {title} Auto-Processed
+                      {isDownloader ? `${cleanTitle} High Speed` : `${cleanTitle} Auto-Processed`}
                     </h4>
 
                     {/* 6 Feature / Part Preview Tiles */}
@@ -1207,25 +1267,35 @@ export function ToolPageTemplate({
 
                 {/* 2. Sona.ai Front Sky Blue Card (Active Dropzone) */}
                 <div
-                  onClick={handleChooseFilesClick}
+                  onClick={() => {
+                    if (isDownloader) {
+                      document.getElementById("tool-canvas-container")?.scrollIntoView({ behavior: "smooth" })
+                    } else {
+                      handleChooseFilesClick()
+                    }
+                  }}
                   className="w-[250px] sm:w-[310px] rounded-3xl bg-[#BAE6FD] dark:bg-sky-950 p-5 sm:p-6 shadow-2xl border border-sky-300 dark:border-sky-800 hover:scale-[1.02] transition-all cursor-pointer relative z-20 transform -translate-x-4 sm:-translate-x-12 translate-y-12 sm:translate-y-20"
                 >
                   <div>
                     <div className="text-[10px] font-mono font-bold tracking-wider uppercase text-sky-900 dark:text-sky-300 mb-1.5">
-                      CLIENT SANDBOX
+                      {isDownloader ? "URL LINK PROCESSOR" : "CLIENT SANDBOX"}
                     </div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-200/80 dark:bg-sky-900/80 text-sky-950 dark:text-sky-200 text-[10px] font-extrabold uppercase tracking-wider mb-2.5">
-                      <span>◆</span> ZERO DATA RETENTION
+                      <span>◆</span> {isDownloader ? "NO FILE UPLOAD" : "ZERO DATA RETENTION"}
                     </div>
                     <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-snug">
-                      Drop {title} files here
+                      {isDownloader ? "Paste Video Link to Download" : `Drop ${cleanTitle} files here`}
                     </h4>
 
                     {/* Modern Drag and Drop Graphic */}
                     <div className="my-3.5 p-3.5 bg-white/80 dark:bg-slate-900/80 rounded-2xl border border-sky-200/80 dark:border-sky-800 flex flex-col items-center justify-center text-center shadow-2xs">
-                      <UploadCloud className="w-8 h-8 text-sky-600 dark:text-sky-400 mb-1 animate-pulse" />
+                      {isDownloader ? (
+                        <Link2 className="w-8 h-8 text-sky-600 dark:text-sky-400 mb-1 animate-pulse" />
+                      ) : (
+                        <UploadCloud className="w-8 h-8 text-sky-600 dark:text-sky-400 mb-1 animate-pulse" />
+                      )}
                       <p className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
-                        Drag &amp; drop files here
+                        {isDownloader ? "Paste link from any video" : "Drag & drop files here"}
                       </p>
                       <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
                         {formatBadgeText}
@@ -1236,10 +1306,16 @@ export function ToolPageTemplate({
                   {/* Sona.ai Cyan Action Button */}
                   <button
                     type="button"
-                    onClick={handleChooseFilesClick}
+                    onClick={() => {
+                      if (isDownloader) {
+                        document.getElementById("tool-canvas-container")?.scrollIntoView({ behavior: "smooth" })
+                      } else {
+                        handleChooseFilesClick()
+                      }
+                    }}
                     className="w-full py-2.5 px-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
                   >
-                    <span>Select {title} Files</span>
+                    <span>{isDownloader ? "Paste Video Link" : `Select ${cleanTitle} Files`}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </button>
                 </div>
@@ -1252,7 +1328,7 @@ export function ToolPageTemplate({
 
           {/* Interactive In-Page Tool Canvas (rendered for tools with interactive editors like Plagiarism Checker, AI Detector, Word Counter) */}
           {toolComponent && (
-            <div className="mt-10 max-w-5xl mx-auto w-full">
+            <div id="tool-canvas-container" className="mt-10 max-w-5xl mx-auto w-full">
               {toolComponent}
             </div>
           )}
@@ -1309,7 +1385,7 @@ export function ToolPageTemplate({
                     {idx === 0 ? "◆ High-Speed Engine" : idx === 1 ? "◆ Enterprise Security" : "◆ Multi-Platform"}
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight leading-snug">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight leading-snug">
                     {feature.title}
                   </h3>
 
@@ -1464,7 +1540,7 @@ export function ToolPageTemplate({
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-4">
                   <span>◆ Step-by-Step Guide</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-5 tracking-tight">
                   {howToTitle}
                 </h2>
                 <ol className="space-y-4">
@@ -1488,7 +1564,7 @@ export function ToolPageTemplate({
       {gridFeatures.length > 0 && (
         <section className="py-20 px-4 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800/80">
           <div className="container mx-auto max-w-5xl">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white text-center mb-16 tracking-tight">{gridTitle}</h2>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white text-center mb-12 tracking-tight">{gridTitle}</h2>
             <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
               {gridFeatures.map((feat, i) => (
                 <div key={i} className="p-6 rounded-3xl bg-[#FAFAFA] dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 text-center hover:border-emerald-400 dark:hover:border-emerald-600 transition-all duration-300">
@@ -1508,7 +1584,7 @@ export function ToolPageTemplate({
       {faqs.length > 0 && (
         <section className="py-20 px-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
           <div className="container mx-auto max-w-3xl">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-12">{faqTitle}</h2>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">{faqTitle}</h2>
             <div className="space-y-4">
               {faqs.map((faq, idx) => (
                 <div key={idx} className="bg-white dark:bg-slate-950 border dark:border-slate-800 rounded-xl overflow-hidden transition-all duration-200">
@@ -1542,7 +1618,7 @@ export function ToolPageTemplate({
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-4 border border-slate-200 dark:border-slate-700">
               <span>◆ Technical Architecture</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
               Technical Specifications &amp; Compatibility
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">

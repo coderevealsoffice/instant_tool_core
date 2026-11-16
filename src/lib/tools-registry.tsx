@@ -25,6 +25,8 @@ import { VideoEditor } from "@/components/tools/VideoEditor"
 import { SignPdf } from "@/components/tools/SignPdf"
 import { GenericToolUploader } from "@/components/tools/GenericToolUploader"
 import { NoFileToolStarter } from "@/components/tools/NoFileToolStarter"
+import { YoutubeDownloaderCanvas } from "@/components/workspace/tools/video/youtube-downloader-canvas"
+import { InstagramDownloaderCanvas } from "@/components/workspace/tools/video/instagram-downloader-canvas"
 import { MonitorPlay, Video, Mic, MessageSquare, Palette, Code2, FileCode2, Camera } from "lucide-react"
 
 // Text Tools
@@ -494,30 +496,16 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
     },
     "youtube-downloader": {
       title: "YouTube Downloader",
-      description: "Download YouTube videos easily.",
+      description: "Download high-quality videos and audio from YouTube instantly without watermarks.",
       headerColorClass: "bg-red-600",
-      toolComponent: (
-        <NoFileToolStarter 
-          toolName="YouTube Downloader" 
-          toolSlug="youtube-downloader" 
-          description="Click to start downloading YouTube videos"
-          icon={<MonitorPlay className="w-16 h-16 mb-4 text-red-500" />}
-        />
-      ),
+      toolComponent: <YoutubeDownloaderCanvas />,
       ...generateSEOData("YouTube Downloader", "video")
     },
     "instagram-downloader": {
       title: "Instagram Downloader",
-      description: "Download Instagram Reels and Videos.",
+      description: "Download Instagram Reels, Photos, and Videos in full resolution.",
       headerColorClass: "bg-pink-600",
-      toolComponent: (
-        <NoFileToolStarter 
-          toolName="Instagram Downloader" 
-          toolSlug="instagram-downloader" 
-          description="Click to start downloading Instagram videos"
-          icon={<Camera className="w-16 h-16 mb-4 text-pink-500" />}
-        />
-      ),
+      toolComponent: <InstagramDownloaderCanvas />,
       ...generateSEOData("Instagram Downloader", "video")
     },
     "recorder": {
@@ -1302,7 +1290,7 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
       ...generateSEOData("AI Resume Builder", "text")
     },
     "ai-detector": {
-      title: "AI Content Detector - Copyleaks-Grade ChatGPT & Claude Detector",
+      title: "AI Content Detector",
       description: "Detect ChatGPT, GPT-4o, Claude 3.5, Gemini, and DeepSeek content with 99.7% accuracy. Features interactive sentence highlighting, model probability breakdown, and 1-click humanizer.",
       headerColorClass: "bg-red-600",
       toolComponent: <AiDetector />,
@@ -1396,7 +1384,7 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
   },
   "seo-tools": {
     "plagiarism-checker": {
-      title: "Plagiarism Checker - 100% Free Online Duplicate Content Detector",
+      title: "Plagiarism Checker",
       description: "Accurate online plagiarism checker with 1,000 words free per search. Features deep search across billions of web pages, sentence-by-sentence analysis, document upload, URL exclusion, and 1-click AI paraphrasing.",
       headerColorClass: "bg-emerald-600",
       toolComponent: <PlagiarismChecker />,
@@ -1500,7 +1488,7 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
       ]
     },
     "geo-aeo-auditor": {
-      title: "AEO & GEO Content Auditor - Generative AI Search Optimization",
+      title: "AEO & GEO Content Auditor",
       description: "Audit and optimize web articles to be synthesized, cited, and recommended by ChatGPT Search, Perplexity AI, Google AI Overviews, and Gemini.",
       headerColorClass: "bg-fuchsia-600",
       toolComponent: <GeoAeoAuditor />,
@@ -1794,7 +1782,7 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
       ]
     },
     "schema-generator": {
-      title: "JSON-LD Schema Markup Generator - Rich Snippets Creator",
+      title: "JSON-LD Schema Markup Generator",
       description: "Build Google-compliant structured data for FAQPage, HowTo guides, Articles, Products, and Web Applications with instant JSON-LD generation.",
       headerColorClass: "bg-indigo-600",
       toolComponent: <SchemaMarkupGenerator />,
@@ -2088,7 +2076,7 @@ export const toolsRegistry: Record<string, Record<string, ToolConfig>> = {
       ]
     },
     "ai-detector": {
-      title: "AI Content Detector - Copyleaks-Grade ChatGPT & Claude Detector",
+      title: "AI Content Detector",
       description: "Detect ChatGPT, GPT-4o, Claude 3.5, Gemini, and DeepSeek content with 99.7% accuracy. Features interactive sentence highlighting, model probability breakdown, and 1-click humanizer.",
       headerColorClass: "bg-red-600",
       toolComponent: <AiDetector />,

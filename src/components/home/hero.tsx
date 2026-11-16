@@ -419,8 +419,8 @@ export function HeroSection() {
               ◆ 100% Free &amp; Private Tools
             </div>
 
-            {/* Giant Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-[3.65rem] font-bold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-6">
+            {/* Main Headline */}
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
               Every tool you need,
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500">
                 {" "}built for speed.
@@ -428,7 +428,7 @@ export function HeroSection() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl font-normal leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl font-normal leading-relaxed mb-6">
               InstantTool helps creators and professionals eliminate bloated software. Merge PDFs, trim 4K videos, transcode media, and run Copyleaks-grade AI detection—100% free and private in your browser.
             </p>
 
