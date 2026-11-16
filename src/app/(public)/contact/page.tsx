@@ -58,7 +58,7 @@ export default function ContactPage() {
               <div className="space-y-5">
                 {[
                   { icon: <Mail className="w-5 h-5" />, label: "Official Support & Inquiries", value: "info.techyfe@gmail.com", href: "mailto:info.techyfe@gmail.com" },
-                  { icon: <MapPin className="w-5 h-5" />, label: "Registered Office & Engineering Desk", value: "Techyfe Office, Sector 62, Noida, Uttar Pradesh 201309, India" },
+                  { icon: <MapPin className="w-5 h-5" />, label: "Registered Office & Engineering Desk", value: "Techyfe Office, Sector 4, Noida, Uttar Pradesh 201309, India" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4">
                     <div className="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 rounded-xl flex items-center justify-center shrink-0 border border-emerald-200/50 dark:border-emerald-800/50">
@@ -82,7 +82,7 @@ export default function ContactPage() {
             <div className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 space-y-3">
               <h3 className="font-bold text-slate-900 dark:text-white mb-1">Entity &amp; Operations</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                Operated by <strong>Techyfe</strong> engineering team, spearheaded by Pradeep Yadav (Lead Product Engineer &amp; Founder @ Techyfe).
+                Operated by <strong>Techyfe </strong> engineering team, spearheaded by Pradeep Yadav (Lead Product Engineer &amp; Founder @ Techyfe).
               </p>
               <div className="pt-2 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 space-y-1">
                 <p>• <strong>Support Hours:</strong> Monday – Friday, 9:00 AM – 6:00 PM IST</p>

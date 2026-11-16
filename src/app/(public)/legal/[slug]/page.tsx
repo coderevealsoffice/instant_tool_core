@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: `${title} | InstantTool Legal & Compliance`,
-    description: `Read our ${title} - InstantTool's commitment to your privacy, security, transparency, and data protection.`,
+    description: `Read the official ${title} for InstantTool. Learn about our commitment to user privacy, zero data retention, transparency, and global regulatory standards.`,
     alternates: { canonical: `https://devigo.cloud/legal/${canonicalSlug}` },
   }
 }
@@ -65,7 +65,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-16 px-4 font-sans text-slate-900 dark:text-slate-100 transition-colors">
       <div className="container mx-auto max-w-5xl">
-        
+
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-500 mb-8" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-slate-900 dark:hover:text-white">Home</Link>
@@ -73,10 +73,10 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
           <span className="text-slate-900 dark:text-white font-medium">{pageTitle}</span>
         </nav>
 
-        <div className="grid lg:grid-cols-4 gap-8">
+        <div className="grid lg:grid-cols-4 gap-4">
           {/* Sidebar Nav */}
           <aside className="lg:col-span-1">
-            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/90 dark:border-slate-800 sticky top-24 shadow-xs">
+            <div className="bg-white dark:bg-slate-900 rounded-xl p-3 border border-slate-200/90 dark:border-slate-800 sticky top-24 shadow-xs">
               <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 px-3">
                 Legal &amp; Policies
               </h2>
@@ -87,11 +87,10 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
                     <Link
                       key={item.slug}
                       href={`/legal/${item.slug}`}
-                      className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                        isActive
-                          ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-xs"
-                          : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
-                      }`}
+                      className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${isActive
+                        ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-xs"
+                        : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                        }`}
                     >
                       <FileText className="w-4 h-4 shrink-0" />
                       <span>{item.label}</span>
@@ -116,7 +115,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
 
           {/* Main Content */}
           <main className="lg:col-span-3">
-            <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 md:p-14 border border-slate-200/90 dark:border-slate-800 shadow-sm">
+            <div className="bg-white dark:bg-slate-900 rounded-xl p-3 md:p-8 border border-slate-200/90 dark:border-slate-800 shadow-sm">
               <div className="flex flex-wrap items-center gap-3 mb-6">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider border border-emerald-200 dark:border-emerald-800">
                   <ShieldCheck className="w-3.5 h-3.5" />
