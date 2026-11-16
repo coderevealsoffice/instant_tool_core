@@ -88,7 +88,7 @@ export async function notifySuperAdminOnNewUser(newUserEmail: string, newUserNam
 
 export async function sendContactEmail(name: string, email: string, subject: string, message: string) {
   try {
-    const toEmail = process.env.CONTACT_TO_EMAIL || "info@codereveals.com"
+    const toEmail = process.env.CONTACT_TO_EMAIL || "info.techyfe@gmail.com"
     const mailOptions = {
       from: `"InstantTool Contact" <${process.env.SMTP_USER}>`,
       to: toEmail,

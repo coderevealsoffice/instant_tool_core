@@ -3,8 +3,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "About InstantTool - Our Mission, Editorial Standards & Security Architecture",
-  description: "Learn about InstantTool's mission to provide fast, secure, and client-side WebAssembly file and AI tools for everyone with zero server data retention.",
+  title: "About Techyfe - Our Mission, Editorial Standards & Security Architecture",
+  description: "Learn about Techyfe's mission to provide fast, secure, and client-side WebAssembly file and AI tools for everyone with zero server data retention.",
   alternates: {
     canonical: "https://devigo.cloud/about"
   }
@@ -14,16 +14,16 @@ export default function AboutPage() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "name": "About InstantTool",
-    "description": "Learn about InstantTool's mission to provide fast, secure, and intuitive file and AI tools for everyone directly in the browser.",
+    "name": "About Techyfe",
+    "description": "Learn about Techyfe's mission to provide fast, secure, and intuitive file and AI tools for everyone directly in the browser.",
     "publisher": {
       "@type": "Organization",
-      "name": "InstantTool",
+      "name": "Techyfe",
       "url": "https://devigo.cloud",
       "logo": "https://devigo.cloud/favicon.png",
       "contactPoint": {
         "@type": "ContactPoint",
-        "email": "info@codereveals.com",
+        "email": "info.techyfe@gmail.com",
         "contactType": "customer service"
       }
     }
@@ -37,13 +37,13 @@ export default function AboutPage() {
       <section className="bg-gradient-to-b from-slate-50 via-white to-white dark:from-slate-900/60 dark:via-slate-950 dark:to-slate-950 py-20 md:py-28 px-4 text-center border-b border-slate-100 dark:border-slate-800/60">
         <div className="container mx-auto max-w-4xl">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-6 border border-emerald-200 dark:border-emerald-800">
-            <span>◆ About Us &amp; Transparency</span>
+            <span>◆ About Techyfe &amp; Transparency</span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-6 leading-tight text-slate-900 dark:text-white">
             Empowering Millions with Free, Private Browser Tools
           </h1>
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            We believe powerful multimedia, PDF, and AI utilities should be fast, private, and accessible to everyone worldwide — without software downloads or paywalls.
+            At Techyfe, we believe powerful multimedia, PDF, and AI utilities should be fast, private, and accessible to everyone worldwide — without software downloads or paywalls.
           </p>
         </div>
       </section>
@@ -60,10 +60,10 @@ export default function AboutPage() {
                 Eliminating Bloat &amp; Respecting User Privacy
               </h2>
               <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4 text-base">
-                InstantTool was built to solve a pervasive problem on the modern web: intrusive file converters filled with misleading download buttons, mandatory email registrations, and servers that covertly store your confidential files.
+                Techyfe was built to solve a pervasive problem on the modern web: intrusive file converters filled with misleading download buttons, mandatory email registrations, and servers that covertly store your confidential files.
               </p>
               <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-base">
-                By leveraging cutting-edge <strong>client-side WebAssembly</strong> and browser memory streams, we process files directly on your own device. When you compress a PDF or convert an image, your sensitive data never leaves your computer.
+                By leveraging cutting-edge <strong>client-side WebAssembly</strong> and browser memory streams, Techyfe processes files directly on your own device. When you compress a PDF or convert an image, your sensitive data never leaves your computer.
               </p>
             </div>
 
@@ -99,7 +99,7 @@ export default function AboutPage() {
               Our Commitment to Editorial Integrity &amp; Accuracy
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
-              Every guide, tutorial, and technical article published on the InstantTool Knowledge Base adheres to rigorous editorial review standards.
+              Every guide, tutorial, and technical article published on the Techyfe Knowledge Base adheres to rigorous editorial review standards.
             </p>
           </div>
 
@@ -144,17 +144,17 @@ export default function AboutPage() {
             <Award className="w-4 h-4 text-emerald-600" /> Engineering &amp; Ownership
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight">
-            Built by CodeReveals for Users Worldwide
+            Built by Techyfe for Users Worldwide
           </h2>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-            InstantTool is engineered and operated by <strong>CodeReveals</strong>, headquartered in Noida, India, under the leadership of <strong>Pradeep Yadav</strong> (Product Engineering @ Techyfe &amp; CodeReveals).
+            Techyfe is an open engineering studio and digital utility platform headquartered in Sector 62, Noida, India, spearheaded by <strong>Pradeep Yadav</strong> (Lead Product Engineer &amp; Founder @ Techyfe).
           </p>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-10">
-            We are passionate about open web standards and empowering creators, students, and businesses with lightweight, privacy-respecting browser utilities. Have questions or want to partner? Email our engineering desk directly at <a href="mailto:info@codereveals.com" className="font-bold text-emerald-600 dark:text-emerald-400 underline">info@codereveals.com</a>.
+            We are passionate about open web standards and empowering creators, students, and businesses with lightweight, privacy-respecting browser utilities. Have questions or want to partner? Email our engineering desk directly at <a href="mailto:info.techyfe@gmail.com" className="font-bold text-emerald-600 dark:text-emerald-400 underline">info.techyfe@gmail.com</a>.
           </p>
 
           <div className="inline-flex flex-wrap items-center justify-center gap-4">
-            <Link
+            <Link 
               href="/tools" 
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#D7FB8E] hover:bg-[#cbf576] text-slate-950 font-black text-sm tracking-tight transition-all shadow-sm border border-black/10"
             >

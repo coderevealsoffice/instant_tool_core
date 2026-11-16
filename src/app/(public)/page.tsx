@@ -104,7 +104,7 @@ export default function HomePage() {
         ],
         "contactPoint": {
           "@type": "ContactPoint",
-          "email": "info@codereveals.com",
+          "email": "info.techyfe@gmail.com",
           "contactType": "customer service"
         }
       },

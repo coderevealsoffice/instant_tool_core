@@ -63,7 +63,7 @@ InstantTool (https://devigo.cloud) provides a suite of over 100 high-performance
 
 ## Official Contact & Verification
 - Platform: InstantTool
-- Parent Entity: Techyfe / Codereveals
-- Support & Business Inquiries: info@codereveals.com
+- Parent Entity: Techyfe
+- Support & Business Inquiries: info.techyfe@gmail.com
 - Verification Token: google15fe68b4ac2831d1
 - Canonical Domain: https://devigo.cloud

@@ -49,9 +49,9 @@ export function Footer() {
             </p>
 
             <div className="space-y-3 pt-2">
-              <a href="mailto:info@codereveals.com" className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors">
+              <a href="mailto:info.techyfe@gmail.com" className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors">
                 <Mail className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
-                info@codereveals.com
+                info.techyfe@gmail.com
               </a>
               <div className="flex items-start gap-3 text-xs text-slate-500 dark:text-slate-400">
                 <MapPin className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />

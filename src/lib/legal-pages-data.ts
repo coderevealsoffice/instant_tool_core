@@ -25,7 +25,7 @@ export const DEFAULT_LEGAL_PAGES: Record<string, LegalContent> = {
     content: `
       <h2>1. Introduction & Commitment to Privacy</h2>
       <p>At <strong>InstantTool</strong> (accessible at <a href="https://devigo.cloud">https://devigo.cloud</a>), protecting the privacy and personal data of our users is our paramount commitment. This Privacy Policy details the types of information collected, processed, and safeguarded by InstantTool, as well as our zero-retention guarantee for uploaded media and files.</p>
-      <p>If you have any questions or require additional details regarding our privacy practices, please contact our data protection team directly at <a href="mailto:info@codereveals.com">info@codereveals.com</a>.</p>
+      <p>If you have any questions or require additional details regarding our privacy practices, please contact our data protection team directly at <a href="mailto:info.techyfe@gmail.com">info.techyfe@gmail.com</a>.</p>
 
       <h2>2. File Processing & Zero-Storage Architecture</h2>
       <p>InstantTool provides browser-based utilities including PDF manipulation, media converters, audio/video tools, and AI assistants. Our architecture operates under two transparent principles:</p>
@@ -124,7 +124,7 @@ export const DEFAULT_LEGAL_PAGES: Record<string, LegalContent> = {
       <p>Voluntary contributions made via our "Support the Project / Buy us a coffee" feature are non-refundable gifts aimed at funding cloud bandwidth, server upkeep, and open web development.</p>
 
       <h2>3. Pro Subscriptions & Credit Packages</h2>
-      <p>If you purchase a paid subscription or credit package and experience a technical glitch where credits were debited without delivering the requested output, please contact our support desk at <a href="mailto:info@codereveals.com">info@codereveals.com</a> within 7 calendar days with your transaction ID. We will promptly investigate and credit your account or issue a full refund.</p>
+      <p>If you purchase a paid subscription or credit package and experience a technical glitch where credits were debited without delivering the requested output, please contact our support desk at <a href="mailto:info.techyfe@gmail.com">info.techyfe@gmail.com</a> within 7 calendar days with your transaction ID. We will promptly investigate and credit your account or issue a full refund.</p>
     `
   },
   "disclaimer": {

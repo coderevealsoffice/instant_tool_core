@@ -105,10 +105,10 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
                   Have compliance or GDPR inquiries?
                 </p>
                 <a
-                  href="mailto:info@codereveals.com"
+                  href="mailto:info.techyfe@gmail.com"
                   className="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
                 >
-                  info@codereveals.com →
+                  info.techyfe@gmail.com →
                 </a>
               </div>
             </div>

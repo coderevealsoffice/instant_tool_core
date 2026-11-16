@@ -65,7 +65,7 @@ export default function CareersPage() {
                     <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {job.location}</span>
                   </div>
                 </div>
-                <a href={`mailto:info@codereveals.com?subject=Application: ${job.title}`}
+                <a href={`mailto:info.techyfe@gmail.com?subject=Application: ${job.title}`}
                   className="shrink-0 bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium py-2.5 px-6 rounded-xl transition-all text-sm flex items-center gap-2 border border-black/10 shadow-xs">
                   <Briefcase className="w-4 h-4 text-slate-950" /> Apply Now
                 </a>
@@ -74,8 +74,8 @@ export default function CareersPage() {
           </div>
           <p className="text-center text-slate-500 dark:text-slate-400 text-sm mt-8">
             Don't see a suitable role? Email us at{" "}
-            <a href="mailto:info@codereveals.com" className="text-blue-600 dark:text-blue-400 hover:underline">
-              info@codereveals.com
+            <a href="mailto:info.techyfe@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">
+              info.techyfe@gmail.com
             </a>
           </p>
         </div>
