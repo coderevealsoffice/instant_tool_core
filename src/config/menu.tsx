@@ -29,6 +29,7 @@ export const MAIN_MENU: MenuItem[] = [
   { label: "Color Tools", href: "/#color-tools" },
   { label: "Downloaders", href: "/#downloaders" },
   { label: "Converters", href: "/#converters" },
+  { label: "Blog", href: "/blog" },
   { label: "Pricing", href: "/pricing" }
 ]
 
@@ -250,6 +251,9 @@ export const FOOTER_MENU: FooterSection[] = [
     title: "Company",
     items: [
       { label: "About Us", href: "/about" },
+      { label: "Blog & Guides", href: "/blog" },
+      { label: "Tutorials", href: "/tutorials" },
+      { label: "Help & FAQs", href: "/faqs" },
       { label: "Contact Us", href: "/contact" },
       { label: "Careers", href: "/careers" },
       { label: "Pricing", href: "/pricing" },
@@ -260,8 +264,8 @@ export const FOOTER_MENU: FooterSection[] = [
     items: [
       { label: "Privacy Policy", href: "/legal/privacy-policy" },
       { label: "Terms of Service", href: "/legal/terms-of-service" },
-      { label: "Refund Policy", href: "/legal/refund-policy" },
       { label: "Cookie Policy", href: "/legal/cookie-policy" },
+      { label: "Refund Policy", href: "/legal/refund-policy" },
       { label: "Disclaimer", href: "/legal/disclaimer" },
     ]
   },

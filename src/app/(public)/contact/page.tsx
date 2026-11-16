@@ -58,6 +58,7 @@ export default function ContactPage() {
               <div className="space-y-5">
                 {[
                   { icon: <Mail className="w-5 h-5" />, label: "Official Support & Inquiries", value: "info@codereveals.com", href: "mailto:info@codereveals.com" },
+                  { icon: <MapPin className="w-5 h-5" />, label: "Registered Office & Engineering Desk", value: "CodeReveals Office, Sector 62, Noida, Uttar Pradesh 201309, India" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4">
                     <div className="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 rounded-xl flex items-center justify-center shrink-0 border border-emerald-200/50 dark:border-emerald-800/50">

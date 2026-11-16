@@ -1,8 +1,10 @@
-import { Users, Target, Rocket, Heart, Shield, Zap, Globe, Award } from "lucide-react"
+import { Users, Target, Rocket, Heart, Shield, Zap, Globe, Award, CheckCircle2, Lock, FileCheck, Mail } from "lucide-react"
+import Link from "next/link"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "About InstantTool - Our Mission for Free Powerful File Tools",
-  description: "Learn about InstantTool's mission to provide fast, secure, and intuitive file and AI tools for everyone directly in the browser.",
+export const metadata: Metadata = {
+  title: "About InstantTool - Our Mission, Editorial Standards & Security Architecture",
+  description: "Learn about InstantTool's mission to provide fast, secure, and client-side WebAssembly file and AI tools for everyone with zero server data retention.",
   alternates: {
     canonical: "https://devigo.cloud/about"
   }
@@ -16,19 +18,34 @@ export default function AboutPage() {
     "description": "Learn about InstantTool's mission to provide fast, secure, and intuitive file and AI tools for everyone directly in the browser.",
     "publisher": {
       "@type": "Organization",
-      "name": "InstantTool"
+      "name": "InstantTool",
+      "url": "https://devigo.cloud",
+      "logo": "https://devigo.cloud/favicon.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@codereveals.com",
+        "contactType": "customer service"
+      }
     }
   }
 
   return (
-    <div className="bg-white dark:bg-slate-950 min-h-screen">
+    <div className="bg-white dark:bg-slate-950 min-h-screen font-sans text-slate-900 dark:text-slate-100 transition-colors">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      
       {/* Hero */}
-      <section className="bg-gradient-to-br from-green-600 to-emerald-700 text-white py-24 px-4 text-center">
-        <h1 className="text-5xl font-extrabold tracking-tight mb-4">About InstantTool</h1>
-        <p className="text-xl text-green-100 max-w-2xl mx-auto">
-          We believe powerful file and AI tools should be fast, intuitive, and accessible to everyone — directly in your browser.
-        </p>
+      <section className="bg-gradient-to-b from-slate-50 via-white to-white dark:from-slate-900/60 dark:via-slate-950 dark:to-slate-950 py-20 md:py-28 px-4 text-center border-b border-slate-100 dark:border-slate-800/60">
+        <div className="container mx-auto max-w-4xl">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-6 border border-emerald-200 dark:border-emerald-800">
+            <span>◆ About Us &amp; Transparency</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-6 leading-tight text-slate-900 dark:text-white">
+            Empowering Millions with Free, Private Browser Tools
+          </h1>
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            We believe powerful multimedia, PDF, and AI utilities should be fast, private, and accessible to everyone worldwide — without software downloads or paywalls.
+          </p>
+        </div>
       </section>
 
       {/* Mission */}
@@ -36,29 +53,33 @@ export default function AboutPage() {
         <div className="container mx-auto max-w-5xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Our Mission</h2>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                InstantTool was born out of frustration with clunky, expensive desktop software and overly complex AI wrappers. We set out to build
-                a platform where anyone — students, professionals, and creators — can work with PDFs, videos, audio, images, and AI directly in their browser.
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-4 border border-slate-200 dark:border-slate-700">
+                <span>Our Core Mission</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight">
+                Eliminating Bloat &amp; Respecting User Privacy
+              </h2>
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4 text-base">
+                InstantTool was built to solve a pervasive problem on the modern web: intrusive file converters filled with misleading download buttons, mandatory email registrations, and servers that covertly store your confidential files.
               </p>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                Our tools are designed to be fast, secure, and intuitive. By leveraging cutting-edge browser technologies
-                like WebAssembly and robust cloud processing, we ensure your files are handled securely and processed lightning fast.
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-base">
+                By leveraging cutting-edge <strong>client-side WebAssembly</strong> and browser memory streams, we process files directly on your own device. When you compress a PDF or convert an image, your sensitive data never leaves your computer.
               </p>
             </div>
-            <div className="grid sm:grid-cols-2 gap-6">
+
+            <div className="grid sm:grid-cols-2 gap-5">
               {[
-                { icon: <Target className="w-7 h-7" />, title: "Goal-Oriented", desc: "Every tool is built to solve a real problem efficiently.", color: "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400" },
-                { icon: <Rocket className="w-7 h-7" />, title: "Lightning Fast", desc: "Optimized processing right in your browser.", color: "bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400" },
-                { icon: <Heart className="w-7 h-7" />, title: "User First", desc: "Designed with simplicity and user experience in mind.", color: "bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400" },
-                { icon: <Users className="w-7 h-7" />, title: "Community Driven", desc: "Built for creators, students, and professionals worldwide.", color: "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400" },
+                { icon: <Shield className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />, title: "Zero Data Retention", desc: "Files process in local RAM and are purged immediately." },
+                { icon: <Zap className="w-6 h-6 text-amber-600 dark:text-amber-400" />, title: "High-Speed Execution", desc: "No queue delays or slow cloud upload bottlenecks." },
+                { icon: <Heart className="w-6 h-6 text-red-600 dark:text-red-400" />, title: "100% Free Access", desc: "Core utilities remain freely available without paywalls." },
+                { icon: <Users className="w-6 h-6 text-sky-600 dark:text-sky-400" />, title: "Universal Compatibility", desc: "Runs on Mac, Windows, Chromebooks, iOS & Android." },
               ].map((item, i) => (
-                <div key={i} className="bg-slate-50 dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800">
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-3 ${item.color}`}>
+                <div key={i} className="bg-[#FAFAFA] dark:bg-slate-900/60 rounded-2xl p-6 border border-slate-200/90 dark:border-slate-800 shadow-2xs">
+                  <div className="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center mb-4">
                     {item.icon}
                   </div>
-                  <h3 className="font-bold text-slate-900 dark:text-white mb-1">{item.title}</h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">{item.desc}</p>
+                  <h3 className="font-bold text-slate-900 dark:text-white mb-1.5 text-base">{item.title}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -66,80 +87,89 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Core Values */}
-      <section className="py-20 px-4 bg-slate-50 dark:bg-slate-900/50">
+      {/* Editorial Standards & Fact-Checking */}
+      <section className="py-20 px-4 bg-slate-50/70 dark:bg-slate-900/40 border-y border-slate-200/80 dark:border-slate-800/80">
         <div className="container mx-auto max-w-5xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Our Core Values</h2>
-            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              These are the principles that guide every feature we build and every decision we make.
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider mb-4 border border-emerald-200 dark:border-emerald-800">
+              <FileCheck className="w-3.5 h-3.5" />
+              <span>Editorial Guidelines</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+              Our Commitment to Editorial Integrity &amp; Accuracy
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
+              Every guide, tutorial, and technical article published on the InstantTool Knowledge Base adheres to rigorous editorial review standards.
             </p>
           </div>
+
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 text-center">
-              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Shield className="w-8 h-8" />
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-[#D7FB8E] text-slate-950 font-black flex items-center justify-center text-sm">
+                1
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Privacy & Security</h3>
-              <p className="text-slate-600 dark:text-slate-400">
-                Your data is yours. We employ robust encryption and automatic file deletion policies to ensure your sensitive documents never fall into the wrong hands.
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Hands-On Verification</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                We test every software workflow, compression ratio, and codec benchmark internally before publishing tutorials to ensure advice is accurate and actionable.
               </p>
             </div>
-            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 text-center">
-              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Zap className="w-8 h-8" />
+
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-[#D7FB8E] text-slate-950 font-black flex items-center justify-center text-sm">
+                2
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Simplicity</h3>
-              <p className="text-slate-600 dark:text-slate-400">
-                Powerful tools shouldn't require a manual. We obsess over intuitive interfaces so you can get your work done with zero friction.
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Continuous Updates</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                As browser specifications (like WebAssembly, WebCodecs, and HTML5 Canvas) evolve, our engineering team regularly revises guides to reflect current industry standards.
               </p>
             </div>
-            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 text-center">
-              <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Globe className="w-8 h-8" />
+
+            <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-[#D7FB8E] text-slate-950 font-black flex items-center justify-center text-sm">
+                3
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Accessibility</h3>
-              <p className="text-slate-600 dark:text-slate-400">
-                Whether you're on a high-end Mac or a low-end Chromebook, our cloud and WebAssembly architecture ensures InstantTool works perfectly for you.
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Independence &amp; Objectivity</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Our educational content is authored to solve user problems. We do not accept sponsored placements that compromise reader trust or privacy ethics.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Team & Origin */}
+      {/* Team, Headquarters & Transparency */}
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-widest mb-6">
-            <Award className="w-4 h-4 text-emerald-600" /> The Origin Story
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-widest mb-6 border border-emerald-200 dark:border-emerald-800">
+            <Award className="w-4 h-4 text-emerald-600" /> Engineering &amp; Ownership
           </div>
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">Built in India, for the World</h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-            InstantTool is proudly engineered by <strong>CodeReveals</strong>, headquartered in Noida, India, spearheaded by <strong>Pradeep</strong> (Product Engineering @ Techyfe &amp; CodeReveals).
-            We started this journey when we realized how much time students, creators, and corporate teams were wasting switching between bloated, paywalled desktop software just to compress a PDF, convert video formats, or verify AI text.
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight">
+            Built by CodeReveals for Users Worldwide
+          </h2>
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+            InstantTool is engineered and operated by <strong>CodeReveals</strong>, headquartered in Noida, India, under the leadership of <strong>Pradeep Yadav</strong> (Product Engineering @ Techyfe &amp; CodeReveals).
           </p>
-          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-10">
-            What started as an internal engineering toolset quickly grew into a global WebAssembly-powered platform. Today, we are dedicated to providing 100% free, private, client-side tools with zero server file retention and zero paywalls for everyday creators.
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-10">
+            We are passionate about open web standards and empowering creators, students, and businesses with lightweight, privacy-respecting browser utilities. Have questions or want to partner? Email our engineering desk directly at <a href="mailto:info@codereveals.com" className="font-bold text-emerald-600 dark:text-emerald-400 underline">info@codereveals.com</a>.
           </p>
 
-          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a 
-              href="/auth/login" 
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-medium text-base tracking-tight transition-all shadow-sm border border-black/10"
-            >
-              <span>Get Started Free</span>
-              <span className="text-slate-950">↗</span>
-            </a>
-            <a 
+          <div className="inline-flex flex-wrap items-center justify-center gap-4">
+            <Link
               href="/tools" 
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-900 dark:border-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white font-medium text-base tracking-tight transition-all shadow-2xs hover:border-black dark:hover:border-white"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#D7FB8E] hover:bg-[#cbf576] text-slate-950 font-black text-sm tracking-tight transition-all shadow-sm border border-black/10"
             >
-              <span>Explore 100+ Tools</span>
-              <span>→</span>
-            </a>
+              <span>Explore All 100+ Free Tools →</span>
+            </Link>
+            <Link 
+              href="/contact" 
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm tracking-tight transition-all shadow-2xs"
+            >
+              <span>Contact Us</span>
+            </Link>
           </div>
         </div>
       </section>
+
     </div>
   )
 }

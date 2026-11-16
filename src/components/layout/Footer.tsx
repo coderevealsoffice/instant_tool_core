@@ -48,11 +48,15 @@ export function Footer() {
               Your all-in-one platform for video editing, PDF conversions, and media manipulation — right in your browser.
             </p>
 
-            <div className="space-y-4 pt-2">
-              <a href="mailto:info@codereveals.com" className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
-                <Mail className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
+            <div className="space-y-3 pt-2">
+              <a href="mailto:info@codereveals.com" className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors">
+                <Mail className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
                 info@codereveals.com
               </a>
+              <div className="flex items-start gap-3 text-xs text-slate-500 dark:text-slate-400">
+                <MapPin className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
+                <span>Sector 62, Noida, Uttar Pradesh 201309, India</span>
+              </div>
             </div>
           </div>
 

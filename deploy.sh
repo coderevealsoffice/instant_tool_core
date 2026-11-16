@@ -15,13 +15,16 @@ fi
 echo "📦 3. Generating Prisma Client..."
 npx prisma generate
 
-echo "🧹 4. Cleaning previous build cache..."
+echo "🌱 4. Seeding high-value blog corpus, legal pages & plans into database..."
+npx tsx prisma/seed.ts || echo "⚠️ DB seed non-blocking warning, proceeding with build..."
+
+echo "🧹 5. Cleaning previous build cache..."
 rm -rf .next
 
-echo "🔨 5. Building Next.js with standalone asset sync..."
+echo "🔨 6. Building Next.js with standalone asset sync..."
 npm run build
 
-echo "🔄 6. Restarting PM2 process..."
+echo "🔄 7. Restarting PM2 process..."
 pm2 restart instant-tool-ai || pm2 start ecosystem.config.js
 pm2 save
 
