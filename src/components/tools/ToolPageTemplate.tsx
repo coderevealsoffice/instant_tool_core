@@ -1055,6 +1055,39 @@ export function ToolPageTemplate({
   const isImage = safeCategory === "image-tools" || cleanTitle.toLowerCase().includes("image")
   const isSeo = safeCategory === "seo-tools" || safeCategory === "ai-tools" || cleanTitle.toLowerCase().includes("seo") || cleanTitle.toLowerCase().includes("aeo") || cleanTitle.toLowerCase().includes("geo")
   const isDownloader = safeSlug.includes("downloader") || cleanTitle.toLowerCase().includes("downloader")
+  const isInteractiveEditor = Boolean(toolComponent) || isSeo || safeSlug.includes("checker") || safeSlug.includes("detector") || safeSlug.includes("generator") || safeSlug.includes("formatter") || safeSlug.includes("counter")
+
+  const primaryButtonText = isDownloader
+    ? "Download Video"
+    : isInteractiveEditor
+    ? `Use ${cleanTitle} Free`
+    : isPdf
+    ? `Choose ${cleanTitle} PDF`
+    : isImage
+    ? `Choose ${cleanTitle} Image`
+    : isVideo
+    ? `Choose ${cleanTitle} Video`
+    : isAudio
+    ? `Choose ${cleanTitle} Audio`
+    : `Choose ${cleanTitle} Files`
+
+  const frontCardButtonText = isDownloader
+    ? "Paste Video Link"
+    : isInteractiveEditor
+    ? `Open ${cleanTitle}`
+    : `Select ${cleanTitle} Files`
+
+  const frontCardTitle = isDownloader
+    ? "Paste Video Link to Download"
+    : isInteractiveEditor
+    ? `Instant ${cleanTitle} Tool`
+    : `Drop ${cleanTitle} files here`
+
+  const frontCardDragText = isDownloader
+    ? "Paste link from any video"
+    : isInteractiveEditor
+    ? "Interactive in-browser tool"
+    : "Drag & drop files here"
 
   const mockupData = getToolMockupData(safeSlug, cleanTitle, safeCategory)
 
@@ -1258,7 +1291,7 @@ export function ToolPageTemplate({
                       onClick={handleChooseFilesClick}
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-[#D7FB8E] hover:bg-[#cbf777] text-slate-950 font-semibold text-xs sm:text-base tracking-tight transition-all shadow-sm hover:scale-[1.01] active:scale-[0.99] border border-black/10 cursor-pointer text-center"
                     >
-                      <span>Choose {cleanTitle} Files</span>
+                      <span>{primaryButtonText}</span>
                       <ArrowUpRight className="w-4 h-4 text-slate-950" />
                     </button>
                   </div>
@@ -1315,10 +1348,10 @@ export function ToolPageTemplate({
                       {isDownloader ? "URL LINK PROCESSOR" : "CLIENT SANDBOX"}
                     </div>
                     <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-sky-200/80 dark:bg-sky-900/80 text-sky-950 dark:text-sky-200 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider mb-2">
-                      <span>◆</span> {isDownloader ? "NO FILE UPLOAD" : "ZERO DATA RETENTION"}
+                      <span>◆</span> {isDownloader ? "NO FILE UPLOAD" : isInteractiveEditor ? "INTERACTIVE SANDBOX" : "ZERO DATA RETENTION"}
                     </div>
                     <h4 className="text-xs sm:text-base font-bold text-slate-900 dark:text-white leading-snug">
-                      {isDownloader ? "Paste Video Link to Download" : `Drop ${cleanTitle} files here`}
+                      {frontCardTitle}
                     </h4>
 
                     {/* Modern Drag and Drop Graphic */}
@@ -1329,7 +1362,7 @@ export function ToolPageTemplate({
                         <UploadCloud className="w-6 h-6 sm:w-8 sm:h-8 text-sky-600 dark:text-sky-400 mb-1 animate-pulse" />
                       )}
                       <p className="text-[11px] sm:text-xs font-bold text-slate-900 dark:text-white leading-tight">
-                        {isDownloader ? "Paste link from any video" : "Drag & drop files here"}
+                        {frontCardDragText}
                       </p>
                       <p className="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
                         {formatBadgeText}
@@ -1341,7 +1374,7 @@ export function ToolPageTemplate({
                   <button
                     type="button"
                     onClick={() => {
-                      if (isDownloader) {
+                      if (isDownloader || isInteractiveEditor) {
                         document.getElementById("tool-canvas-container")?.scrollIntoView({ behavior: "smooth" })
                       } else {
                         handleChooseFilesClick()
@@ -1349,7 +1382,7 @@ export function ToolPageTemplate({
                     }}
                     className="w-full py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all shadow-sm cursor-pointer"
                   >
-                    <span>{isDownloader ? "Paste Video Link" : `Select ${cleanTitle} Files`}</span>
+                    <span>{frontCardButtonText}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </button>
                 </div>

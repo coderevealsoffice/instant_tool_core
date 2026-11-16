@@ -14,7 +14,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://devigo.cloud"),
   title: "InstantTool - Free Online Tools (PDF Alternative, Compress PDF, Video & AI Tools)",
-  description: "Free online tools pdf: Compress PDF, Merge PDF, Split PDF, PDF to Word, JPG to PDF, Video to Audio Converter, YouTube Downloader, and AI Caption Generator. 100% free, private WebAssembly processing with zero watermarks.",
+  description: "Free online tools to compress PDF, merge & split documents, convert video to audio, and download YouTube media. 100% private in-browser WebAssembly.",
   robots: {
     index: true,
     follow: true,
@@ -58,24 +58,24 @@ export const metadata: Metadata = {
     apple: "/favicon.png",
   },
   openGraph: {
-    title: "Instant Tool | Free PDF, Image & QR Code Tools",
-    description: "Free online tools to compress, merge, split, and rotate PDFs, compress and convert images, and generate QR codes quickly and securely.",
+    title: "InstantTool - Free Online Tools (PDF, Video & AI)",
+    description: "Free online tools to compress PDF, merge & split documents, convert video to audio, and download YouTube media. 100% private in-browser WebAssembly.",
     url: "/",
-    siteName: "Instant Tool",
+    siteName: "InstantTool",
     images: [
       {
         url: "https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=1200&q=80",
         width: 1200,
         height: 630,
-        alt: "Instant Tool",
+        alt: "InstantTool",
       }
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Instant Tool | Free PDF, Image & QR Code Tools",
-    description: "Free online tools to compress, merge, split, and rotate PDFs, compress and convert images, and generate QR codes quickly and securely.",
+    title: "InstantTool - Free Online Tools (PDF, Video & AI)",
+    description: "Free online tools to compress PDF, merge & split documents, convert video to audio, and download YouTube media. 100% private in-browser WebAssembly.",
     images: ["https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=1200&q=80"],
   },
   verification: {

@@ -125,6 +125,34 @@ export default async function DynamicToolPage({ params }: DynamicToolPageProps) 
   )
 }
 
+function generateSeoDescription(title: string, rawDesc: string): string {
+  let desc = (rawDesc || "").trim()
+  if (desc.endsWith('.')) desc = desc.slice(0, -1).trim()
+
+  if (desc.length > 158) {
+    const truncated = desc.slice(0, 155)
+    const lastSpace = truncated.lastIndexOf(' ')
+    desc = (lastSpace > 100 ? truncated.slice(0, lastSpace) : truncated).trim() + '.'
+  } else if (desc.length < 120) {
+    const candidates = [
+      ` 100% free, private in-browser tool with zero watermarks.`,
+      ` Fast, private and free with no registration required.`,
+      ` 100% free and secure in your browser.`
+    ]
+    for (const c of candidates) {
+      if (desc.length + c.length <= 158) {
+        desc = `${desc}.${c}`
+        break
+      }
+    }
+  }
+
+  if (desc.length > 158) {
+    desc = desc.slice(0, 155).trim() + "..."
+  }
+  return desc
+}
+
 export async function generateMetadata({ params }: DynamicToolPageProps): Promise<Metadata> {
   const resolvedParams = await params
   const config = getToolConfig(resolvedParams.category, resolvedParams.slug)
@@ -145,6 +173,8 @@ export async function generateMetadata({ params }: DynamicToolPageProps): Promis
     ? `${config.title} Online - Color Picker & Palette | InstantTool`
     : `${config.title} Online Free | InstantTool`
 
+  const seoDescription = generateSeoDescription(config.title, config.description)
+
   const seoKeywords = [
     config.title,
     `${config.title.toLowerCase()} free`,
@@ -161,16 +191,25 @@ export async function generateMetadata({ params }: DynamicToolPageProps): Promis
 
   return {
     title: seoTitle,
-    description: config.description.length > 50 
-      ? `${config.description} 100% free, private in-browser WebAssembly processing with zero watermarks and no registration required.`
-      : `${config.description} Fast, secure, and free online tool with zero watermarks. No installation or registration required.`,
+    description: seoDescription,
     keywords: seoKeywords,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     alternates: {
       canonical: `/${resolvedParams.category}/${resolvedParams.slug}`
     },
     openGraph: {
       title: seoTitle,
-      description: config.description,
+      description: seoDescription,
       url: `/${resolvedParams.category}/${resolvedParams.slug}`,
       siteName: "InstantTool",
       images: [
@@ -186,7 +225,7 @@ export async function generateMetadata({ params }: DynamicToolPageProps): Promis
     twitter: {
       card: "summary_large_image",
       title: seoTitle,
-      description: config.description,
+      description: seoDescription,
       images: ["https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=1200&q=80"],
     }
   }
