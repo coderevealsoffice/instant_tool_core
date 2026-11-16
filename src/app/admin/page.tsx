@@ -1,7 +1,9 @@
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma/client"
 import { redirect } from "next/navigation"
-import { Activity, Users, Database, CreditCard, ArrowUpRight } from "lucide-react"
+import { Activity, Users, Database, CreditCard, ArrowUpRight, Globe, Cpu } from "lucide-react"
+import Image from "next/image"
+import { ToolStatusDirectory } from "@/components/dashboard/ToolStatusDirectory"
 
 export const metadata = {
  title: "Overview - Admin",
@@ -30,9 +32,36 @@ export default async function AdminOverviewPage() {
 
  return (
  <div className="p-8 max-w-6xl mx-auto w-full space-y-8 w-full">
- <div>
- <h1 className="text-3xl font-black text-slate-900 dark:text-white mb-2">Welcome to the Admin Panel</h1>
- <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Here's a top-level overview of InstantTool's performance.</p>
+ <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+   <div className="flex items-center gap-4">
+     <div className="w-14 h-14 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-center p-2.5 shrink-0">
+       <Image
+         src="/favicon.png"
+         alt="InstantTool Logo"
+         width={40}
+         height={40}
+         className="w-full h-full object-contain rounded-lg"
+       />
+     </div>
+     <div>
+       <div className="flex items-center gap-2 flex-wrap">
+         <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+           InstantTool Admin Command Center
+         </h1>
+         <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-mono text-[10px] font-black uppercase tracking-wider border border-emerald-300 dark:border-emerald-800 shadow-2xs">
+           SUPER ADMIN
+         </span>
+       </div>
+       <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+         Real-time global performance, traffic stats, and tool availability monitor.
+       </p>
+     </div>
+   </div>
+
+   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold shadow-2xs">
+     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+     <span>104 Tools Online • 100% Operational</span>
+   </div>
  </div>
 
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -143,6 +172,8 @@ export default async function AdminOverviewPage() {
  </div>
  </div>
  </div>
+
+ <ToolStatusDirectory />
  </div>
  )
 }

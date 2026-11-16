@@ -46,6 +46,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useSession, signOut } from "next-auth/react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 
 const data = {
@@ -105,9 +106,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" render={<Link href="/" />}>
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900">
-                  <GalleryVerticalEnd className="size-4" />
-                </div>
+                <Image
+                  src="/favicon.png"
+                  alt="InstantTool Logo"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 rounded-lg object-contain shrink-0 shadow-xs"
+                />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-bold tracking-tight">InstantTool</span>
                   <span className="truncate text-[10px] uppercase font-bold text-amber-500">{displayRole}</span>
